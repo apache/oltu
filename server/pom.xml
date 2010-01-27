@@ -29,7 +29,7 @@
     <artifactId>amber-server</artifactId>
     <packaging>jar</packaging>
     <version>${parent.version}</version>
-    <name>Service Provider</name>
+    <name>Server</name>
 
     <reporting>
         <plugins>

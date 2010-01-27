@@ -29,7 +29,7 @@
     <artifactId>amber-client</artifactId>
     <packaging>jar</packaging>
     <version>${parent.version}</version>
-    <name>Consumer</name>
+    <name>Client</name>
 
     <reporting>
         <plugins>
