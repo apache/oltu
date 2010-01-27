@@ -26,7 +26,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.apache.labs</groupId>
-    <artifactId>amber-service-provider</artifactId>
+    <artifactId>amber-server</artifactId>
     <packaging>jar</packaging>
     <version>${parent.version}</version>
     <name>Service Provider</name>
