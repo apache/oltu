@@ -23,7 +23,7 @@
         <shortname>at-digester</shortname>
         <shortdesc xml:lang="en">OAuth Java framework</shortdesc>
         <description xml:lang="en">A Java development framework
-		mainly aimed to build OAuth-aware applications.</description>
+        mainly aimed to build OAuth-aware applications.</description>
         <homepage rdf:resource="http://labs.apache.org/amber/" />
         <license rdf:resource="http://usefulinc.com/doap/licenses/asl20" />
         <created>2010-1-24</created>
