@@ -306,8 +306,8 @@
 
     <modules>
         <module>signature-api</module>
-        <module>consumer</module>
-        <module>service-provider</module>
+        <module>client</module>
+        <module>server</module>
     </modules>
 
 </project>
