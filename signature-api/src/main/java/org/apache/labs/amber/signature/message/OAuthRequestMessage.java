@@ -19,6 +19,8 @@ package org.apache.labs.amber.signature.message;
 /**
  * OAuth base request message representation.
  *
+ * This class is not thread-safety.
+ *
  * @version $Id$
  */
 public class OAuthRequestMessage {
