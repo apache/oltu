@@ -32,4 +32,6 @@ public @interface OAuthParameter {
 
     String name();
 
+    boolean optional() default false;
+
 }
