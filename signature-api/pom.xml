@@ -31,6 +31,15 @@
     <version>${parent.version}</version>
     <name>Signature API</name>
 
+    <dependencies>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.4</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
     <reporting>
         <plugins>
             <plugin>
