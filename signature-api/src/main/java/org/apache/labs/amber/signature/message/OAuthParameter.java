@@ -44,4 +44,11 @@ public @interface OAuthParameter {
      */
     boolean optional() default false;
 
+    /**
+     * Flag to mark an OAuth parameter has to be included in the signature.
+     *
+     * @return true by default, user specified otherwise.
+     */
+    boolean includeInSignature() default true;
+
 }

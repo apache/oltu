@@ -45,7 +45,10 @@ public class OAuthRequestMessage {
     /**
      * The {@code oauth_signature} parameter.
      */
-    @OAuthParameter(name = "oauth_signature")
+    @OAuthParameter(
+            name = "oauth_signature",
+            includeInSignature = false
+    )
     private String signature;
 
     /**
@@ -63,13 +66,21 @@ public class OAuthRequestMessage {
     /**
      * The {@code oauth_version} parameter.
      */
-    @OAuthParameter(name = "oauth_version", optional = true)
+    @OAuthParameter(
+            name = "oauth_version",
+            optional = true,
+            includeInSignature = false
+    )
     private String version;
 
     /**
      * The {@code realm} parameter.
      */
-    @OAuthParameter(name = "realm", optional = true)
+    @OAuthParameter(
+            name = "realm",
+            optional = true,
+            includeInSignature = false
+    )
     private String realm;
 
     /**
