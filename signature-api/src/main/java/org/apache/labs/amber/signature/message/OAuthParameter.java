@@ -30,8 +30,18 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface OAuthParameter {
 
+    /**
+     * The OAuth parameter name.
+     *
+     * @return the OAuth parameter name.
+     */
     String name();
 
+    /**
+     * Flag to mark an OAuth parameter optional or not.
+     *
+     * @return false by default, user specified otherwise.
+     */
     boolean optional() default false;
 
 }
