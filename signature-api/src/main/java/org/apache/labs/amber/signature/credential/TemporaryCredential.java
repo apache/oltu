@@ -26,6 +26,7 @@ public class TemporaryCredential extends Credential {
     /**
      * The {@code oauth_callback_confirmed} parameter.
      */
+    @CredentialParameter("oauth_callback_confirmed")
     private boolean callbackConfirmed;
 
     /**

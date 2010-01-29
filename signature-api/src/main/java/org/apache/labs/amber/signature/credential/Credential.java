@@ -26,11 +26,13 @@ public class Credential {
     /**
      * The {@code oauth_token} parameter.
      */
+    @CredentialParameter("oauth_token")
     private String identifier;
 
     /**
      * The {@code oauth_token_secret} parameter.
      */
+    @CredentialParameter("sharedSecret")
     private String sharedSecret;
 
     /**
