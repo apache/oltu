@@ -20,15 +20,15 @@ package org.apache.labs.amber.signature.message;
  * Provides informations about the token request message bean.
  *
  * @version $Id$
- * @see OAuthTokenRequestMessage
+ * @see TokenRequestMessage
  */
-public final class OAuthTokenRequestMessageBeanInfo extends AbstractOAuthMessageBeanInfo {
+public final class TokenRequestMessageBeanInfo extends AbstractMessageBeanInfo {
 
     /**
-     * Creates a new {@link OAuthTokenRequestMessage} BeanInfo.
+     * Creates a new {@link TokenRequestMessage} BeanInfo.
      */
-    public OAuthTokenRequestMessageBeanInfo() {
-        super(OAuthTokenRequestMessage.class);
+    public TokenRequestMessageBeanInfo() {
+        super(TokenRequestMessage.class);
     }
 
 }

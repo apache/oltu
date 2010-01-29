@@ -23,7 +23,7 @@ package org.apache.labs.amber.signature.message;
  *
  * @version $Id$
  */
-public final class OAuthTokenRequestMessage extends OAuthRequestMessage {
+public final class TokenRequestMessage extends RequestMessage {
 
     /**
      * The {@code oauth_token} parameter.

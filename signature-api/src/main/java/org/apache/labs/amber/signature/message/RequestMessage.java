@@ -23,7 +23,7 @@ package org.apache.labs.amber.signature.message;
  *
  * @version $Id$
  */
-public class OAuthRequestMessage {
+public class RequestMessage {
 
     /**
      * The default OAuth protocol version.

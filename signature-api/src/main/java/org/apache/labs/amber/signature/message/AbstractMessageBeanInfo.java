@@ -28,7 +28,7 @@ import java.util.List;
  *
  * @version $Id$
  */
-abstract class AbstractOAuthMessageBeanInfo extends SimpleBeanInfo {
+abstract class AbstractMessageBeanInfo extends SimpleBeanInfo {
 
     /**
      * Maintains the original descriptors and the alias descriptor.
@@ -40,7 +40,7 @@ abstract class AbstractOAuthMessageBeanInfo extends SimpleBeanInfo {
      *
      * @param klass the class is currently analyzed.
      */
-    public AbstractOAuthMessageBeanInfo(Class<?> klass) {
+    public AbstractMessageBeanInfo(Class<?> klass) {
         this.visit(klass);
     }
 
