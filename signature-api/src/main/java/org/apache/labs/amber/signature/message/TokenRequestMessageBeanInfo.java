@@ -16,19 +16,21 @@
  */
 package org.apache.labs.amber.signature.message;
 
+import org.apache.labs.amber.signature.beaninfo.AbstractAliasBeanInfo;
+
 /**
  * Provides informations about the token request message bean.
  *
  * @version $Id$
  * @see TokenRequestMessage
  */
-public final class TokenRequestMessageBeanInfo extends AbstractMessageBeanInfo {
+public final class TokenRequestMessageBeanInfo extends AbstractAliasBeanInfo {
 
     /**
      * Creates a new {@link TokenRequestMessage} BeanInfo.
      */
     public TokenRequestMessageBeanInfo() {
-        super(TokenRequestMessage.class);
+        super(TokenRequestMessage.class, OAuthParameter.class, "name");
     }
 
 }
