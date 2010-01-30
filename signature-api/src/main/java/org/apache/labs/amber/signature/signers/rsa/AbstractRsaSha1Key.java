@@ -96,8 +96,10 @@ abstract class AbstractRsaSha1Key implements Key {
      * Initializes the key after reading the RSA certificate.
      *
      * @param bufferedValue the buffered RSA certificate.
+     * @throws SignatureException if any error occurs while reading the
+     *         certificate.
      */
-    protected abstract void init(byte[] bufferedValue);
+    protected abstract void init(byte[] bufferedValue) throws SignatureException;
 
     /**
      * Read the certificate and store the value into a returned buffer.
