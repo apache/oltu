@@ -24,7 +24,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Signature algorithm implementations have to be annotated with
+ * Signature keys and algorithms implementations have to be annotated with
  * @SignatureMethod to identify the OAuth signature method.
  *
  * @version $Id$
