@@ -29,7 +29,7 @@ public abstract class AbstractKey implements Key {
     private final String keyValue;
 
     /**
-     * Instantiate an OAuth key by the consumer secret string representation.
+     * Instantiate an OAuth key with the consumer secret string representation.
      *
      * @param keyValue the consumer secret string representation.
      */
