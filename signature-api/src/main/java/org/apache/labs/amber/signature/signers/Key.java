@@ -26,7 +26,7 @@ public interface Key {
     /**
      * Returns the consumer secret string representation.
      *
-     * @return the consumer secret string representation
+     * @return the consumer secret string representation.
      */
     String getValue();
 
