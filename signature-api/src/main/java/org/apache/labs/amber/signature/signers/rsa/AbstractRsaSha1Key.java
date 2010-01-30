@@ -16,6 +16,7 @@
  */
 package org.apache.labs.amber.signature.signers.rsa;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -34,9 +35,9 @@ import org.apache.labs.amber.signature.signers.SignatureException;
 abstract class AbstractRsaSha1Key implements Key {
 
     /**
-     * The RSA certificate value.
+     * The RSA certificate string representation.
      */
-    private final byte[] value;
+    private final String value;
 
     /**
      * Instantiate a new RSA key reading the certificate from the URL.
@@ -61,7 +62,10 @@ abstract class AbstractRsaSha1Key implements Key {
 
             input = urlConnection.getInputStream();
 
-            this.value = this.readCertificate(input);
+            byte[] bufferedValue = this.readCertificate(input);
+            this.value = new String(bufferedValue);
+
+            this.init(bufferedValue);
         } catch (Exception e) {
             throw new SignatureException("An error occurred while reading RSA cerificate '"
                     + certificateLocation
@@ -82,25 +86,23 @@ abstract class AbstractRsaSha1Key implements Key {
     }
 
     /**
-     * Return the byte array certificate value.
-     *
-     * @return the byte array certificate value.
+     * {@inheritDoc}
      */
-    public final byte[] getByteArrayValue() {
+    public final String getValue() {
         return this.value;
     }
 
     /**
-     * {@inheritDoc}
+     * Initializes the key after reading the RSA certificate.
+     *
+     * @param bufferedValue the buffered RSA certificate.
      */
-    public final String getValue() {
-        return new String(this.value);
-    }
+    protected abstract void init(byte[] bufferedValue);
 
     /**
      * Read the certificate and store the value into a returned buffer.
      *
-     * Subclasses that implement this method don't have to take care about
+     * Subclasses that override this method don't have to take care about
      * closing the input stream.
      *
      * @param input the certificate input stream.
@@ -108,6 +110,20 @@ abstract class AbstractRsaSha1Key implements Key {
      * @throws SignatureException if any error occurs while reading the
      *         certificate.
      */
-    protected abstract byte[] readCertificate(InputStream input) throws SignatureException;
+    protected byte[] readCertificate(InputStream input) throws SignatureException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+        int i;
+        try {
+            while ((i = input.read()) != -1) {
+                baos.write(i);
+            }
+
+            baos.close();
+            return baos.toByteArray();
+        } catch (IOException e) {
+            throw new SignatureException("Fatal error while reading public certificate", e);
+        }
+    }
 
 }
