@@ -17,15 +17,32 @@
 package org.apache.labs.amber.signature.signers.rsa;
 
 import java.net.URL;
+import java.security.KeyFactory;
+import java.security.NoSuchAlgorithmException;
+import java.security.interfaces.RSAPrivateKey;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.PKCS8EncodedKeySpec;
 
 import org.apache.labs.amber.signature.signers.SignatureException;
+import org.apache.labs.amber.signature.signers.SignatureMethod;
 
 /**
  * Implementation of a DER RSA private key.
  *
  * @version $Id$
  */
-public final class DerRsaSha1SigningKey extends AbstractRsaSha1SigningKey {
+@SignatureMethod("RSA-SHA1")
+public class DerRsaSha1SigningKey extends AbstractRsaSha1Key {
+
+    /**
+     * The RSA algorithm name.
+     */
+    private static final String RSA = "RSA";
+
+    /**
+     * The RSA private key.
+     */
+    private RSAPrivateKey rsaPrivateKey;
 
     /**
      * Instantiate a new DER RSA private key reading the certificate from the URL.
@@ -36,6 +53,33 @@ public final class DerRsaSha1SigningKey extends AbstractRsaSha1SigningKey {
      */
     public DerRsaSha1SigningKey(URL certificateLocation) throws SignatureException {
         super(certificateLocation);
+    }
+
+    /**
+     * Return the RSA private key.
+     *
+     * @return the RSA private key.
+     */
+    public RSAPrivateKey getRsaPrivateKey() {
+        return this.rsaPrivateKey;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void init(byte[] bufferedValue) throws SignatureException {
+        try {
+            KeyFactory keyFactory = KeyFactory.getInstance(RSA);
+            PKCS8EncodedKeySpec privSpec = new PKCS8EncodedKeySpec(bufferedValue);
+            try {
+                this.rsaPrivateKey = (RSAPrivateKey) keyFactory.generatePrivate(privSpec);
+            } catch (InvalidKeySpecException e) {
+                throw new SignatureException("An error occurred while reading the private key ceritificate", e);
+            }
+        } catch (NoSuchAlgorithmException e) {
+            // TODO can this exception be ignored?
+        }
     }
 
 }

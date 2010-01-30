@@ -16,16 +16,33 @@
  */
 package org.apache.labs.amber.signature.signers.rsa;
 
+import java.io.ByteArrayInputStream;
 import java.net.URL;
+import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
+import java.security.interfaces.RSAPublicKey;
 
 import org.apache.labs.amber.signature.signers.SignatureException;
+import org.apache.labs.amber.signature.signers.SignatureMethod;
 
 /**
  * Implementation of a DER RSA public key.
  *
  * @version $Id$
  */
-public final class DerRsaSha1VeryfingKey extends AbstractRsaSha1VerifyingKey {
+@SignatureMethod("RSA-SHA1")
+public class DerRsaSha1VeryfingKey extends AbstractRsaSha1Key {
+
+    /**
+     * The X509 string constant.
+     */
+    private static final String X509 = "X509";
+
+    /**
+     * The RSA public key.
+     */
+    private RSAPublicKey rsaPublicKey;
 
     /**
      * Instantiate a new DER RSA public key reading the certificate from the URL.
@@ -36,6 +53,35 @@ public final class DerRsaSha1VeryfingKey extends AbstractRsaSha1VerifyingKey {
      */
     public DerRsaSha1VeryfingKey(URL certificateLocation) throws SignatureException {
         super(certificateLocation);
+    }
+
+    /**
+     * Return the RSA public key.
+     *
+     * @return the RSA public key.
+     */
+    public RSAPublicKey getRsaPublicKey() {
+        return this.rsaPublicKey;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void init(byte[] bufferedValue) throws SignatureException {
+        try {
+            CertificateFactory certificateFactory = CertificateFactory.getInstance(X509);
+
+            ByteArrayInputStream input = new ByteArrayInputStream(bufferedValue);
+            try {
+                X509Certificate certificate = (X509Certificate) certificateFactory.generateCertificate(input);
+                this.rsaPublicKey = (RSAPublicKey) certificate.getPublicKey();
+            } catch (CertificateException e) {
+                throw new SignatureException("An error occurred while reading the public ceritificate", e);
+            }
+        } catch (CertificateException e) {
+            // TODO can this exception be ignored?
+        }
     }
 
 }

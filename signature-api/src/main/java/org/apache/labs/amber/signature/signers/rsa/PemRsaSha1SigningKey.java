@@ -26,7 +26,7 @@ import org.apache.labs.amber.signature.signers.SignatureException;
  *
  * @version $Id$
  */
-public final class PemRsaSha1SigningKey extends AbstractRsaSha1SigningKey {
+public final class PemRsaSha1SigningKey extends DerRsaSha1SigningKey {
 
     /**
      * Instantiate a new PEM RSA private key reading the certificate from the URL.
