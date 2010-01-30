@@ -33,9 +33,25 @@ import org.apache.commons.beanutils.MethodUtils;
 public abstract class AbstractAliasBeanInfo extends SimpleBeanInfo {
 
     /**
+     * The default property name that contains the alias.
+     */
+    private static final String VALUE = "value";
+
+    /**
      * Maintains the original descriptors and the alias descriptor.
      */
     private final List<PropertyDescriptor> descriptors = new ArrayList<PropertyDescriptor>();
+
+    /**
+     * Scans the class hierarchy and associates the property field to alias.
+     *
+     * @param klass the class is currently analyzed.
+     * @param annotationType the annotation type that contains the alias name.
+     */
+    public AbstractAliasBeanInfo(Class<?> klass,
+            Class<? extends Annotation> annotationType) {
+        this(klass, annotationType, VALUE);
+    }
 
     /**
      * Scans the class hierarchy and associates the property field to alias.
