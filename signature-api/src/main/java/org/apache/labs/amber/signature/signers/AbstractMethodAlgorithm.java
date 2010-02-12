@@ -1,0 +1,149 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.apache.labs.amber.signature.signers;
+
+import org.apache.labs.amber.signature.descriptors.Service;
+import org.apache.labs.amber.signature.message.RequestMessage;
+import org.apache.labs.amber.signature.parameters.Parameter;
+
+/**
+ * Abstract implementation of OAuth signature method algorithm.
+ *
+ * @param <S> the {@link SigningKey} type.
+ * @param <V> the {@link VerifyingKey} type.
+ */
+public abstract class AbstractMethodAlgorithm<S extends SigningKey, V extends VerifyingKey> implements SignatureMethodAlgorithm<S, V> {
+
+    /**
+     * HTTP protocol name.
+     */
+    private static final String HTTP_PROTOCOL = "http";
+
+    /**
+     * HTTPS protocol name.
+     */
+    private static final String HTTPS_PROTOCOL = "https";
+
+    /**
+     * URL path separator.
+     */
+    private static final String PATH_SEPARATOR = "/";
+
+    /**
+     * URL scheme separator.
+     */
+    private static final String SCHEME_SEPARATOR = "://";
+
+    /**
+     * The default HTTP port ({@code 80}) constant.
+     */
+    private static final int DEFAULT_HTTP_PORT = 80;
+
+    /**
+     * The default HTTPS port ({@code 443}) constant.
+     */
+    private static final int DEFAULT_HTTPS_PORT = 443;
+
+    /**
+     * The empty string constant.
+     */
+    private static final String EMPTY = "";
+
+    /**
+     * {@inheritDoc}
+     */
+    public final String calculate(S signingKey, String secretCredential, Service service, RequestMessage message, Parameter...parameterList) throws SignatureException {
+        if (signingKey == null) {
+            throw new IllegalArgumentException("parameter 'signingKey' must not be null");
+        }
+        if (secretCredential == null) {
+            secretCredential = EMPTY;
+        }
+        if (service == null) {
+            throw new IllegalArgumentException("parameter 'service' must not be null");
+        }
+        if (message == null) {
+            throw new IllegalArgumentException("parameter 'message' must not be null");
+        }
+
+        String baseString = this.createBaseString(service, message, parameterList);
+        return this.encode(signingKey, secretCredential, baseString);
+    }
+
+    /**
+     * Calculates the signature applying the method algorithm.
+     *
+     * @param signingKey the key has to be used to sign the request.
+     * @param secretCredential the temporary/token credential.
+     * @param baseString the OAuth base string.
+     * @return the calculated signature.
+     * @throws SignatureException if any error occurs.
+     */
+    protected abstract String encode(S signingKey, String secretCredential, String baseString) throws SignatureException;
+
+    /**
+     * {@inheritDoc}
+     */
+    public final boolean verify(String signature, V verifyingKey, String secretCredential, Service service, RequestMessage message, Parameter...parameterList) throws SignatureException {
+        if (signature == null) {
+            throw new IllegalArgumentException("parameter 'signature' must not be null");
+        }
+        if (verifyingKey == null) {
+            throw new IllegalArgumentException("parameter 'verifyingKey' must not be null");
+        }
+        if (secretCredential == null) {
+            secretCredential = EMPTY;
+        }
+        if (service == null) {
+            throw new IllegalArgumentException("parameter 'service' must not be null");
+        }
+        if (message == null) {
+            throw new IllegalArgumentException("parameter 'message' must not be null");
+        }
+
+        String baseString = this.createBaseString(service, message, parameterList);
+        return this.verify(signature, verifyingKey, secretCredential, baseString);
+    }
+
+    /**
+     * Verifies the signature applying the method algorithm.
+     *
+     * @param signature the OAuth signature has to be verified.
+     * @param verifyingKey the key has to be used to verify the request.
+     * @param secretCredential the temporary/token credential.
+     * @param baseString the OAuth base string.
+     * @return true if the signature is correct, false otherwise.
+     * @throws SignatureException if any error occurs.
+     */
+    protected abstract boolean verify(String signature, V verifyingKey, String secretCredential, String baseString) throws SignatureException;
+
+    /**
+     * Calculates the OAuth base string.
+     *
+     * @param service the service for which the signature has to be
+     *        signed/verified.
+     * @param message the (has to be signed) OAuth message.
+     * @param parameterList the (optional) parameter list the cliend sends to
+     *        the OAuth server.
+     * @return the calculated OAuth base string.
+     * @throws SignatureException if any error occurs.
+     */
+    private String createBaseString(Service service, RequestMessage message, Parameter... parameterList) throws SignatureException {
+        return null;
+    }
+
+}
