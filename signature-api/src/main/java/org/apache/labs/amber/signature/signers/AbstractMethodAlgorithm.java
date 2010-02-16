@@ -16,6 +16,8 @@
  */
 package org.apache.labs.amber.signature.signers;
 
+import java.net.URL;
+
 import org.apache.labs.amber.signature.descriptors.Service;
 import org.apache.labs.amber.signature.message.RequestMessage;
 import org.apache.labs.amber.signature.parameters.Parameter;
@@ -143,6 +145,36 @@ public abstract class AbstractMethodAlgorithm<S extends SigningKey, V extends Ve
      * @throws SignatureException if any error occurs.
      */
     private String createBaseString(Service service, RequestMessage message, Parameter... parameterList) throws SignatureException {
+        // the HTTP method
+        String method = service.getHttpMethod().name();
+
+        // the normalized request URL
+        URL url = service.getServiceUri();
+        String scheme = url.getProtocol().toLowerCase();
+        String authority = url.getAuthority().toLowerCase();
+
+        int port = url.getPort();
+        if ((HTTP_PROTOCOL.equals(scheme) && port == DEFAULT_HTTP_PORT)
+                || (HTTPS_PROTOCOL.equals(scheme) && port == DEFAULT_HTTPS_PORT)) {
+            int index = authority.lastIndexOf(':');
+            if (index >= 0) {
+                authority = authority.substring(0, index);
+            }
+        }
+
+        String path = url.getPath();
+        if (path == null || path.length() <= 0) {
+            path = PATH_SEPARATOR; // conforms to RFC 2616 section 3.2.2
+        }
+
+        String requestUrl =  new StringBuilder(scheme)
+                                .append(SCHEME_SEPARATOR)
+                                .append(authority)
+                                .append(path)
+                                .toString();
+
+        
+
         return null;
     }
 
