@@ -79,7 +79,11 @@ public final class Parameter implements Comparable<Parameter> {
      * {@inheritDoc}
      */
     public int compareTo(Parameter parameter) {
-        return this.name.compareTo(parameter.getName());
+        int nameComparison = this.name.compareTo(parameter.getName());
+        if (nameComparison == 0) {
+            return this.value.compareTo(parameter.getValue());
+        }
+        return nameComparison;
     }
 
     /**
