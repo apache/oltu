@@ -207,14 +207,15 @@ public abstract class AbstractMethodAlgorithm<S extends SigningKey, V extends Ve
                                 .append(path)
                                 .toString();
 
+        // parameter normalization
         // TODO add missing algorithm part implementation
-        String requestParameters = null;
+        String normalizedParameters = null;
 
         return new StringBuilder(method)
                 .append('&')
                 .append(percentEncode(requestUrl))
                 .append('&')
-                .append(percentEncode(requestParameters))
+                .append(percentEncode(normalizedParameters))
                 .toString();
     }
 
