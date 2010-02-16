@@ -17,7 +17,10 @@
 package org.apache.labs.amber.signature.signers;
 
 import java.net.URL;
+import java.nio.charset.Charset;
+import java.util.BitSet;
 
+import org.apache.commons.codec.net.URLCodec;
 import org.apache.labs.amber.signature.descriptors.Service;
 import org.apache.labs.amber.signature.message.RequestMessage;
 import org.apache.labs.amber.signature.parameters.Parameter;
@@ -64,6 +67,37 @@ public abstract class AbstractMethodAlgorithm<S extends SigningKey, V extends Ve
      * The empty string constant.
      */
     private static final String EMPTY = "";
+
+    /**
+     * The default {@code UTF-8} character encoding.
+     */
+    private static final Charset UTF_8 = Charset.forName("UTF-8");
+
+    /**
+     * The {@code RFC3986} unreserved chars.
+     */
+    private static final BitSet UNRESERVED_CHARS = new BitSet(256);
+
+    /**
+     * Static unreserved chars bit set initialization.
+     */
+    static {
+        for (byte b = 'A'; b <= 'Z'; b++) {
+            UNRESERVED_CHARS.set(b);
+        }
+        for (byte b = 'a'; b <= 'z'; b++) {
+            UNRESERVED_CHARS.set(b);
+        }
+        for (byte b = '0'; b <= '9'; b++) {
+            UNRESERVED_CHARS.set(b);
+        }
+
+        // special URL encoding chars
+        UNRESERVED_CHARS.set('-');
+        UNRESERVED_CHARS.set('.');
+        UNRESERVED_CHARS.set('_');
+        UNRESERVED_CHARS.set('~');
+    }
 
     /**
      * {@inheritDoc}
@@ -173,9 +207,25 @@ public abstract class AbstractMethodAlgorithm<S extends SigningKey, V extends Ve
                                 .append(path)
                                 .toString();
 
-        
+        // TODO add missing algorithm part implementation
+        String requestParameters = null;
 
-        return null;
+        return new StringBuilder(method)
+                .append('&')
+                .append(percentEncode(requestUrl))
+                .append('&')
+                .append(percentEncode(requestParameters))
+                .toString();
+    }
+
+    /**
+     * Applies the percent encoding algorithm to the input text.
+     *
+     * @param text the text has to be encoded.
+     * @return the encoded string.
+     */
+    private static String percentEncode(String text) {
+        return new String(URLCodec.encodeUrl(UNRESERVED_CHARS, text.getBytes(UTF_8)), UTF_8);
     }
 
 }
