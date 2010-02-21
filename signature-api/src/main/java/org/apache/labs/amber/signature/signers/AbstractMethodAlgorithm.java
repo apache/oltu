@@ -18,7 +18,10 @@ package org.apache.labs.amber.signature.signers;
 
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.BitSet;
+import java.util.Collections;
+import java.util.List;
 
 import org.apache.commons.codec.net.URLCodec;
 import org.apache.labs.amber.signature.descriptors.Service;
@@ -173,12 +176,12 @@ public abstract class AbstractMethodAlgorithm<S extends SigningKey, V extends Ve
      * @param service the service for which the signature has to be
      *        signed/verified.
      * @param message the (has to be signed) OAuth message.
-     * @param parameterList the (optional) parameter list the cliend sends to
+     * @param parameters the (optional) parameter list the cliend sends to
      *        the OAuth server.
      * @return the calculated OAuth base string.
      * @throws SignatureException if any error occurs.
      */
-    private String createBaseString(Service service, RequestMessage message, Parameter... parameterList) throws SignatureException {
+    private String createBaseString(Service service, RequestMessage message, Parameter... parameters) throws SignatureException {
         // the HTTP method
         String method = service.getHttpMethod().name();
 
@@ -208,8 +211,29 @@ public abstract class AbstractMethodAlgorithm<S extends SigningKey, V extends Ve
                                 .toString();
 
         // parameter normalization
-        // TODO add missing algorithm part implementation
-        String normalizedParameters = null;
+        List<Parameter> parametersList = new ArrayList<Parameter>();
+
+        // TODO add the message parameters
+
+        // add the user parameters
+        for (Parameter parameter : parameters) {
+            encodeAndAddParameter(parameter, parametersList);
+        }
+
+        // now serialize the normalized parameters
+        StringBuilder buffer = new StringBuilder();
+        for (int i = 0; i < parametersList.size(); i++) {
+            if (i > 0) {
+                buffer.append('&');
+            }
+
+            Parameter parameter = parametersList.get(i);
+            buffer.append(parameter.getName());
+            buffer.append('=');
+            buffer.append(parameter.getValue());
+        }
+
+        String normalizedParameters = buffer.toString();
 
         return new StringBuilder(method)
                 .append('&')
@@ -227,6 +251,22 @@ public abstract class AbstractMethodAlgorithm<S extends SigningKey, V extends Ve
      */
     private static String percentEncode(String text) {
         return new String(URLCodec.encodeUrl(UNRESERVED_CHARS, text.getBytes(UTF_8)), UTF_8);
+    }
+
+    /**
+     * Add the input parameter in the list, encoding the parameter name/value
+     * first, then putting it in the list in the right position
+     *
+     * @param parameter the input parameter.
+     * @param parametersList the list where add the parameter.
+     */
+    private static void encodeAndAddParameter(Parameter parameter, List<Parameter> parametersList) {
+        Parameter encodedParameter = new Parameter(percentEncode(parameter.getName()), percentEncode(parameter.getValue()));
+        int paramIndex = Collections.binarySearch(parametersList, encodedParameter);
+        if (paramIndex < 0) {
+            paramIndex = -paramIndex - 1;
+        }
+        parametersList.add(paramIndex, encodedParameter);
     }
 
 }

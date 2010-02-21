@@ -34,7 +34,7 @@ public interface SignatureMethodAlgorithm<S extends SigningKey, V extends Verify
      * @param secretCredential the temporary/token credential.
      * @param service the service for which the signature is calculated.
      * @param message the OAuth message has to be signed.
-     * @param parameterList the (optional) parameter list the cliend sends to
+     * @param parameters the (optional) parameter list the cliend sends to
      *        the OAuth server.
      * @return the calculated signature.
      * @throws SignatureException if any error occurs.
@@ -43,7 +43,7 @@ public interface SignatureMethodAlgorithm<S extends SigningKey, V extends Verify
             String secretCredential,
             Service service,
             RequestMessage message,
-            Parameter... parameterList) throws SignatureException;
+            Parameter... parameters) throws SignatureException;
 
     /**
      * Verifies the OAuth request message signature.
@@ -53,7 +53,7 @@ public interface SignatureMethodAlgorithm<S extends SigningKey, V extends Verify
      * @param secretCredential the temporary/token credential.
      * @param service the service for which the signature has to be verified.
      * @param message the signed OAuth message.
-     * @param parameterList the (optional) parameter list the cliend sends to
+     * @param parameters the (optional) parameter list the cliend sends to
      *        the OAuth server.
      * @return true if the signature is correct, false otherwise.
      * @throws SignatureException if any error occurs.
@@ -63,6 +63,6 @@ public interface SignatureMethodAlgorithm<S extends SigningKey, V extends Verify
             String secretCredential,
             Service service,
             RequestMessage message,
-            Parameter... parameterList) throws SignatureException;
+            Parameter... parameters) throws SignatureException;
 
 }
