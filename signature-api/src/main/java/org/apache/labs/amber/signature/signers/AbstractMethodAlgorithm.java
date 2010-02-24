@@ -24,6 +24,7 @@ import java.util.BitSet;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.codec.net.URLCodec;
 import org.apache.labs.amber.signature.descriptors.Service;
 import org.apache.labs.amber.signature.message.OAuthParameter;
@@ -224,9 +225,8 @@ public abstract class AbstractMethodAlgorithm<S extends SigningKey, V extends Ve
                 if (field.isAnnotationPresent(OAuthParameter.class)) {
                     OAuthParameter oAuthParameter = field.getAnnotation(OAuthParameter.class);
                     if (oAuthParameter.includeInSignature()) {
-                        field.setAccessible(true);
                         try {
-                            Object fieldValue = field.get(message);
+                            Object fieldValue = BeanUtils.getProperty(message, field.getName());
 
                             if (fieldValue == null && !oAuthParameter.optional()) {
                                 throw new SignatureException(new StringBuilder("OAuth parameter '")
@@ -240,11 +240,9 @@ public abstract class AbstractMethodAlgorithm<S extends SigningKey, V extends Ve
                             encodeAndAddParameter(oAuthParameter.name(), String.valueOf(fieldValue), parametersList);
                         } catch (Exception e) {
                             throw new SignatureException(new StringBuilder("An error occurred while getting '")
-                                    .append(field)
-                                    .append("' value, see nested exception")
-                                    .toString(), e);
-                        } finally {
-                            field.setAccessible(false);
+                                        .append(field)
+                                        .append("' value, see nested exception")
+                                        .toString(), e);
                         }
                     }
                 }
