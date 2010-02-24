@@ -85,6 +85,16 @@ public final class HmacSha1MethodAlgorithm extends AbstractMethodAlgorithm<HmacS
             String baseString)
             throws SignatureException {
         String expectedSignature = this.encode(verifyingKey, secretCredential, baseString);
+
+        if (this.getLog().isDebugEnabled()) {
+            this.getLog().debug(new StringBuilder("Received signature {")
+                    .append(signature)
+                    .append("} expected signature {")
+                    .append(expectedSignature)
+                    .append('}')
+                    .toString());
+        }
+
         return expectedSignature.equals(signature);
     }
 

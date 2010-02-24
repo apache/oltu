@@ -26,6 +26,8 @@ import java.util.List;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.codec.net.URLCodec;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.labs.amber.signature.descriptors.Service;
 import org.apache.labs.amber.signature.message.OAuthParameter;
 import org.apache.labs.amber.signature.message.RequestMessage;
@@ -103,6 +105,20 @@ public abstract class AbstractMethodAlgorithm<S extends SigningKey, V extends Ve
         UNRESERVED_CHARS.set('.');
         UNRESERVED_CHARS.set('_');
         UNRESERVED_CHARS.set('~');
+    }
+
+    /**
+     * This class log.
+     */
+    private final Log log = LogFactory.getLog(this.getClass());
+
+    /**
+     * Return this class log.
+     *
+     * @return this class log.
+     */
+    protected Log getLog() {
+        return this.log;
     }
 
     /**
