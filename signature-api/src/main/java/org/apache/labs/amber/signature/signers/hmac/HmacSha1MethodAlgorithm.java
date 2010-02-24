@@ -82,8 +82,7 @@ public final class HmacSha1MethodAlgorithm extends AbstractMethodAlgorithm<HmacS
     protected boolean verify(String signature,
             HmacSha1Key verifyingKey,
             String secretCredential,
-            String baseString)
-            throws SignatureException {
+            String baseString) throws SignatureException {
         String expectedSignature = this.encode(verifyingKey, secretCredential, baseString);
 
         if (this.getLog().isDebugEnabled()) {
