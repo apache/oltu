@@ -16,6 +16,7 @@
  */
 package org.apache.labs.amber.signature.signers;
 
+import java.lang.reflect.Field;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ import java.util.List;
 
 import org.apache.commons.codec.net.URLCodec;
 import org.apache.labs.amber.signature.descriptors.Service;
+import org.apache.labs.amber.signature.message.OAuthParameter;
 import org.apache.labs.amber.signature.message.RequestMessage;
 import org.apache.labs.amber.signature.parameters.Parameter;
 
@@ -213,11 +215,46 @@ public abstract class AbstractMethodAlgorithm<S extends SigningKey, V extends Ve
         // parameter normalization
         List<Parameter> parametersList = new ArrayList<Parameter>();
 
-        // TODO add the message parameters
+        // add the message parameters
+        Class<?> klass = message.getClass();
+        // traverses the class hierarchy
+        // TODO optimize it
+        while (Object.class != klass) {
+            for (Field field : klass.getDeclaredFields()) {
+                if (field.isAnnotationPresent(OAuthParameter.class)) {
+                    OAuthParameter oAuthParameter = field.getAnnotation(OAuthParameter.class);
+                    if (oAuthParameter.includeInSignature()) {
+                        field.setAccessible(true);
+                        try {
+                            Object fieldValue = field.get(message);
+
+                            if (fieldValue == null && !oAuthParameter.optional()) {
+                                throw new SignatureException(new StringBuilder("OAuth parameter '")
+                                    .append(oAuthParameter.name())
+                                    .append("' specified in '")
+                                    .append(field)
+                                    .append("' is not optional")
+                                    .toString());
+                            }
+
+                            encodeAndAddParameter(oAuthParameter.name(), String.valueOf(fieldValue), parametersList);
+                        } catch (Exception e) {
+                            throw new SignatureException(new StringBuilder("An error occurred while getting '")
+                                    .append(field)
+                                    .append("' value, see nested exception")
+                                    .toString(), e);
+                        }
+                        field.setAccessible(false);
+                    }
+                }
+            }
+
+            klass = klass.getSuperclass();
+        }
 
         // add the user parameters
         for (Parameter parameter : parameters) {
-            encodeAndAddParameter(parameter, parametersList);
+            encodeAndAddParameter(parameter.getName(), parameter.getValue(), parametersList);
         }
 
         // now serialize the normalized parameters
@@ -260,13 +297,13 @@ public abstract class AbstractMethodAlgorithm<S extends SigningKey, V extends Ve
      * @param parameter the input parameter.
      * @param parametersList the list where add the parameter.
      */
-    private static void encodeAndAddParameter(Parameter parameter, List<Parameter> parametersList) {
-        Parameter encodedParameter = new Parameter(percentEncode(parameter.getName()), percentEncode(parameter.getValue()));
-        int paramIndex = Collections.binarySearch(parametersList, encodedParameter);
+    private static void encodeAndAddParameter(String name, String value, List<Parameter> parametersList) {
+        Parameter parameter = new Parameter(percentEncode(name), percentEncode(value));
+        int paramIndex = Collections.binarySearch(parametersList, parameter);
         if (paramIndex < 0) {
             paramIndex = -paramIndex - 1;
         }
-        parametersList.add(paramIndex, encodedParameter);
+        parametersList.add(paramIndex, parameter);
     }
 
 }
