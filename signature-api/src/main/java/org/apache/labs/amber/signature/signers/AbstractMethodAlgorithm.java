@@ -210,8 +210,8 @@ public abstract class AbstractMethodAlgorithm<S extends SigningKey, V extends Ve
         String authority = url.getAuthority().toLowerCase();
 
         int port = url.getPort();
-        if ((HTTP_PROTOCOL.equals(scheme) && port == DEFAULT_HTTP_PORT)
-                || (HTTPS_PROTOCOL.equals(scheme) && port == DEFAULT_HTTPS_PORT)) {
+        if ((HTTP_PROTOCOL.equals(scheme) && DEFAULT_HTTP_PORT == port)
+                || (HTTPS_PROTOCOL.equals(scheme) && DEFAULT_HTTPS_PORT == port)) {
             int index = authority.lastIndexOf(':');
             if (index >= 0) {
                 authority = authority.substring(0, index);
