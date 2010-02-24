@@ -243,8 +243,9 @@ public abstract class AbstractMethodAlgorithm<S extends SigningKey, V extends Ve
                                     .append(field)
                                     .append("' value, see nested exception")
                                     .toString(), e);
+                        } finally {
+                            field.setAccessible(false);
                         }
-                        field.setAccessible(false);
                     }
                 }
             }
