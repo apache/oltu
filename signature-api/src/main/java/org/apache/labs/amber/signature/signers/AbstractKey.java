@@ -44,6 +44,9 @@ public abstract class AbstractKey implements Key {
         return this.keyValue;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public final String toString() {
         return new StringBuilder(this.getClass().getSimpleName())
