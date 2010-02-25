@@ -321,4 +321,15 @@ public abstract class AbstractMethodAlgorithm<S extends SigningKey, V extends Ve
         parametersList.add(paramIndex, parameter);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final String toString() {
+        if (this.getClass().isAnnotationPresent(SignatureMethod.class)) {
+            return this.getClass().getAnnotation(SignatureMethod.class).value();
+        }
+        return super.toString();
+    }
+
 }
