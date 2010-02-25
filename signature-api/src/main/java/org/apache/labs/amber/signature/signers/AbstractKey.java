@@ -49,7 +49,7 @@ public abstract class AbstractKey implements Key {
         return new StringBuilder(this.getClass().getSimpleName())
                 .append("('")
                 .append(this.keyValue)
-                .append("'")
+                .append("')")
                 .toString();
     }
 
