@@ -68,8 +68,8 @@ public class RequestMessage {
      */
     @OAuthParameter(
             name = "oauth_version",
-            optional = true,
-            includeInSignature = false
+            optional = false,
+            includeInSignature = true
     )
     private String version;
 
