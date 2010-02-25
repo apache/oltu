@@ -16,12 +16,15 @@
  */
 package org.apache.labs.amber.signature.signers;
 
+import static junit.framework.Assert.assertTrue;
+
 import java.net.URL;
 
 import org.apache.labs.amber.signature.descriptors.HTTPMethod;
 import org.apache.labs.amber.signature.descriptors.Service;
 import org.apache.labs.amber.signature.message.TokenRequestMessage;
 import org.apache.labs.amber.signature.parameters.Parameter;
+
 
 /**
  * Abstract implementation of OAuth signature method algorithm test case.
@@ -50,13 +53,13 @@ public abstract class AbstractMethodAlgorithmTestCase<S extends SigningKey, V ex
         // the service has to be invoked
         Service service = new Service(HTTPMethod.GET, new URL("http://photos.example.net/photos"));
 
-        assert methodAlgorithm.verify(expectedSignature,
+        assertTrue(methodAlgorithm.verify(expectedSignature,
                 verifyingKey,
                 secretCredential,
                 service,
                 message,
                 new Parameter("size", "original"),
-                new Parameter("file", "vacation.jpg"));
+                new Parameter("file", "vacation.jpg")));
     }
 
 }
