@@ -27,7 +27,7 @@ import org.junit.Test;
 public final class PlaintextMethodAlgorithmTestCase extends AbstractMethodAlgorithmTestCase<PlaintextKey, PlaintextKey> {
 
     @Test
-    public void verifyHmacSha1MethodAlgorithm() throws Exception {
+    public void verifyPlaintextMethodAlgorithm() throws Exception {
         // the consumer secret
         PlaintextKey hmacKey = new PlaintextKey("kd94hf93k423kf44");
 
