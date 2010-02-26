@@ -302,7 +302,17 @@ public abstract class AbstractMethodAlgorithm<S extends SigningKey, V extends Ve
      * @return the encoded string.
      */
     protected static String percentEncode(String text) {
-        return new String(URLCodec.encodeUrl(UNRESERVED_CHARS, text.getBytes(UTF_8)), UTF_8);
+        return new String(URLCodec.encodeUrl(UNRESERVED_CHARS, toUTF8Bytes(text)), UTF_8);
+    }
+
+    /**
+     * Converts the input text in a sequence of UTF-8 bytes.
+     *
+     * @param text the text has to be converted.
+     * @return the UTF-8 bytes sequence.
+     */
+    protected static byte[] toUTF8Bytes(String text) {
+        return text.getBytes(UTF_8);
     }
 
     /**
