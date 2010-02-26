@@ -69,7 +69,14 @@ public final class RsaSha1MethodAlgorithm extends AbstractMethodAlgorithm<DerRsa
             DerRsaSha1VeryfingKey verifyingKey,
             String secretCredential,
             String baseString) throws SignatureException {
-        return false;
+        try {
+            Signature verifier = Signature.getInstance(RSA_SHA1_ALGORITHM);
+            verifier.initVerify(verifyingKey.getRsaPublicKey());
+            verifier.update(toUTF8Bytes(baseString));
+            return verifier.verify(decodeBase64(signature));
+        } catch (Exception e) {
+            throw new SignatureException(e);
+        }
     }
 
 }

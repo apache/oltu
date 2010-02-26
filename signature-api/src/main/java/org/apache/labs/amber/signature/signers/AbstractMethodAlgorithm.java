@@ -328,6 +328,16 @@ public abstract class AbstractMethodAlgorithm<S extends SigningKey, V extends Ve
     }
 
     /**
+     * Decodes an input text to a bytes sequence applying the Base64 algorithm.
+     *
+     * @param text the text has to be encoded.
+     * @return the decoded bytes sequence;
+     */
+    protected static byte[] decodeBase64(String text) {
+        return Base64.decodeBase64(text);
+    }
+
+    /**
      * Add the input parameter in the list, encoding the parameter name/value
      * first, then putting it in the list in the right position
      *
