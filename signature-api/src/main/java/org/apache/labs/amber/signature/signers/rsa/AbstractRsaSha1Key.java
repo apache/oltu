@@ -40,6 +40,11 @@ abstract class AbstractRsaSha1Key implements Key {
     private final String value;
 
     /**
+     * The certificate URL location.
+     */
+    private final URL certificateLocation;
+
+    /**
      * Instantiate a new RSA key reading the certificate from the URL.
      *
      * @param certificateLocation the certificate from the URL.
@@ -66,6 +71,8 @@ abstract class AbstractRsaSha1Key implements Key {
             this.value = new String(bufferedValue);
 
             this.init(bufferedValue);
+
+            this.certificateLocation = certificateLocation;
         } catch (Exception e) {
             throw new SignatureException("An error occurred while reading RSA cerificate '"
                     + certificateLocation
@@ -126,6 +133,14 @@ abstract class AbstractRsaSha1Key implements Key {
         } catch (IOException e) {
             throw new SignatureException("Fatal error while reading public certificate", e);
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return this.certificateLocation.toString();
     }
 
 }
