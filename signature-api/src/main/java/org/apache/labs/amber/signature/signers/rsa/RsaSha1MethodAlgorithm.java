@@ -52,7 +52,13 @@ public final class RsaSha1MethodAlgorithm extends AbstractMethodAlgorithm<DerRsa
 
             return new String(Base64.encodeBase64(signature, false));
         } catch (Exception e) {
-            throw new SignatureException(e);
+            throw new SignatureException(new StringBuilder("An error occurred while signing base string '")
+                    .append(baseString)
+                    .append("' using secret credential '")
+                    .append(secretCredential)
+                    .append("' and private RSA certificate: ")
+                    .append(signingKey)
+                    .toString(), e);
         }
     }
 
