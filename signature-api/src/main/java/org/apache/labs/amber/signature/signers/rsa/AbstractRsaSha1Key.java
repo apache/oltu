@@ -139,8 +139,12 @@ abstract class AbstractRsaSha1Key implements Key {
      * {@inheritDoc}
      */
     @Override
-    public String toString() {
-        return this.certificateLocation.toString();
+    public final String toString() {
+        return new StringBuilder(this.getClass().getSimpleName())
+                .append("('")
+                .append(this.certificateLocation.toString())
+                .append("')")
+                .toString();
     }
 
 }
