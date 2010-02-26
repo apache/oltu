@@ -19,7 +19,7 @@ package org.apache.labs.amber.server;
 import org.apache.labs.amber.signature.credential.Credential;
 
 /**
- * Temporary/Token storage inerface.
+ * Temporary/Token storage interface.
  *
  * @version $Id$
  */
@@ -28,8 +28,8 @@ public interface CredentialsStorage {
     /**
      * Stores a new token.
      *
-     * @param clientCredentials Consumer key associated to the token to be stored.
-     * @param credential The token to be stored.
+     * @param clientCredentials the consumer key associated to the token to be stored.
+     * @param credential the token to be stored.
      * @throws StorageException if a backend error occurs.
      */
     void add(String clientCredentials, Credential credential) throws StorageException;
@@ -37,7 +37,7 @@ public interface CredentialsStorage {
     /**
      * Modifies an existing token.
      *
-     * @param token The token to be modified.
+     * @param token the token to be modified.
      * @throws StorageException if a backend error occurs.
      */
     void update(Credential token) throws StorageException;
