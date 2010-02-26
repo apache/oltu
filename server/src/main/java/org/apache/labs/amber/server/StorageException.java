@@ -21,22 +21,22 @@ package org.apache.labs.amber.server;
  *
  * @version $Id$
  */
-public final class AccessStorageException extends Exception {
+public final class StorageException extends Exception {
 
     /**
      * The default serial version UID;
      */
     private static final long serialVersionUID = 1L;
 
-    public AccessStorageException(String message) {
+    public StorageException(String message) {
         super(message);
     }
 
-    public AccessStorageException(Throwable cause) {
+    public StorageException(Throwable cause) {
         super(cause);
     }
 
-    public AccessStorageException(String message, Throwable cause) {
+    public StorageException(String message, Throwable cause) {
         super(message, cause);
     }
 
