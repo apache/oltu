@@ -25,6 +25,7 @@ import java.security.interfaces.RSAPublicKey;
 
 import org.apache.labs.amber.signature.signers.SignatureException;
 import org.apache.labs.amber.signature.signers.SignatureMethod;
+import org.apache.labs.amber.signature.signers.VerifyingKey;
 
 /**
  * Implementation of a DER RSA public key.
@@ -32,7 +33,7 @@ import org.apache.labs.amber.signature.signers.SignatureMethod;
  * @version $Id$
  */
 @SignatureMethod("RSA-SHA1")
-public class DerRsaSha1VeryfingKey extends AbstractRsaSha1Key {
+public class DerRsaSha1VeryfingKey extends AbstractRsaSha1Key implements VerifyingKey {
 
     /**
      * The X509 string constant.

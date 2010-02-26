@@ -25,6 +25,7 @@ import java.security.spec.PKCS8EncodedKeySpec;
 
 import org.apache.labs.amber.signature.signers.SignatureException;
 import org.apache.labs.amber.signature.signers.SignatureMethod;
+import org.apache.labs.amber.signature.signers.SigningKey;
 
 /**
  * Implementation of a DER RSA private key.
@@ -32,7 +33,7 @@ import org.apache.labs.amber.signature.signers.SignatureMethod;
  * @version $Id$
  */
 @SignatureMethod("RSA-SHA1")
-public class DerRsaSha1SigningKey extends AbstractRsaSha1Key {
+public class DerRsaSha1SigningKey extends AbstractRsaSha1Key implements SigningKey {
 
     /**
      * The RSA algorithm name.
