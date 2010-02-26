@@ -16,6 +16,9 @@
  */
 package org.apache.labs.amber.signature.signers.rsa;
 
+import java.security.Signature;
+
+import org.apache.commons.codec.binary.Base64;
 import org.apache.labs.amber.signature.signers.AbstractMethodAlgorithm;
 import org.apache.labs.amber.signature.signers.SignatureException;
 import org.apache.labs.amber.signature.signers.SignatureMethod;
@@ -29,13 +32,28 @@ import org.apache.labs.amber.signature.signers.SignatureMethod;
 public final class RsaSha1MethodAlgorithm extends AbstractMethodAlgorithm<DerRsaSha1SigningKey, DerRsaSha1VeryfingKey> {
 
     /**
+     * The RSA+SHA1 algorithm name.
+     */
+    private static final String RSA_SHA1_ALGORITHM = "SHA1withRSA";
+
+    /**
      * {@inheritDoc}
      */
     @Override
     protected String encode(DerRsaSha1SigningKey signingKey,
             String secretCredential,
             String baseString) throws SignatureException {
-        return null;
+        try {
+            Signature signer = Signature.getInstance(RSA_SHA1_ALGORITHM);
+            signer.initSign(signingKey.getRsaPrivateKey());
+            signer.update(toUTF8Bytes(baseString));
+
+            byte[] signature = signer.sign();
+
+            return new String(Base64.encodeBase64(signature, false));
+        } catch (Exception e) {
+            throw new SignatureException(e);
+        }
     }
 
     /**
