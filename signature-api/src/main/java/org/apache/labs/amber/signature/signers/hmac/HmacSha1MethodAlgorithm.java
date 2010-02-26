@@ -22,7 +22,6 @@ import java.security.NoSuchAlgorithmException;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
-import org.apache.commons.codec.binary.Base64;
 import org.apache.labs.amber.signature.signers.AbstractMethodAlgorithm;
 import org.apache.labs.amber.signature.signers.SignatureException;
 import org.apache.labs.amber.signature.signers.SignatureMethod;
@@ -72,7 +71,7 @@ public final class HmacSha1MethodAlgorithm extends AbstractMethodAlgorithm<HmacS
 
         byte[] rawHmac = mac.doFinal(baseString.getBytes());
 
-        return new String(Base64.encodeBase64(rawHmac, false));
+        return base64Encode(rawHmac);
     }
 
     /**

@@ -18,7 +18,6 @@ package org.apache.labs.amber.signature.signers.rsa;
 
 import java.security.Signature;
 
-import org.apache.commons.codec.binary.Base64;
 import org.apache.labs.amber.signature.signers.AbstractMethodAlgorithm;
 import org.apache.labs.amber.signature.signers.SignatureException;
 import org.apache.labs.amber.signature.signers.SignatureMethod;
@@ -50,7 +49,7 @@ public final class RsaSha1MethodAlgorithm extends AbstractMethodAlgorithm<DerRsa
 
             byte[] signature = signer.sign();
 
-            return new String(Base64.encodeBase64(signature, false));
+            return base64Encode(signature);
         } catch (Exception e) {
             throw new SignatureException(new StringBuilder("An error occurred while signing base string '")
                     .append(baseString)

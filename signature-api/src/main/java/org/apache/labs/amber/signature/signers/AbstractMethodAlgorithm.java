@@ -25,6 +25,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.net.URLCodec;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -313,6 +314,17 @@ public abstract class AbstractMethodAlgorithm<S extends SigningKey, V extends Ve
      */
     protected static byte[] toUTF8Bytes(String text) {
         return text.getBytes(UTF_8);
+    }
+
+    /**
+     * Encodes a bytes sequence applying the Base64 algorithm without chuncking
+     * the output string.
+     *
+     * @param sequence the bytes sequence has to be encoded.
+     * @return the Base64 encoded string.
+     */
+    protected static String base64Encode(byte[] sequence) {
+        return new String(Base64.encodeBase64(sequence, false));
     }
 
     /**
