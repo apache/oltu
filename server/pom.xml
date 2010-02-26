@@ -31,6 +31,15 @@
     <version>${parent.version}</version>
     <name>Server</name>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.labs</groupId>
+            <artifactId>amber-signature-api</artifactId>
+            <version>${parent.version}</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
     <reporting>
         <plugins>
             <plugin>
