@@ -26,28 +26,28 @@ public interface AccessStorage {
     /**
      * Stores a new nonce / timestamp pair associated with a consumer key.
      *
-     * @param clientCredentials the consumer to be associated with the access
-     * @param timestamp the timestamp of the request
-     * @param nonce the nonce associated with the timestamp
-     * @throws AccessStorageException if a backend error occurs
+     * @param clientCredentials the consumer to be associated with the access.
+     * @param timestamp the timestamp of the request.
+     * @param nonce the nonce associated with the timestamp.
+     * @throws AccessStorageException if a backend error occurs.
      */
     void add(String clientCredentials, long timestamp, String nonce) throws AccessStorageException;
 
     /**
      * Get the last access (by timestamp) of a consumer.
      *
-     * @param clientCredentials the consumer whose access needs to be read
-     * @return the access object
-     * @throws AccessStorageException if a backend error occurs
+     * @param clientCredentials the consumer whose access needs to be read.
+     * @return the access object.
+     * @throws AccessStorageException if a backend error occurs.
      */
     Access getLastAccess(String clientCredentials) throws AccessStorageException;
 
     /**
      * Remove a consumer access.
      *
-     * @param clientCredentials the consumer key
-     * @param timestamp the timestamp
-     * @throws AccessStorageException if a backend error occurs
+     * @param clientCredentials the consumer key.
+     * @param timestamp the timestamp.
+     * @throws AccessStorageException if a backend error occurs.
      */
     void remove(String clientCredentials, long timestamp) throws AccessStorageException;
 
