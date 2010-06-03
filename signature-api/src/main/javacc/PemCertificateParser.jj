@@ -15,7 +15,7 @@ PARSER_BEGIN(PemCertificateParser)
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.labs.amber.signature.signers.rsa;
+package org.apache.amber.signature.signers.rsa;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
