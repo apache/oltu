@@ -19,23 +19,22 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <parent>
-        <groupId>org.apache.labs</groupId>
+        <groupId>org.apache.amber</groupId>
         <artifactId>amber-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.apache.labs</groupId>
+    <groupId>org.apache.amber</groupId>
     <artifactId>amber-server</artifactId>
     <packaging>jar</packaging>
-    <version>${parent.version}</version>
-    <name>Server</name>
+    <name>Apache Amber: Server</name>
 
     <dependencies>
         <dependency>
-            <groupId>org.apache.labs</groupId>
+            <groupId>org.apache.amber</groupId>
             <artifactId>amber-signature-api</artifactId>
-            <version>${parent.version}</version>
+            <version>${project.version}</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

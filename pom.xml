@@ -18,13 +18,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
+    <parent>
+        <groupId>org.apache</groupId>
+        <artifactId>apache</artifactId>
+        <version>7</version>
+    </parent>
+
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.apache.labs</groupId>
+    <groupId>org.apache.amber</groupId>
     <artifactId>amber-parent</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>Amber</name>
-    <url>http://svn.apache.org/repos/asf/labs/amber</url>
+    <name>Apache Amber</name>
+    <url>https://cwiki.apache.org/confluence/display/AMBER</url>
 
     <organization>
         <name>Apache Software Foundation</name>
@@ -39,47 +45,171 @@
     </licenses>
 
     <scm>
-        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/labs/</developerConnection>
-        <connection>scm:svn:http://svn.apache.org/repos/asf/labs/</connection>
-        <url>http://svn.apache.org/viewvc/labs/amber/</url>
+        <developerConnection>scm:svn:https://svn.apache.org/repos/asf/incubator/amber/trunk/</developerConnection>
+        <connection>scm:svn:https://svn.apache.org/repos/asf/incubator/amber/trunk/</connection>
+        <url>https://svn.apache.org/repos/asf/incubator/amber/trunk/</url>
     </scm>
 
     <issueManagement>
         <system>JIRA</system>
-        <url>https://issues.apache.org/jira/browse/LABS</url>
+        <url>https://issues.apache.org/jira/browse/AMBER</url>
     </issueManagement>
 
     <mailingLists>
         <mailingList>
-            <name>Apache labs general mailing list</name>
-            <post>labs@labs.apache.org</post>
-            <subscribe>labs-subscribe@labs.apache.org</subscribe>
-            <unsubscribe>labs-unsubscribe@labs.apache.org</unsubscribe>
-            <archive>http://mail-archives.apache.org/mod_mbox/labs-labs/</archive>
-            <otherArchives>
-                <otherArchive>http://markmail.org/list/org.apache.labs.labs/</otherArchive>
-            </otherArchives>
+            <name>Dev Mailing List</name>
+            <post>amber-dev[at]incubator[dot]apache[dot]org</post>
+            <subscribe>amber-dev-subscribe[at]incubator[dot]apache[dot]org</subscribe>
+            <unsubscribe>amber-dev-unsubscribe[at]incubator[dot]apache[dot]org</unsubscribe>
         </mailingList>
 
         <mailingList>
-            <name>Apache labs general SVN commit mailing list</name>
-            <subscribe>commits-subscribe@labs.apache.org</subscribe>
-            <unsubscribe>commits-unsubscribe@labs.apache.org</unsubscribe>
-            <archive>http://mail-archives.apache.org/mod_mbox/labs-commits/</archive>
-            <otherArchives>
-                <otherArchive>http://markmail.org/list/org.apache.labs.commits/</otherArchive>
-            </otherArchives>
+            <name>User Mailing List</name>
+            <post>amber-user[at]incubator[dot]apache[dot]org</post>
+            <subscribe>amber-user-subscribe[at]incubator[dot]apache[dot]org</subscribe>
+            <unsubscribe>amber-user-unsubscribe[at]incubator[dot]apache[dot]org</unsubscribe>
+        </mailingList>
+
+        <mailingList>
+            <name>Commits Mailing List</name>
+            <post>amber-commits[at]incubator[dot]apache[dot]org</post>
+            <subscribe>amber-commits-subscribe[at]incubator[dot]apache[dot]org</subscribe>
+            <unsubscribe>amber-commits-unsubscribe[at]incubator[dot]apache[dot]org</unsubscribe>
         </mailingList>
     </mailingLists>
 
     <developers>
         <developer>
+            <id>brianm</id>
+            <name>Brian McCallister</name>
+            <email>brianm[at]apache[dot]org</email>
+            <roles>
+                <role>Mentor</role>
+                <role>PMC Member</role>
+                <role>Committer</role>
+            </roles>
+        </developer>
+
+        <developer>
+            <id>henning</id>
+            <name>Henning Schmiedehausen</name>
+            <email>henning[at]apache[dot]org</email>
+            <roles>
+                <role>Mentor</role>
+                <role>PMC Member</role>
+                <role>Committer</role>
+            </roles>
+        </developer>
+
+        <developer>
+            <id>jfclere</id>
+            <name>Jean-Frederic Clere</name>
+            <email>jfclere[at]apache[dot]org</email>
+            <roles>
+                <role>Mentor</role>
+                <role>PMC Member</role>
+                <role>Committer</role>
+            </roles>
+        </developer>
+
+        <developer>
+            <id>gianugo</id>
+            <name>Gianugo Rabellino</name>
+            <email>gianugo[at]apache[dot]org</email>
+            <roles>
+                <role>Mentor</role>
+                <role>PMC Member</role>
+                <role>Committer</role>
+            </roles>
+        </developer>
+
+        <developer>
+            <id>djencks</id>
+            <name>David Jencks</name>
+            <email>djencks[at]apache[dot]org</email>
+            <roles>
+                <role>Mentor</role>
+                <role>PMC Member</role>
+                <role>Committer</role>
+            </roles>
+        </developer>
+
+        <developer>
+            <id>simoneg</id>
+            <name>Simone Gianni</name>
+            <email>simoneg[at]apache[dot]org</email>
+            <organization>Semeru S.r.l.</organization>
+            <organizationUrl>http://www.semeru.it/</organizationUrl>
+            <roles>
+                <role>PMC Member</role>
+                <role>Committer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+
+        <developer>
             <id>simonetripodi</id>
             <name>Simone Tripodi</name>
-            <email>simonetripodi at apache dot com</email>
+            <email>simonetripodi[at]apache[dot]org</email>
             <organization>Sourcesense S.r.l.</organization>
             <organizationUrl>http://www.sourcesense.com/</organizationUrl>
             <roles>
+                <role>PMC Member</role>
+                <role>Committer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+
+        <developer>
+            <id>TBD</id>
+            <name>Stuart "Pid" Williams</name>
+            <roles>
+                <role>PMC Member</role>
+                <role>Committer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+
+        <developer>
+            <id>recordond</id>
+            <name>David Recordon</name>
+            <email>recordond[at]apache[dot]org</email>
+            <roles>
+                <role>PMC Member</role>
+                <role>Committer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+
+        <developer>
+            <id>tommaso</id>
+            <name>Tommaso Teofili</name>
+            <email>tommaso[at]apache[dot]org</email>
+            <organization>Sourcesense S.r.l.</organization>
+            <organizationUrl>http://www.sourcesense.com/</organizationUrl>
+            <roles>
+                <role>PMC Member</role>
+                <role>Committer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+
+        <developer>
+            <id>lindner</id>
+            <name>Paul Lindner</name>
+            <email>lindner[at]apache[dot]org</email>
+            <roles>
+                <role>PMC Member</role>
+                <role>Committer</role>
+            </roles>
+            <timezone>+1</timezone>
+        </developer>
+
+        <developer>
+            <id>TBD</id>
+            <name>Pablo Fernandez</name>
+            <roles>
+                <role>PMC Member</role>
                 <role>Committer</role>
             </roles>
             <timezone>+1</timezone>
