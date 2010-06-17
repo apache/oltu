@@ -161,7 +161,7 @@
         </developer>
 
         <developer>
-            <id>TBD</id>
+            <id>pidster</id>
             <name>Stuart "Pid" Williams</name>
             <roles>
                 <role>PMC Member</role>
@@ -284,7 +284,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>2.1</version>
+                <version>2.2</version>
             </plugin>
 
             <plugin>
@@ -416,6 +416,7 @@
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
+                        <phase>package</phase>
                         <goals>
                             <goal>jar</goal>
                         </goals>
@@ -430,7 +431,7 @@
                 <executions>
                     <execution>
                         <id>attach-sources</id>
-                        <phase>verify</phase>
+                        <phase>package</phase>
                         <goals>
                             <goal>jar</goal>
                         </goals>
@@ -447,7 +448,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>2.0-beta-7</version>
+                <version>2.1.1</version>
                 <configuration>
                     <outputEncoding>UTF-8</outputEncoding>
                 </configuration>
@@ -499,7 +500,7 @@
                         <artifactId>maven-release-plugin</artifactId>
                         <version>2.0</version>
                         <configuration>
-                            <preparationGoals></preparationGoals>
+                            <preparationGoals>clean install</preparationGoals>
                             <autoVersionSubmodules>true</autoVersionSubmodules>
                         </configuration>
                     </plugin>
@@ -507,7 +508,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.0</version>
+                        <version>1.1</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
