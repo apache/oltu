@@ -524,6 +524,7 @@
     </profiles>
 
     <modules>
+        <module>spec-api</module>
         <module>signature-api</module>
         <module>client</module>
         <module>server</module>
