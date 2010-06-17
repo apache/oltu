@@ -26,9 +26,9 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.apache.amber</groupId>
-    <artifactId>amber-spec</artifactId>
+    <artifactId>amber-spec-api</artifactId>
     <packaging>jar</packaging>
-    <name>Apache Amber: Specification</name>
+    <name>Apache Amber: Specification API</name>
 
     <reporting>
         <plugins>
