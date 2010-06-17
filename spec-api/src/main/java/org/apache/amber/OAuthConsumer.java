@@ -24,7 +24,6 @@ import java.io.Serializable;
  * the client in one of the legs during an authorisation or authentication.
  * </p>
  * 
- * @author pidster
  * @version $Revision$ $Date$
  * 
  */

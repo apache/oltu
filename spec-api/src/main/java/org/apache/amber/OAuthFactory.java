@@ -16,20 +16,52 @@
  */
 package org.apache.amber;
 
+import java.util.Properties;
+
 /**
- * <p>
- * An object representing the response returned from an
- * {@link org.apache.amber.OAuthClient} or {@link org.apache.amber.OAuthServer}
- * </p>
- * 
- * @author pidster
  * @version $Revision$ $Date$
  * 
- * @see org.apache.amber.OAuthClient
- * 
  */
-public interface OAuthResponse {
+public interface OAuthFactory {
 
-    //
+    /**
+     * @return version
+     */
+    Version getVersion();
+
+    /**
+     * @param properties
+     */
+    void setProperties(Properties properties);
+
+    /**
+     * @return properties
+     */
+    Properties getProperties();
+
+    /**
+     * @return providers
+     */
+    OAuthProviders getProviders();
+
+    /**
+     * @param provider
+     * @throws OAuthRuntimeException
+     */
+    void register(OAuthProvider provider) throws OAuthRuntimeException;
+
+    /**
+     * @param realm
+     * @return service
+     * @throws OAuthException
+     */
+    OAuthClient useService(String realm) throws OAuthException;
+
+    /**
+     * @param realm
+     * @return service
+     * @throws OAuthException
+     */
+    OAuthServer createServer(String realm) throws OAuthException;
 
 }

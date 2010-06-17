@@ -41,7 +41,6 @@ import org.xml.sax.SAXException;
  * The OAuth object provides access to the {@link org.apache.amber.OAuthFactory}.
  * </p>
  * 
- * @author pidster
  * @version $Revision$ $Date$
  * 
  */

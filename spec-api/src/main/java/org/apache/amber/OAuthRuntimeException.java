@@ -22,7 +22,6 @@ package org.apache.amber;
  * unchecked exception that prevents the implementation from operating.
  * </p>
  * 
- * @author pidster
  * @version $Revision$ $Date$
  * 
  */

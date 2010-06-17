@@ -14,20 +14,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/**
- * <h2>An OAuth Java Specification</h2>
- * 
- * <p>Provides the interfaces for an implementation of the OAuth specification.</p>
- * 
- * <p>The implementation MUST permit entirely programmatical configuration, configuration
- * by the presence of an XML file called &quot;oauth-providers.xml&quot; located in a META-INF 
- * directory on the classpath and by detecting classes configured using the ServiceLoader 
- * mechanism.</p>
- * 
- * @author pidster
- * @version $Revision$ $Date$
- * @see org.apache.amber.OAuth
- * 
- */
 package org.apache.amber;
 
+/**
+ * <p>
+ * An OAuth Server provides the functionality required to deliver OAuth Provider
+ * functionality. It can be exposed by wrapping it in an HTTP layer, e.g. that
+ * provided by the Servlet Spec or perhaps directly exposed by a custom HTTP
+ * server.
+ * </p>
+ * 
+ * @version $Revision$ $Date$
+ * 
+ */
+public interface OAuthServer {
+
+    //
+
+}

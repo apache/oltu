@@ -17,38 +17,31 @@
 package org.apache.amber;
 
 /**
- * 
  * <p>
- * Check exception, wraps exceptions thrown by implementation that can be
- * recovered from.
+ * Defines the possible locations for the OAuth parameters during each request.
+ * N.B. Each Provider is likely to have a preferred location.
  * </p>
  * 
- * @author pidster
  * @version $Revision$ $Date$
  * 
  */
-public class OAuthException extends Exception {
+public enum OAuthParameterLocation {
 
     /**
-     * @param message
-     * @param cause
+     * OAuth parameters should be included in the appropriate header
      */
-    public OAuthException(final String message, final Throwable cause) {
-        super(message, cause);
-    }
+    Header,
 
     /**
-     * @param message
+     * OAuth parameters are included in the query string
+     * 
+     * N.B. size/length limits may impact on the request
      */
-    public OAuthException(final String message) {
-        super(message);
-    }
+    Query,
 
     /**
-     * @param cause
+     * OAuth parameters are included in the body of the request
      */
-    public OAuthException(final Throwable cause) {
-        super(cause);
-    }
+    Body,
 
 }

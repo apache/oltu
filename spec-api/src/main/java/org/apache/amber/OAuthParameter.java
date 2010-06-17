@@ -22,7 +22,6 @@ package org.apache.amber;
  * at different stages of the authentication and authorisation process.
  * </p>
  * 
- * @author pidster
  * @version $Revision$ $Date$
  * 
  */

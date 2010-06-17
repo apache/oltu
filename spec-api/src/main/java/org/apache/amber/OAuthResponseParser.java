@@ -16,53 +16,30 @@
  */
 package org.apache.amber;
 
-import java.util.Properties;
-
 /**
- * @author pidster
+ * <p>
+ * It's possible that a {@link org.apache.amber.OAuthProvider} will return OAuth
+ * information in a custom response format. The response parser interface allows
+ * a {@link org.apache.amber.OAuthProvider} to specific a concrete implementation.
+ * </p>
+ * 
+ * <p>
+ * An OAuth API implementation MUST provide a response parser that assumes the
+ * returned parameters are name/value pairs, separated by ampersand characters.
+ * </p>
+ * 
  * @version $Revision$ $Date$
  * 
  */
-public interface OAuthFactory {
+public interface OAuthResponseParser {
 
     /**
-     * @return version
+     * Update the provided token, to include the details from the response
+     * 
+     * @param token
+     * @param response
+     * @return token
      */
-    Version getVersion();
-
-    /**
-     * @param properties
-     */
-    void setProperties(Properties properties);
-
-    /**
-     * @return properties
-     */
-    Properties getProperties();
-
-    /**
-     * @return providers
-     */
-    OAuthProviders getProviders();
-
-    /**
-     * @param provider
-     * @throws OAuthRuntimeException
-     */
-    void register(OAuthProvider provider) throws OAuthRuntimeException;
-
-    /**
-     * @param realm
-     * @return service
-     * @throws OAuthException
-     */
-    OAuthClient useService(String realm) throws OAuthException;
-
-    /**
-     * @param realm
-     * @return service
-     * @throws OAuthException
-     */
-    OAuthServer createServer(String realm) throws OAuthException;
+    OAuthToken parseResponse(OAuthToken token, OAuthResponse response);
 
 }

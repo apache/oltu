@@ -119,7 +119,6 @@ import java.io.Serializable;
  * stored in an instance field. Implementations must be thread-safe.
  * </p>
  * 
- * @author pidster
  * @version $Revision$ $Date$
  * 
  */

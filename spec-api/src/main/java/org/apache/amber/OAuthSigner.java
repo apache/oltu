@@ -19,7 +19,6 @@ package org.apache.amber;
 import java.security.SignatureException;
 
 /**
- * @author pidster
  * @version $Revision$ $Date$
  * 
  */

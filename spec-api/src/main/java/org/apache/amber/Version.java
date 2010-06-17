@@ -4,7 +4,6 @@
 package org.apache.amber;
 
 /**
- * @author pidster
  * @version $Revision$ $Date$
  * 
  */

@@ -16,20 +16,54 @@
  */
 package org.apache.amber;
 
+import java.io.Serializable;
+
 /**
  * <p>
- * An OAuth Server provides the functionality required to deliver OAuth Provider
- * functionality. It can be exposed by wrapping it in an HTTP layer, e.g. that
- * provided by the Servlet Spec or perhaps directly exposed by a custom HTTP
- * server.
+ * An OAuthToken is the wrapper for the pair of key values returned by the
+ * {@link org.apache.amber.OAuthClient} during the authentication or authorisation
+ * process.
  * </p>
  * 
- * @author pidster
+ * <p>
+ * The implementation MUST also support validation of the returned access token
+ * values to determine whether the token is authorised or unauthorised.
+ * </p>
+ * 
+ * <p>
+ * A Map contains additional response parameters, sent by the provider.
+ * </p>
+ * 
+ * 
  * @version $Revision$ $Date$
  * 
  */
-public interface OAuthServer {
+public interface OAuthToken extends Serializable {
 
-    //
+    /**
+     * @return the token
+     */
+    String getToken();
+
+    /**
+     * @param token
+     */
+    void setToken(String token);
+
+    /**
+     * @param token
+     * @return outcome
+     */
+    boolean matchesToken(String token);
+
+    /**
+     * @return the secret
+     */
+    String getSecret();
+
+    /**
+     * @param secret
+     */
+    void setSecret(String secret);
 
 }

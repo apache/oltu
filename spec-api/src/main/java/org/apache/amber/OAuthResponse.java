@@ -16,34 +16,19 @@
  */
 package org.apache.amber;
 
-import java.util.List;
-
 /**
  * <p>
- * A convenience object which contains multiple possible OAuth Service
- * Providers, in order of preference.
+ * An object representing the response returned from an
+ * {@link org.apache.amber.OAuthClient} or {@link org.apache.amber.OAuthServer}
  * </p>
  * 
- * <p>
- * The first Provider will be considered to be the default one, where
- * applicable.
- * </p>
- * 
- * @author pidster
  * @version $Revision$ $Date$
  * 
+ * @see org.apache.amber.OAuthClient
+ * 
  */
-public interface OAuthProviders {
+public interface OAuthResponse {
 
-    /**
-     * @return the provider
-     */
-    List<OAuthProvider> getProvider();
-
-    /**
-     * @param provider
-     *            the provider to set
-     */
-    void setProvider(List<OAuthProvider> provider);
+    //
 
 }

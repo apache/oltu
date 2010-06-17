@@ -18,31 +18,15 @@ package org.apache.amber;
 
 /**
  * <p>
- * Defines the possible locations for the OAuth parameters during each request.
- * N.B. Each Provider is likely to have a preferred location.
+ * A convenient object representing the properties of an OAuth request to a
+ * {@link org.apache.amber.OAuthProvider}
  * </p>
  * 
- * @author pidster
  * @version $Revision$ $Date$
  * 
  */
-public enum OAuthParameterLocation {
+public interface OAuthRequest {
 
-    /**
-     * OAuth parameters should be included in the appropriate header
-     */
-    Header,
-
-    /**
-     * OAuth parameters are included in the query string
-     * 
-     * N.B. size/length limits may impact on the request
-     */
-    Query,
-
-    /**
-     * OAuth parameters are included in the body of the request
-     */
-    Body,
+    //
 
 }

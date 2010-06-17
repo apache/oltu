@@ -25,7 +25,6 @@ import java.util.List;
  * of a Provider (an entity defined by the OAuth specification).
  * </p>
  * 
- * @author pidster
  * @version $Revision$ $Date$
  * 
  */

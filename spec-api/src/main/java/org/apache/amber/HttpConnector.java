@@ -16,19 +16,35 @@
  */
 package org.apache.amber;
 
+import java.io.IOException;
+
 /**
  * <p>
- * A convenient object representing the properties of an OAuth request to a
- * {@link org.apache.amber.OAuthProvider}
+ * The HttpConnector does the work converting executing an
+ * {@link org.apache.amber.OAuthRequest} and returning an
+ * {@link org.apache.amber.OAuthResponse}. This is configurable to allow some choice
+ * with regard to libaries, code etc.
  * </p>
  * 
- * @author pidster
+ * <p>
+ * An implementation MUST provide a default connector.
+ * </p>
  * 
  * @version $Revision$ $Date$
  * 
  */
-public interface OAuthRequest {
+public interface HttpConnector {
 
-    //
+    /**
+     * The execute method does the work of processing a request and returning a
+     * response from the Provider.
+     * 
+     * @param request
+     * @param authorization
+     * @return response
+     * @throws IOException
+     *             if something untoward happened, propagate the exception
+     */
+    OAuthResponse execute(OAuthRequest request, String authorization) throws IOException;
 
 }

@@ -14,33 +14,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.amber;
-
 /**
- * <p>
- * It's possible that a {@link org.apache.amber.OAuthProvider} will return OAuth
- * information in a custom response format. The response parser interface allows
- * a {@link org.apache.amber.OAuthProvider} to specific a concrete implementation.
- * </p>
+ * <h2>An OAuth Java Specification</h2>
  * 
- * <p>
- * An OAuth API implementation MUST provide a response parser that assumes the
- * returned parameters are name/value pairs, separated by ampersand characters.
- * </p>
+ * <p>Provides the interfaces for an implementation of the OAuth specification.</p>
  * 
- * @author pidster
+ * <p>The implementation MUST permit entirely programmatical configuration, configuration
+ * by the presence of an XML file called &quot;oauth-providers.xml&quot; located in a META-INF 
+ * directory on the classpath and by detecting classes configured using the ServiceLoader 
+ * mechanism.</p>
+ * 
  * @version $Revision$ $Date$
+ * @see org.apache.amber.OAuth
  * 
  */
-public interface OAuthResponseParser {
+package org.apache.amber;
 
-    /**
-     * Update the provided token, to include the details from the response
-     * 
-     * @param token
-     * @param response
-     * @return token
-     */
-    OAuthToken parseResponse(OAuthToken token, OAuthResponse response);
-
-}
