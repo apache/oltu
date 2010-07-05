@@ -21,11 +21,12 @@ package org.apache.amber;
  * Unchecked exception wrapper, thrown when there is a configuration or other
  * unchecked exception that prevents the implementation from operating.
  * </p>
- * 
- * @version $Revision$ $Date$
- * 
+ *
+ * @version $Id$
  */
 public class OAuthRuntimeException extends RuntimeException {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * @param message
