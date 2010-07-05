@@ -17,8 +17,6 @@
 package org.apache.amber;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -40,74 +38,37 @@ import java.util.Set;
  *
  * @version $Id$
  */
-public final class OAuthToken implements Serializable {
-
-    /**
-     * The default serialVersionUID.
-     */
-    private static final long serialVersionUID = 1L;
-
-    /**
-     * The additional response parameters, sent by the provider.
-     */
-    private final Map<String, String> additionalParameters = new HashMap<String, String>();
-
-    /**
-     * The {@code oauth_token} parameter.
-     */
-    private String token;
-
-    /**
-     * The {@code oauth_token_secret} parameter.
-     */
-    private String tokenSecret;
-
-    /**
-     * The {@code oauth_callback_confirmed} parameter.
-     */
-    private boolean callbackConfirmed;
+public interface OAuthToken extends Serializable {
 
     /**
      * @return the the {@code oauth_token} parameter.
      */
-    public String getToken() {
-        return this.token;
-    }
+    String getToken();
 
     /**
      * @param token the {@code oauth_token} parameter.
      */
-    public void setToken(String token) {
-        this.token = token;
-    }
+    void setToken(String token);
 
     /**
      * @return the {@code oauth_token_secret} parameter.
      */
-    public String getTokenSecret() {
-        return tokenSecret;
-    }
+    String getTokenSecret();
 
     /**
      * @param tokenSecret the {@code oauth_token_secret} parameter.
      */
-    public void setTokenSecret(String tokenSecret) {
-        this.tokenSecret = tokenSecret;
-    }
+    void setTokenSecret(String tokenSecret);
 
     /**
      * @return the {@code oauth_callback_confirmed} parameter.
      */
-    public boolean isCallbackConfirmed() {
-        return callbackConfirmed;
-    }
+    boolean isCallbackConfirmed();
 
     /**
      * @param callbackConfirmed the {@code oauth_callback_confirmed} parameter.
      */
-    public void setCallbackConfirmed(boolean callbackConfirmed) {
-        this.callbackConfirmed = callbackConfirmed;
-    }
+    void setCallbackConfirmed(boolean callbackConfirmed);
 
     /**
      * Associates the specified value with the specified name in this additional
@@ -116,16 +77,12 @@ public final class OAuthToken implements Serializable {
      * @param name name with which the specified value is to be associated.
      * @param value value to be associated with the specified name.
      */
-    public void addAdditionalParameters(String name, String value) {
-        this.additionalParameters.put(name, value);
-    }
+    void addAdditionalParameters(String name, String value);
 
     /**
      * @return a {@link Set} view of the mappings contained in this additional
      *         parameters map
      */
-    public Set<Entry<String, String>> additionalParametersEntrySet() {
-        return this.additionalParameters.entrySet();
-    }
+    Set<Entry<String, String>> additionalParametersEntrySet();
 
 }
