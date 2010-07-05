@@ -17,6 +17,10 @@
 package org.apache.amber;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 /**
  * <p>
@@ -24,46 +28,104 @@ import java.io.Serializable;
  * {@link org.apache.amber.OAuthClient} during the authentication or authorisation
  * process.
  * </p>
- * 
+ *
  * <p>
  * The implementation MUST also support validation of the returned access token
  * values to determine whether the token is authorised or unauthorised.
  * </p>
- * 
+ *
  * <p>
  * A Map contains additional response parameters, sent by the provider.
  * </p>
- * 
- * 
- * @version $Revision$ $Date$
- * 
+ *
+ * @version $Id$
  */
-public interface OAuthToken extends Serializable {
+public final class OAuthToken implements Serializable {
 
     /**
-     * @return the token
+     * The default serialVersionUID.
      */
-    String getToken();
+    private static final long serialVersionUID = 1L;
 
     /**
-     * @param token
+     * The additional response parameters, sent by the provider.
      */
-    void setToken(String token);
+    private final Map<String, String> additionalParameters = new HashMap<String, String>();
 
     /**
-     * @param token
-     * @return outcome
+     * The {@code oauth_token} parameter.
      */
-    boolean matchesToken(String token);
+    private String token;
 
     /**
-     * @return the secret
+     * The {@code oauth_token_secret} parameter.
      */
-    String getSecret();
+    private String tokenSecret;
 
     /**
-     * @param secret
+     * The {@code oauth_callback_confirmed} parameter.
      */
-    void setSecret(String secret);
+    private boolean callbackConfirmed;
+
+    /**
+     * @return the the {@code oauth_token} parameter.
+     */
+    public String getToken() {
+        return this.token;
+    }
+
+    /**
+     * @param token the {@code oauth_token} parameter.
+     */
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    /**
+     * @return the {@code oauth_token_secret} parameter.
+     */
+    public String getTokenSecret() {
+        return tokenSecret;
+    }
+
+    /**
+     * @param tokenSecret the {@code oauth_token_secret} parameter.
+     */
+    public void setTokenSecret(String tokenSecret) {
+        this.tokenSecret = tokenSecret;
+    }
+
+    /**
+     * @return the {@code oauth_callback_confirmed} parameter.
+     */
+    public boolean isCallbackConfirmed() {
+        return callbackConfirmed;
+    }
+
+    /**
+     * @param callbackConfirmed the {@code oauth_callback_confirmed} parameter.
+     */
+    public void setCallbackConfirmed(boolean callbackConfirmed) {
+        this.callbackConfirmed = callbackConfirmed;
+    }
+
+    /**
+     * Associates the specified value with the specified name in this additional
+     * parameters map.
+     *
+     * @param name name with which the specified value is to be associated.
+     * @param value value to be associated with the specified name.
+     */
+    public void addAdditionalParameters(String name, String value) {
+        this.additionalParameters.put(name, value);
+    }
+
+    /**
+     * @return a {@link Set} view of the mappings contained in this additional
+     *         parameters map
+     */
+    public Set<Entry<String, String>> additionalParametersEntrySet() {
+        return this.additionalParameters.entrySet();
+    }
 
 }
