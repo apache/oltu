@@ -19,90 +19,90 @@ package org.apache.amber;
 /**
  * The OAuth specification defines individual parameters required by a provider
  * at different stages of the authentication and authorisation process.
- * 
+ *
  * @version $Id$
  */
 public enum OAuthParameter {
 
     /**
      * The callback parameter name.
-     * 
-     * Value: oauth_callback
+     *
+     * Value: {@code oauth_callback}.
      */
     CALLBACK("oauth_callback"),
 
     /**
      * The Consumer key parameter name.
-     * 
-     * Value: oauth_consumer_key
+     *
+     * Value: {@code oauth_consumer_key}.
      */
     CONSUMER_KEY("oauth_consumer_key"),
 
     /**
      * The nonce parameter name.
-     * 
-     * Value: oauth_nonce
+     *
+     * Value: {@code oauth_nonce}.
      */
     NONCE("oauth_nonce"),
 
     /**
-     * The realm parameter name
-     * 
-     * Value: realm
+     * The realm parameter name.
+     *
+     * Value: {@code realm}.
      */
     REALM("realm"),
 
     /**
-     * The signature parameter name
-     * 
-     * Value: oauth_signature
+     * The signature parameter name.
+     *
+     * Value: {@code oauth_signature}.
      */
     SIGNATURE("oauth_signature"),
 
     /**
-     * The signature method parameter name
-     * 
-     * Value: oauth_signature_method
+     * The signature method parameter name.
+     *
+     * Value: {@code oauth_signature_method}.
      */
     SIGNATURE_METHOD("oauth_signature_method"),
 
     /**
-     * The timestamp parameter name
-     * 
-     * Value: oauth_timestamp
+     * The timestamp parameter name.
+     *
+     * Value: {@code oauth_timestamp}.
      */
     TIMESTAMP("oauth_timestamp"),
 
     /**
-     * The token parameter name
-     * 
-     * Value: oauth_token
-     * 
+     * The token parameter name.
+     *
+     * Value: {@code oauth_token}.
+     *
      * @see org.apache.amber.OAuthToken
      */
     TOKEN("oauth_token"),
 
     /**
-     * The token secret parameter name
-     * 
-     * Value: oauth_token_secret
-     * 
+     * The token secret parameter name.
+     *
+     * Value: {@code oauth_token_secret}.
+     *
      * @see org.apache.amber.OAuthToken
      */
     TOKEN_SECRET("oauth_token_secret"),
 
     /**
-     * The verifier parameter name
-     * 
-     * Value: oauth_verifier
+     * The verifier parameter name.
+     *
+     * Value: {@code oauth_verifier}.
      */
     VERIFIER("oauth_verifier"),
 
     /**
-     * The version parameter name
-     * 
-     * Value: oauth_version
-     * 
+     * The version parameter name.
+     *
+     * Value: {@code oauth_version}.
+     *
      * @see org.apache.amber.Version
      */
     VERSION("oauth_version");
