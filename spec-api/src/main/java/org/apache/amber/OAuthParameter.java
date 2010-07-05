@@ -17,13 +17,10 @@
 package org.apache.amber;
 
 /**
- * <p>
  * The OAuth specification defines individual parameters required by a provider
  * at different stages of the authentication and authorisation process.
- * </p>
  * 
- * @version $Revision$ $Date$
- * 
+ * @version $Id$
  */
 public enum OAuthParameter {
 
@@ -32,84 +29,49 @@ public enum OAuthParameter {
      * 
      * Value: oauth_callback
      */
-    CALLBACK {
-        @Override
-        public String toString() {
-            return "oauth_callback";
-        }
-    },
+    CALLBACK("oauth_callback"),
 
     /**
      * The Consumer key parameter name.
      * 
      * Value: oauth_consumer_key
      */
-    CONSUMER_KEY {
-        @Override
-        public String toString() {
-            return "oauth_consumer_key";
-        }
-    },
+    CONSUMER_KEY("oauth_consumer_key"),
 
     /**
      * The nonce parameter name.
      * 
      * Value: oauth_nonce
      */
-    NONCE {
-        @Override
-        public String toString() {
-            return "oauth_nonce";
-        }
-    },
+    NONCE("oauth_nonce"),
 
     /**
      * The realm parameter name
      * 
-     * Value: OAuth realm
+     * Value: realm
      */
-    REALM {
-        @Override
-        public String toString() {
-            return "OAuth realm";
-        }
-    },
+    REALM("realm"),
 
     /**
      * The signature parameter name
      * 
      * Value: oauth_signature
      */
-    SIGNATURE {
-        @Override
-        public String toString() {
-            return "oauth_signature";
-        }
-    },
+    SIGNATURE("oauth_signature"),
 
     /**
      * The signature method parameter name
      * 
      * Value: oauth_signature_method
      */
-    SIGNATURE_METHOD {
-        @Override
-        public String toString() {
-            return "oauth_signature_method";
-        }
-    },
+    SIGNATURE_METHOD("oauth_signature_method"),
 
     /**
      * The timestamp parameter name
      * 
      * Value: oauth_timestamp
      */
-    TIMESTAMP {
-        @Override
-        public String toString() {
-            return "oauth_timestamp";
-        }
-    },
+    TIMESTAMP("oauth_timestamp"),
 
     /**
      * The token parameter name
@@ -118,12 +80,7 @@ public enum OAuthParameter {
      * 
      * @see org.apache.amber.OAuthToken
      */
-    TOKEN {
-        @Override
-        public String toString() {
-            return "oauth_token";
-        }
-    },
+    TOKEN("oauth_token"),
 
     /**
      * The token secret parameter name
@@ -132,24 +89,14 @@ public enum OAuthParameter {
      * 
      * @see org.apache.amber.OAuthToken
      */
-    TOKEN_SECRET {
-        @Override
-        public String toString() {
-            return "oauth_token_secret";
-        }
-    },
+    TOKEN_SECRET("oauth_token_secret"),
 
     /**
      * The verifier parameter name
      * 
      * Value: oauth_verifier
      */
-    VERIFIER {
-        @Override
-        public String toString() {
-            return "oauth_verifier";
-        }
-    },
+    VERIFIER("oauth_verifier"),
 
     /**
      * The version parameter name
@@ -158,11 +105,21 @@ public enum OAuthParameter {
      * 
      * @see org.apache.amber.Version
      */
-    VERSION {
-        @Override
-        public String toString() {
-            return "oauth_version";
-        }
-    },
+    VERSION("oauth_version");
+
+    private final String label;
+
+    private OAuthParameter(String label) {
+        this.label = label;
+    }
+
+    public String getLabel() {
+        return this.label;
+    }
+
+    @Override
+    public String toString() {
+        return this.label;
+    }
 
 }
