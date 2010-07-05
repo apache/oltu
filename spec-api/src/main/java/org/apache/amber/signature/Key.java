@@ -24,11 +24,11 @@ package org.apache.amber.signature;
 interface Key {
 
     /**
-     * Returns the signing algorithm method.
+     * Returns the signing algorithm methods.
      *
-     * @return the signing algorithm method.
+     * @return the signing algorithm methods.
      */
-    String getAlgorithmMethod();
+    String[] getAlgorithmMethods();
 
     /**
      * Returns the key string representation.
