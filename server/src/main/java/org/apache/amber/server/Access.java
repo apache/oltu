@@ -99,4 +99,31 @@ public final class Access implements Comparable<Long> {
         }
     }
 
+    /**
+     * {@inheritDoc}}
+     */
+    @Override
+    public boolean equals(Object obj) {
+      boolean equals = false;
+      if (obj instanceof Access) {
+        Access other = (Access) obj;
+        if (other.timestamp == this.timestamp && other.nonces.equals(this.nonces)) {
+          equals = true;
+        }
+      }
+      return equals;
+    }
+
+    /**
+     * {@inheritDoc}}
+     */
+    @Override
+    public int hashCode() {
+      final int prime = 31;
+      int result = 1;
+      result = prime * result + ((nonces == null) ? 0 : nonces.hashCode());
+      result = prime * result + (int) (timestamp ^ (timestamp >>> 32));
+      return result;
+    }
+
 }
