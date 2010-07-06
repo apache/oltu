@@ -28,7 +28,9 @@ package org.apache.amber;
  */
 public class OAuthException extends Exception {
 
-    /**
+	private static final long serialVersionUID = 1L;
+
+	/**
      * @param message
      * @param cause
      */
