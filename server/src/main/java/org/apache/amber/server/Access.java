@@ -100,7 +100,7 @@ public final class Access implements Comparable<Long> {
     }
 
     /**
-     * {@inheritDoc}}
+     * {@inheritDoc}
      */
     @Override
     public boolean equals(Object obj) {
@@ -115,7 +115,7 @@ public final class Access implements Comparable<Long> {
     }
 
     /**
-     * {@inheritDoc}}
+     * {@inheritDoc}
      */
     @Override
     public int hashCode() {
