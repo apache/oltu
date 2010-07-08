@@ -71,7 +71,7 @@ public enum OAuthParameter {
      *
      * Value: {@code oauth_timestamp}.
      */
-    TIMESTAMP("oauth_timestamp"),
+    TIMESTAMP("oauth_timestamp", true, false),
 
     /**
      * The token parameter name.
@@ -105,16 +105,34 @@ public enum OAuthParameter {
      *
      * @see org.apache.amber.Version
      */
-    VERSION("oauth_version");
+    VERSION("oauth_version", false, false);
 
     private final String label;
 
+    private final boolean optional;
+
+    private final boolean includeInSignature;
+
     private OAuthParameter(String label) {
+        this(label, false, true);
+    }
+
+    private OAuthParameter(String label, boolean optional, boolean includeInSignature) {
         this.label = label;
+        this.optional = optional;
+        this.includeInSignature = includeInSignature;
     }
 
     public String getLabel() {
         return this.label;
+    }
+
+    public boolean isOptional() {
+        return this.optional;
+    }
+
+    public boolean isIncludeInSignature() {
+        return this.includeInSignature;
     }
 
     @Override
