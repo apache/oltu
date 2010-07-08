@@ -16,14 +16,23 @@
  */
 package org.apache.amber.server;
 
-/**
- * An OAuth Server provides the functionality required to deliver OAuth Provider
- * functionality. It can be exposed by wrapping it in an HTTP layer, e.g. that
- * provided by the Servlet Spec or perhaps directly exposed by a custom HTTP
- * server.
- *
- * @version $Id$
- */
-public abstract class OAuthServer implements OAuthnServer, OAuthzServer {
+import org.apache.amber.OAuthException;
+import org.apache.amber.OAuthRequest;
 
+/**
+ * @version $Id $HeadURL $Revision $Date $Author
+ *
+ */
+public interface OAuthzServer {
+
+    /**
+     * Evaluates if a specific request contains authorization token to
+     * access to a protected resource.
+     *
+     * @param request
+     * @return
+     * @throws OAuthException
+     */
+    boolean isAuthorized(OAuthRequest request) throws OAuthException;
+    
 }
