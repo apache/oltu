@@ -18,6 +18,8 @@ package org.apache.amber;
 
 import java.util.Properties;
 
+import org.apache.amber.server.OAuthServer;
+
 /**
  * @version $Revision$ $Date$
  * 

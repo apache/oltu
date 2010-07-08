@@ -16,17 +16,22 @@
  */
 package org.apache.amber;
 
+import java.net.URL;
+
 /**
- * <p>
  * A convenient object representing the properties of an OAuth request to a
- * {@link org.apache.amber.OAuthProvider}
- * </p>
- * 
- * @version $Revision$ $Date$
- * 
+ * {@link org.apache.amber.OAuthProvider}.
+ *
+ * @version $Id$
  */
 public interface OAuthRequest {
 
-    //
+    URL getRequestURL();
+
+    void setRequestURL(URL requestURL);
+
+    HTTPMethod getHTTPMethod();
+
+    void setHTTPMethod(HTTPMethod httpMethod);
 
 }

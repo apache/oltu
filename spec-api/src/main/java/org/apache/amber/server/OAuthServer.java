@@ -14,21 +14,57 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.amber;
+package org.apache.amber.server;
+
+import org.apache.amber.OAuthException;
+import org.apache.amber.OAuthRequest;
+import org.apache.amber.OAuthToken;
 
 /**
- * <p>
  * An OAuth Server provides the functionality required to deliver OAuth Provider
  * functionality. It can be exposed by wrapping it in an HTTP layer, e.g. that
  * provided by the Servlet Spec or perhaps directly exposed by a custom HTTP
  * server.
- * </p>
- * 
- * @version $Revision$ $Date$
- * 
+ *
+ * @version $Id$
  */
 public interface OAuthServer {
 
-    //
+    /**
+     * Generates a new request token.
+     *
+     * @param request
+     * @return
+     * @throws OAuthException
+     */
+    OAuthToken requestToken(OAuthRequest request) throws OAuthException;
+
+    /**
+     * Authorize a request token.
+     *
+     * @param oauthToken
+     * @return
+     * @throws OAuthException
+     */
+    OAuthToken authorizeToken(String oauthToken) throws OAuthException;
+
+    /**
+     * Generates a new access token.
+     *
+     * @param request
+     * @return
+     * @throws OAuthException
+     */
+    OAuthToken accessToken(OAuthRequest request) throws OAuthException;
+
+    /**
+     * Evaluates if a specific request contains authorization token to
+     * access to a protected resource.
+     *
+     * @param request
+     * @return
+     * @throws OAuthException
+     */
+    boolean canAccessToProtectedResources(OAuthRequest request) throws OAuthException;
 
 }
