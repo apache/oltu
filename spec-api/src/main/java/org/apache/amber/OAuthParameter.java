@@ -89,14 +89,14 @@ public enum OAuthParameter {
      *
      * @see org.apache.amber.OAuthToken
      */
-    TOKEN_SECRET("oauth_token_secret"),
+    TOKEN_SECRET("oauth_token_secret", false, false),
 
     /**
      * The verifier parameter name.
      *
      * Value: {@code oauth_verifier}.
      */
-    VERIFIER("oauth_verifier"),
+    VERIFIER("oauth_verifier", false, false),
 
     /**
      * The version parameter name.
