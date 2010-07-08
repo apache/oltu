@@ -22,7 +22,7 @@ import java.util.Map.Entry;
  * 
  *
  * @version $Id$
- * @param <K>
+ * @param <N>
  */
 abstract class AbstractParameter<N>
         implements Entry<N, String>, Comparable<AbstractParameter<N>> {
