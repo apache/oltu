@@ -26,4 +26,19 @@ package org.apache.amber.server;
  */
 public abstract class OAuthServer implements OAuthnServer, OAuthzServer {
 
+	/**
+	 * @return access storage
+	 */
+	protected abstract AccessStorage getAccessStorage();
+
+	/**
+	 * @return consumer storage
+	 */
+	protected abstract ConsumerStorage getConsumerStorage();
+
+	/**
+	 * @return token storage
+	 */
+	protected abstract TokenStorage getTokenStorage();
+	
 }
