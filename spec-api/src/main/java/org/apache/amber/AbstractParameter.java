@@ -68,6 +68,10 @@ abstract class AbstractParameter<N>
      * {@inheritDoc}
      */
     public final int compareTo(AbstractParameter<N> parameter) {
+        if (parameter == null) {
+            return 1;
+        }
+
         int nameComparison = String.valueOf(this.key).compareTo(String.valueOf(parameter.getKey()));
         if (0 == nameComparison) {
             return this.value.compareTo(parameter.getValue());
