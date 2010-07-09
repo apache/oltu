@@ -35,10 +35,6 @@ public interface OAuthRequest {
 
     void setHTTPMethod(HTTPMethod httpMethod);
 
-    String getSignatureBase();
-
-    void setSignature(String signature);
-
     void addOAuthMessageParameter(OAuthMessageParameter parameter);
 
     /**
