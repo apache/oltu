@@ -71,7 +71,7 @@ public enum OAuthParameter {
      *
      * Value: {@code oauth_timestamp}.
      */
-    TIMESTAMP("oauth_timestamp", true, false),
+    TIMESTAMP("oauth_timestamp", true, true),
 
     /**
      * The token parameter name.
@@ -105,7 +105,7 @@ public enum OAuthParameter {
      *
      * @see org.apache.amber.Version
      */
-    VERSION("oauth_version", false, false);
+    VERSION("oauth_version", false, true);
 
     private final String label;
 
