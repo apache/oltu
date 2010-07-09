@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,20 +14,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.amber.signature.credential;
-
-import org.apache.amber.signature.beaninfo.AbstractAliasBeanInfo;
+package org.apache.amber.signature;
 
 /**
- * Provides informations about the credential bean.
+ * 
  *
  * @version $Id$
- * @see Credential
  */
-public final class CredentialBeanInfo extends AbstractAliasBeanInfo {
+public final class BasicKey implements SigningKey, VerifyingKey {
 
-    public CredentialBeanInfo() {
-        super(Credential.class, CredentialParameter.class);
+    private static final String[] METHODS = { "PLAINTEXT", "HMAC-SHA1" };
+
+    private final String value;
+
+    public BasicKey(String value) {
+        this.value = value;
+    }
+
+    public String getValue() {
+        return this.value;
+    }
+
+    public String[] getAlgorithmMethods() {
+        return METHODS;
     }
 
 }

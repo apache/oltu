@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.amber.signature.signers.hmac;
+package org.apache.amber.signature.hmac;
 
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -22,33 +22,32 @@ import java.security.NoSuchAlgorithmException;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
-import org.apache.amber.signature.signers.AbstractMethodAlgorithm;
-import org.apache.amber.signature.signers.SignatureException;
-import org.apache.amber.signature.signers.SignatureMethod;
+import org.apache.amber.signature.AbstractMethod;
+import org.apache.amber.signature.SignatureException;
+import org.apache.amber.signature.SigningKey;
+import org.apache.amber.signature.VerifyingKey;
 
 /**
  * HMAC-SHA1 Method implementation.
  *
  * @version $Id$
  */
-@SignatureMethod("HMAC-SHA1")
-public final class HmacSha1MethodAlgorithm extends AbstractMethodAlgorithm<HmacSha1Key, HmacSha1Key> {
+public final class HmacSha1Method extends AbstractMethod {
 
-    /**
-     * The algorithm name.
-     */
+    private static final String HMAC_SHA1 = "HMAC-SHA1";
+
     private static final String HMAC_SHA1_ALGORITHM = "HmacSHA1";
 
     /**
      * {@inheritDoc}
      */
     @Override
-    protected String encode(HmacSha1Key signingKey,
-            String secretCredential,
+    protected String calculate(SigningKey signingKey,
+            String tokenSecret,
             String baseString) throws SignatureException {
         String key = new StringBuilder(percentEncode(signingKey.getValue()))
                 .append('&')
-                .append(percentEncode(secretCredential))
+                .append(percentEncode(tokenSecret))
                 .toString();
 
         SecretKeySpec secretKeySpec = new SecretKeySpec(key.getBytes(), HMAC_SHA1_ALGORITHM);
@@ -79,10 +78,10 @@ public final class HmacSha1MethodAlgorithm extends AbstractMethodAlgorithm<HmacS
      */
     @Override
     protected boolean verify(String signature,
-            HmacSha1Key verifyingKey,
-            String secretCredential,
+            VerifyingKey verifyingKey,
+            String tokenSecret,
             String baseString) throws SignatureException {
-        String expectedSignature = this.encode(verifyingKey, secretCredential, baseString);
+        String expectedSignature = this.calculate((SigningKey) verifyingKey, tokenSecret, baseString);
 
         if (this.getLog().isDebugEnabled()) {
             this.getLog().debug(new StringBuilder("Received signature {")
@@ -94,6 +93,13 @@ public final class HmacSha1MethodAlgorithm extends AbstractMethodAlgorithm<HmacS
         }
 
         return expectedSignature.equals(signature);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public String getAlgorithm() {
+        return HMAC_SHA1;
     }
 
 }

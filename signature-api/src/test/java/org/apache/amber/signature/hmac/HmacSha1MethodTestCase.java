@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,20 +14,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.amber.signature.signers;
+package org.apache.amber.signature.hmac;
+
+import org.apache.amber.signature.AbstractSimpleMethodTestCase;
+import org.junit.Test;
 
 /**
- * Client Credential representation.
+ * HMAC-SHA1 Method test case implementation.
  *
  * @version $Id$
  */
-public interface Key {
+public class HmacSha1MethodTestCase extends AbstractSimpleMethodTestCase {
 
-    /**
-     * Returns the consumer secret string representation.
-     *
-     * @return the consumer secret string representation.
-     */
-    String getValue();
+    @Test
+    public void verifyHmacSha1MethodAlgorithm() throws Exception {
+        this.verifySignature(new HmacSha1Method(), "tR3+Ty81lMeYAr/Fid0kMTYa/WM=");
+    }
 
 }

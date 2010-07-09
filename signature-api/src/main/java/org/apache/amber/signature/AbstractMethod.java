@@ -6,7 +6,7 @@
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,9 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.amber.signature.signers;
+package org.apache.amber.signature;
 
-import java.lang.reflect.Field;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -24,11 +23,10 @@ import java.util.BitSet;
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.amber.signature.descriptors.Service;
-import org.apache.amber.signature.message.OAuthParameter;
-import org.apache.amber.signature.message.RequestMessage;
-import org.apache.amber.signature.parameters.Parameter;
-import org.apache.commons.beanutils.BeanUtils;
+import org.apache.amber.OAuthMessageParameter;
+import org.apache.amber.OAuthRequest;
+import org.apache.amber.OAuthRequestParameter;
+import org.apache.amber.OAuthToken;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.net.URLCodec;
 import org.apache.commons.logging.Log;
@@ -39,8 +37,9 @@ import org.apache.commons.logging.LogFactory;
  *
  * @param <S> the {@link SigningKey} type.
  * @param <V> the {@link VerifyingKey} type.
+ * @version $Id$
  */
-public abstract class AbstractMethodAlgorithm<S extends SigningKey, V extends VerifyingKey> implements SignatureMethodAlgorithm<S, V> {
+public abstract class AbstractMethod implements SignatureMethod {
 
     /**
      * HTTP protocol name.
@@ -125,57 +124,52 @@ public abstract class AbstractMethodAlgorithm<S extends SigningKey, V extends Ve
     /**
      * {@inheritDoc}
      */
-    public final String calculate(S signingKey, String secretCredential, Service service, RequestMessage message, Parameter...parameterList) throws SignatureException {
+    public final String calculate(SigningKey signingKey,
+            OAuthToken token,
+            OAuthRequest request) throws SignatureException {
         if (signingKey == null) {
             throw new IllegalArgumentException("parameter 'signingKey' must not be null");
         }
-        if (secretCredential == null) {
-            secretCredential = EMPTY;
-        }
-        if (service == null) {
-            throw new IllegalArgumentException("parameter 'service' must not be null");
-        }
-        if (message == null) {
-            throw new IllegalArgumentException("parameter 'message' must not be null");
+        if (request == null) {
+            throw new IllegalArgumentException("parameter 'request' must not be null");
         }
 
-        String baseString = this.createBaseString(service, message, parameterList);
-        return this.encode(signingKey, secretCredential, baseString);
+        String baseString = this.createBaseString(request);
+        String tokenSecret = extractTokenSecret(token);
+        return this.calculate(signingKey, tokenSecret, baseString);
     }
 
     /**
      * Calculates the signature applying the method algorithm.
      *
      * @param signingKey the key has to be used to sign the request.
-     * @param secretCredential the temporary/token credential.
+     * @param tokenSecret the temporary/token credential.
      * @param baseString the OAuth base string.
      * @return the calculated signature.
      * @throws SignatureException if any error occurs.
      */
-    protected abstract String encode(S signingKey, String secretCredential, String baseString) throws SignatureException;
+    protected abstract String calculate(SigningKey signingKey, String tokenSecret, String baseString) throws SignatureException;
 
     /**
      * {@inheritDoc}
      */
-    public final boolean verify(String signature, V verifyingKey, String secretCredential, Service service, RequestMessage message, Parameter...parameterList) throws SignatureException {
+    public final boolean verify(String signature,
+            VerifyingKey verifyingKey,
+            OAuthToken token,
+            OAuthRequest request) throws SignatureException {
         if (signature == null) {
             throw new IllegalArgumentException("parameter 'signature' must not be null");
         }
         if (verifyingKey == null) {
             throw new IllegalArgumentException("parameter 'verifyingKey' must not be null");
         }
-        if (secretCredential == null) {
-            secretCredential = EMPTY;
-        }
-        if (service == null) {
-            throw new IllegalArgumentException("parameter 'service' must not be null");
-        }
-        if (message == null) {
-            throw new IllegalArgumentException("parameter 'message' must not be null");
+        if (request == null) {
+            throw new IllegalArgumentException("parameter 'request' must not be null");
         }
 
-        String baseString = this.createBaseString(service, message, parameterList);
-        return this.verify(signature, verifyingKey, secretCredential, baseString);
+        String baseString = this.createBaseString(request);
+        String tokenSecret = extractTokenSecret(token);
+        return this.verify(signature, verifyingKey, tokenSecret, baseString);
     }
 
     /**
@@ -183,30 +177,26 @@ public abstract class AbstractMethodAlgorithm<S extends SigningKey, V extends Ve
      *
      * @param signature the OAuth signature has to be verified.
      * @param verifyingKey the key has to be used to verify the request.
-     * @param secretCredential the temporary/token credential.
+     * @param tokenSecret the temporary/token credential.
      * @param baseString the OAuth base string.
-     * @return true if the signature is correct, false otherwise.
+     * @return true if the signature is verified, false otherwise.
      * @throws SignatureException if any error occurs.
      */
-    protected abstract boolean verify(String signature, V verifyingKey, String secretCredential, String baseString) throws SignatureException;
+    protected abstract boolean verify(String signature, VerifyingKey verifyingKey, String tokenSecret, String baseString) throws SignatureException;
 
     /**
      * Calculates the OAuth base string.
      *
-     * @param service the service for which the signature has to be
-     *        signed/verified.
-     * @param message the (has to be signed) OAuth message.
-     * @param parameters the (optional) parameter list the cliend sends to
-     *        the OAuth server.
+     * @param request
      * @return the calculated OAuth base string.
      * @throws SignatureException if any error occurs.
      */
-    private String createBaseString(Service service, RequestMessage message, Parameter... parameters) throws SignatureException {
+    private String createBaseString(OAuthRequest request) throws SignatureException {
         // the HTTP method
-        String method = service.getHttpMethod().name();
+        String method = request.getHTTPMethod().name();
 
         // the normalized request URL
-        URL url = service.getServiceUri();
+        URL url = request.getRequestURL();
         String scheme = url.getProtocol().toLowerCase();
         String authority = url.getAuthority().toLowerCase();
 
@@ -230,70 +220,52 @@ public abstract class AbstractMethodAlgorithm<S extends SigningKey, V extends Ve
                                 .append(path)
                                 .toString();
 
-        // parameter normalization
-        List<Parameter> parametersList = new ArrayList<Parameter>();
+        // parameters normalization
+        int normalizedParametersSize = request.getOAuthMessageParameters().size()
+                                        + request.getOAuthRequestParameters().size();
+        List<OAuthRequestParameter> normalizedParameters = new ArrayList<OAuthRequestParameter>(normalizedParametersSize);
 
-        // add the message parameters
-        Class<?> klass = message.getClass();
-        // traverses the class hierarchy
-        // TODO optimize it
-        while (Object.class != klass) {
-            for (Field field : klass.getDeclaredFields()) {
-                if (field.isAnnotationPresent(OAuthParameter.class)) {
-                    OAuthParameter oAuthParameter = field.getAnnotation(OAuthParameter.class);
-                    if (oAuthParameter.includeInSignature()) {
-                        try {
-                            Object fieldValue = BeanUtils.getProperty(message, field.getName());
-
-                            if (fieldValue == null && !oAuthParameter.optional()) {
-                                throw new SignatureException(new StringBuilder("OAuth parameter '")
-                                    .append(oAuthParameter.name())
-                                    .append("' specified in '")
-                                    .append(field)
-                                    .append("' is not optional")
-                                    .toString());
-                            }
-
-                            encodeAndAddParameter(oAuthParameter.name(), String.valueOf(fieldValue), parametersList);
-                        } catch (Exception e) {
-                            throw new SignatureException(new StringBuilder("An error occurred while getting '")
-                                        .append(field)
-                                        .append("' value, see nested exception")
-                                        .toString(), e);
-                        }
-                    }
-                }
+        for (OAuthMessageParameter parameter : request.getOAuthMessageParameters()) {
+            if (parameter.getKey().isIncludeInSignature()) {
+                encodeAndAddParameter(parameter.getKey().getLabel(), parameter.getValue(), normalizedParameters);
             }
-
-            klass = klass.getSuperclass();
         }
 
-        // add the user parameters
-        for (Parameter parameter : parameters) {
-            encodeAndAddParameter(parameter.getName(), parameter.getValue(), parametersList);
+        for (OAuthRequestParameter parameter : request.getOAuthRequestParameters()) {
+            if (request.getOAuthMessageParameters().contains(parameter)) {
+                throw new SignatureException("Request parameter "
+                        + parameter
+                        + " can't override an OAuth message one");
+            }
+            encodeAndAddParameter(parameter.getKey(), parameter.getValue(), normalizedParameters);
         }
 
         // now serialize the normalized parameters
-        StringBuilder buffer = new StringBuilder();
-        for (int i = 0; i < parametersList.size(); i++) {
+        StringBuilder normalizedParametersBuffer = new StringBuilder();
+        for (int i = 0; i < normalizedParameters.size(); i++) {
             if (i > 0) {
-                buffer.append('&');
+                normalizedParametersBuffer.append('&');
             }
 
-            Parameter parameter = parametersList.get(i);
-            buffer.append(parameter.getName());
-            buffer.append('=');
-            buffer.append(parameter.getValue());
+            OAuthRequestParameter parameter = normalizedParameters.get(i);
+            normalizedParametersBuffer.append(parameter.getKey());
+            normalizedParametersBuffer.append('=');
+            normalizedParametersBuffer.append(parameter.getValue());
         }
-
-        String normalizedParameters = buffer.toString();
 
         return new StringBuilder(method)
                 .append('&')
                 .append(percentEncode(requestUrl))
                 .append('&')
-                .append(percentEncode(normalizedParameters))
+                .append(percentEncode(normalizedParametersBuffer.toString()))
                 .toString();
+    }
+
+    private static final String extractTokenSecret(OAuthToken token) {
+        if (token == null) {
+            return EMPTY;
+        }
+        return token.getTokenSecret();
     }
 
     /**
@@ -344,24 +316,13 @@ public abstract class AbstractMethodAlgorithm<S extends SigningKey, V extends Ve
      * @param parameter the input parameter.
      * @param parametersList the list where add the parameter.
      */
-    private static void encodeAndAddParameter(String name, String value, List<Parameter> parametersList) {
-        Parameter parameter = new Parameter(percentEncode(name), percentEncode(value));
+    private static void encodeAndAddParameter(String name, String value, List<OAuthRequestParameter> parametersList) {
+        OAuthRequestParameter parameter = new OAuthRequestParameter(percentEncode(name), percentEncode(value));
         int paramIndex = Collections.binarySearch(parametersList, parameter);
         if (paramIndex < 0) {
             paramIndex = -paramIndex - 1;
         }
         parametersList.add(paramIndex, parameter);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public final String toString() {
-        if (this.getClass().isAnnotationPresent(SignatureMethod.class)) {
-            return this.getClass().getAnnotation(SignatureMethod.class).value();
-        }
-        return super.toString();
     }
 
 }
