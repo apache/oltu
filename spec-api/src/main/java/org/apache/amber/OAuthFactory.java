@@ -66,6 +66,6 @@ public interface OAuthFactory extends Serializable {
      * @return service
      * @throws OAuthException
      */
-    OAuthServer createServer(String realm) throws OAuthException;
+    <T extends OAuthServer> T createServer(String realm) throws OAuthException;
 
 }
