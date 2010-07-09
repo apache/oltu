@@ -17,6 +17,7 @@
 package org.apache.amber.signature;
 
 import org.apache.amber.OAuthRequest;
+import org.apache.amber.OAuthToken;
 
 /**
  * Common definition of OAuth signature method algorithm.
@@ -36,23 +37,30 @@ public interface SignatureMethod {
      * Calculates the OAuth request message signature.
      *
      * @param signingKey the key has to be used to sign the request.
+     * @param token the received OAuth token, can be {@code null} if clients
+     *        are requesting for the authorization token.
      * @param request the OAuth request message has to be signed.
      * @return the calculated signature.
      * @throws SignatureException if any error occurs.
      */
-    String calculate(SigningKey signingKey, OAuthRequest request) throws SignatureException;
+    String calculate(SigningKey signingKey,
+            OAuthToken token,
+            OAuthRequest request) throws SignatureException;
 
     /**
      * Verifies the OAuth request message signature.
      *
      * @param signature the OAuth signature has to be verified.
      * @param verifyingKey the key has to be used to verify the request.
+     * @param token the received OAuth token, can be {@code null} if clients
+     *        are requesting for the authorization token.
      * @param request the signed OAuth request message.
      * @return true if the signature is correct, false otherwise.
      * @throws SignatureException if any error occurs.
      */
     boolean verify(String signature,
             VerifyingKey verifyingKey,
+            OAuthToken token,
             OAuthRequest request) throws SignatureException;
 
 }
