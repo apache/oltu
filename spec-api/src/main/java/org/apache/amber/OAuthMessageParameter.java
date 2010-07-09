@@ -27,4 +27,44 @@ public final class OAuthMessageParameter extends AbstractParameter<OAuthParamete
         super(key, value);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        int result = INITIAL_ODD_NUMBER;
+        result = MULTIPLIER_ODD_NUMBER * result + ((this.getKey() == null) ? 0 : this.getKey().hashCode());
+        return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null) {
+            return false;
+        }
+
+        if (this.getClass() != obj.getClass()) {
+            return false;
+        }
+
+        AbstractParameter<?> other = (AbstractParameter<?>) obj;
+
+        if (this.getKey() == null) {
+            if (other.getKey() != null) {
+                return false;
+            }
+        } else if (!String.valueOf(this.getKey()).equals(String.valueOf(other.getKey()))) {
+            return false;
+        }
+
+        return true;
+    }
+
 }

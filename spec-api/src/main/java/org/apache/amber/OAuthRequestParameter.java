@@ -27,4 +27,53 @@ public class OAuthRequestParameter extends AbstractParameter<String> {
         super(key, value);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        int result = INITIAL_ODD_NUMBER;
+        result = MULTIPLIER_ODD_NUMBER * result + ((this.getKey() == null) ? 0 : this.getKey().hashCode());
+        result = MULTIPLIER_ODD_NUMBER * result + ((this.getValue() == null) ? 0 : this.getValue().hashCode());
+        return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null) {
+            return false;
+        }
+
+        if (this.getClass() != obj.getClass()) {
+            return false;
+        }
+
+        AbstractParameter<?> other = (AbstractParameter<?>) obj;
+
+        if (this.getKey() == null) {
+            if (other.getKey() != null) {
+                return false;
+            }
+        } else if (!String.valueOf(this.getKey()).equals(String.valueOf(other.getKey()))) {
+            return false;
+        }
+
+        if (this.getValue() == null) {
+            if (other.getValue() != null) {
+                return false;
+            }
+        } else if (!this.getValue().equals(other.getValue())) {
+            return false;
+        }
+
+        return true;
+    }
+
 }

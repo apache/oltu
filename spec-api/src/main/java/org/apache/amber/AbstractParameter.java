@@ -30,12 +30,12 @@ abstract class AbstractParameter<N>
     /**
      * A non-zero, odd number used as the initial value.
      */
-    private static final int INITIAL_ODD_NUMBER = 1;
+    protected static final int INITIAL_ODD_NUMBER = 1;
 
     /**
      * A non-zero, odd number used as the multiplier.
      */
-    private static final int MULTIPLIER_ODD_NUMBER = 31;
+    protected static final int MULTIPLIER_ODD_NUMBER = 31;
 
     /**
      * The parameter key.
@@ -94,17 +94,6 @@ abstract class AbstractParameter<N>
      */
     public final String setValue(String value) {
         return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int hashCode() {
-        int result = INITIAL_ODD_NUMBER;
-        result = MULTIPLIER_ODD_NUMBER * result + ((this.key == null) ? 0 : this.key.hashCode());
-        result = MULTIPLIER_ODD_NUMBER * result + ((this.value == null) ? 0 : this.value.hashCode());
-        return result;
     }
 
     /**
