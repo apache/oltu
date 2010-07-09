@@ -25,5 +25,21 @@ package org.apache.amber.server;
  * @version $Id$
  */
 public abstract class OAuthServer implements OAuthnServer, OAuthzServer {
+	
+	private OAuthServerConfiguration configuration;
 
+	/**
+	 * @param configuration
+	 */
+	protected OAuthServer(OAuthServerConfiguration configuration) {
+		this.configuration = configuration;
+	}
+	
+	/**
+	 * @return configuration
+	 */
+	protected OAuthServerConfiguration getConfiguration() {
+		return configuration;
+	}
+	
 }
