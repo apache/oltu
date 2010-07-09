@@ -23,7 +23,7 @@ import org.apache.amber.OAuthRequest;
  *
  * @version $Id$
  */
-public interface SignatureMethod<S extends SigningKey, V extends VerifyingKey> {
+public interface SignatureMethod {
 
     /**
      * Returns the signing algorithm method.
@@ -31,6 +31,18 @@ public interface SignatureMethod<S extends SigningKey, V extends VerifyingKey> {
      * @return the signing algorithm method.
      */
     String getAlgorithm();
+    
+    /**
+     * @param value
+     * @return key
+     */
+    SigningKey createSigningKey(String... value);
+
+    /**
+     * @param value
+     * @return key
+     */
+    VerifyingKey createVerifyingKey(String... value);
 
     /**
      * Calculates the OAuth request message signature.
@@ -40,7 +52,7 @@ public interface SignatureMethod<S extends SigningKey, V extends VerifyingKey> {
      * @return the calculated signature.
      * @throws SignatureException if any error occurs.
      */
-    String calculate(S signingKey, OAuthRequest request) throws SignatureException;
+    String calculate(SigningKey signingKey, OAuthRequest request) throws SignatureException;
 
     /**
      * Verifies the OAuth request message signature.
@@ -52,7 +64,7 @@ public interface SignatureMethod<S extends SigningKey, V extends VerifyingKey> {
      * @throws SignatureException if any error occurs.
      */
     boolean verify(String signature,
-            V verifyingKey,
+            VerifyingKey verifyingKey,
             OAuthRequest request) throws SignatureException;
 
 }
