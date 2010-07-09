@@ -50,7 +50,7 @@ public enum OAuthParameter {
      *
      * Value: {@code realm}.
      */
-    REALM("realm"),
+    REALM("realm", false, false),
 
     /**
      * The signature parameter name.
