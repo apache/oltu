@@ -41,7 +41,7 @@ public final class OAuthMessageParameter extends AbstractParameter<OAuthParamete
      * {@inheritDoc}
      */
     @Override
-    public final boolean equals(Object obj) {
+    public boolean equals(Object obj) {
         if (this == obj) {
             return true;
         }
