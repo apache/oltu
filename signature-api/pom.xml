@@ -32,6 +32,13 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.apache.amber</groupId>
+            <artifactId>amber-spec-api</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
             <groupId>commons-beanutils</groupId>
             <artifactId>commons-beanutils-core</artifactId>
             <version>1.8.2</version>
