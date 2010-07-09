@@ -30,7 +30,7 @@ abstract class AbstractParameter<N>
     /**
      * A non-zero, odd number used as the initial value.
      */
-    private final static int INITIAL_ODD_NUMBER = 1;
+    private static final int INITIAL_ODD_NUMBER = 1;
 
     /**
      * A non-zero, odd number used as the multiplier.
@@ -64,6 +64,9 @@ abstract class AbstractParameter<N>
         this.value = value;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public final int compareTo(AbstractParameter<N> parameter) {
         int nameComparison = String.valueOf(this.key).compareTo(String.valueOf(parameter.getKey()));
         if (nameComparison == 0) {
@@ -97,7 +100,7 @@ abstract class AbstractParameter<N>
      * {@inheritDoc}
      */
     @Override
-    public final int hashCode() {
+    public int hashCode() {
         int result = INITIAL_ODD_NUMBER;
         result = MULTIPLIER_ODD_NUMBER * result + ((this.key == null) ? 0 : this.key.hashCode());
         result = MULTIPLIER_ODD_NUMBER * result + ((this.value == null) ? 0 : this.value.hashCode());
@@ -108,46 +111,7 @@ abstract class AbstractParameter<N>
      * {@inheritDoc}
      */
     @Override
-    public final boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-
-        if (obj == null) {
-            return false;
-        }
-
-        if (this.getClass() != obj.getClass()) {
-            return false;
-        }
-
-        @SuppressWarnings({ "rawtypes" })
-        AbstractParameter other = (AbstractParameter) obj;
-
-        if (this.key == null) {
-            if (other.getKey() != null) {
-                return false;
-            }
-        } else if (!String.valueOf(this.key).equals(String.valueOf(other.getKey()))) {
-            return false;
-        }
-
-        if (this.value == null) {
-            if (other.getValue() != null) {
-                return false;
-            }
-        } else if (!this.value.equals(other.getValue())) {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toString() {
+    public final String toString() {
         return new StringBuilder("Parameter { key=")
                 .append(this.key)
                 .append(", value=")
