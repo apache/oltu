@@ -16,15 +16,17 @@
  */
 package org.apache.amber;
 
+import java.io.Serializable;
 import java.util.Properties;
 
 import org.apache.amber.server.OAuthServer;
 
 /**
- * @version $Revision$ $Date$
+ * TODO Write extensive documentation
  * 
+ * @version $Id $HeadURL $Revision $Date $Author
  */
-public interface OAuthFactory {
+public interface OAuthFactory extends Serializable {
 
     /**
      * @return version
