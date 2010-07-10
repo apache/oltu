@@ -23,6 +23,10 @@ package org.apache.amber;
  */
 public class OAuthRequestParameter extends AbstractParameter<String> {
 
+	/**
+	 * @param key
+	 * @param value
+	 */
     public OAuthRequestParameter(String key, String value) {
         super(key, value);
     }
