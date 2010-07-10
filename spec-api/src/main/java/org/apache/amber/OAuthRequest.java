@@ -18,6 +18,7 @@ package org.apache.amber;
 
 import java.net.URL;
 import java.util.Collection;
+import java.util.SortedSet;
 
 /**
  * A convenient object representing the properties of an OAuth request to a
@@ -35,6 +36,9 @@ public interface OAuthRequest {
 
     void setHTTPMethod(HTTPMethod httpMethod);
 
+    /**
+     * @param parameter
+     */
     void addOAuthMessageParameter(OAuthMessageParameter parameter);
 
     /**
@@ -42,15 +46,30 @@ public interface OAuthRequest {
      *
      * @return the OAuth parameters will be included in the OAuth message.
      */
-    Collection<OAuthMessageParameter> getOAuthMessageParameters();
+    SortedSet<OAuthMessageParameter> getOAuthMessageParameters();
 
+    /**
+     * @param parameter
+     */
     void addOAuthRequestParameter(OAuthRequestParameter parameter);
+
+	/**
+	 * @param signatureMethod
+	 * @return
+	 */
+	String getOAuthMessageParameter(OAuthParameter parameter);
 
     /**
      * Returns the aux parameters client will included in the request.
      *
      * @return the aux parameters client will included in the request.
      */
-    Collection<OAuthRequestParameter> getOAuthRequestParameters();
+    SortedSet<OAuthRequestParameter> getOAuthRequestParameters();
+
+	/**
+	 * @param signatureMethod
+	 * @return
+	 */
+	String getOAuthRequestParameter(String name);
 
 }
