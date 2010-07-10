@@ -17,11 +17,12 @@
 package org.apache.amber.signature;
 
 import java.net.URL;
-import java.util.Collection;
-import java.util.HashSet;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import org.apache.amber.HTTPMethod;
 import org.apache.amber.OAuthMessageParameter;
+import org.apache.amber.OAuthParameter;
 import org.apache.amber.OAuthRequest;
 import org.apache.amber.OAuthRequestParameter;
 
@@ -35,9 +36,9 @@ final class FakeOAuthRequest implements OAuthRequest {
 
     private URL requestURL;
 
-    private final Collection<OAuthMessageParameter> messageParameters = new HashSet<OAuthMessageParameter>();
+    private final SortedSet<OAuthMessageParameter> messageParameters = new TreeSet<OAuthMessageParameter>();
 
-    private final Collection<OAuthRequestParameter> requestParameters = new HashSet<OAuthRequestParameter>();
+    private final SortedSet<OAuthRequestParameter> requestParameters = new  TreeSet<OAuthRequestParameter>();
 
     public void addOAuthMessageParameter(OAuthMessageParameter parameter) {
         this.messageParameters.add(parameter);
@@ -55,11 +56,11 @@ final class FakeOAuthRequest implements OAuthRequest {
         this.httpMethod = httpMethod;
     }
 
-    public Collection<OAuthMessageParameter> getOAuthMessageParameters() {
+    public SortedSet<OAuthMessageParameter> getOAuthMessageParameters() {
         return this.messageParameters;
     }
 
-    public Collection<OAuthRequestParameter> getOAuthRequestParameters() {
+    public SortedSet<OAuthRequestParameter> getOAuthRequestParameters() {
         return this.requestParameters;
     }
 
@@ -70,5 +71,23 @@ final class FakeOAuthRequest implements OAuthRequest {
     public void setRequestURL(URL requestURL) {
         this.requestURL = requestURL;
     }
+
+	public String getOAuthMessageParameter(OAuthParameter parameter) {
+		for (OAuthMessageParameter omp : this.messageParameters) {
+			if (omp.getKey().equals(parameter)) {
+				return omp.getValue();
+			}
+		}		
+		return null; // not ideal, but it's only a test
+	}
+
+	public String getOAuthRequestParameter(String name) {
+		for (OAuthRequestParameter orp : this.requestParameters) {
+			if (orp.getKey().equals(name)) {
+				return orp.getValue();
+			}
+		}		
+		return null; // not ideal, but it's only a test
+	}
 
 }
