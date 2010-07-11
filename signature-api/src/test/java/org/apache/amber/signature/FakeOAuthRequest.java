@@ -17,6 +17,7 @@
 package org.apache.amber.signature;
 
 import java.net.URL;
+import java.util.Collection;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -56,11 +57,11 @@ final class FakeOAuthRequest implements OAuthRequest {
         this.httpMethod = httpMethod;
     }
 
-    public SortedSet<OAuthMessageParameter> getOAuthMessageParameters() {
+    public Collection<OAuthMessageParameter> getOAuthMessageParameters() {
         return this.messageParameters;
     }
 
-    public SortedSet<OAuthRequestParameter> getOAuthRequestParameters() {
+    public Collection<OAuthRequestParameter> getOAuthRequestParameters() {
         return this.requestParameters;
     }
 
@@ -72,22 +73,22 @@ final class FakeOAuthRequest implements OAuthRequest {
         this.requestURL = requestURL;
     }
 
-	public String getOAuthMessageParameter(OAuthParameter parameter) {
-		for (OAuthMessageParameter omp : this.messageParameters) {
-			if (omp.getKey().equals(parameter)) {
-				return omp.getValue();
-			}
-		}		
-		return null; // not ideal, but it's only a test
-	}
+    public String getOAuthMessageParameter(OAuthParameter parameter) {
+        for (OAuthMessageParameter omp : this.messageParameters) {
+            if (omp.getKey().equals(parameter)) {
+                return omp.getValue();
+            }
+        }
+        return null; // not ideal, but it's only a test
+    }
 
-	public String getOAuthRequestParameter(String name) {
-		for (OAuthRequestParameter orp : this.requestParameters) {
-			if (orp.getKey().equals(name)) {
-				return orp.getValue();
-			}
-		}		
-		return null; // not ideal, but it's only a test
-	}
+    public String getOAuthRequestParameter(String name) {
+        for (OAuthRequestParameter orp : this.requestParameters) {
+            if (orp.getKey().equals(name)) {
+                return orp.getValue();
+            }
+        }
+        return null; // not ideal, but it's only a test
+    }
 
 }
