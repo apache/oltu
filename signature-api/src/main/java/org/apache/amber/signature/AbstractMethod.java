@@ -35,8 +35,6 @@ import org.apache.commons.logging.LogFactory;
 /**
  * Abstract implementation of OAuth signature method algorithm.
  *
- * @param <S> the {@link SigningKey} type.
- * @param <V> the {@link VerifyingKey} type.
  * @version $Id$
  */
 public abstract class AbstractMethod implements SignatureMethod {
