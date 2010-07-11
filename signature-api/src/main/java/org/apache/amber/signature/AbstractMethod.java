@@ -127,10 +127,10 @@ public abstract class AbstractMethod implements SignatureMethod {
             OAuthToken token,
             OAuthRequest request) throws SignatureException {
         if (signingKey == null) {
-            throw new IllegalArgumentException("parameter 'signingKey' must not be null");
+            throw new SignatureException("parameter 'signingKey' must not be null");
         }
         if (request == null) {
-            throw new IllegalArgumentException("parameter 'request' must not be null");
+            throw new SignatureException("parameter 'request' must not be null");
         }
         this.checkKey(signingKey);
 
@@ -158,13 +158,13 @@ public abstract class AbstractMethod implements SignatureMethod {
             OAuthToken token,
             OAuthRequest request) throws SignatureException {
         if (signature == null) {
-            throw new IllegalArgumentException("parameter 'signature' must not be null");
+            throw new SignatureException("parameter 'signature' must not be null");
         }
         if (verifyingKey == null) {
-            throw new IllegalArgumentException("parameter 'verifyingKey' must not be null");
+            throw new SignatureException("parameter 'verifyingKey' must not be null");
         }
         if (request == null) {
-            throw new IllegalArgumentException("parameter 'request' must not be null");
+            throw new SignatureException("parameter 'request' must not be null");
         }
         this.checkKey(verifyingKey);
 
