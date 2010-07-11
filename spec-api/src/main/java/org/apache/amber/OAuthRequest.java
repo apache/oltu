@@ -17,7 +17,6 @@
 package org.apache.amber;
 
 import java.net.URL;
-import java.util.Collection;
 import java.util.SortedSet;
 
 /**
@@ -53,11 +52,11 @@ public interface OAuthRequest {
      */
     void addOAuthRequestParameter(OAuthRequestParameter parameter);
 
-	/**
-	 * @param signatureMethod
-	 * @return
-	 */
-	String getOAuthMessageParameter(OAuthParameter parameter);
+    /**
+     * @param signatureMethod
+     * @return
+     */
+    String getOAuthMessageParameter(OAuthParameter parameter);
 
     /**
      * Returns the aux parameters client will included in the request.
@@ -66,10 +65,10 @@ public interface OAuthRequest {
      */
     SortedSet<OAuthRequestParameter> getOAuthRequestParameters();
 
-	/**
-	 * @param signatureMethod
-	 * @return
-	 */
-	String getOAuthRequestParameter(String name);
+    /**
+     * @param signatureMethod
+     * @return
+     */
+    String getOAuthRequestParameter(String name);
 
 }
