@@ -22,7 +22,7 @@ import java.net.URL;
 import java.security.interfaces.RSAPublicKey;
 
 import org.apache.amber.signature.SignatureException;
-import org.apache.amber.signature.SigningKey;
+import org.apache.amber.signature.VerifyingKey;
 
 /**
  * 
@@ -31,7 +31,7 @@ import org.apache.amber.signature.SigningKey;
  */
 public final class PemRsaSha1VerifyingKey
         extends AbstractRsaSha1Key<RSAPublicKey>
-        implements SigningKey {
+        implements VerifyingKey {
 
     public PemRsaSha1VerifyingKey(File certificateFileLocation)
             throws SignatureException {
