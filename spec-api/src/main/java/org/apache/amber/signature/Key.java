@@ -21,7 +21,7 @@ package org.apache.amber.signature;
  *
  * @version $Id$
  */
-interface Key {
+public interface Key {
 
     /**
      * Returns the signing algorithm methods.
