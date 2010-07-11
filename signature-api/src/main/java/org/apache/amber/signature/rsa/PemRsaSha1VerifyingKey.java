@@ -29,21 +29,21 @@ import org.apache.amber.signature.SigningKey;
  *
  * @version $Id$
  */
-public final class PemRsaSha1VeifyingKey
+public final class PemRsaSha1VerifyingKey
         extends AbstractRsaSha1Key<RSAPublicKey>
         implements SigningKey {
 
-    public PemRsaSha1VeifyingKey(File certificateFileLocation)
+    public PemRsaSha1VerifyingKey(File certificateFileLocation)
             throws SignatureException {
         super(certificateFileLocation);
     }
 
-    public PemRsaSha1VeifyingKey(String certificateClasspathLocation)
+    public PemRsaSha1VerifyingKey(String certificateClasspathLocation)
             throws SignatureException {
         super(certificateClasspathLocation);
     }
 
-    public PemRsaSha1VeifyingKey(URL certificateURL) throws SignatureException {
+    public PemRsaSha1VerifyingKey(URL certificateURL) throws SignatureException {
         super(certificateURL);
     }
 
