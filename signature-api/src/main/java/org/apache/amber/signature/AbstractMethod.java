@@ -18,11 +18,11 @@ package org.apache.amber.signature;
 
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.BitSet;
-import java.util.Collections;
-import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
+import java.util.Map.Entry;
 
 import org.apache.amber.OAuthMessageParameter;
 import org.apache.amber.OAuthRequest;
@@ -243,9 +243,7 @@ public abstract class AbstractMethod implements SignatureMethod {
                                 .toString();
 
         // parameters normalization
-        int normalizedParametersSize = request.getOAuthMessageParameters().size()
-                                        + request.getOAuthRequestParameters().size();
-        List<OAuthRequestParameter> normalizedParameters = new ArrayList<OAuthRequestParameter>(normalizedParametersSize);
+        SortedSet<Entry<String, String>> normalizedParameters = new TreeSet<Entry<String,String>>();
 
         for (OAuthMessageParameter parameter : request.getOAuthMessageParameters()) {
             if (parameter.getKey().isIncludeInSignature()) {
@@ -264,15 +262,16 @@ public abstract class AbstractMethod implements SignatureMethod {
 
         // now serialize the normalized parameters
         StringBuilder normalizedParametersBuffer = new StringBuilder();
-        for (int i = 0; i < normalizedParameters.size(); i++) {
-            if (i > 0) {
+        int counter = 0;
+        for (Entry<String, String> parameter : normalizedParameters) {
+            if (counter > 0) {
                 normalizedParametersBuffer.append('&');
             }
 
-            OAuthRequestParameter parameter = normalizedParameters.get(i);
             normalizedParametersBuffer.append(parameter.getKey());
             normalizedParametersBuffer.append('=');
             normalizedParametersBuffer.append(parameter.getValue());
+            counter++;
         }
 
         return new StringBuilder(method)
@@ -338,13 +337,8 @@ public abstract class AbstractMethod implements SignatureMethod {
      * @param parameter the input parameter.
      * @param parametersList the list where add the parameter.
      */
-    private static void encodeAndAddParameter(String name, String value, List<OAuthRequestParameter> parametersList) {
-        OAuthRequestParameter parameter = new OAuthRequestParameter(percentEncode(name), percentEncode(value));
-        int paramIndex = Collections.binarySearch(parametersList, parameter);
-        if (paramIndex < 0) {
-            paramIndex = -paramIndex - 1;
-        }
-        parametersList.add(paramIndex, parameter);
+    private static void encodeAndAddParameter(String name, String value, SortedSet<Entry<String, String>> normalizedParameters) {
+        normalizedParameters.add(new OAuthRequestParameter(percentEncode(name), percentEncode(value)));
     }
 
 }
