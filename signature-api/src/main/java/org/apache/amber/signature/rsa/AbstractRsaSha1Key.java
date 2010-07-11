@@ -31,11 +31,11 @@ import org.apache.amber.signature.SignatureException;
  *
  * @version $Id$
  */
-abstract class AbstractRsaSha1Key implements org.apache.amber.signature.Key {
+abstract class AbstractRsaSha1Key<T extends java.security.Key> implements org.apache.amber.signature.Key {
 
     private static final String[] METHODS = { "RSA-SHA1" };
 
-    private final java.security.Key keyValue;
+    private final T keyValue;
 
     /**
      * Loads a key from a certificate located in the classpath.
@@ -104,7 +104,7 @@ abstract class AbstractRsaSha1Key implements org.apache.amber.signature.Key {
         this.keyValue = this.readCertificate(certificateURL);
     }
 
-    private java.security.Key readCertificate(URL certificateURL) throws SignatureException {
+    private T readCertificate(URL certificateURL) throws SignatureException {
         URLConnection urlConnection = null;
         InputStream input = null;
 
@@ -132,7 +132,7 @@ abstract class AbstractRsaSha1Key implements org.apache.amber.signature.Key {
         }
     }
 
-    public java.security.Key getKeyValue() {
+    public T getKeyValue() {
         return this.keyValue;
     }
 
@@ -141,7 +141,7 @@ abstract class AbstractRsaSha1Key implements org.apache.amber.signature.Key {
         return String.valueOf(this.keyValue);
     }
 
-    protected abstract java.security.Key readCertificate(InputStream input) throws Exception;
+    protected abstract T readCertificate(InputStream input) throws Exception;
 
     /**
      * {@inheritDoc}
