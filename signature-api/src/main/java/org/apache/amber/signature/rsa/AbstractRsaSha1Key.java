@@ -24,7 +24,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
-import org.apache.amber.signature.Key;
 import org.apache.amber.signature.SignatureException;
 
 /**
@@ -32,11 +31,11 @@ import org.apache.amber.signature.SignatureException;
  *
  * @version $Id$
  */
-abstract class AbstractRsaSha1Key implements Key {
+abstract class AbstractRsaSha1Key implements org.apache.amber.signature.Key {
 
     private static final String[] METHODS = { "RSA-SHA1" };
 
-    private final byte[] byteValue;
+    private final java.security.Key keyValue;
 
     /**
      * Loads a key from a certificate located in the classpath.
@@ -63,7 +62,7 @@ abstract class AbstractRsaSha1Key implements Key {
                     + "' not found, please make sure it exists in the classpath");
         }
 
-        this.byteValue = this.readCertificate(certificateURL);
+        this.keyValue = this.readCertificate(certificateURL);
     }
 
     /**
@@ -83,7 +82,7 @@ abstract class AbstractRsaSha1Key implements Key {
         }
 
         try {
-            this.byteValue = this.readCertificate(certificateFileLocation.toURI().toURL());
+            this.keyValue = this.readCertificate(certificateFileLocation.toURI().toURL());
         } catch (MalformedURLException e) {
             throw new SignatureException("Impossible to read the certificate from '"
                     + certificateFileLocation
@@ -102,10 +101,10 @@ abstract class AbstractRsaSha1Key implements Key {
             throw new SignatureException("parameter 'certificateURL' must not be null");
         }
 
-        this.byteValue = this.readCertificate(certificateURL);
+        this.keyValue = this.readCertificate(certificateURL);
     }
 
-    private byte[] readCertificate(URL certificateURL) throws SignatureException {
+    private java.security.Key readCertificate(URL certificateURL) throws SignatureException {
         URLConnection urlConnection = null;
         InputStream input = null;
 
@@ -133,16 +132,16 @@ abstract class AbstractRsaSha1Key implements Key {
         }
     }
 
-    public final byte[] getByteValue() {
-        return this.byteValue;
+    public java.security.Key getKeyValue() {
+        return this.keyValue;
     }
 
     @Override
     public final String getValue() {
-        return new String(this.byteValue);
+        return String.valueOf(this.keyValue);
     }
 
-    protected abstract byte[] readCertificate(InputStream input) throws Exception;
+    protected abstract java.security.Key readCertificate(InputStream input) throws Exception;
 
     /**
      * {@inheritDoc}

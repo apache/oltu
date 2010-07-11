@@ -19,6 +19,11 @@ package org.apache.amber.signature.rsa;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.security.KeyFactory;
+import java.security.interfaces.RSAPrivateKey;
+import java.security.interfaces.RSAPublicKey;
+import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.X509EncodedKeySpec;
 
 import org.apache.commons.codec.binary.Base64OutputStream;
 
@@ -28,6 +33,18 @@ import org.apache.commons.codec.binary.Base64OutputStream;
  * @version $Id$
  */
 final class PemCertificateParser {
+
+    private static final String RSA_NAME = "RSA";
+
+    private static KeyFactory getRsaKeyFactory() {
+        try {
+            return KeyFactory.getInstance(RSA_NAME);
+        } catch (Exception e) {
+            throw new RuntimeException("Impossible to instantiate the RSA KeyFactory", e);
+        }
+    }
+
+    private final KeyFactory keyFactory = getRsaKeyFactory();
 
     private final ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
@@ -49,28 +66,40 @@ TOKEN : {
     | <CERTIFICATE_CONTENT : (["a"-"z","A"-"Z","0"-"9","+","/","="])+>
 }
 
-public byte[] parsePrivateKey() : { }
+public RSAPrivateKey parsePrivateKey() throws Exception : { }
 {
     <BEGIN_PRIVATE_KEY> [ certificateContent() ]  <END_PRIVATE_KEY> <EOF> {
         try {
-            this.output.close();
-            this.baos.close();
-            return this.baos.toByteArray();
-        } catch (IOException e) {
-            throw new ParseException("Fatal protocol error: " + e.getMessage());
+            PKCS8EncodedKeySpec privSpec = new PKCS8EncodedKeySpec(this.baos.toByteArray());
+            return (RSAPrivateKey) this.keyFactory.generatePrivate(privSpec);
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                this.output.close();
+                this.baos.close();
+            } catch (IOException e) {
+                // close quietly
+            }
         }
     }
 }
 
-public byte[] parsePublicCertificate() : { }
+public RSAPublicKey parsePublicCertificate() throws Exception : { }
 {
     <BEGIN_CERTIFICATE> [ certificateContent() ]  <END_CERTIFICATE> <EOF> {
         try {
-            this.output.close();
-            this.baos.close();
-            return this.baos.toByteArray();
-        } catch (IOException e) {
-            throw new ParseException("Fatal protocol error: " + e.getMessage());
+            X509EncodedKeySpec pubSpec = new X509EncodedKeySpec(this.baos.toByteArray());
+            return (RSAPublicKey) this.keyFactory.generatePublic(pubSpec);
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            try {
+                this.output.close();
+                this.baos.close();
+            } catch (IOException e) {
+                // close quietly
+            }
         }
     }
 }

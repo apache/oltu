@@ -19,6 +19,7 @@ package org.apache.amber.signature.rsa;
 import java.io.File;
 import java.io.InputStream;
 import java.net.URL;
+import java.security.Key;
 
 import org.apache.amber.signature.SignatureException;
 import org.apache.amber.signature.SigningKey;
@@ -50,7 +51,7 @@ public final class PemRsaSha1VeifyingKey
      * {@inheritDoc}
      */
     @Override
-    protected byte[] readCertificate(InputStream input) throws Exception {
+    protected Key readCertificate(InputStream input) throws Exception {
         PemCertificateParser pemCertificateParser = new PemCertificateParser(input);
         return pemCertificateParser.parsePublicCertificate();
     }
