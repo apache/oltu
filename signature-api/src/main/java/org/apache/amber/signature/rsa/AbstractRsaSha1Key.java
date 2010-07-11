@@ -35,7 +35,7 @@ abstract class AbstractRsaSha1Key<T extends java.security.Key> implements org.ap
 
     private static final String[] METHODS = { "RSA-SHA1" };
 
-    private final T keyValue;
+    private final T rsaKey;
 
     /**
      * Loads a key from a certificate located in the classpath.
@@ -62,7 +62,7 @@ abstract class AbstractRsaSha1Key<T extends java.security.Key> implements org.ap
                     + "' not found, please make sure it exists in the classpath");
         }
 
-        this.keyValue = this.readCertificate(certificateURL);
+        this.rsaKey = this.readCertificate(certificateURL);
     }
 
     /**
@@ -82,7 +82,7 @@ abstract class AbstractRsaSha1Key<T extends java.security.Key> implements org.ap
         }
 
         try {
-            this.keyValue = this.readCertificate(certificateFileLocation.toURI().toURL());
+            this.rsaKey = this.readCertificate(certificateFileLocation.toURI().toURL());
         } catch (MalformedURLException e) {
             throw new SignatureException("Impossible to read the certificate from '"
                     + certificateFileLocation
@@ -101,7 +101,7 @@ abstract class AbstractRsaSha1Key<T extends java.security.Key> implements org.ap
             throw new SignatureException("parameter 'certificateURL' must not be null");
         }
 
-        this.keyValue = this.readCertificate(certificateURL);
+        this.rsaKey = this.readCertificate(certificateURL);
     }
 
     private T readCertificate(URL certificateURL) throws SignatureException {
@@ -132,13 +132,13 @@ abstract class AbstractRsaSha1Key<T extends java.security.Key> implements org.ap
         }
     }
 
-    public T getKeyValue() {
-        return this.keyValue;
+    public final T getRsaKey() {
+        return this.rsaKey;
     }
 
     @Override
     public final String getValue() {
-        return String.valueOf(this.keyValue);
+        return String.valueOf(this.rsaKey);
     }
 
     protected abstract T readCertificate(InputStream input) throws Exception;
