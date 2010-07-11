@@ -31,8 +31,7 @@ import org.apache.amber.Version;
 /**
  * Abstract implementation of OAuth signature method algorithm test case.
  *
- * @param <S> the {@link SigningKey} type.
- * @param <V> the {@link VerifyingKey} type.
+ * @version $Id$
  */
 public abstract class AbstractSimpleMethodTestCase {
 
