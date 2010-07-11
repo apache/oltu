@@ -316,7 +316,7 @@ public abstract class AbstractMethod implements SignatureMethod {
      * @param sequence the bytes sequence has to be encoded.
      * @return the Base64 encoded string.
      */
-    protected static String base64Encode(byte[] sequence) {
+    protected static String encodeBase64(byte[] sequence) {
         return new String(Base64.encodeBase64(sequence, false));
     }
 

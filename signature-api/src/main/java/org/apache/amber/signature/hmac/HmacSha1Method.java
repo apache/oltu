@@ -70,7 +70,7 @@ public final class HmacSha1Method extends AbstractMethod {
 
         byte[] rawHmac = mac.doFinal(baseString.getBytes());
 
-        return base64Encode(rawHmac);
+        return encodeBase64(rawHmac);
     }
 
     /**
