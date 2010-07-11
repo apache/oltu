@@ -19,6 +19,7 @@ package org.apache.amber.signature;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.BitSet;
 import java.util.Collections;
 import java.util.List;
@@ -131,6 +132,7 @@ public abstract class AbstractMethod implements SignatureMethod {
         if (request == null) {
             throw new IllegalArgumentException("parameter 'request' must not be null");
         }
+        this.checkKey(signingKey);
 
         String baseString = this.createBaseString(request);
         String tokenSecret = extractTokenSecret(token);
@@ -164,6 +166,7 @@ public abstract class AbstractMethod implements SignatureMethod {
         if (request == null) {
             throw new IllegalArgumentException("parameter 'request' must not be null");
         }
+        this.checkKey(verifyingKey);
 
         String baseString = this.createBaseString(request);
         String tokenSecret = extractTokenSecret(token);
@@ -181,6 +184,27 @@ public abstract class AbstractMethod implements SignatureMethod {
      * @throws SignatureException if any error occurs.
      */
     protected abstract boolean verify(String signature, VerifyingKey verifyingKey, String tokenSecret, String baseString) throws SignatureException;
+
+    /**
+     * 
+     *
+     * @param key
+     * @throws SignatureException
+     */
+    private void checkKey(Key key) throws SignatureException {
+        for (String method : key.getAlgorithmMethods()) {
+            if (this.getAlgorithm().equals(method)) {
+                return;
+            }
+        }
+        throw new SignatureException("Required '"
+                + this.getAlgorithm()
+                + "', key of type '"
+                + key.getClass().getName()
+                + "' only supports "
+                + Arrays.toString(key.getAlgorithmMethods())
+                + " methods");
+    }
 
     /**
      * Calculates the OAuth base string.
