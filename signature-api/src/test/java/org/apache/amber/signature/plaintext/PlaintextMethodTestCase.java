@@ -16,7 +16,7 @@
  */
 package org.apache.amber.signature.plaintext;
 
-import org.apache.amber.signature.AbstractSimpleMethodTestCase;
+import org.apache.amber.signature.AbstractMethodTestCase;
 import org.apache.amber.signature.BasicKey;
 import org.junit.Test;
 
@@ -25,7 +25,7 @@ import org.junit.Test;
  *
  * @version $Id$
  */
-public class PlaintextMethodTestCase extends AbstractSimpleMethodTestCase {
+public class PlaintextMethodTestCase extends AbstractMethodTestCase {
 
     @Test
     public void verifyHmacSha1MethodAlgorithm() throws Exception {

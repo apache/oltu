@@ -16,14 +16,14 @@
  */
 package org.apache.amber.signature.rsa;
 
-import org.apache.amber.signature.AbstractSimpleMethodTestCase;
+import org.apache.amber.signature.AbstractMethodTestCase;
 
 /**
  * 
  *
  * @version $Id$
  */
-public final class RsaSha1MethodTestCase extends AbstractSimpleMethodTestCase {
+public final class RsaSha1MethodTestCase extends AbstractMethodTestCase {
 
     // TODO test disabled, expected signature has to be calculated
     public void verifyRsaSha1MethodAlgorithm() throws Exception {

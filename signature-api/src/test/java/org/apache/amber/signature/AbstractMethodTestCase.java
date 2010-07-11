@@ -33,7 +33,7 @@ import org.apache.amber.Version;
  *
  * @version $Id$
  */
-public abstract class AbstractSimpleMethodTestCase {
+public abstract class AbstractMethodTestCase {
 
     protected void verifySignature(VerifyingKey verifyingKey,
             SignatureMethod signatureMethod,
