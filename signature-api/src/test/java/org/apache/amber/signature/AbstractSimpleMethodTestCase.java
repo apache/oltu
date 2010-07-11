@@ -18,7 +18,7 @@ package org.apache.amber.signature;
 
 import static junit.framework.Assert.assertTrue;
 
-import java.net.URL;
+import java.net.URI;
 
 import org.apache.amber.HTTPMethod;
 import org.apache.amber.OAuthMessageParameter;
@@ -40,7 +40,7 @@ public abstract class AbstractSimpleMethodTestCase {
             SignatureMethod signatureMethod,
             String expectedSignature) throws Exception {
         OAuthRequest request = new FakeOAuthRequest();
-        request.setRequestURL(new URL("http://photos.example.net/photos"));
+        request.setRequestURL(URI.create("http://photos.example.net/photos"));
         request.setHTTPMethod(HTTPMethod.GET);
         addMessageParameter(OAuthParameter.CONSUMER_KEY, "dpf43f3p2l4k3l03", request);
         addMessageParameter(OAuthParameter.NONCE, "kllo9940pd9333jh", request);

@@ -16,7 +16,7 @@
  */
 package org.apache.amber.signature;
 
-import java.net.URL;
+import java.net.URI;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.BitSet;
@@ -218,8 +218,8 @@ public abstract class AbstractMethod implements SignatureMethod {
         String method = request.getHTTPMethod().name();
 
         // the normalized request URL
-        URL url = request.getRequestURL();
-        String scheme = url.getProtocol().toLowerCase();
+        URI url = request.getRequestURL();
+        String scheme = url.getScheme().toLowerCase();
         String authority = url.getAuthority().toLowerCase();
 
         int port = url.getPort();

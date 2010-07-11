@@ -16,7 +16,7 @@
  */
 package org.apache.amber;
 
-import java.net.URL;
+import java.net.URI;
 import java.util.Collection;
 
 /**
@@ -27,9 +27,9 @@ import java.util.Collection;
  */
 public interface OAuthRequest {
 
-    URL getRequestURL();
+    URI getRequestURL();
 
-    void setRequestURL(URL requestURL);
+    void setRequestURL(URI requestURL);
 
     HTTPMethod getHTTPMethod();
 

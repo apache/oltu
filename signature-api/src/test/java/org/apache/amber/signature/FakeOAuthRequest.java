@@ -16,7 +16,7 @@
  */
 package org.apache.amber.signature;
 
-import java.net.URL;
+import java.net.URI;
 import java.util.Collection;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -35,7 +35,7 @@ final class FakeOAuthRequest implements OAuthRequest {
 
     private HTTPMethod httpMethod;
 
-    private URL requestURL;
+    private URI requestURL;
 
     private final SortedSet<OAuthMessageParameter> messageParameters = new TreeSet<OAuthMessageParameter>();
 
@@ -65,11 +65,11 @@ final class FakeOAuthRequest implements OAuthRequest {
         return this.requestParameters;
     }
 
-    public URL getRequestURL() {
+    public URI getRequestURL() {
         return this.requestURL;
     }
 
-    public void setRequestURL(URL requestURL) {
+    public void setRequestURL(URI requestURL) {
         this.requestURL = requestURL;
     }
 
