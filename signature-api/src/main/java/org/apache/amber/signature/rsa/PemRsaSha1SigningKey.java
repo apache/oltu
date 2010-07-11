@@ -55,12 +55,4 @@ public final class PemRsaSha1SigningKey
         return pemCertificateParser.parsePrivateKey();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getValue() {
-        return null;
-    }
-
 }

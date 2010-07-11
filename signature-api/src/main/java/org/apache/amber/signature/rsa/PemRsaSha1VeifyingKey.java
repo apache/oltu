@@ -55,12 +55,4 @@ public final class PemRsaSha1VeifyingKey
         return pemCertificateParser.parsePublicCertificate();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getValue() {
-        return null;
-    }
-
 }

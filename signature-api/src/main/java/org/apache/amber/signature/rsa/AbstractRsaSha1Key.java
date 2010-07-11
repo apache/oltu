@@ -137,6 +137,11 @@ abstract class AbstractRsaSha1Key implements Key {
         return this.byteValue;
     }
 
+    @Override
+    public final String getValue() {
+        return new String(this.byteValue);
+    }
+
     protected abstract byte[] readCertificate(InputStream input) throws Exception;
 
     /**
