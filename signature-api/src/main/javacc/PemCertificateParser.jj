@@ -42,10 +42,10 @@ SKIP : {
 }
 
 TOKEN : {
-    <BEGIN_PRIVATE_KEY : "-----BEGIN PRIVATE KEY-----">
-    | <END_PRIVATE_KEY : "-----END PRIVATE KEY-----">
-    | <BEGIN_CERTIFICATE : "-----BEGIN CERTIFICATE-----">
-    | <END_CERTIFICATE : "-----END CERTIFICATE-----">
+    <BEGIN_PRIVATE_KEY : "-----BEGIN RSA PRIVATE KEY-----">
+    | <END_PRIVATE_KEY : "-----END RSA PRIVATE KEY-----">
+    | <BEGIN_CERTIFICATE : "-----BEGIN PUBLIC KEY-----">
+    | <END_CERTIFICATE : "-----END PUBLIC KEY-----">
     | <CERTIFICATE_CONTENT : (["a"-"z","A"-"Z","0"-"9","+","/","="])+>
 }
 
