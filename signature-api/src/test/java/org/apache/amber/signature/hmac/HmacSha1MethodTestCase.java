@@ -17,6 +17,7 @@
 package org.apache.amber.signature.hmac;
 
 import org.apache.amber.signature.AbstractSimpleMethodTestCase;
+import org.apache.amber.signature.BasicKey;
 import org.junit.Test;
 
 /**
@@ -28,7 +29,9 @@ public class HmacSha1MethodTestCase extends AbstractSimpleMethodTestCase {
 
     @Test
     public void verifyHmacSha1MethodAlgorithm() throws Exception {
-        this.verifySignature(new HmacSha1Method(), "tR3+Ty81lMeYAr/Fid0kMTYa/WM=");
+        this.verifySignature(new BasicKey("kd94hf93k423kf44"),
+                new HmacSha1Method(),
+                "tR3+Ty81lMeYAr/Fid0kMTYa/WM=");
     }
 
 }

@@ -17,6 +17,7 @@
 package org.apache.amber.signature.plaintext;
 
 import org.apache.amber.signature.AbstractSimpleMethodTestCase;
+import org.apache.amber.signature.BasicKey;
 import org.junit.Test;
 
 /**
@@ -28,7 +29,9 @@ public class PlaintextMethodTestCase extends AbstractSimpleMethodTestCase {
 
     @Test
     public void verifyHmacSha1MethodAlgorithm() throws Exception {
-        this.verifySignature(new PlaintextMethod(), "kd94hf93k423kf44&pfkkdhi9sl3r4s00");
+        this.verifySignature(new BasicKey("kd94hf93k423kf44"),
+                new PlaintextMethod(),
+                "kd94hf93k423kf44&pfkkdhi9sl3r4s00");
     }
 
 }

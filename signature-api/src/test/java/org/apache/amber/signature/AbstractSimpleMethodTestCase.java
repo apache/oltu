@@ -27,9 +27,6 @@ import org.apache.amber.OAuthRequest;
 import org.apache.amber.OAuthRequestParameter;
 import org.apache.amber.OAuthToken;
 import org.apache.amber.Version;
-import org.apache.amber.signature.SignatureMethod;
-import org.apache.amber.signature.SigningKey;
-import org.apache.amber.signature.VerifyingKey;
 
 /**
  * Abstract implementation of OAuth signature method algorithm test case.
@@ -39,7 +36,8 @@ import org.apache.amber.signature.VerifyingKey;
  */
 public abstract class AbstractSimpleMethodTestCase {
 
-    protected void verifySignature(SignatureMethod signatureMethod,
+    protected void verifySignature(VerifyingKey verifyingKey,
+            SignatureMethod signatureMethod,
             String expectedSignature) throws Exception {
         OAuthRequest request = new FakeOAuthRequest();
         request.setRequestURL(new URL("http://photos.example.net/photos"));
@@ -55,8 +53,6 @@ public abstract class AbstractSimpleMethodTestCase {
 
         OAuthToken token = new FakeToken();
         token.setTokenSecret("pfkkdhi9sl3r4s00");
-
-        VerifyingKey verifyingKey = new BasicKey("kd94hf93k423kf44");
 
         assertTrue(signatureMethod.verify(expectedSignature, verifyingKey, token, request));
     }
