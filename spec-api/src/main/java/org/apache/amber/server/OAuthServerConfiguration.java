@@ -17,24 +17,25 @@
 package org.apache.amber.server;
 
 /**
- * @version $Id $HeadURL $Revision $Date $Author
+ * 
  *
+ * @version $Id$
  */
 public interface OAuthServerConfiguration {
 
-	/**
-	 * @return access storage
-	 */
-	AccessStorage getAccessStorage();
+    /**
+     * @return access storage
+     */
+    AccessStorage getAccessStorage();
 
-	/**
-	 * @return consumer storage
-	 */
-	ConsumerStorage getConsumerStorage();
+    /**
+     * @return consumer storage
+     */
+    ConsumerStorage getConsumerStorage();
 
-	/**
-	 * @return token storage
-	 */
-	TokenStorage getTokenStorage();
+    /**
+     * @return token storage
+     */
+    TokenStorage getTokenStorage();
 
 }

@@ -20,8 +20,9 @@ import org.apache.amber.OAuthException;
 import org.apache.amber.OAuthRequest;
 
 /**
- * @version $Id $HeadURL $Revision $Date $Author
+ * 
  *
+ * @version $Id$
  */
 public interface OAuthzServer {
 
@@ -34,5 +35,5 @@ public interface OAuthzServer {
      * @throws OAuthException
      */
     boolean isAuthorized(OAuthRequest request) throws OAuthException;
-    
+
 }

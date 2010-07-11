@@ -21,8 +21,9 @@ import org.apache.amber.OAuthRequest;
 import org.apache.amber.OAuthToken;
 
 /**
- * @version $Id $HeadURL $Revision $Date $Author
+ * 
  *
+ * @version $Id$
  */
 public interface OAuthnServer {
 
