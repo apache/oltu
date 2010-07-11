@@ -44,6 +44,11 @@
             <version>1.4</version>
             <scope>compile</scope>
         </dependency>
+
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+        </dependency>
     </dependencies>
 
     <reporting>
