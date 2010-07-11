@@ -17,6 +17,7 @@
 package org.apache.amber.signature.rsa;
 
 import org.apache.amber.signature.AbstractMethodTestCase;
+import org.junit.Test;
 
 /**
  * 
@@ -24,6 +25,12 @@ import org.apache.amber.signature.AbstractMethodTestCase;
  * @version $Id$
  */
 public final class RsaSha1MethodTestCase extends AbstractMethodTestCase {
+
+    // TODO delete me once next test will be re-enabled
+    @Test
+    public void doNothing() {
+        // do nothing
+    }
 
     // TODO test disabled, expected signature has to be calculated
     public void verifyRsaSha1MethodAlgorithm() throws Exception {
