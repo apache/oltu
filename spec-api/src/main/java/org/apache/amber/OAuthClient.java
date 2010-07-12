@@ -18,6 +18,8 @@ package org.apache.amber;
 
 import java.io.Serializable;
 
+import org.apache.amber.client.NonceGenerator;
+
 /**
  * <p>
  * An OAuth Service is an abstract representation of the standard remote API
@@ -25,16 +27,16 @@ import java.io.Serializable;
  * for performing {@link org.apache.amber.OAuth} authentication and authorisation
  * tasks.
  * </p>
- * 
+ *
  * <h3>Using an OAuthClient</h3>
- * 
+ *
  * <p>
  * By far the easiest way to use an OAuthClient is by configuring an
  * {@link org.apache.amber.OAuthProvider} in an XML file (called
  * &quot;oauth-providers.xml&quot;) and placing it in the META-INF directory on
  * the applications classpath.
  * </p>
- * 
+ *
  * <pre>
  * &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
  *  &lt;providers&gt;
@@ -52,37 +54,37 @@ import java.io.Serializable;
  *      &lt;/provider&gt;
  *  &lt;/providers&gt;
  * </pre>
- * 
+ *
  * <p>
  * The OAuthClient is called by using it's realm name as a reference. The
  * example below assumes the API is used in a Servlet environment, and simply
  * redirects the user to the {@link org.apache.amber.OAuthProvider} to authorize the
  * token.
  * </p>
- * 
+ *
  * <p>
  * The {@link org.apache.amber.OAuthProvider} uses the default
  * {@link org.apache.amber.OAuthConsumer} configured in the XML file.
  * </p>
- * 
+ *
  * <pre>
  * HttpSession session = request.getSession();
- * 
+ *
  * OAuthClient service = OAuth.useService(&quot;http://example.com&quot;);
  * OAuthToken requestToken = service.getRequestToken(); // This method also takes an OAuthToken implementation class 
- * 
+ *
  * session.setAttribute(&quot;requestToken&quot;, requestToken);
- * 
+ *
  * String authorizePath = service.getAuthorizeURL(requestToken);
  * response.sendRedirect(authorizePath);
  * </pre>
- * 
+ *
  * <p>
  * If you supply your own implementation of the {@link org.apache.amber.OAuthToken}
  * interface when you call the requestToken method, you could store the
  * OAuthToken in a database.
  * </p>
- * 
+ *
  * <p>
  * The token is stored in the user session, as we can re-use it when the
  * response comes back. We initialise the service and retrieve the token from
@@ -90,51 +92,50 @@ import java.io.Serializable;
  * {@link org.apache.amber.OAuthProvider}, who converts the authorised Request Token
  * into an Access Token.
  * </p>
- * 
+ *
  * <p>
  * After checking that the token is authorised, we remove the old request token
  * from the session and add the access token, so it can be used to sign future
  * requests for services at the {@link org.apache.amber.OAuthProvider}.
  * </p>
- * 
+ *
  * <pre>
  * HttpSession session = req.getSession();
- * 
+ *
  * OAuthClient service = OAuth.useService(&quot;http://oauth.apache.site/&quot;);
  * OAuthToken requestToken = OAuthToken.class.cast(session
  *         .getAttribute(&quot;requestToken&quot;));
- * 
+ *
  * String oauth_token = req.getParameter(&quot;oauth_token&quot;); // you could check this matches the one in the session
  * String oauth_verifier = req.getParameter(&quot;oauth_verifier&quot;); // supplied with the response
  * OAuthToken accessToken = service.getAccessToken(requestToken, oauth_verifier);
- * 
+ *
  * if (accessToken.isAuthorized()) {
  *     session.removeAttribute(&quot;requestToken&quot;);
  *     session.setAttribute(&quot;accessToken&quot;, accessToken);
  * }
  * </pre>
- * 
+ *
  * <p>
  * The OAuthClient could be initialised in an HttpServlet.init() method and
  * stored in an instance field. Implementations must be thread-safe.
  * </p>
- * 
- * @version $Revision$ $Date$
- * 
+ *
+ * @version $Id$
  */
 public interface OAuthClient extends Serializable {
 
     /**
-     * Get a request token using the default consumer and token
-     * 
+     * Get a request token using the default consumer and token.
+     *
      * @return token
      * @throws OAuthException
      */
     OAuthToken getRequestToken() throws OAuthException;
 
     /**
-     * Get a request token using the specified consumer
-     * 
+     * Get a request token using the specified consumer.
+     *
      * @param consumer
      * @return token
      * @throws OAuthException
@@ -143,8 +144,8 @@ public interface OAuthClient extends Serializable {
 
     /**
      * Get a request token, instantiated from the provided class, using the
-     * default consumer
-     * 
+     * default consumer.
+     *
      * @param tokenClass
      * @return token
      * @throws OAuthException
@@ -153,8 +154,8 @@ public interface OAuthClient extends Serializable {
 
     /**
      * Get a request token, instantiated from the provided class, using the
-     * specified consumer
-     * 
+     * specified consumer.
+     *
      * @param tokenClass
      * @param consumer
      * @return token
@@ -164,8 +165,8 @@ public interface OAuthClient extends Serializable {
 
     /**
      * Get the authentication URL for the configured provider, using the
-     * specified token
-     * 
+     * specified token.
+     *
      * @param token
      *            The token to be authenticated
      * @return path The path to which the user should be directed for
@@ -175,8 +176,8 @@ public interface OAuthClient extends Serializable {
 
     /**
      * Get the authentication URL for the configured provider, using the
-     * specified token and callback
-     * 
+     * specified token and callback.
+     *
      * @param token
      * @param callback
      *            The URL to which the user should be redirected after
@@ -188,8 +189,8 @@ public interface OAuthClient extends Serializable {
 
     /**
      * Get the authorisation URL for the configured provider, using the
-     * specified token
-     * 
+     * specified token.
+     *
      * @param token
      *            The token to be authorised
      * @return path The path to which the user should be directed for
@@ -199,8 +200,8 @@ public interface OAuthClient extends Serializable {
 
     /**
      * Get the authorisation URL for the configured provider, using the
-     * specified token
-     * 
+     * specified token.
+     *
      * @param token
      * @param callback
      *            The URL to which the user should be redirected after
@@ -212,8 +213,8 @@ public interface OAuthClient extends Serializable {
 
     /**
      * Convert the authorised token to an access token, using the supplied
-     * verification code
-     * 
+     * verification code.
+     *
      * @param token
      * @param verifier
      * @return authorised token
@@ -223,8 +224,8 @@ public interface OAuthClient extends Serializable {
 
     /**
      * Convert the authorised token to an access token, using the supplied
-     * consumer and verification code
-     * 
+     * consumer and verification code.
+     *
      * @param consumer
      * @param token
      * @param verifier
@@ -234,17 +235,31 @@ public interface OAuthClient extends Serializable {
     OAuthToken getAccessToken(OAuthConsumer consumer, OAuthToken token, String verifier) throws OAuthException;
 
     /**
-     * Get the current connector
-     * 
+     * Get the current connector.
+     *
      * @return connector
      */
     HttpConnector getConnector();
 
     /**
-     * Set the connector to be used
-     * 
+     * Set the connector to be used.
+     *
      * @param httpConnector
      */
     void setConnector(HttpConnector httpConnector);
+
+    /**
+     * Returns the current  nonce generator to be used.
+     *
+     * @return the current nonce generator to be used.
+     */
+    NonceGenerator getNonceGenerator();
+
+    /**
+     * Sets the nonce generator to be used.
+     *
+     * @param nonceGenerator the nonce generator to be used.
+     */
+    void setNonceGenerator(NonceGenerator nonceGenerator);
 
 }
