@@ -24,6 +24,7 @@ import java.util.TreeSet;
 import org.apache.amber.HTTPMethod;
 import org.apache.amber.OAuthMessageParameter;
 import org.apache.amber.OAuthParameter;
+import org.apache.amber.OAuthParameterLocation;
 import org.apache.amber.OAuthRequest;
 import org.apache.amber.OAuthRequestParameter;
 
@@ -36,6 +37,8 @@ final class FakeOAuthRequest implements OAuthRequest {
     private HTTPMethod httpMethod;
 
     private URI requestURL;
+
+    private OAuthParameterLocation parameterLocation;
 
     private final SortedSet<OAuthMessageParameter> messageParameters = new TreeSet<OAuthMessageParameter>();
 
@@ -55,6 +58,14 @@ final class FakeOAuthRequest implements OAuthRequest {
 
     public void setHTTPMethod(HTTPMethod httpMethod) {
         this.httpMethod = httpMethod;
+    }
+
+    public OAuthParameterLocation getParameterLocation() {
+        return this.parameterLocation;
+    }
+
+    public void setParameterLocation(OAuthParameterLocation parameterLocation) {
+        this.parameterLocation = parameterLocation;
     }
 
     public Collection<OAuthMessageParameter> getOAuthMessageParameters() {

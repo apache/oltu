@@ -35,6 +35,10 @@ public interface OAuthRequest {
 
     void setHTTPMethod(HTTPMethod httpMethod);
 
+    OAuthParameterLocation getParameterLocation();
+
+    void setParameterLocation(OAuthParameterLocation parameterLocation);
+
     /**
      * @param parameter
      */
