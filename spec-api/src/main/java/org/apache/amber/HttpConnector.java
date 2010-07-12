@@ -19,26 +19,21 @@ package org.apache.amber;
 import java.io.IOException;
 
 /**
- * <p>
  * The HttpConnector does the work converting executing an
  * {@link org.apache.amber.OAuthRequest} and returning an
  * {@link org.apache.amber.OAuthResponse}. This is configurable to allow some choice
- * with regard to libaries, code etc.
- * </p>
- * 
- * <p>
+ * with regard to libraries, code etc.
+ *
  * An implementation MUST provide a default connector.
- * </p>
- * 
- * @version $Revision$ $Date$
- * 
+ *
+ * @version $Id$
  */
 public interface HttpConnector {
 
     /**
      * The execute method does the work of processing a request and returning a
      * response from the Provider.
-     * 
+     *
      * @param request
      * @param authorization
      * @return response
