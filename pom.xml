@@ -454,24 +454,6 @@
                 </configuration>
             </plugin>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-pdf-plugin</artifactId>
-                <version>1.1</version>
-                <executions>
-                    <execution>
-                        <id>pdf</id>
-                        <phase>site</phase>
-                        <goals>
-                            <goal>pdf</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <includeReports>false</includeReports>
-                    <indentSize>1</indentSize>
-                </configuration>
-            </plugin>
         </plugins>
 
         <resources>

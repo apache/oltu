@@ -17,6 +17,11 @@
 -->
 <project name="${project.name}">
 
+  <bannerLeft>
+    <name>Apache Amber OAuth reference implementation</name>
+    <src>images/amber_head.png</src>
+    <href>${project.url}/index.html</href>
+  </bannerLeft>
     <version position="left"/>
 
     <body>
@@ -24,7 +29,6 @@
 
         <menu name="Miscellaneous">
             <item name="Project stats" href="stats.html"/>
-            <item name="PDF Manual" href="${project.name}-${project.version}.pdf"/>
         </menu>
 
         <menu ref="reports"/>
@@ -32,7 +36,7 @@
         <menu ref="modules"/>
 
         <menu name="External Links">
-            <item name="Apache Labs" href="http://labs.apache.org/"/>
+            <item name="Apache Incubator" href="http://incubator.apache.org/"/>
         </menu>
     </body>
 
