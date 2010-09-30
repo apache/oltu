@@ -40,12 +40,9 @@ import java.util.ServiceLoader;
 import static javax.xml.XMLConstants.W3C_XML_SCHEMA_NS_URI;
 
 /**
- * <p>
  * The OAuth object provides access to the {@link org.apache.amber.OAuthFactory}.
- * </p>
- * 
- * @version $Revision$ $Date$
- * 
+ *
+ * @version $Id$
  */
 public final class OAuth {
 
