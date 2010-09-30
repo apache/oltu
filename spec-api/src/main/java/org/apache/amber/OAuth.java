@@ -28,6 +28,8 @@ import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
+
+import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -110,16 +112,20 @@ public final class OAuth {
         // TODO avoid classloader memory leaks?
         ClassLoader loader = Thread.currentThread().getContextClassLoader();
 
+        InputStream inputStream = null;
         try {
             Enumeration<URL> resources = loader.getResources(PROPERTIES_XML);
             while (resources.hasMoreElements()) {
                 // TODO specify classloader search order manually?
                 // Load the first resource
                 URL resource = resources.nextElement();
-                properties.loadFromXML(resource.openStream());
+                inputStream = resource.openStream();
+                properties.loadFromXML(inputStream);
             }
         } catch (IOException e) {
             throw new OAuthRuntimeException(e);
+        } finally {
+            closeQuietly(inputStream);
         }
 
         return createFactory(version, properties);
@@ -213,13 +219,7 @@ public final class OAuth {
                             // TODO warn of error here, in log?
                             e.printStackTrace();
                         } finally {
-                            if (inputStream != null) {
-                                try {
-                                    inputStream.close();
-                                } catch (IOException e) {
-                                    // close quietly
-                                }
-                            }
+                            closeQuietly(inputStream);
                         }
                     }
                 } catch (IOException e) {
@@ -241,6 +241,16 @@ public final class OAuth {
         factories = null;
 
         throw new OAuthRuntimeException(OAuthFactory.class.getName() + " implementation not found.");
+    }
+
+    private static void closeQuietly(Closeable closeable) {
+        if (closeable != null) {
+            try {
+                closeable.close();
+            } catch (Exception e) {
+                // close quietly
+            }
+        }
     }
 
 }
