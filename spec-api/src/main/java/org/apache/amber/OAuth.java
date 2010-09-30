@@ -118,8 +118,7 @@ public final class OAuth {
                 URL resource = resources.nextElement();
                 properties.loadFromXML(resource.openStream());
             }
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new OAuthRuntimeException(e);
         }
 
@@ -140,12 +139,7 @@ public final class OAuth {
         // TODO Can we avoid classloader leaks and related trauma, by:
         // ClassLoader loader = OAuth.class.getClassLoader();
 
-        ClassLoader loader = Thread.currentThread().getContextClassLoader();
-        ServiceLoader<OAuthFactory> factories = ServiceLoader.load(OAuthFactory.class, loader);
-
-        // Is this surplus, or might it help if we're in a modifiable
-        // environment?
-        factories.reload();
+        ServiceLoader<OAuthFactory> factories = ServiceLoader.load(OAuthFactory.class);
 
         for (OAuthFactory factory : factories) {
 
@@ -159,7 +153,7 @@ public final class OAuth {
             // Load any installed OAuthProvider classes using the ServiceLoader
             // mechanism
             try {
-                ServiceLoader<OAuthProvider> providers = ServiceLoader.load(OAuthProvider.class, loader);
+                ServiceLoader<OAuthProvider> providers = ServiceLoader.load(OAuthProvider.class);
 
                 // Is this surplus, or might it help if we're in a modifiable
                 // environment?
@@ -203,6 +197,7 @@ public final class OAuth {
                     unMarshaller.setSchema(schema);
 
                     // find multiple instances of the XML configuration file
+                    ClassLoader loader = Thread.currentThread().getContextClassLoader();
                     Enumeration<URL> providerXMLs = loader.getResources(PROVIDER_XML);
 
                     while (providerXMLs.hasMoreElements()) {
@@ -218,23 +213,24 @@ public final class OAuth {
                             for (OAuthProvider provider : element.getValue().getProvider()) {
                                 factory.register(provider);
                             }
-                        }
-                        catch (JAXBException e) {
+                        } catch (JAXBException e) {
                             // TODO warn of error here, in log?
                             e.printStackTrace();
-                        }
-                        finally {
-                            inputStream.close();
+                        } finally {
+                            if (inputStream != null) {
+                                try {
+                                    inputStream.close();
+                                } catch (IOException e) {
+                                    // close quietly
+                                }
+                            }
                         }
                     }
-                }
-                catch (IOException e) {
+                } catch (IOException e) {
                     throw new OAuthRuntimeException(e);
-                }
-                catch (SAXException e) {
+                } catch (SAXException e) {
                     throw new OAuthRuntimeException(e);
-                }
-                catch (JAXBException e) {
+                } catch (JAXBException e) {
                     throw new OAuthRuntimeException(e);
                 }
             }
