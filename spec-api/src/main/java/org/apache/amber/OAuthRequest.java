@@ -21,7 +21,7 @@ import java.util.Collection;
 
 /**
  * A convenient object representing the properties of an OAuth request to a
- * {@link org.apache.amber.OAuthProvider}.
+ * {@link org.apache.amber.server.OAuthProvider}.
  *
  * @version $Id$
  */

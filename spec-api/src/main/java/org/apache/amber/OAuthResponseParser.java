@@ -18,9 +18,9 @@ package org.apache.amber;
 
 /**
  * <p>
- * It's possible that a {@link org.apache.amber.OAuthProvider} will return OAuth
+ * It's possible that a {@link org.apache.amber.server.OAuthProvider} will return OAuth
  * information in a custom response format. The response parser interface allows
- * a {@link org.apache.amber.OAuthProvider} to specific a concrete implementation.
+ * a {@link org.apache.amber.server.OAuthProvider} to specific a concrete implementation.
  * </p>
  * 
  * <p>

@@ -14,16 +14,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.amber;
+package org.apache.amber.client;
+
+import org.apache.amber.OAuthException;
+import org.apache.amber.OAuthToken;
 
 import java.io.Serializable;
-
-import org.apache.amber.client.NonceGenerator;
 
 /**
  * <p>
  * An OAuth Service is an abstract representation of the standard remote API
- * offered by an {@link org.apache.amber.OAuthProvider}, providing a simple mechanism
+ * offered by an {@link org.apache.amber.server.OAuthProvider}, providing a simple mechanism
  * for performing {@link org.apache.amber.OAuth} authentication and authorisation
  * tasks.
  * </p>
@@ -32,7 +33,7 @@ import org.apache.amber.client.NonceGenerator;
  *
  * <p>
  * By far the easiest way to use an OAuthClient is by configuring an
- * {@link org.apache.amber.OAuthProvider} in an XML file (called
+ * {@link org.apache.amber.server.OAuthProvider} in an XML file (called
  * &quot;oauth-providers.xml&quot;) and placing it in the META-INF directory on
  * the applications classpath.
  * </p>
@@ -58,13 +59,13 @@ import org.apache.amber.client.NonceGenerator;
  * <p>
  * The OAuthClient is called by using it's realm name as a reference. The
  * example below assumes the API is used in a Servlet environment, and simply
- * redirects the user to the {@link org.apache.amber.OAuthProvider} to authorize the
+ * redirects the user to the {@link org.apache.amber.server.OAuthProvider} to authorize the
  * token.
  * </p>
  *
  * <p>
- * The {@link org.apache.amber.OAuthProvider} uses the default
- * {@link org.apache.amber.OAuthConsumer} configured in the XML file.
+ * The {@link org.apache.amber.server.OAuthProvider} uses the default
+ * {@link OAuthConsumer} configured in the XML file.
  * </p>
  *
  * <pre>
@@ -89,14 +90,14 @@ import org.apache.amber.client.NonceGenerator;
  * The token is stored in the user session, as we can re-use it when the
  * response comes back. We initialise the service and retrieve the token from
  * the session, before resubmitting the token and the verifier to the
- * {@link org.apache.amber.OAuthProvider}, who converts the authorised Request Token
+ * {@link org.apache.amber.server.OAuthProvider}, who converts the authorised Request Token
  * into an Access Token.
  * </p>
  *
  * <p>
  * After checking that the token is authorised, we remove the old request token
  * from the session and add the access token, so it can be used to sign future
- * requests for services at the {@link org.apache.amber.OAuthProvider}.
+ * requests for services at the {@link org.apache.amber.server.OAuthProvider}.
  * </p>
  *
  * <pre>
@@ -129,7 +130,7 @@ public interface OAuthClient extends Serializable {
      * Get a request token using the default consumer and token.
      *
      * @return token
-     * @throws OAuthException
+     * @throws org.apache.amber.OAuthException
      */
     OAuthToken getRequestToken() throws OAuthException;
 

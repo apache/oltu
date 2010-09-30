@@ -16,10 +16,13 @@
  */
 package org.apache.amber;
 
+import org.apache.amber.client.OAuthClient;
+import org.apache.amber.server.OAuthProvider;
+import org.apache.amber.server.OAuthProviders;
+import org.apache.amber.server.OAuthServer;
+
 import java.io.Serializable;
 import java.util.Properties;
-
-import org.apache.amber.server.OAuthServer;
 
 /**
  * TODO Write extensive documentation

@@ -18,10 +18,10 @@ package org.apache.amber;
 
 /**
  * An object representing the response returned from an
- * {@link org.apache.amber.OAuthClient} or {@link org.apache.amber.server.OAuthServer}.
+ * {@link org.apache.amber.client.OAuthClient} or {@link org.apache.amber.server.OAuthServer}.
  *
  * @version $Id$
- * @see org.apache.amber.OAuthClient
+ * @see org.apache.amber.client.OAuthClient
  */
 public interface OAuthResponse {
 

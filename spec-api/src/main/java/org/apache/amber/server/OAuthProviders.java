@@ -14,32 +14,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.amber;
+package org.apache.amber.server;
 
-import java.io.IOException;
+import java.util.List;
 
 /**
- * The HttpConnector does the work converting executing an
- * {@link org.apache.amber.OAuthRequest} and returning an
- * {@link org.apache.amber.OAuthResponse}. This is configurable to allow some choice
- * with regard to libraries, code etc.
- *
- * An implementation MUST provide a default connector.
- *
- * @version $Id$
+ * <p>
+ * A convenience object which contains multiple possible OAuth Service
+ * Providers, in order of preference.
+ * </p>
+ * 
+ * <p>
+ * The first Provider will be considered to be the default one, where
+ * applicable.
+ * </p>
+ * 
+ * @version $Revision$ $Date$
+ * 
  */
-public interface HttpConnector {
+public interface OAuthProviders {
 
     /**
-     * The execute method does the work of processing a request and returning a
-     * response from the Provider.
-     *
-     * @param request
-     * @param authorization
-     * @return response
-     * @throws IOException
-     *             if something untoward happened, propagate the exception
+     * @return the provider
      */
-    OAuthResponse execute(OAuthRequest request, String authorization) throws IOException;
+    List<OAuthProvider> getProvider();
+
+    /**
+     * @param provider
+     *            the provider to set
+     */
+    void setProvider(List<OAuthProvider> provider);
 
 }

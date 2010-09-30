@@ -23,7 +23,7 @@ import java.util.Set;
 /**
  * <p>
  * An OAuthToken is the wrapper for the pair of key values returned by the
- * {@link org.apache.amber.OAuthClient} during the authentication or authorisation
+ * {@link org.apache.amber.client.OAuthClient} during the authentication or authorisation
  * process.
  * </p>
  *

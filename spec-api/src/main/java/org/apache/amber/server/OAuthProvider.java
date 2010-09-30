@@ -14,7 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.amber;
+package org.apache.amber.server;
+
+import org.apache.amber.OAuthParameterLocation;
+import org.apache.amber.OAuthResponseParser;
+import org.apache.amber.client.OAuthConsumer;
 
 import java.io.Serializable;
 import java.util.List;

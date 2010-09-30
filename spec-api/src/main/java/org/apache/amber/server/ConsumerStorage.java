@@ -16,7 +16,7 @@
  */
 package org.apache.amber.server;
 
-import org.apache.amber.OAuthConsumer;
+import org.apache.amber.client.OAuthConsumer;
 
 /**
  * OAuthConsumer consumer storage interface.

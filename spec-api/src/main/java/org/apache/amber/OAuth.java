@@ -16,14 +16,9 @@
  */
 package org.apache.amber;
 
-import static javax.xml.XMLConstants.W3C_XML_SCHEMA_NS_URI;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.util.Enumeration;
-import java.util.Properties;
-import java.util.ServiceLoader;
+import org.apache.amber.server.OAuthProvider;
+import org.apache.amber.server.OAuthProviders;
+import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -33,8 +28,14 @@ import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.util.Enumeration;
+import java.util.Properties;
+import java.util.ServiceLoader;
 
-import org.xml.sax.SAXException;
+import static javax.xml.XMLConstants.W3C_XML_SCHEMA_NS_URI;
 
 /**
  * <p>
