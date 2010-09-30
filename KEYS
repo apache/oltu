@@ -1,3 +1,25 @@
+This file contains the PGP and GPG keys of Apache Amber
+developers. Please don't use them for email unless you have
+to. Their main purpose is code signing.
+
+Users: pgp < KEYS
+       gpg --import KEYS
+
+Amber Developers:
+        pgp -kxa <your name> and append it to this file.
+        (pgpk -ll <your name> && pgpk -xa <your name>) >> this file.
+        (gpg --list-sigs <your name> \
+             && gpg --armor --export <your name>) >> this file.
+
+************************************ PLEASE NOTE **********************************************************
+
+        Edit this file in SVN at
+        https://svn.apache.org/repos/asf/incubator/amber/trunk/KEYS
+
+        N.B. use a command such as the following to check it out without downloading every Amber module:
+        svn co --depth=files https://svn.apache.org/repos/asf/incubator/amber/trunk/
+
+************************************************************************************************************
 pub   4096R/62590808 2010-04-14
       Key fingerprint = 0D7E 15FB 2B3A D181 21B9  74C8 0B66 2050 6259 0808
 uid                  Pid * (Stuart Williams) <pid@pidster.com>
@@ -228,7 +250,9 @@ UQnxiQionc1HZl0Yc+hKIqAvpPlgb8aDV3aJdCb6dFPeBGLz6ygX
 
 pub   1024D/19FEA27D 2010-03-24
 uid                  Simone Tripodi (simonetripodi) <simonetripodi@apache.org>
+sig 3        19FEA27D 2010-03-24  Simone Tripodi (simonetripodi) <simonetripodi@apache.org>
 sub   4096g/C002CC79 2010-03-24
+sig          19FEA27D 2010-03-24  Simone Tripodi (simonetripodi) <simonetripodi@apache.org>
 
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 Version: GnuPG v1.4.9 (Darwin)
@@ -271,3 +295,4 @@ AhsMAAoJEMr17FkZ/qJ9vzwAn0vGmShhBzWDSkLjTQ+qW8VXLee2AKCCqsqCN9eL
 dcC0KEtNPufKywDTzA==
 =vtxx
 -----END PGP PUBLIC KEY BLOCK-----
+
