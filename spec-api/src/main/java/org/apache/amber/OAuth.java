@@ -155,10 +155,6 @@ public final class OAuth {
             try {
                 ServiceLoader<OAuthProvider> providers = ServiceLoader.load(OAuthProvider.class);
 
-                // Is this surplus, or might it help if we're in a modifiable
-                // environment?
-                providers.reload();
-
                 for (OAuthProvider provider : providers) {
                     factory.register(provider);
                 }
