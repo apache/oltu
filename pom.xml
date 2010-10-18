@@ -32,18 +32,6 @@
     <name>Apache Amber</name>
     <url>https://cwiki.apache.org/confluence/display/AMBER</url>
 
-    <organization>
-        <name>Apache Software Foundation</name>
-        <url>http://www.apache.org/</url>
-    </organization>
-
-    <licenses>
-        <license>
-            <name>Apache License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-        </license>
-    </licenses>
-
     <scm>
         <developerConnection>scm:svn:https://svn.apache.org/repos/asf/incubator/amber/trunk/</developerConnection>
         <connection>scm:svn:https://svn.apache.org/repos/asf/incubator/amber/trunk/</connection>
@@ -217,7 +205,6 @@
     </developers>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
