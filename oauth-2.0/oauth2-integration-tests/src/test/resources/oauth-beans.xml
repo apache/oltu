@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+          Copyright 2010 Newcastle University
+
+             http://research.ncl.ac.uk/smart/
+
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
+
+    <!--<import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>-->
+    <import resource="classpath:META-INF/cxf/cxf-extension-http-jetty.xml"/>
+    <import resource="classpath:META-INF/cxf/cxf.xml"/>
+    <import resource="classpath:META-INF/cxf/cxf-extension-jaxrs-binding.xml"/>
+    <import resource="classpath:META-INF/cxf/cxf-extension-http.xml"/>
+    <!--<import resource="classpath:META-INF/cxf/cxf-extension-xml.xml"/>-->
+
+    <!--OAuth Authorization Server Extended - Client Registration -->
+    <jaxrs:server id="oauthServerExt" address="http://localhost:9000/auth/oauth2ext/">
+        <jaxrs:serviceBeans>
+            <ref bean="registrationEndpoint"/>
+        </jaxrs:serviceBeans>
+    </jaxrs:server>
+
+    <bean id="registrationEndpoint"
+          class="org.apache.amber.oauth2.integration.endpoints.RegistrationEndpoint"/>
+
+    <!--OAuth Authorization Server -->
+    <jaxrs:server id="oauthServer" address="http://localhost:9001/auth/oauth2/">
+        <jaxrs:serviceBeans>
+            <ref bean="authzEndpoint"/>
+            <ref bean="tokenEndpoint"/>
+        </jaxrs:serviceBeans>
+    </jaxrs:server>
+
+    <bean id="authzEndpoint"
+          class="org.apache.amber.oauth2.integration.endpoints.AuthzEndpoint"/>
+    <bean id="tokenEndpoint" class="org.apache.amber.oauth2.integration.endpoints.TokenEndpoint"/>
+
+    <!--OAuth Client -->
+    <jaxrs:server id="oauthClient" address="http://localhost:9002/auth/oauth2/">
+        <jaxrs:serviceBeans>
+            <ref bean="clientRedirect"/>
+        </jaxrs:serviceBeans>
+    </jaxrs:server>
+
+    <bean id="clientRedirect" class="org.apache.amber.oauth2.integration.EndUserAuthorizationTest"/>
+
+    <!-- Resource Server -->
+    <jaxrs:server id="resourceServer" address="http://localhost:9003/resource_server/">
+        <jaxrs:serviceBeans>
+            <ref bean="resourceHeaderEndpoint"/>
+            <ref bean="resourceBodyEndpoint"/>
+            <ref bean="resourceQueryEndpoint"/>
+        </jaxrs:serviceBeans>
+    </jaxrs:server>
+
+    <bean id="resourceHeaderEndpoint"
+          class="org.apache.amber.oauth2.integration.endpoints.ResourceHeaderEndpoint"/>
+    <bean id="resourceBodyEndpoint"
+          class="org.apache.amber.oauth2.integration.endpoints.ResourceBodyEndpoint"/>
+    <bean id="resourceQueryEndpoint"
+          class="org.apache.amber.oauth2.integration.endpoints.ResourceQueryEndpoint"/>
+
+</beans>
