@@ -38,6 +38,11 @@
         <module>oauth2-client-demo</module>
         <module>oauth2-dynamicreg-client</module>
         <module>oauth2-dynamicreg-common</module>
+        <module>oauth2-authzserver</module>
+        <module>oauth2-resourceserver</module>
+        <module>oauth2-rs-filter</module>
+        <module>oauth2-dynamicreg-server</module>
+        <module>oauth2-integration-tests</module>
     </modules>
 
     <properties>
@@ -51,8 +56,6 @@
         <jettison.version>1.2</jettison.version>
         <jetty.version>7.1.5.v20100705</jetty.version>
         <pmd.version>2.5</pmd.version>
-        <sonatypeOssDistMgmtSnapshotsUrl>https://oss.sonatype.org/content/repositories/snapshots/
-        </sonatypeOssDistMgmtSnapshotsUrl>
     </properties>
 
     <dependencies>
