@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
+
+          Copyright 2010 Newcastle University
+
+             http://research.ncl.ac.uk/smart/
+
     Licensed to the Apache Software Foundation (ASF) under one or more
     contributor license agreements.  See the NOTICE file distributed with
     this work for additional information regarding copyright ownership.
@@ -14,35 +19,224 @@
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
+
 -->
+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-
-    <parent>
-        <groupId>org.apache.amber</groupId>
-        <artifactId>amber-parent</artifactId>
-        <version>1.0-SNAPSHOT</version>
-    </parent>
-
-    <modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <name>Apache Amber: OAuth 2.0 Implementation - Parent</name>
     <groupId>org.apache.amber</groupId>
-    <artifactId>amber-oauth-2.0</artifactId>
-    <packaging>jar</packaging>
-    <name>Apache Amber: OAuth 2.0 Implementation</name>
+    <artifactId>amber-oauth2-parent</artifactId>
+    <version>0.2-SNAPSHOT</version>
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>oauth2-common</module>
+        <module>oauth2-client</module>
+        <module>oauth2-httpclient4</module>
+        <module>oauth2-client-demo</module>
+        <module>oauth2-dynamicreg-client</module>
+        <module>oauth2-dynamicreg-common</module>
+    </modules>
+
+    <properties>
+        <java.version>1.6</java.version>
+        <cxf.version>2.2.10</cxf.version>
+        <spring.version>3.0.2.RELEASE</spring.version>
+        <spring-mock.version>2.0.8</spring-mock.version>
+        <easy-mock.version>3.0</easy-mock.version>
+        <servlet-api.version>2.5</servlet-api.version>
+        <junit.version>4.8.1</junit.version>
+        <jettison.version>1.2</jettison.version>
+        <jetty.version>7.1.5.v20100705</jetty.version>
+        <pmd.version>2.5</pmd.version>
+        <sonatypeOssDistMgmtSnapshotsUrl>https://oss.sonatype.org/content/repositories/snapshots/
+        </sonatypeOssDistMgmtSnapshotsUrl>
+    </properties>
 
     <dependencies>
+
         <dependency>
-            <groupId>org.apache.amber</groupId>
-            <artifactId>amber-signature-api</artifactId>
-            <version>${project.version}</version>
-            <scope>compile</scope>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.6.1</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.amber</groupId>
-            <artifactId>amber-spec-api</artifactId>
-            <version>${project.version}</version>
-            <scope>compile</scope>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.6.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-mock</artifactId>
+            <version>${spring-mock.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.easymock</groupId>
+            <artifactId>easymock</artifactId>
+            <version>${easy-mock.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>${servlet-api.version}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
+    <profiles>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-assembly-plugin</artifactId>
+                        <version>2.2-beta-5</version>
+                        <executions>
+                            <execution>
+                                <id>make-assembly</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>single</goal>
+                                </goals>
+                                <configuration>
+                                    <runOnlyAtExecutionRoot>false</runOnlyAtExecutionRoot>
+                                    <descriptors>
+                                        <descriptor>assembly.xml</descriptor>
+                                    </descriptors>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+    <build>
+        <finalName>oauth-parent</finalName>
+        <defaultGoal>install</defaultGoal>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>cobertura-maven-plugin</artifactId>
+                    <version>2.4</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>2.0</version>
+                    <configuration>
+                        <mavenExecutorId>forked-path</mavenExecutorId>
+                        <useReleaseProfile>false</useReleaseProfile>
+                        <autoVersionSubmodules>true</autoVersionSubmodules>
+                        <arguments>-Psonatype-oss-release</arguments>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.mycila.maven-license-plugin</groupId>
+                <artifactId>maven-license-plugin</artifactId>
+                <version>1.8.0</version>
+                <configuration>
+                    <strictCheck>true</strictCheck>
+                    <basedir>${project.basedir}</basedir>
+                    <header>license.txt</header>
+                    <quiet>false</quiet>
+                    <failIfMissing>true</failIfMissing>
+                    <aggregate>true</aggregate>
+                    <excludes>
+                        <exclude>target/**</exclude>
+                        <exclude>**/target/**</exclude>
+                        <exclude>**/.hg/**</exclude>
+                        <exclude>.clover/**</exclude>
+                        <exclude>**/*.class</exclude>
+                        <exclude>**/*.iml</exclude>
+                        <exclude>**/*.ipr</exclude>
+                        <exclude>**/*.iws</exclude>
+                    </excludes>
+                    <useDefaultExcludes>false</useDefaultExcludes>
+                    <mapping>
+                        <jwc>XML_STYLE</jwc>
+                        <xml>XML_STYLE</xml>
+                        <application>XML_STYLE</application>
+                        <myFileExtension>JAVADOC_STYLE</myFileExtension>
+                    </mapping>
+                    <useDefaultMapping>true</useDefaultMapping>
+                    <properties>
+                        <year>2010</year>
+                        <www>http://research.ncl.ac.uk/smart/</www>
+                    </properties>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>format</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>1.0-beta-1</version>
+                <executions>
+                    <execution>
+                        <id>enforce-java</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <rules>
+                        <requireJavaVersion>
+                            <!-- require JDK 1.6 to run the build -->
+                            <version>[1.6,)</version>
+                        </requireJavaVersion>
+                    </rules>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.1.2</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
