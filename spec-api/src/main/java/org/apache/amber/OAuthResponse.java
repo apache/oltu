@@ -16,6 +16,8 @@
  */
 package org.apache.amber;
 
+import java.util.Map;
+
 /**
  * An object representing the response returned from an
  * {@link org.apache.amber.client.OAuthClient} or {@link org.apache.amber.server.OAuthServer}.
@@ -25,6 +27,14 @@ package org.apache.amber;
  */
 public interface OAuthResponse {
 
-    //
+  public String getLocationUri();
+
+  public String getBody();
+
+  public String getHeader(String name);
+
+  public Map<String, String> getHeaders();
+
+  public int getResponseStatus();
 
 }
