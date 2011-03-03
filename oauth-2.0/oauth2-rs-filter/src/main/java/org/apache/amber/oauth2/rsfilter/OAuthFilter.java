@@ -21,26 +21,21 @@
 
 package org.apache.amber.oauth2.rsfilter;
 
-import java.io.IOException;
-import java.security.Principal;
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.amber.oauth2.common.OAuth;
 import org.apache.amber.oauth2.common.error.OAuthError;
 import org.apache.amber.oauth2.common.exception.OAuthProblemException;
 import org.apache.amber.oauth2.common.exception.OAuthSystemException;
+import org.apache.amber.oauth2.common.message.OAuthResponse;
 import org.apache.amber.oauth2.common.message.types.ParameterStyle;
 import org.apache.amber.oauth2.rs.request.OAuthAccessResourceRequest;
 import org.apache.amber.oauth2.rs.response.OAuthRSResponse;
-import org.apache.amber.oauth2.common.message.OAuthResponse;
+
+import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.security.Principal;
 
 /**
  * @author Maciej Machulak (m.p.machulak@ncl.ac.uk)
@@ -83,8 +78,8 @@ public class OAuthFilter implements Filter {
         } else {
             String[] parameters = parameterStylesString.split(TOKEN_DELIMITER);
             if (parameters != null && parameters.length > 0) {
+                parameterStyles = new ParameterStyle[parameters.length];
                 for (int i = 0; i < parameters.length; i++) {
-                    parameterStyles = new ParameterStyle[parameters.length];
                     ParameterStyle tempParameterStyle = ParameterStyle.valueOf(parameters[i]);
                     if (tempParameterStyle != null) {
                         parameterStyles[i] = tempParameterStyle;
