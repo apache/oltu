@@ -109,10 +109,16 @@ public class OAuthFilter implements Filter {
 
             final OAuthDecision decision = provider.validateRequest(realm, accessToken, req);
 
+            final Principal principal = decision.getPrincipal();
+
             request = new HttpServletRequestWrapper((HttpServletRequest)request) {
                 @Override
+                public String getRemoteUser() {
+                    return principal != null ? principal.getName() : null;
+                }
+                @Override
                 public Principal getUserPrincipal() {
-                    return decision.getPrincipal();
+                    return principal;
                 }
 
             };
