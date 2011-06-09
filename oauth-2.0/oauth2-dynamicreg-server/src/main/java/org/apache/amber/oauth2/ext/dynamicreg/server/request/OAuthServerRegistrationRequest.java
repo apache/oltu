@@ -24,13 +24,11 @@ package org.apache.amber.oauth2.ext.dynamicreg.server.request;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.amber.oauth2.common.exception.OAuthSystemException;
-import org.apache.amber.oauth2.common.utils.OAuthUtils;
 import org.apache.amber.oauth2.common.validators.OAuthValidator;
 import org.apache.amber.oauth2.ext.dynamicreg.common.OAuthRegistration;
 import org.apache.amber.oauth2.as.request.OAuthRequest;
 import org.apache.amber.oauth2.common.exception.OAuthProblemException;
-import org.apache.amber.oauth2.ext.dynamicreg.server.validator.PullValidator;
-import org.apache.amber.oauth2.ext.dynamicreg.server.validator.PushValidator;
+import org.apache.amber.oauth2.ext.dynamicreg.server.validator.PushPullValidator;
 
 
 /**
@@ -44,12 +42,12 @@ public class OAuthServerRegistrationRequest extends OAuthRequest {
 
     private boolean isDiscovered;
 
-    public OAuthServerRegistrationRequest(HttpServletRequest request)
+    public OAuthServerRegistrationRequest(JSONHttpServletRequestWrapper request)
         throws OAuthSystemException, OAuthProblemException {
         this(request, false);
     }
 
-    public OAuthServerRegistrationRequest(HttpServletRequest request, boolean discover)
+    public OAuthServerRegistrationRequest(JSONHttpServletRequestWrapper request, boolean discover)
         throws OAuthSystemException, OAuthProblemException {
         super(request);
         if (discover) {
@@ -59,17 +57,7 @@ public class OAuthServerRegistrationRequest extends OAuthRequest {
 
     @Override
     protected OAuthValidator initValidator() throws OAuthProblemException, OAuthSystemException {
-        validators.put(OAuthRegistration.Type.PULL, PullValidator.class);
-        validators.put(OAuthRegistration.Type.PUSH, PushValidator.class);
-        type = getParam(OAuthRegistration.Request.TYPE);
-        if (OAuthUtils.isEmpty(type)) {
-            throw OAuthUtils.handleOAuthProblemException("Missing type parameter value");
-        }
-        Class clazz = validators.get(type);
-        if (clazz == null) {
-            throw OAuthUtils.handleOAuthProblemException("Invalid type parameter value");
-        }
-        return (OAuthValidator)OAuthUtils.instantiateClass(clazz);
+        return new PushPullValidator();
     }
 
     public void discover() throws OAuthSystemException {
@@ -83,24 +71,24 @@ public class OAuthServerRegistrationRequest extends OAuthRequest {
         return getParam(OAuthRegistration.Request.TYPE);
     }
 
-    public String getName() {
-        return getParam(OAuthRegistration.Request.NAME);
+    public String getClientName() {
+        return getParam(OAuthRegistration.Request.CLIENT_NAME);
     }
 
-    public String getUrl() {
-        return getParam(OAuthRegistration.Request.URL);
+    public String getClientUrl() {
+        return getParam(OAuthRegistration.Request.CLIENT_URL);
     }
 
-    public String getDescription() {
-        return getParam(OAuthRegistration.Request.DESCRIPTION);
+    public String getClientDescription() {
+        return getParam(OAuthRegistration.Request.CLIENT_DESCRIPTION);
     }
 
-    public String getIcon() {
-        return getParam(OAuthRegistration.Request.ICON);
+    public String getClientIcon() {
+        return getParam(OAuthRegistration.Request.CLIENT_ICON);
     }
 
     public String getRedirectURI() {
-        return getParam(OAuthRegistration.Request.REDIRECT_URI);
+        return getParam(OAuthRegistration.Request.REDIRECT_URL);
     }
 
     public boolean isDiscovered() {

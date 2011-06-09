@@ -90,7 +90,7 @@ public class BodyOAuthValidatorTest {
             Assert.fail("Exception not thrown.");
         } catch (OAuthProblemException e) {
             Assert.assertEquals(OAuthError.TokenResponse.INVALID_REQUEST, e.getError());
-            Assert.assertEquals("Bad content type.", e.getDescription());
+            Assert.assertEquals("Bad request content type. Expecting: application/x-www-form-urlencoded", e.getDescription());
         }
         verify(request);
     }

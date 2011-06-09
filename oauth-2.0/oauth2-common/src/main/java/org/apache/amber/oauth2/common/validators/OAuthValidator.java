@@ -30,18 +30,18 @@ import org.apache.amber.oauth2.common.exception.OAuthProblemException;
  * @author Lukasz Moren (lukasz.moren@ncl.ac.uk)
  * @author Aad van Moorsel (aad.vanmoorsel@ncl.ac.uk)
  */
-public interface OAuthValidator {
+public interface OAuthValidator<T extends HttpServletRequest> {
 
-    public void validateMethod(HttpServletRequest request) throws OAuthProblemException;
+    public void validateMethod(T request) throws OAuthProblemException;
 
-    public void validateContentType(HttpServletRequest request) throws OAuthProblemException;
+    public void validateContentType(T request) throws OAuthProblemException;
 
-    public void validateRequiredParameters(HttpServletRequest request) throws OAuthProblemException;
+    public void validateRequiredParameters(T request) throws OAuthProblemException;
 
-    public void validateOptionalParameters(HttpServletRequest request) throws OAuthProblemException;
+    public void validateOptionalParameters(T request) throws OAuthProblemException;
 
-    public void validateNotAllowedParameters(HttpServletRequest request) throws OAuthProblemException;
+    public void validateNotAllowedParameters(T request) throws OAuthProblemException;
 
-    public void performAllValidations(HttpServletRequest request) throws OAuthProblemException;
+    public void performAllValidations(T request) throws OAuthProblemException;
 
 }

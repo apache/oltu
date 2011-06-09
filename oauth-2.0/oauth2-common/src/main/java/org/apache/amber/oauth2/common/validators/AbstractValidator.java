@@ -39,7 +39,7 @@ import org.apache.amber.oauth2.common.utils.OAuthUtils;
  * @author Aad van Moorsel (aad.vanmoorsel@ncl.ac.uk)
  */
 //todo add client secret in header, sect 2.1
-public abstract class AbstractValidator implements OAuthValidator {
+public abstract class AbstractValidator<T extends HttpServletRequest> implements OAuthValidator<T> {
 
     protected List<String> requiredParams = new ArrayList<String>();
     protected Map<String, String[]> optionalParams = new HashMap<String, String[]>();
@@ -47,22 +47,23 @@ public abstract class AbstractValidator implements OAuthValidator {
 
 
     @Override
-    public void validateMethod(HttpServletRequest request) throws OAuthProblemException {
+    public void validateMethod(T request) throws OAuthProblemException {
         if (!request.getMethod().equals(OAuth.HttpMethod.POST)) {
             throw OAuthUtils.handleOAuthProblemException("Method not set to POST.");
         }
     }
 
     @Override
-    public void validateContentType(HttpServletRequest request) throws OAuthProblemException {
+    public void validateContentType(T request) throws OAuthProblemException {
         String contentType = request.getContentType();
-        if (!OAuthUtils.hasContentType(contentType, OAuth.ContentType.URL_ENCODED)) {
-            throw OAuthUtils.handleOAuthProblemException("Bad content type.");
+        final String expectedContentType = OAuth.ContentType.URL_ENCODED;
+        if (!OAuthUtils.hasContentType(contentType, expectedContentType)) {
+            throw OAuthUtils.handleBadContentTypeException(expectedContentType);
         }
     }
 
     @Override
-    public void validateRequiredParameters(HttpServletRequest request) throws OAuthProblemException {
+    public void validateRequiredParameters(T request) throws OAuthProblemException {
         Set<String> missingParameters = new HashSet<String>();
         for (String requiredParam : requiredParams) {
             String val = request.getParameter(requiredParam);
@@ -76,7 +77,7 @@ public abstract class AbstractValidator implements OAuthValidator {
     }
 
     @Override
-    public void validateOptionalParameters(HttpServletRequest request) throws OAuthProblemException {
+    public void validateOptionalParameters(T request) throws OAuthProblemException {
 
         Set<String> missingParameters = new HashSet<String>();
 
@@ -102,7 +103,7 @@ public abstract class AbstractValidator implements OAuthValidator {
     }
 
     @Override
-    public void validateNotAllowedParameters(HttpServletRequest request) throws OAuthProblemException {
+    public void validateNotAllowedParameters(T request) throws OAuthProblemException {
         List<String> notAllowedParameters = new ArrayList<String>();
         for (String requiredParam : notAllowedParams) {
             String val = request.getParameter(requiredParam);
@@ -116,7 +117,7 @@ public abstract class AbstractValidator implements OAuthValidator {
     }
 
     @Override
-    public void performAllValidations(HttpServletRequest request) throws OAuthProblemException {
+    public void performAllValidations(T request) throws OAuthProblemException {
         this.validateContentType(request);
         this.validateMethod(request);
         this.validateRequiredParameters(request);

@@ -73,7 +73,7 @@ public class RegistrationController {
                     .setName(oauthRegParams.getName())
                     .setUrl(oauthRegParams.getUrl())
                     .setDescription(oauthRegParams.getDescription())
-                    .setRedirectURI(oauthRegParams.getRedirectUri())
+                    .setRedirectURL(oauthRegParams.getRedirectUri())
                     .setIcon(oauthRegParams.getIcon())
                     .buildBodyMessage();
             }
