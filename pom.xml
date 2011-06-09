@@ -123,6 +123,26 @@
         </developer>
 
         <developer>
+            <id>lmoren</id>
+            <name>Lukasz Moren</name>
+            <email>lmoren[at]apache[dot]org</email>
+            <roles>
+                <role>Committer</role>
+            </roles>
+            <timezone>0</timezone>
+        </developer>
+
+        <developer>
+            <id>mmachulak</id>
+            <name>Maciej Machulak</name>
+            <email>mmachulak[at]apache[dot]org</email>
+            <roles>
+                <role>Committer</role>
+            </roles>
+            <timezone>0</timezone>
+        </developer>
+
+        <developer>
             <id>simoneg</id>
             <name>Simone Gianni</name>
             <email>simoneg[at]apache[dot]org</email>
