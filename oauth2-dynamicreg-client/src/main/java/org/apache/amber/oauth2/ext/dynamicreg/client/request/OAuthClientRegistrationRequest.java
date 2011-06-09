@@ -21,9 +21,10 @@
 
 package org.apache.amber.oauth2.ext.dynamicreg.client.request;
 
-import org.apache.amber.oauth2.ext.dynamicreg.common.OAuthRegistration;
 import org.apache.amber.oauth2.client.request.OAuthClientRequest;
-import org.apache.amber.oauth2.common.OAuth;
+import org.apache.amber.oauth2.common.exception.OAuthSystemException;
+import org.apache.amber.oauth2.common.parameters.JSONBodyParametersApplier;
+import org.apache.amber.oauth2.ext.dynamicreg.common.OAuthRegistration;
 
 
 /**
@@ -51,28 +52,34 @@ public class OAuthClientRegistrationRequest extends OAuthClientRequest {
         }
 
         public OAuthRegistrationRequestBuilder setName(String value) {
-            this.parameters.put(OAuthRegistration.Request.NAME, value);
+            this.parameters.put(OAuthRegistration.Request.CLIENT_NAME, value);
             return this;
         }
 
         public OAuthRegistrationRequestBuilder setUrl(String value) {
-            this.parameters.put(OAuthRegistration.Request.URL, value);
+            this.parameters.put(OAuthRegistration.Request.CLIENT_URL, value);
             return this;
         }
 
         public OAuthRegistrationRequestBuilder setDescription(String value) {
-            this.parameters.put(OAuthRegistration.Request.DESCRIPTION, value);
+            this.parameters.put(OAuthRegistration.Request.CLIENT_DESCRIPTION, value);
             return this;
         }
 
         public OAuthRegistrationRequestBuilder setIcon(String value) {
-            this.parameters.put(OAuthRegistration.Request.ICON, value);
+            this.parameters.put(OAuthRegistration.Request.CLIENT_ICON, value);
             return this;
         }
 
-        public OAuthRegistrationRequestBuilder setRedirectURI(String uri) {
-            this.parameters.put(OAuth.OAUTH_REDIRECT_URI, uri);
+        public OAuthRegistrationRequestBuilder setRedirectURL(String uri) {
+            this.parameters.put(OAuthRegistration.Request.REDIRECT_URL, uri);
             return this;
+        }
+
+        public OAuthClientRequest buildJSONMessage() throws OAuthSystemException {
+            OAuthClientRequest request = new OAuthClientRegistrationRequest(url);
+            this.applier = new JSONBodyParametersApplier();
+            return (OAuthClientRequest)applier.applyOAuthParameters(request, parameters);
         }
 
     }

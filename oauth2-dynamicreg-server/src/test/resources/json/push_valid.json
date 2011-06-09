@@ -1,0 +1,8 @@
+{
+    "type": "push",
+    "client_name": "Online Photo Gallery",
+    "client_url":  "http://onlinephotogallery.com",
+    "client_description": "Uploading and also editing capabilities!",
+    "client_icon": "http://onlinephotogallery.com/icon.png",
+    "redirect_url": "https://onlinephotogallery.com/client_reg"
+}

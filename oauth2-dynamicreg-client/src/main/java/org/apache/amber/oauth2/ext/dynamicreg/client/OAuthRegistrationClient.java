@@ -50,7 +50,7 @@ public class OAuthRegistrationClient extends OAuthClient {
         throws IOException, OAuthSystemException, OAuthProblemException {
         String method = OAuth.HttpMethod.POST;
         Map<String, String> headers = new HashMap<String, String>();
-        headers.put(OAuth.HeaderType.CONTENT_TYPE, OAuth.ContentType.URL_ENCODED);
+        headers.put(OAuth.HeaderType.CONTENT_TYPE, OAuth.ContentType.JSON);
 
         return httpClient.execute(request, headers, method, OAuthClientRegistrationResponse.class);
     }

@@ -31,6 +31,8 @@ import org.apache.amber.oauth2.common.exception.OAuthProblemException;
 import org.apache.amber.oauth2.common.exception.OAuthSystemException;
 import org.apache.amber.oauth2.common.utils.OAuthUtils;
 import org.apache.amber.oauth2.common.validators.OAuthValidator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Maciej Machulak (m.p.machulak@ncl.ac.uk)
@@ -38,6 +40,8 @@ import org.apache.amber.oauth2.common.validators.OAuthValidator;
  * @author Aad van Moorsel (aad.vanmoorsel@ncl.ac.uk)
  */
 public abstract class OAuthRequest {
+
+    private Logger log = LoggerFactory.getLogger(OAuthRequest.class);
 
     protected HttpServletRequest request;
     protected OAuthValidator validator;
@@ -58,9 +62,16 @@ public abstract class OAuthRequest {
             validator.validateContentType(request);
             validator.validateRequiredParameters(request);
         } catch (OAuthProblemException e) {
-            String redirectUri = request.getParameter(OAuth.OAUTH_REDIRECT_URI);
-            if (!OAuthUtils.isEmpty(redirectUri)) {
-                e.setRedirectUri(redirectUri);
+            try {
+                String redirectUri = request.getParameter(OAuth.OAUTH_REDIRECT_URI);
+                if (!OAuthUtils.isEmpty(redirectUri)) {
+                    e.setRedirectUri(redirectUri);
+                }
+            } catch (Exception ex) {
+                if (log.isDebugEnabled()) {
+                    log.debug("Cannot read redirect_url from the request: {}",
+                        new String[] {ex.getMessage()});
+                }
             }
 
             throw e;

@@ -32,6 +32,7 @@ import javax.ws.rs.core.Response;
 
 import org.apache.amber.oauth2.common.exception.OAuthSystemException;
 import org.apache.amber.oauth2.common.message.OAuthResponse;
+import org.apache.amber.oauth2.ext.dynamicreg.server.request.JSONHttpServletRequestWrapper;
 import org.apache.amber.oauth2.ext.dynamicreg.server.request.OAuthServerRegistrationRequest;
 import org.apache.amber.oauth2.ext.dynamicreg.server.response.OAuthServerRegistrationResponse;
 import org.apache.amber.oauth2.common.exception.OAuthProblemException;
@@ -47,18 +48,18 @@ public class RegistrationEndpoint {
 
 
     @POST
-    @Consumes("application/x-www-form-urlencoded")
+    @Consumes("application/json")
     @Produces("application/json")
     public Response register(@Context HttpServletRequest request) throws OAuthSystemException {
 
 
         OAuthServerRegistrationRequest oauthRequest = null;
         try {
-            oauthRequest = new OAuthServerRegistrationRequest(request);
+            oauthRequest = new OAuthServerRegistrationRequest(new JSONHttpServletRequestWrapper(request));
             oauthRequest.discover();
-            oauthRequest.getName();
-            oauthRequest.getUrl();
-            oauthRequest.getDescription();
+            oauthRequest.getClientName();
+            oauthRequest.getClientUrl();
+            oauthRequest.getClientDescription();
             oauthRequest.getRedirectURI();
 
             OAuthResponse response = OAuthServerRegistrationResponse

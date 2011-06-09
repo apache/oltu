@@ -24,6 +24,7 @@ package org.apache.amber.oauth2.common.utils;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -67,6 +68,8 @@ public final class OAuthUtils {
     private static final Pattern NVP = Pattern.compile("(\\S*)\\s*\\=\\s*\"([^\"]*)\"");
 
     public static final String MULTIPART = "multipart/";
+
+    private static final String DEFAULT_CONTENT_CHARSET = ENCODING;
 
     /**
      * Translates parameters into <code>application/x-www-form-urlencoded</code> String
@@ -113,24 +116,43 @@ public final class OAuthUtils {
      * @param is InputStream to be read
      * @return String that was read from the stream
      */
-    public static String saveStreamAsString(InputStream is) {
-        if (is != null) {
-            InputStreamReader ir = new InputStreamReader(is);
-            StringBuffer sb = new StringBuffer();
+    public static String saveStreamAsString(InputStream is) throws IOException {
+        return toString(is, ENCODING);
+    }
 
-            char[] buffer = new char[1000];
-            try {
-                while ((ir.read(buffer)) != -1) {
-                    sb.append(buffer);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            String string = sb.toString();
-            return string.trim();
+    /**
+     * Get the entity content as a String, using the provided default character set
+     * if none is found in the entity.
+     * If defaultCharset is null, the default "UTF-8" is used.
+     *
+     * @param is             input stream to be saved as string
+     * @param defaultCharset character set to be applied if none found in the entity
+     * @return the entity content as a String
+     * @throws IllegalArgumentException if entity is null or if content length > Integer.MAX_VALUE
+     * @throws IOException              if an error occurs reading the input stream
+     */
+    public static String toString(
+        final InputStream is, final String defaultCharset) throws IOException {
+        if (is == null) {
+            throw new IllegalArgumentException("InputStream may not be null");
         }
 
-        return null;
+        String charset = defaultCharset;
+        if (charset == null) {
+            charset = DEFAULT_CONTENT_CHARSET;
+        }
+        Reader reader = new InputStreamReader(is, charset);
+        StringBuilder sb = new StringBuilder();
+        int l;
+        try {
+            char[] tmp = new char[4096];
+            while ((l = reader.read(tmp)) != -1) {
+                sb.append(tmp, 0, l);
+            }
+        } finally {
+            reader.close();
+        }
+        return sb.toString();
     }
 
     /**
@@ -150,6 +172,7 @@ public final class OAuthUtils {
      * @param missingParams missing oauth parameters
      * @return OAuthProblemException with user friendly message about missing oauth parameters
      */
+
     public static OAuthProblemException handleMissingParameters(Set<String> missingParams) {
         StringBuffer sb = new StringBuffer("Missing parameters: ");
         if (!OAuthUtils.isEmpty(missingParams)) {
@@ -160,11 +183,10 @@ public final class OAuthUtils {
         return handleOAuthProblemException(sb.toString().trim());
     }
 
-    private static boolean isEmpty(Set<String> missingParams) {
-        if (missingParams == null || missingParams.size() == 0) {
-            return true;
-        }
-        return false;
+    public static OAuthProblemException handleBadContentTypeException(String expectedContentType) {
+        StringBuilder errorMsg = new StringBuilder("Bad request content type. Expecting: ").append(
+            expectedContentType);
+        return handleOAuthProblemException(errorMsg.toString());
     }
 
     public static OAuthProblemException handleNotAllowedParametersOAuthException(
@@ -258,6 +280,13 @@ public final class OAuthUtils {
 
     private static final String toString(Object from) {
         return (from == null) ? null : from.toString();
+    }
+
+    private static boolean isEmpty(Set<String> missingParams) {
+        if (missingParams == null || missingParams.size() == 0) {
+            return true;
+        }
+        return false;
     }
 
     public static Object instantiateClass(Class clazz) throws OAuthSystemException {

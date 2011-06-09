@@ -43,11 +43,11 @@ public final class OAuthRegistration {
         }
 
         public static final String TYPE = "type";
-        public static final String NAME = "name";
-        public static final String URL = "url";
-        public static final String DESCRIPTION = "description";
-        public static final String ICON = "icon";
-        public static final String REDIRECT_URI = "redirect_uri";
+        public static final String CLIENT_NAME = "client_name";
+        public static final String CLIENT_URL = "client_url";
+        public static final String CLIENT_DESCRIPTION = "client_description";
+        public static final String CLIENT_ICON = "client_icon";
+        public static final String REDIRECT_URL = "redirect_url";
     }
 
     public static final class Response {

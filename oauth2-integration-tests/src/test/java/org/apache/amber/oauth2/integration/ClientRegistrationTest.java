@@ -47,8 +47,8 @@ public class ClientRegistrationTest extends ClientServerOAuthTest {
             .setUrl(CommonExt.APP_URL)
             .setDescription(CommonExt.APP_DESCRIPTION)
             .setIcon(CommonExt.APP_ICON)
-            .setRedirectURI(CommonExt.APP_REDIRECT_URI)
-            .buildBodyMessage();
+            .setRedirectURL(CommonExt.APP_REDIRECT_URI)
+            .buildJSONMessage();
 
         OAuthRegistrationClient oauthclient = new OAuthRegistrationClient(new URLConnectionClient());
         OAuthClientRegistrationResponse response = oauthclient.clientInfo(request);
@@ -69,7 +69,7 @@ public class ClientRegistrationTest extends ClientServerOAuthTest {
             .setUrl(CommonExt.APP_URL)
             .setDescription(CommonExt.APP_DESCRIPTION)
             .setIcon(CommonExt.APP_ICON)
-            .setRedirectURI(CommonExt.APP_REDIRECT_URI)
+            .setRedirectURL(CommonExt.APP_REDIRECT_URI)
             .buildBodyMessage();
 
         OAuthRegistrationClient oauthclient = new OAuthRegistrationClient(new URLConnectionClient());
