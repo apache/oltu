@@ -25,18 +25,18 @@ package org.apache.amber.oauth2.common.exception;
  */
 public class OAuthRuntimeException extends RuntimeException {
     public OAuthRuntimeException() {
-        super();    //To change body of overridden methods use File | Settings | File Templates.
+        super();
     }
 
     public OAuthRuntimeException(String message) {
-        super(message);    //To change body of overridden methods use File | Settings | File Templates.
+        super(message);
     }
 
     public OAuthRuntimeException(String message, Throwable cause) {
-        super(message, cause);    //To change body of overridden methods use File | Settings | File Templates.
+        super(message, cause);
     }
 
     public OAuthRuntimeException(Throwable cause) {
-        super(cause);    //To change body of overridden methods use File | Settings | File Templates.
+        super(cause);
     }
 }
