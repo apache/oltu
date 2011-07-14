@@ -19,6 +19,18 @@ public class BasicOAuthToken implements OAuthToken {
         this.scope = scope;
     }
 
+    public BasicOAuthToken(String accessToken) {
+        this(accessToken, null, null, null);
+    }
+
+    public BasicOAuthToken(String accessToken, String expiresIn) {
+        this(accessToken, expiresIn, null, null);
+    }
+
+    public BasicOAuthToken(String accessToken, String expiresIn, String scope) {
+        this(accessToken, expiresIn, null, scope);
+    }
+
     public String getAccessToken() {
         return accessToken;
     }
