@@ -26,12 +26,12 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.amber.oauth2.as.validator.CodeTokenValidator;
 import org.apache.amber.oauth2.as.validator.CodeValidator;
 import org.apache.amber.oauth2.as.validator.TokenValidator;
+import org.apache.amber.oauth2.common.OAuth;
 import org.apache.amber.oauth2.common.exception.OAuthProblemException;
 import org.apache.amber.oauth2.common.exception.OAuthSystemException;
 import org.apache.amber.oauth2.common.message.types.ResponseType;
 import org.apache.amber.oauth2.common.utils.OAuthUtils;
 import org.apache.amber.oauth2.common.validators.OAuthValidator;
-import org.apache.amber.oauth2.common.OAuth;
 
 /**
  * @author Maciej Machulak (m.p.machulak@ncl.ac.uk)
@@ -62,5 +62,8 @@ public class OAuthAuthzRequest extends OAuthRequest {
 
     }
 
+    public String getState() {
+        return getParam(OAuth.OAUTH_STATE);
+    }
 
 }
