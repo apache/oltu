@@ -24,9 +24,10 @@ package org.apache.amber.oauth2.client.response;
 import org.apache.amber.oauth2.common.OAuth;
 import org.apache.amber.oauth2.common.error.OAuthError;
 import org.apache.amber.oauth2.common.exception.OAuthProblemException;
-import org.codehaus.jettison.json.JSONException;
-
+import org.apache.amber.oauth2.common.token.BasicOAuthToken;
+import org.apache.amber.oauth2.common.token.OAuthToken;
 import org.apache.amber.oauth2.common.utils.JSONUtils;
+import org.codehaus.jettison.json.JSONException;
 
 /**
  * @author Maciej Machulak (m.p.machulak@ncl.ac.uk)
@@ -50,6 +51,10 @@ public class OAuthJSONAccessTokenResponse extends OAuthAccessTokenResponse {
 
     public String getScope() {
         return parameters.get(OAuth.OAUTH_SCOPE);
+    }
+
+    public OAuthToken getOAuthToken() {
+        return new BasicOAuthToken(getAccessToken(), getExpiresIn(), getRefreshToken(), getScope());
     }
 
     public String getRefreshToken() {

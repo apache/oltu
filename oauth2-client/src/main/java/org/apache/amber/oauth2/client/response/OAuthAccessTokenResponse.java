@@ -23,6 +23,7 @@ package org.apache.amber.oauth2.client.response;
 
 import org.apache.amber.oauth2.client.validator.TokenValidator;
 import org.apache.amber.oauth2.common.exception.OAuthProblemException;
+import org.apache.amber.oauth2.common.token.OAuthToken;
 
 /**
  * @author Maciej Machulak (m.p.machulak@ncl.ac.uk)
@@ -38,6 +39,8 @@ public abstract class OAuthAccessTokenResponse extends OAuthClientResponse {
     public abstract String getRefreshToken();
 
     public abstract String getScope();
+
+    public abstract OAuthToken getOAuthToken();
 
     public String getBody() {
         return body;
