@@ -21,6 +21,8 @@
 
 package org.apache.amber.oauth2.client.response;
 
+import org.apache.amber.oauth2.common.token.BasicOAuthToken;
+import org.apache.amber.oauth2.common.token.OAuthToken;
 import org.apache.amber.oauth2.common.utils.OAuthUtils;
 import org.apache.amber.oauth2.common.OAuth;
 
@@ -49,6 +51,10 @@ public class GitHubTokenResponse extends OAuthAccessTokenResponse {
         return parameters.get(OAuth.OAUTH_SCOPE);
     }
 
+    public OAuthToken getOAuthToken() {
+        return new BasicOAuthToken(getAccessToken(), getExpiresIn(), getRefreshToken(), getScope());
+    }
+
     protected void setBody(String body) {
         this.body = body;
         parameters = OAuthUtils.decodeForm(body);
@@ -65,5 +71,7 @@ public class GitHubTokenResponse extends OAuthAccessTokenResponse {
     public String getParam(String name) {
         return parameters.get(name);
     }
+
+
 
 }
