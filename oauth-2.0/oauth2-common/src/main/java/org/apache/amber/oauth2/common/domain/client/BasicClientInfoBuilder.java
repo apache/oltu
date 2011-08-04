@@ -69,6 +69,11 @@ public class BasicClientInfoBuilder {
         return this;
     }
 
+    public BasicClientInfoBuilder setDescription(String value) {
+        info.setDescription(value);
+        return this;
+    }
+
     public BasicClientInfoBuilder setExpiresIn(Long value) {
         info.setExpiresIn(value);
         return this;

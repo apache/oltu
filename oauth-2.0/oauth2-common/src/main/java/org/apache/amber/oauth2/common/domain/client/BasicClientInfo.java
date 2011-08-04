@@ -32,27 +32,12 @@ public class BasicClientInfo implements ClientInfo {
     protected String clientSecret;
     protected String redirectUri;
     protected String clientUri;
+    protected String description;
     protected String iconUri;
     protected Long issuedAt;
     protected Long expiresIn;
 
-    BasicClientInfo() {
-
-    }
-
-    protected BasicClientInfo(String clientId, String clientSecret, String redirectUri) {
-        this.clientId = clientId;
-        this.clientSecret = clientSecret;
-        this.redirectUri = redirectUri;
-    }
-
-    protected BasicClientInfo(String name, String clientId, String clientSecret, String redirectUri,
-                           String iconUri) {
-        this.name = name;
-        this.clientId = clientId;
-        this.clientSecret = clientSecret;
-        this.redirectUri = redirectUri;
-        this.iconUri = iconUri;
+    public BasicClientInfo() {
     }
 
     @Override
@@ -83,6 +68,11 @@ public class BasicClientInfo implements ClientInfo {
     @Override
     public String getClientUri() {
         return clientUri;
+    }
+
+    @Override
+    public String getDescription() {
+        return description;
     }
 
     public void setClientUri(String clientUri) {
@@ -125,6 +115,10 @@ public class BasicClientInfo implements ClientInfo {
         this.iconUri = iconUri;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -140,6 +134,12 @@ public class BasicClientInfo implements ClientInfo {
             return false;
         }
         if (clientSecret != null ? !clientSecret.equals(that.clientSecret) : that.clientSecret != null) {
+            return false;
+        }
+        if (clientUri != null ? !clientUri.equals(that.clientUri) : that.clientUri != null) {
+            return false;
+        }
+        if (description != null ? !description.equals(that.description) : that.description != null) {
             return false;
         }
         if (expiresIn != null ? !expiresIn.equals(that.expiresIn) : that.expiresIn != null) {
@@ -167,6 +167,8 @@ public class BasicClientInfo implements ClientInfo {
         result = 31 * result + (clientId != null ? clientId.hashCode() : 0);
         result = 31 * result + (clientSecret != null ? clientSecret.hashCode() : 0);
         result = 31 * result + (redirectUri != null ? redirectUri.hashCode() : 0);
+        result = 31 * result + (clientUri != null ? clientUri.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (iconUri != null ? iconUri.hashCode() : 0);
         result = 31 * result + (issuedAt != null ? issuedAt.hashCode() : 0);
         result = 31 * result + (expiresIn != null ? expiresIn.hashCode() : 0);

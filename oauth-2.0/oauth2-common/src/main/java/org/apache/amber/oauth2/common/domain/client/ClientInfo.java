@@ -40,6 +40,8 @@ public interface ClientInfo {
 
     String getClientUri();
 
+    String getDescription();
+
     String getName();
 
     String getIconUri();
