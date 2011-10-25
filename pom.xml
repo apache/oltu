@@ -481,7 +481,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>3.0-beta-2</version>
+                <version>3.0</version>
                 <configuration>
                     <outputEncoding>${project.reporting.outputEncoding}</outputEncoding>
                 </configuration>
@@ -495,7 +495,7 @@
             </resource>
 
             <resource>
-                <directory>..</directory>
+                <directory>${basedir}</directory>
                 <targetPath>META-INF</targetPath>
                 <includes>
                     <include>LICENSE</include>
