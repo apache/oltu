@@ -39,7 +39,7 @@
         <finalName>oauth2-httpclient4</finalName>
     </build>
     <properties>
-        <httpclient.version>4.0.1</httpclient.version>
+        <httpclient.version>4.1.2</httpclient.version>
     </properties>
 
     <dependencies>

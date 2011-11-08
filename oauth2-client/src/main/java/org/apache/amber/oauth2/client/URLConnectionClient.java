@@ -34,9 +34,9 @@ import org.apache.amber.oauth2.client.request.OAuthClientRequest;
 import org.apache.amber.oauth2.client.response.OAuthClientResponse;
 import org.apache.amber.oauth2.client.response.OAuthClientResponseFactory;
 import org.apache.amber.oauth2.common.OAuth;
+import org.apache.amber.oauth2.common.exception.OAuthProblemException;
 import org.apache.amber.oauth2.common.exception.OAuthSystemException;
 import org.apache.amber.oauth2.common.utils.OAuthUtils;
-import org.apache.amber.oauth2.common.exception.OAuthProblemException;
 
 
 /**
@@ -104,6 +104,11 @@ public class URLConnectionClient implements HttpClient {
 
         return OAuthClientResponseFactory
             .createCustomResponse(responseBody, c.getContentType(), responseCode, responseClass);
+    }
+
+    @Override
+    public void shutdown() {
+        // Nothing to do here
     }
 
 }
