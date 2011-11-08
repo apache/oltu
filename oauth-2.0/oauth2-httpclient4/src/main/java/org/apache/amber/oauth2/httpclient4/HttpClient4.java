@@ -26,7 +26,11 @@ import java.util.Map;
 
 import org.apache.amber.oauth2.client.HttpClient;
 import org.apache.amber.oauth2.client.request.OAuthClientRequest;
+import org.apache.amber.oauth2.client.response.OAuthClientResponse;
+import org.apache.amber.oauth2.client.response.OAuthClientResponseFactory;
+import org.apache.amber.oauth2.common.OAuth;
 import org.apache.amber.oauth2.common.exception.OAuthProblemException;
+import org.apache.amber.oauth2.common.exception.OAuthSystemException;
 import org.apache.amber.oauth2.common.utils.OAuthUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -34,14 +38,10 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
-import org.apache.amber.oauth2.client.response.OAuthClientResponseFactory;
-
-import org.apache.amber.oauth2.client.response.OAuthClientResponse;
-import org.apache.amber.oauth2.common.OAuth;
-import org.apache.amber.oauth2.common.exception.OAuthSystemException;
 
 
 /**
@@ -53,13 +53,23 @@ import org.apache.amber.oauth2.common.exception.OAuthSystemException;
  */
 public class HttpClient4 implements HttpClient {
 
-    private org.apache.http.client.HttpClient client = new DefaultHttpClient();
+    private org.apache.http.client.HttpClient client;
 
     public HttpClient4() {
+        client = new DefaultHttpClient();
     }
 
     public HttpClient4(org.apache.http.client.HttpClient client) {
         this.client = client;
+    }
+    
+    public void shutdown() {
+        if (client != null) {
+            ClientConnectionManager connectionManager = client.getConnectionManager();
+            if (connectionManager != null) {
+                connectionManager.shutdown();
+            }
+        }
     }
 
     public <T extends OAuthClientResponse> T execute(OAuthClientRequest request,

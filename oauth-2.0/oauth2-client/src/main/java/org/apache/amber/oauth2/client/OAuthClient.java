@@ -27,9 +27,9 @@ import java.util.Map;
 import org.apache.amber.oauth2.client.request.OAuthClientRequest;
 import org.apache.amber.oauth2.client.response.OAuthAccessTokenResponse;
 import org.apache.amber.oauth2.client.response.OAuthJSONAccessTokenResponse;
+import org.apache.amber.oauth2.common.OAuth;
 import org.apache.amber.oauth2.common.exception.OAuthProblemException;
 import org.apache.amber.oauth2.common.exception.OAuthSystemException;
-import org.apache.amber.oauth2.common.OAuth;
 
 /**
  * OAuth Client - exposes a high-level API for Client Applications
@@ -62,5 +62,9 @@ public class OAuthClient {
         OAuthClientRequest request)
         throws OAuthSystemException, OAuthProblemException {
         return accessToken(request, OAuthJSONAccessTokenResponse.class);
+    }
+    
+    public void shutdown() {
+        httpClient.shutdown();
     }
 }

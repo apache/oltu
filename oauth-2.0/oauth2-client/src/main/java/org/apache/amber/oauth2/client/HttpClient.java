@@ -41,4 +41,9 @@ public interface HttpClient {
         String requestMethod,
         Class<T> responseClass)
         throws OAuthSystemException, OAuthProblemException;
+    
+    /**
+     * Shut down the client and release the resources associated with the HttpClient
+     */
+    public void shutdown();
 }
