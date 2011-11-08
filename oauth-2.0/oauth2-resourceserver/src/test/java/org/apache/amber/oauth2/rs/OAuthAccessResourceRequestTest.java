@@ -62,7 +62,7 @@ public class OAuthAccessResourceRequestTest {
             new OAuthAccessResourceRequest(request);
             fail("Exception expected");
         } catch (OAuthProblemException e) {
-            Assert.assertEquals("OAuth parameters were not found", e.getDescription());
+            Assert.assertEquals("Missing authorization header.", e.getDescription());
         }
 
         verify(request);
@@ -82,7 +82,7 @@ public class OAuthAccessResourceRequestTest {
             new OAuthAccessResourceRequest(request);
             fail("Exception expected");
         } catch (OAuthProblemException e) {
-            Assert.assertEquals("OAuth parameters were not found", e.getDescription());
+            Assert.assertEquals("Incorrect authorization method.", e.getDescription());
         }
         verify(request);
     }
@@ -98,7 +98,7 @@ public class OAuthAccessResourceRequestTest {
 
         try {
             new OAuthAccessResourceRequest(request);
-            fail("Exception expeted");
+            fail("Exception expected");
         } catch (OAuthProblemException e) {
             Assert
                 .assertTrue(
@@ -223,7 +223,7 @@ public class OAuthAccessResourceRequestTest {
 
         try {
             new OAuthAccessResourceRequest(request, ParameterStyle.BODY, ParameterStyle.HEADER);
-            fail("Exception expeted");
+            fail("Exception expected");
         } catch (OAuthProblemException e) {
             Assert
                 .assertTrue(
@@ -404,7 +404,7 @@ public class OAuthAccessResourceRequestTest {
             new OAuthAccessResourceRequest(request);
             fail("Exception expected");
         } catch (OAuthProblemException e) {
-            Assert.assertEquals("OAuth parameters were not found", e.getDescription());
+            Assert.assertEquals("Missing authorization header.", e.getDescription());
         }
         verify(request);
     }
@@ -425,7 +425,7 @@ public class OAuthAccessResourceRequestTest {
             new OAuthAccessResourceRequest(request, ParameterStyle.BODY);
             fail("Exception expected");
         } catch (OAuthProblemException e) {
-            Assert.assertEquals("OAuth parameters were not found", e.getDescription());
+            Assert.assertEquals("Missing OAuth token.", e.getDescription());
         }
         verify(request);
     }

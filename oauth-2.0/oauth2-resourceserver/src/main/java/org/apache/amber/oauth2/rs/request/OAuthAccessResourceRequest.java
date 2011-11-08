@@ -89,6 +89,7 @@ public class OAuthAccessResourceRequest {
         int foundValidStyles = 0;
         boolean lackAuthInfo = false;
         OAuthProblemException ex = null;
+        String lackAuthReason = "OAuth parameters were not found";
         for (ParameterStyle style : parameterStyles) {
             try {
 
@@ -103,6 +104,7 @@ public class OAuthAccessResourceRequest {
                 //request lacks any authentication information?
                 if (OAuthUtils.isEmpty(e.getError())) {
                     lackAuthInfo = true;
+                    lackAuthReason = e.getDescription();
                 } else {
                     ex = OAuthProblemException.error(e.getError(), e.getDescription());
                 }
@@ -119,7 +121,7 @@ public class OAuthAccessResourceRequest {
         }
 
         if (foundValidStyles == 0 && lackAuthInfo) {
-            throw OAuthProblemException.error(null, "OAuth parameters were not found");
+            throw OAuthProblemException.error(null, lackAuthReason);
         }
 
         if (foundValidStyles == 0) {
