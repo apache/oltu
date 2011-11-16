@@ -29,12 +29,12 @@
     <groupId>org.apache.amber</groupId>
     <name>Apache Amber: OAuth 2.0 Implementation - Client</name>
     <packaging>jar</packaging>
-    <version>0.10-incubating-SNAPSHOT</version>
+    <version>0.22-incubating-SNAPSHOT</version>
 
     <parent>
         <artifactId>amber-oauth2-parent</artifactId>
         <groupId>org.apache.amber</groupId>
-        <version>0.10-incubating-SNAPSHOT</version>
+        <version>0.22-incubating-SNAPSHOT</version>
     </parent>
 
     <build>

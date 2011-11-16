@@ -28,7 +28,7 @@
     <parent>
         <artifactId>amber-oauth2-parent</artifactId>
         <groupId>org.apache.amber</groupId>
-        <version>0.10-incubating-SNAPSHOT</version>
+        <version>0.22-incubating-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
