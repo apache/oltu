@@ -27,13 +27,13 @@
     <parent>
         <artifactId>amber-oauth2-parent</artifactId>
         <groupId>org.apache.amber</groupId>
-        <version>0.10-incubating-SNAPSHOT</version>
+        <version>0.22-incubating-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>oauth2-common</artifactId>
     <name>Apache Amber: OAuth 2.0 Implementation - Common</name>
-    <version>0.10-incubating-SNAPSHOT</version>
+    <version>0.22-incubating-SNAPSHOT</version>
     <packaging>jar</packaging>
     <description>OAuth 2.0 library - Common</description>
 

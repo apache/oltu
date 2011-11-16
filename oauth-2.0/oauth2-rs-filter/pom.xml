@@ -28,10 +28,10 @@
     <parent>
         <artifactId>amber-oauth2-parent</artifactId>
         <groupId>org.apache.amber</groupId>
-        <version>0.10-incubating-SNAPSHOT</version>
+        <version>0.22-incubating-SNAPSHOT</version>
     </parent>
     <artifactId>oauth2-rs-filter</artifactId>
-    <version>0.10-incubating-SNAPSHOT</version>
+    <version>0.22-incubating-SNAPSHOT</version>
     <name>Apache Amber: OAuth 2.0 Implementation - Resource Server Filter</name>
 
     <build>
