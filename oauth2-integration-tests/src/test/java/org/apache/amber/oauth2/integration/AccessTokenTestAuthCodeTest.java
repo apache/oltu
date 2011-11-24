@@ -28,9 +28,8 @@ import org.apache.amber.oauth2.client.response.OAuthAccessTokenResponse;
 import org.apache.amber.oauth2.common.OAuth;
 import org.apache.amber.oauth2.common.error.OAuthError;
 import org.apache.amber.oauth2.common.exception.OAuthProblemException;
-import org.junit.Test;
-
 import org.apache.amber.oauth2.common.message.types.GrantType;
+import org.junit.Test;
 
 /**
  * @author Maciej Machulak (m.p.machulak@ncl.ac.uk)
@@ -54,6 +53,26 @@ public class AccessTokenTestAuthCodeTest extends ClientServerOAuthTest {
 
         OAuthClient oAuthClient = new OAuthClient(new URLConnectionClient());
         OAuthAccessTokenResponse response = oAuthClient.accessToken(request);
+        assertNotNull(response.getAccessToken());
+        assertNotNull(response.getExpiresIn());
+
+
+    }
+
+    @Test
+    public void testSuccessfullAccesTokenGETMethod() throws Exception {
+
+        OAuthClientRequest request = OAuthClientRequest
+            .tokenLocation(Common.ACCESS_TOKEN_ENDPOINT)
+            .setGrantType(GrantType.AUTHORIZATION_CODE)
+            .setCode(Common.AUTHORIZATION_CODE)
+            .setRedirectURI(Common.REDIRECT_URL)
+            .setClientId(Common.CLIENT_ID)
+            .setClientSecret(Common.CLIENT_SECRET)
+            .buildQueryMessage();
+
+        OAuthClient oAuthClient = new OAuthClient(new URLConnectionClient());
+        OAuthAccessTokenResponse response = oAuthClient.accessToken(request, OAuth.HttpMethod.GET);
         assertNotNull(response.getAccessToken());
         assertNotNull(response.getExpiresIn());
 
