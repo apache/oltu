@@ -51,11 +51,17 @@ public class OAuthClient {
         Class<T> responseClass)
         throws OAuthSystemException, OAuthProblemException {
 
-        String method = OAuth.HttpMethod.POST;
+        return accessToken(request, OAuth.HttpMethod.POST, responseClass);
+    }
+
+    public <T extends OAuthAccessTokenResponse> T accessToken(
+        OAuthClientRequest request, String requestMethod, Class<T> responseClass)
+        throws OAuthSystemException, OAuthProblemException {
+
         Map<String, String> headers = new HashMap<String, String>();
         headers.put(OAuth.HeaderType.CONTENT_TYPE, OAuth.ContentType.URL_ENCODED);
 
-        return httpClient.execute(request, headers, method, responseClass);
+        return httpClient.execute(request, headers, requestMethod, responseClass);
     }
 
     public OAuthJSONAccessTokenResponse accessToken(
@@ -63,7 +69,13 @@ public class OAuthClient {
         throws OAuthSystemException, OAuthProblemException {
         return accessToken(request, OAuthJSONAccessTokenResponse.class);
     }
-    
+
+    public OAuthJSONAccessTokenResponse accessToken(
+        OAuthClientRequest request, String requestMethod)
+        throws OAuthSystemException, OAuthProblemException {
+        return accessToken(request, requestMethod, OAuthJSONAccessTokenResponse.class);
+    }
+
     public void shutdown() {
         httpClient.shutdown();
     }
