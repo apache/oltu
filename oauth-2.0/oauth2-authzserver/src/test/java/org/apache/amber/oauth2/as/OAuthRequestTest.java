@@ -128,26 +128,6 @@ public class OAuthRequestTest {
         }
 
         verify(request);
-
-        reset(request);
-
-        expect(request.getParameter(OAuth.OAUTH_RESPONSE_TYPE)).andStubReturn(ResponseType.CODE.toString());
-        expect(request.getMethod()).andStubReturn(OAuth.HttpMethod.GET);
-        expect(request.getContentType()).andStubReturn(OAuth.ContentType.URL_ENCODED);
-
-        expect(request.getParameter(OAuth.OAUTH_CLIENT_ID)).andStubReturn("client_id");
-        expect(request.getParameter(OAuth.OAUTH_REDIRECT_URI)).andStubReturn(null);
-        replay(request);
-
-        try {
-            new OAuthAuthzRequest(request);
-            fail("Exception expected");
-        } catch (OAuthProblemException e) {
-            Assert.assertEquals(OAuthError.TokenResponse.INVALID_REQUEST, e.getError());
-        }
-
-        verify(request);
-
     }
 
     @Test
