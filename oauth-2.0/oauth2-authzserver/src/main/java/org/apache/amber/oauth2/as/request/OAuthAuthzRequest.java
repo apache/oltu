@@ -23,7 +23,6 @@ package org.apache.amber.oauth2.as.request;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.amber.oauth2.as.validator.CodeTokenValidator;
 import org.apache.amber.oauth2.as.validator.CodeValidator;
 import org.apache.amber.oauth2.as.validator.TokenValidator;
 import org.apache.amber.oauth2.common.OAuth;
@@ -49,7 +48,6 @@ public class OAuthAuthzRequest extends OAuthRequest {
         //end user authorization validators
         validators.put(ResponseType.CODE.toString(), CodeValidator.class);
         validators.put(ResponseType.TOKEN.toString(), TokenValidator.class);
-        validators.put(ResponseType.CODE_AND_TOKEN.toString(), CodeTokenValidator.class);
         String requestTypeValue = getParam(OAuth.OAUTH_RESPONSE_TYPE);
         if (OAuthUtils.isEmpty(requestTypeValue)) {
             throw OAuthUtils.handleOAuthProblemException("Missing response_type parameter value");
