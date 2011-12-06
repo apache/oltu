@@ -67,12 +67,10 @@ public class AuthzEndpoint {
             OAuthASResponse.OAuthAuthorizationResponseBuilder builder = OAuthASResponse
                 .authorizationResponse(HttpServletResponse.SC_FOUND);
 
-            if (responseType.equals(ResponseType.CODE.toString()) || responseType
-                .equals(ResponseType.CODE_AND_TOKEN.toString())) {
+            if (responseType.equals(ResponseType.CODE.toString())) {
                 builder.setCode(oauthIssuerImpl.authorizationCode());
             }
-            if (responseType.equals(ResponseType.TOKEN.toString()) || responseType
-                .equals(ResponseType.CODE_AND_TOKEN.toString())) {
+            if (responseType.equals(ResponseType.TOKEN.toString())) {
                 builder.setAccessToken(oauthIssuerImpl.accessToken());
                 builder.setExpiresIn(String.valueOf(3600));
             }
