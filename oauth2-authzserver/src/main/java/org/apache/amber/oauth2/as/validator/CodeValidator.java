@@ -39,7 +39,6 @@ public class CodeValidator extends AbstractValidator {
     public CodeValidator() {
         requiredParams.add(OAuth.OAUTH_RESPONSE_TYPE);
         requiredParams.add(OAuth.OAUTH_CLIENT_ID);
-        requiredParams.add(OAuth.OAUTH_REDIRECT_URI);
     }
 
     @Override
