@@ -42,7 +42,7 @@
         <dependency>
             <groupId>org.apache.amber</groupId>
             <artifactId>oauth2-common</artifactId>
-           <version>0.2-SNAPSHOT</version>
+           <version>0.22-incubating-SNAPSHOT</version>
         </dependency>
 
         <dependency>
