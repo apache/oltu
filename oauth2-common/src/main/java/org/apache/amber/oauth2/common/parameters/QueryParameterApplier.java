@@ -21,7 +21,7 @@
 
 package org.apache.amber.oauth2.common.parameters;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.apache.amber.oauth2.common.OAuth;
@@ -43,13 +43,23 @@ public class QueryParameterApplier implements OAuthParametersApplier {
             StringBuffer url = new StringBuffer(messageUrl);
 
             //apply uri fragment component if exist access_toke param
-            Map<String, String> fragmentParams = new HashMap<String, String>();
+            Map<String, String> fragmentParams = new LinkedHashMap<String, String>();
             if (params.containsKey(OAuth.OAUTH_ACCESS_TOKEN)) {
                 fragmentParams.put(OAuth.OAUTH_ACCESS_TOKEN, params.remove(OAuth.OAUTH_ACCESS_TOKEN));
 
+                // State should be in the fragment too
+                if (params.containsKey(OAuth.OAUTH_STATE)) {
+                    fragmentParams.put(OAuth.OAUTH_STATE, params.remove(OAuth.OAUTH_STATE));
+                }
+                
                 if (params.containsKey(OAuth.OAUTH_EXPIRES_IN)) {
                     fragmentParams.put(OAuth.OAUTH_EXPIRES_IN, params.remove(OAuth.OAUTH_EXPIRES_IN));
                 }
+                
+                if (params.containsKey(OAuth.OAUTH_TOKEN_TYPE)) {
+                    fragmentParams.put(OAuth.OAUTH_TOKEN_TYPE, params.remove(OAuth.OAUTH_TOKEN_TYPE));
+                }
+                
             }
 
             StringBuffer query = new StringBuffer(OAuthUtils.format(params.entrySet(), "UTF-8"));

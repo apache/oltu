@@ -21,14 +21,12 @@
 
 package org.apache.amber.oauth2.as.response;
 
-import org.apache.amber.oauth2.as.response.OAuthASResponse;
+import org.apache.amber.oauth2.common.OAuth;
 import org.apache.amber.oauth2.common.error.OAuthError;
+import org.apache.amber.oauth2.common.exception.OAuthProblemException;
 import org.apache.amber.oauth2.common.message.OAuthResponse;
 import org.junit.Assert;
 import org.junit.Test;
-
-import org.apache.amber.oauth2.common.OAuth;
-import org.apache.amber.oauth2.common.exception.OAuthProblemException;
 
 /**
  * @author Maciej Machulak (m.p.machulak@ncl.ac.uk)
@@ -50,8 +48,8 @@ public class OAuthASResponseTest {
 
         String url = oAuthResponse.getLocationUri();
 
-        Assert.assertEquals("http://www.example.com?testValue=value2&state=ok&code=code"
-            + "#expires_in=400&access_token=access_111", url);
+        Assert.assertEquals("http://www.example.com?testValue=value2&code=code"
+            + "#access_token=access_111&state=ok&expires_in=400", url);
         Assert.assertEquals(200, oAuthResponse.getResponseStatus());
 
     }

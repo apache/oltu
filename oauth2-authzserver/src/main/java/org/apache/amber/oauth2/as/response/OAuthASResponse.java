@@ -102,6 +102,11 @@ public class OAuthASResponse extends OAuthResponse {
             this.parameters.put(OAuth.OAUTH_REFRESH_TOKEN, refreshToken);
             return this;
         }
+        
+        public OAuthTokenResponseBuilder setTokenType(String tokenType) {
+            this.parameters.put(OAuth.OAUTH_TOKEN_TYPE, tokenType);
+            return this;
+        }
 
         public OAuthTokenResponseBuilder setParam(String key, String value) {
             this.parameters.put(key, value);

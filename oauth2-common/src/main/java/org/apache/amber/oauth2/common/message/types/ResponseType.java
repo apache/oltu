@@ -30,6 +30,7 @@ public enum ResponseType {
 
     CODE("code"),
     TOKEN("token"),
+    @Deprecated
     CODE_AND_TOKEN("code_and_token");
 
     private String code;

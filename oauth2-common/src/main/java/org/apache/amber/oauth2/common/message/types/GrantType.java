@@ -29,8 +29,10 @@ package org.apache.amber.oauth2.common.message.types;
 public enum GrantType {
     AUTHORIZATION_CODE("authorization_code"),
     PASSWORD("password"),
+    @Deprecated
     ASSERTION("assertion"),
     REFRESH_TOKEN("refresh_token"),
+    CLIENT_CREDENTIALS("client_credentials"),
     NONE("none");
 
     private String grantType;
