@@ -159,8 +159,6 @@
             <id>simonetripodi</id>
             <name>Simone Tripodi</name>
             <email>simonetripodi[at]apache[dot]org</email>
-            <organization>Sourcesense S.r.l.</organization>
-            <organizationUrl>http://www.sourcesense.com/</organizationUrl>
             <roles>
                 <role>PMC Member</role>
                 <role>Committer</role>
