@@ -47,6 +47,11 @@
     <menu name="External Links">
       <item name="Apache Incubator" href="http://incubator.apache.org/"/>
     </menu>
+
+    <footer>
+      <div class="row span16">Apache Amber, Apache, the Apache feather logo, and the Apache Maven project logos are trademarks of The Apache Software Foundation.
+      All other marks mentioned may be trademarks or registered trademarks of their respective owners.</div>
+    </footer>
   </body>
 
 </project>
