@@ -159,8 +159,6 @@
       <id>tommaso</id>
       <name>Tommaso Teofili</name>
       <email>tommaso[at]apache[dot]org</email>
-      <organization>Sourcesense S.r.l.</organization>
-      <organizationUrl>http://www.sourcesense.com/</organizationUrl>
       <roles>
         <role>PPMC Member</role>
         <role>Committer</role>
