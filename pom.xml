@@ -253,7 +253,6 @@
     <javac.src.version>1.6</javac.src.version>
     <javac.target.version>1.6</javac.target.version>
     <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ssZ</maven.build.timestamp.format>
-    <project.previousVersion>${project.version}</project.previousVersion>
   </properties>
 
   <dependencyManagement>
