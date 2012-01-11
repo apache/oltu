@@ -180,13 +180,22 @@
     </developer>
 
     <developer>
-      <id>TBD</id>
+      <id>pablo</id>
       <name>Pablo Fernandez</name>
       <roles>
         <role>PPMC Member</role>
         <role>Committer</role>
       </roles>
       <timezone>+1</timezone>
+    </developer>
+
+    <developer>
+      <id>asanso</id>
+      <name>Antonio Sanso</name>
+      <roles>
+        <role>PPMC Member</role>
+        <role>Committer</role>
+      </roles>
     </developer>
   </developers>
 
