@@ -367,16 +367,9 @@
             </goals>
             <configuration>
               <excludes>
-                <exclude>.gitignore</exclude>
-                <exclude>DEPENDENCIES</exclude>
-                <exclude>README.txt</exclude>
-                <exclude>*.sh</exclude>
-                <exclude>.git/**</exclude>
-                <exclude>.idea/**</exclude>
-                <exclude>*.bat</exclude>
-                <exclude>.repository/**</exclude>
-                <exclude>ajcore**</exclude>
-                <exclude>init-git-svn.sh</exclude>
+                <exclude>DISCLAIMER</exclude>
+                <exclude>KEYS</exclude>
+                <exclude>NOTICE</exclude>
               </excludes>
             </configuration>
           </execution>
