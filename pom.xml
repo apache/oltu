@@ -247,10 +247,14 @@
   </distributionManagement>
 
   <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <javac.src.version>1.6</javac.src.version>
     <javac.target.version>1.6</javac.target.version>
     <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ssZ</maven.build.timestamp.format>
+    <implementation.build>${buildNumber}; ${maven.build.timestamp}</implementation.build>
+    <project.previousVersion>${project.version}</project.previousVersion>
   </properties>
 
   <dependencyManagement>
@@ -376,6 +380,28 @@
 
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>buildnumber-maven-plugin</artifactId>
+        <version>1.0</version>
+        <executions>
+          <execution>
+            <phase>validate</phase>
+            <goals>
+              <goal>create</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <doCheck>false</doCheck>
+          <doUpdate>false</doUpdate>
+          <!-- Use committed revision so it does not change every time svn update is run -->
+          <useLastCommittedRevision>true</useLastCommittedRevision>
+          <!-- default revision number if unavailable -->
+          <revisionOnScmFailure>??????</revisionOnScmFailure>
+        </configuration>
+      </plugin>
+
       <plugin>
         <artifactId>maven-clean-plugin</artifactId>
         <version>2.4.1</version>
