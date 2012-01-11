@@ -24,13 +24,9 @@
   </properties>
 
   <body>
-    <div class="hero-unit">
-      <img src="./images/amber_head.png" style="margin-bottom:15px" />
-
-      <br clear="left" />
-
+    <section name="Apache Amber">
       <p><span style="font-weight: bold">Apache Amber</span> is an OAuth protocol implementation in Java.</p>
-    </div>
+    </section>
 
     <div class="alert-message warning">
       <h2>Disclaimer</h2>
