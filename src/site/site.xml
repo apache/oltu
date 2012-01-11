@@ -15,18 +15,20 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<project name="${project.name}">
+<project xmlns="http://maven.apache.org/DECORATION/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/DECORATION/1.1.0 http://maven.apache.org/xsd/decoration-1.1.0.xsd"
+  name="${project.name}">
 
   <bannerLeft>
-  <name>Apache Amber OAuth reference implementation</name>
-  <src>images/amber_head.png</src>
-  <href>${project.url}/index.html</href>
+    <name>Apache Amber OAuth reference implementation</name>
+    <src>images/amber_head.png</src>
+    <href>${project.url}/index.html</href>
   </bannerLeft>
 
   <skin>
-  <groupId>org.apache.maven.skins</groupId>
-  <artifactId>maven-fluido-skin</artifactId>
-  <version>1.0</version>
+    <groupId>org.apache.maven.skins</groupId>
+    <artifactId>maven-fluido-skin</artifactId>
+    <version>1.0</version>
   </skin>
 
   <version position="left"/>
