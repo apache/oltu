@@ -51,7 +51,6 @@
     <spring-mock.version>2.0.8</spring-mock.version>
     <easy-mock.version>3.0</easy-mock.version>
     <servlet-api.version>2.5</servlet-api.version>
-    <junit.version>4.8.1</junit.version>
     <jettison.version>1.2</jettison.version>
     <jetty.version>7.1.5.v20100705</jetty.version>
     <pmd.version>2.5</pmd.version>
