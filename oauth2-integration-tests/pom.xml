@@ -7,7 +7,7 @@
   (the "License"); you may not use this file except in compliance with
   the License.  You may obtain a copy of the License at
 
-     http://www.apache.org/licenses/LICENSE-2.0
+   http://www.apache.org/licenses/LICENSE-2.0
 
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,115 +16,123 @@
   limitations under the License.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>amber-oauth2-parent</artifactId>
-        <groupId>org.apache.amber</groupId>
-       <version>0.22-incubating-SNAPSHOT</version>
-    </parent>
-    <modelVersion>4.0.0</modelVersion>
-    <name>Apache Amber: OAuth 2.0 Implementation - Integration Tests</name>
-    <artifactId>oauth2-integration-tests</artifactId>
-   <version>0.22-incubating-SNAPSHOT</version>
+  <modelVersion>4.0.0</modelVersion>
 
-    <build>
-        <finalName>oauth2-integration-tests</finalName>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.5</version>
-                <configuration>
-                    <excludes>
-                        <exclude>**/utils/*</exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+  <parent>
+    <groupId>org.apache.amber</groupId>
+    <artifactId>amber-oauth2-parent</artifactId>
+    <version>0.22-incubating-SNAPSHOT</version>
+  </parent>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.apache.amber</groupId>
-            <artifactId>oauth2-common</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.amber</groupId>
-            <artifactId>oauth2-client</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.amber</groupId>
-            <artifactId>oauth2-authzserver</artifactId>
-            <version>${project.version}</version>
-        </dependency>
+  <name>Apache Amber: OAuth 2.0 Implementation - Integration Tests</name>
 
-        <dependency>
-            <groupId>org.apache.amber</groupId>
-            <artifactId>oauth2-httpclient4</artifactId>
-            <version>${project.version}</version>
-        </dependency>
+  <artifactId>oauth2-integration-tests</artifactId>
 
-        <dependency>
-            <groupId>org.apache.amber</groupId>
-            <artifactId>oauth2-resourceserver</artifactId>
-            <version>${project.version}</version>
-        </dependency>
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.amber</groupId>
+      <artifactId>oauth2-common</artifactId>
+      <version>${project.version}</version>
+    </dependency>
 
-        <dependency>
-            <groupId>org.apache.amber</groupId>
-            <artifactId>oauth2-dynamicreg-client</artifactId>
-            <version>${project.version}</version>
-        </dependency>
+    <dependency>
+      <groupId>org.apache.amber</groupId>
+      <artifactId>oauth2-client</artifactId>
+      <version>${project.version}</version>
+    </dependency>
 
-        <dependency>
-            <groupId>org.apache.amber</groupId>
-            <artifactId>oauth2-dynamicreg-server</artifactId>
-            <version>${project.version}</version>
-        </dependency>
+    <dependency>
+      <groupId>org.apache.amber</groupId>
+      <artifactId>oauth2-authzserver</artifactId>
+      <version>${project.version}</version>
+    </dependency>
 
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-frontend-jaxrs</artifactId>
-            <version>${cxf.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-webapp</artifactId>
-            <version>${jetty.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-transports-http</artifactId>
-            <version>${cxf.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-transports-http-jetty</artifactId>
-            <version>${cxf.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${spring.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <version>${spring.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-            <version>${spring.version}</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+    <dependency>
+      <groupId>org.apache.amber</groupId>
+      <artifactId>oauth2-httpclient4</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.amber</groupId>
+      <artifactId>oauth2-resourceserver</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.amber</groupId>
+      <artifactId>oauth2-dynamicreg-client</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.amber</groupId>
+      <artifactId>oauth2-dynamicreg-server</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+      <version>${cxf.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-webapp</artifactId>
+      <version>${jetty.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-transports-http</artifactId>
+      <version>${cxf.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-transports-http-jetty</artifactId>
+      <version>${cxf.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <version>${org.springframework.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
+      <version>${org.springframework.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-beans</artifactId>
+      <version>${org.springframework.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <excludes>
+            <exclude>**/utils/*</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 
 </project>
