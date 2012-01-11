@@ -334,10 +334,7 @@
 
         <plugin>
           <artifactId>maven-resources-plugin</artifactId>
-          <version>2.4.3</version>
-          <configuration>
-            <encoding>${project.build.sourceEncoding}</encoding>
-          </configuration>
+          <version>2.5</version>
         </plugin>
 
         <plugin>
