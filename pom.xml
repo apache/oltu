@@ -429,7 +429,6 @@
         <configuration>
           <source>${javac.src.version}</source>
           <target>${javac.target.version}</target>
-          <encoding>${project.build.sourceEncoding}</encoding>
         </configuration>
       </plugin>
 
