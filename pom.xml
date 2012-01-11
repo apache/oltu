@@ -25,7 +25,6 @@
     <version>0.22-incubating-SNAPSHOT</version>
   </parent>
 
-  <groupId>org.apache.amber</groupId>
   <artifactId>amber-oauth2-parent</artifactId>
   <packaging>pom</packaging>
 
