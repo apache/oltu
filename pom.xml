@@ -482,6 +482,17 @@
         </includes>
       </resource>
     </resources>
+
+    <!--
+     | Maven3 doesn't handle ssh/scp by default
+    -->
+    <extensions>
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-ssh</artifactId>
+        <version>1.0</version>
+      </extension>
+    </extensions>
   </build>
 
   <reporting>
