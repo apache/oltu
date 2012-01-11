@@ -73,7 +73,7 @@
             <email>brianm[at]apache[dot]org</email>
             <roles>
                 <role>Mentor</role>
-                <role>PMC Member</role>
+                <role>PPMC Member</role>
                 <role>Committer</role>
             </roles>
         </developer>
@@ -84,7 +84,7 @@
             <email>henning[at]apache[dot]org</email>
             <roles>
                 <role>Mentor</role>
-                <role>PMC Member</role>
+                <role>PPMC Member</role>
                 <role>Committer</role>
             </roles>
         </developer>
@@ -95,7 +95,7 @@
             <email>jfclere[at]apache[dot]org</email>
             <roles>
                 <role>Mentor</role>
-                <role>PMC Member</role>
+                <role>PPMC Member</role>
                 <role>Committer</role>
             </roles>
         </developer>
@@ -106,7 +106,7 @@
             <email>gianugo[at]apache[dot]org</email>
             <roles>
                 <role>Mentor</role>
-                <role>PMC Member</role>
+                <role>PPMC Member</role>
                 <role>Committer</role>
             </roles>
         </developer>
@@ -117,7 +117,7 @@
             <email>djencks[at]apache[dot]org</email>
             <roles>
                 <role>Mentor</role>
-                <role>PMC Member</role>
+                <role>PPMC Member</role>
                 <role>Committer</role>
             </roles>
         </developer>
@@ -149,7 +149,7 @@
             <organization>Semeru S.r.l.</organization>
             <organizationUrl>http://www.semeru.it/</organizationUrl>
             <roles>
-                <role>PMC Member</role>
+                <role>PPMC Member</role>
                 <role>Committer</role>
             </roles>
             <timezone>+1</timezone>
@@ -160,7 +160,7 @@
             <name>Simone Tripodi</name>
             <email>simonetripodi[at]apache[dot]org</email>
             <roles>
-                <role>PMC Member</role>
+                <role>PPMC Member</role>
                 <role>Committer</role>
             </roles>
             <timezone>+1</timezone>
@@ -170,7 +170,7 @@
             <id>pidster</id>
             <name>Stuart "Pid" Williams</name>
             <roles>
-                <role>PMC Member</role>
+                <role>PPMC Member</role>
                 <role>Committer</role>
             </roles>
             <timezone>+1</timezone>
@@ -181,7 +181,7 @@
             <name>David Recordon</name>
             <email>recordond[at]apache[dot]org</email>
             <roles>
-                <role>PMC Member</role>
+                <role>PPMC Member</role>
                 <role>Committer</role>
             </roles>
             <timezone>+1</timezone>
@@ -194,7 +194,7 @@
             <organization>Sourcesense S.r.l.</organization>
             <organizationUrl>http://www.sourcesense.com/</organizationUrl>
             <roles>
-                <role>PMC Member</role>
+                <role>PPMC Member</role>
                 <role>Committer</role>
             </roles>
             <timezone>+1</timezone>
@@ -205,7 +205,7 @@
             <name>Paul Lindner</name>
             <email>lindner[at]apache[dot]org</email>
             <roles>
-                <role>PMC Member</role>
+                <role>PPMC Member</role>
                 <role>Committer</role>
             </roles>
             <timezone>+1</timezone>
@@ -215,7 +215,7 @@
             <id>TBD</id>
             <name>Pablo Fernandez</name>
             <roles>
-                <role>PMC Member</role>
+                <role>PPMC Member</role>
                 <role>Committer</role>
             </roles>
             <timezone>+1</timezone>
