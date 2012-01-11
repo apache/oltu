@@ -221,19 +221,15 @@
     <module>oauth-2.0</module>
   </modules>
 
-  
-
   <scm>
     <developerConnection>scm:svn:https://svn.apache.org/repos/asf/incubator/amber/trunk/</developerConnection>
     <connection>scm:svn:https://svn.apache.org/repos/asf/incubator/amber/trunk/</connection>
     <url>https://svn.apache.org/repos/asf/incubator/amber/trunk/</url>
   </scm>
-
   <issueManagement>
     <system>JIRA</system>
     <url>https://issues.apache.org/jira/browse/AMBER</url>
   </issueManagement>
-
   <distributionManagement>
     <site>
       <id>website</id>
