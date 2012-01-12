@@ -203,6 +203,7 @@
       <post>amber-dev[at]incubator[dot]apache[dot]org</post>
       <subscribe>amber-dev-subscribe[at]incubator[dot]apache[dot]org</subscribe>
       <unsubscribe>amber-dev-unsubscribe[at]incubator[dot]apache[dot]org</unsubscribe>
+      <archive>http://mail-archives.apache.org/mod_mbox/incubator-amber-dev/</archive>
     </mailingList>
 
     <mailingList>
@@ -210,6 +211,7 @@
       <post>amber-user[at]incubator[dot]apache[dot]org</post>
       <subscribe>amber-user-subscribe[at]incubator[dot]apache[dot]org</subscribe>
       <unsubscribe>amber-user-unsubscribe[at]incubator[dot]apache[dot]org</unsubscribe>
+      <archive>http://mail-archives.apache.org/mod_mbox/incubator-amber-user/</archive>
     </mailingList>
 
     <mailingList>
@@ -217,6 +219,7 @@
       <post>amber-commits[at]incubator[dot]apache[dot]org</post>
       <subscribe>amber-commits-subscribe[at]incubator[dot]apache[dot]org</subscribe>
       <unsubscribe>amber-commits-unsubscribe[at]incubator[dot]apache[dot]org</unsubscribe>
+      <archive>http://mail-archives.apache.org/mod_mbox/incubator-amber-commits/</archive>
     </mailingList>
   </mailingLists>
 
