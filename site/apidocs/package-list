@@ -1,7 +1,0 @@
-org.apache.amber
-org.apache.amber.client
-org.apache.amber.server
-org.apache.amber.signature
-org.apache.amber.signature.hmac
-org.apache.amber.signature.plaintext
-org.apache.amber.signature.rsa
