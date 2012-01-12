@@ -242,6 +242,7 @@
   </issueManagement>
   <distributionManagement>
     <site>
+      <id>amber.website</id>
       <name>Apache Amber website</name>
       <url>scp://people.apache.org/www/incubator.apache.org/amber/</url>
     </site>
