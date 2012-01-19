@@ -190,10 +190,14 @@
     <developer>
       <id>asanso</id>
       <name>Antonio Sanso</name>
+      <email>asanso[at]apache[dot]org</email>
+      <organization>Adobe</organization>
+      <organizationUrl>http://www.day.com</organizationUrl>
       <roles>
         <role>PPMC Member</role>
         <role>Committer</role>
       </roles>
+      <timezone>+1</timezone>
     </developer>
   </developers>
 
