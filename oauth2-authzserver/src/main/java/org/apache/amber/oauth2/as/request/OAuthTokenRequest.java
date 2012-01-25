@@ -24,7 +24,7 @@ package org.apache.amber.oauth2.as.request;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.amber.oauth2.as.validator.AuthorizationCodeValidator;
-import org.apache.amber.oauth2.as.validator.AssertionValidator;
+import org.apache.amber.oauth2.as.validator.ClientCredentialValidator;
 import org.apache.amber.oauth2.as.validator.PasswordValidator;
 import org.apache.amber.oauth2.as.validator.RefreshTokenValidator;
 import org.apache.amber.oauth2.common.OAuth;
@@ -48,20 +48,20 @@ public class OAuthTokenRequest extends OAuthRequest {
     }
 
     @Override
-    protected OAuthValidator initValidator() throws OAuthProblemException, OAuthSystemException {
+    protected OAuthValidator<HttpServletRequest> initValidator() throws OAuthProblemException, OAuthSystemException {
         validators.put(GrantType.PASSWORD.toString(), PasswordValidator.class);
-        validators.put(GrantType.ASSERTION.toString(), AssertionValidator.class);
+        validators.put(GrantType.CLIENT_CREDENTIALS.toString(), ClientCredentialValidator.class);
         validators.put(GrantType.AUTHORIZATION_CODE.toString(), AuthorizationCodeValidator.class);
         validators.put(GrantType.REFRESH_TOKEN.toString(), RefreshTokenValidator.class);
         String requestTypeValue = getParam(OAuth.OAUTH_GRANT_TYPE);
         if (OAuthUtils.isEmpty(requestTypeValue)) {
             throw OAuthUtils.handleOAuthProblemException("Missing grant_type parameter value");
         }
-        Class clazz = validators.get(requestTypeValue);
+        Class<? extends OAuthValidator<HttpServletRequest>> clazz = validators.get(requestTypeValue);
         if (clazz == null) {
             throw OAuthUtils.handleOAuthProblemException("Invalid grant_type parameter value");
         }
-        return (OAuthValidator)OAuthUtils.instantiateClass(clazz);
+        return OAuthUtils.instantiateClass(clazz);
     }
 
     public String getPassword() {
@@ -72,14 +72,10 @@ public class OAuthTokenRequest extends OAuthRequest {
         return getParam(OAuth.OAUTH_USERNAME);
     }
 
-    public String getAssertion() {
-        return getParam(OAuth.OAUTH_ASSERTION);
+    public String getRefreshToken() {
+        return getParam(OAuth.OAUTH_REFRESH_TOKEN);
     }
-
-    public String getAssertionType() {
-        return getParam(OAuth.OAUTH_ASSERTION_TYPE);
-    }
-
+    
     public String getCode() {
         return getParam(OAuth.OAUTH_CODE);
     }

@@ -33,7 +33,7 @@ import org.apache.amber.oauth2.common.validators.AbstractValidator;
  * @author Lukasz Moren (lukasz.moren@ncl.ac.uk)
  * @author Aad van Moorsel (aad.vanmoorsel@ncl.ac.uk)
  */
-public class TokenValidator extends AbstractValidator {
+public class TokenValidator extends AbstractValidator<HttpServletRequest> {
 
     public TokenValidator() {
         requiredParams.add(OAuth.OAUTH_RESPONSE_TYPE);

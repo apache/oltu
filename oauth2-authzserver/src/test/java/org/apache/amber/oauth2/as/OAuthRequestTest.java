@@ -21,7 +21,15 @@
 
 package org.apache.amber.oauth2.as;
 
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.reset;
+import static org.easymock.EasyMock.verify;
+import static org.junit.Assert.fail;
+
 import java.util.Set;
+
 import javax.servlet.http.HttpServletRequest;
 
 import junit.framework.Assert;
@@ -35,13 +43,6 @@ import org.apache.amber.oauth2.common.exception.OAuthProblemException;
 import org.apache.amber.oauth2.common.message.types.GrantType;
 import org.apache.amber.oauth2.common.message.types.ResponseType;
 import org.junit.Test;
-
-import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.reset;
-import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.fail;
 
 
 /**
@@ -225,13 +226,12 @@ public class OAuthRequestTest {
         verify(request);
 
         reset(request);
-        expect(request.getParameter(OAuth.OAUTH_GRANT_TYPE))
-            .andStubReturn(GrantType.ASSERTION.toString());
         expect(request.getMethod()).andStubReturn(OAuth.HttpMethod.GET);
         expect(request.getContentType()).andStubReturn(OAuth.ContentType.URL_ENCODED);
 
         expect(request.getParameter(OAuth.OAUTH_CLIENT_ID)).andStubReturn("test_client");
         expect(request.getParameter(OAuth.OAUTH_REDIRECT_URI)).andStubReturn("http://example.com/callback");
+        expect(request.getParameter(OAuth.OAUTH_GRANT_TYPE)).andStubReturn("authorization_code");
         replay(request);
 
         try {
@@ -281,7 +281,7 @@ public class OAuthRequestTest {
         reset(request);
 
         expect(request.getParameter(OAuth.OAUTH_GRANT_TYPE))
-            .andStubReturn(GrantType.NONE.toString());
+            .andStubReturn(null);
         expect(request.getMethod()).andStubReturn(OAuth.HttpMethod.GET);
         expect(request.getContentType()).andStubReturn(OAuth.ContentType.URL_ENCODED);
 
@@ -321,13 +321,13 @@ public class OAuthRequestTest {
         verify(request);
         reset(request);
 
-        expect(request.getParameter(OAuth.OAUTH_GRANT_TYPE))
-            .andStubReturn(GrantType.ASSERTION.toString());
         expect(request.getMethod()).andStubReturn(OAuth.HttpMethod.POST);
         expect(request.getContentType()).andStubReturn(OAuth.ContentType.JSON);
 
         expect(request.getParameter(OAuth.OAUTH_CLIENT_ID)).andStubReturn("test_client");
         expect(request.getParameter(OAuth.OAUTH_REDIRECT_URI)).andStubReturn("http://example.com/callback");
+        expect(request.getParameter(OAuth.OAUTH_GRANT_TYPE)).andStubReturn("authorization_code");
+
         replay(request);
 
         try {
@@ -382,7 +382,7 @@ public class OAuthRequestTest {
         reset(request);
 
         expect(request.getParameter(OAuth.OAUTH_GRANT_TYPE))
-            .andStubReturn(GrantType.NONE.toString());
+            .andStubReturn(null);
         expect(request.getMethod()).andStubReturn(OAuth.HttpMethod.POST);
         expect(request.getContentType()).andStubReturn(OAuth.ContentType.JSON);
 
@@ -535,70 +535,6 @@ public class OAuthRequestTest {
         verify(request);
     }
 
-    @Test
-    public void testTokenAssertionRequestMissingParameter() throws Exception {
-        HttpServletRequest request = createMock(HttpServletRequest.class);
-        expect(request.getParameter(OAuth.OAUTH_GRANT_TYPE))
-            .andStubReturn(GrantType.ASSERTION.toString());
-        expect(request.getMethod()).andStubReturn(OAuth.HttpMethod.POST);
-        expect(request.getContentType()).andStubReturn(OAuth.ContentType.URL_ENCODED);
-        expect(request.getParameter(OAuth.OAUTH_REDIRECT_URI)).andStubReturn("http://www.example.com/red");
-
-        expect(request.getParameter(OAuth.OAUTH_ASSERTION)).andStubReturn(null);
-        expect(request.getParameter(OAuth.OAUTH_ASSERTION_TYPE)).andStubReturn("test_type");
-        replay(request);
-
-        try {
-            new OAuthTokenRequest(request);
-            fail("Exception expected");
-        } catch (OAuthProblemException e) {
-            Assert.assertEquals(OAuthError.TokenResponse.INVALID_REQUEST, e.getError());
-        }
-
-        verify(request);
-
-        reset(request);
-
-        expect(request.getParameter(OAuth.OAUTH_GRANT_TYPE))
-            .andStubReturn(GrantType.ASSERTION.toString());
-        expect(request.getMethod()).andStubReturn(OAuth.HttpMethod.POST);
-        expect(request.getContentType()).andStubReturn(OAuth.ContentType.URL_ENCODED);
-        expect(request.getParameter(OAuth.OAUTH_REDIRECT_URI)).andStubReturn("http://www.example.com/red");
-
-        expect(request.getParameter(OAuth.OAUTH_ASSERTION)).andStubReturn("test_assertion");
-        expect(request.getParameter(OAuth.OAUTH_ASSERTION_TYPE)).andStubReturn(null);
-        replay(request);
-
-        try {
-            new OAuthTokenRequest(request);
-            fail("Exception expected");
-        } catch (OAuthProblemException e) {
-            Assert.assertEquals(OAuthError.TokenResponse.INVALID_REQUEST, e.getError());
-        }
-
-        verify(request);
-
-        reset(request);
-
-        expect(request.getParameter(OAuth.OAUTH_GRANT_TYPE))
-            .andStubReturn(GrantType.ASSERTION.toString());
-        expect(request.getMethod()).andStubReturn(OAuth.HttpMethod.POST);
-        expect(request.getContentType()).andStubReturn(OAuth.ContentType.URL_ENCODED);
-        expect(request.getParameter(OAuth.OAUTH_REDIRECT_URI)).andStubReturn("http://www.example.com/red");
-
-        expect(request.getParameter(OAuth.OAUTH_ASSERTION)).andStubReturn("");
-        expect(request.getParameter(OAuth.OAUTH_ASSERTION_TYPE)).andStubReturn("");
-        replay(request);
-
-        try {
-            new OAuthTokenRequest(request);
-            fail("Exception expected");
-        } catch (OAuthProblemException e) {
-            Assert.assertEquals(OAuthError.TokenResponse.INVALID_REQUEST, e.getError());
-        }
-
-        verify(request);
-    }
 
     @Test
     public void testRefreshTokenRequestMissingParameter() throws Exception {
@@ -720,13 +656,10 @@ public class OAuthRequestTest {
         verify(request);
         reset(request);
 
-        expect(request.getParameter(OAuth.OAUTH_GRANT_TYPE))
-            .andStubReturn(GrantType.ASSERTION.toString());
         expect(request.getMethod()).andStubReturn(OAuth.HttpMethod.POST);
         expect(request.getContentType()).andStubReturn(OAuth.ContentType.URL_ENCODED);
 
-        expect(request.getParameter(OAuth.OAUTH_ASSERTION)).andStubReturn("test_assertion");
-        expect(request.getParameter(OAuth.OAUTH_ASSERTION_TYPE)).andStubReturn("test_type");
+        expect(request.getParameter(OAuth.OAUTH_GRANT_TYPE)).andStubReturn(GrantType.CLIENT_CREDENTIALS.toString());
         replay(request);
 
         try {
@@ -735,8 +668,8 @@ public class OAuthRequestTest {
         } catch (OAuthProblemException e) {
             fail("Exception not expected");
         }
-        Assert.assertEquals("test_assertion", req.getAssertion());
-        Assert.assertEquals("test_type", req.getAssertionType());
+//        Assert.assertEquals("test_assertion", req.getAssertion());
+//        Assert.assertEquals("test_type", req.getAssertionType());
 
         verify(request);
         reset(request);

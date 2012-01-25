@@ -34,7 +34,7 @@ import org.apache.amber.oauth2.common.validators.AbstractValidator;
  * @author Lukasz Moren (lukasz.moren@ncl.ac.uk)
  * @author Aad van Moorsel (aad.vanmoorsel@ncl.ac.uk)
  */
-public class CodeValidator extends AbstractValidator {
+public class CodeValidator extends AbstractValidator<HttpServletRequest> {
 
     public CodeValidator() {
         requiredParams.add(OAuth.OAUTH_RESPONSE_TYPE);

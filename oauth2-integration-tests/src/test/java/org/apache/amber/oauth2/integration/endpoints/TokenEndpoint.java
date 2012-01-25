@@ -63,17 +63,14 @@ public class TokenEndpoint {
 
         try {
             oauthRequest = new OAuthTokenRequest(request);
-
+            
             //check if clientid is valid
-            if (!GrantType.ASSERTION.toString().equals(oauthRequest.getGrantType())) {
-                if (!Common.CLIENT_ID.equals(oauthRequest.getParam(OAuth.OAUTH_CLIENT_ID))) {
-                    OAuthResponse response = OAuthASResponse
-                        .errorResponse(HttpServletResponse.SC_BAD_REQUEST)
-                        .setError(OAuthError.TokenResponse.INVALID_CLIENT)
-                        .setErrorDescription("client_id not found")
+            if (!Common.CLIENT_ID.equals(oauthRequest.getParam(OAuth.OAUTH_CLIENT_ID))) {
+                OAuthResponse response =
+                    OAuthASResponse.errorResponse(HttpServletResponse.SC_BAD_REQUEST)
+                        .setError(OAuthError.TokenResponse.INVALID_CLIENT).setErrorDescription("client_id not found")
                         .buildJSONMessage();
-                    return Response.status(response.getResponseStatus()).entity(response.getBody()).build();
-                }
+                return Response.status(response.getResponseStatus()).entity(response.getBody()).build();
             }
 
             //do checking for different grant types
@@ -98,17 +95,6 @@ public class TokenEndpoint {
                         .buildJSONMessage();
                     return Response.status(response.getResponseStatus()).entity(response.getBody()).build();
                 }
-            } else if (oauthRequest.getParam(OAuth.OAUTH_GRANT_TYPE)
-                .equals(GrantType.ASSERTION.toString())) {
-                if (!Common.ASSERTION.equals(oauthRequest.getAssertion())) {
-                    OAuthResponse response = OAuthASResponse
-                        .errorResponse(HttpServletResponse.SC_BAD_REQUEST)
-                        .setError(OAuthError.TokenResponse.INVALID_GRANT)
-                        .setErrorDescription("invalid assertion")
-                        .buildJSONMessage();
-                    return Response.status(response.getResponseStatus()).entity(response.getBody()).build();
-                }
-
             } else if (oauthRequest.getParam(OAuth.OAUTH_GRANT_TYPE)
                 .equals(GrantType.REFRESH_TOKEN.toString())) {
                 OAuthResponse response = OAuthASResponse

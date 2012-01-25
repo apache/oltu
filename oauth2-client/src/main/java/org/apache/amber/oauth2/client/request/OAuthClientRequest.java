@@ -27,10 +27,10 @@ import java.util.Map;
 import org.apache.amber.oauth2.common.OAuth;
 import org.apache.amber.oauth2.common.exception.OAuthSystemException;
 import org.apache.amber.oauth2.common.message.OAuthMessage;
-import org.apache.amber.oauth2.common.parameters.OAuthParametersApplier;
-import org.apache.amber.oauth2.common.parameters.QueryParameterApplier;
 import org.apache.amber.oauth2.common.message.types.GrantType;
 import org.apache.amber.oauth2.common.parameters.BodyURLEncodedParametersApplier;
+import org.apache.amber.oauth2.common.parameters.OAuthParametersApplier;
+import org.apache.amber.oauth2.common.parameters.QueryParameterApplier;
 
 /**
  * OAuth Client Request
@@ -169,7 +169,7 @@ public class OAuthClientRequest implements OAuthMessage {
         }
 
         public TokenRequestBuilder setGrantType(GrantType grantType) {
-            this.parameters.put(OAuth.OAUTH_GRANT_TYPE, grantType.toString());
+            this.parameters.put(OAuth.OAUTH_GRANT_TYPE, grantType == null ? null : grantType.toString());
             return this;
         }
 
