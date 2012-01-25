@@ -22,6 +22,8 @@
 package org.apache.amber.oauth2.as.validator;
 
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.amber.oauth2.common.OAuth;
 import org.apache.amber.oauth2.common.validators.AbstractValidator;
 
@@ -30,7 +32,7 @@ import org.apache.amber.oauth2.common.validators.AbstractValidator;
  * @author Lukasz Moren (lukasz.moren@ncl.ac.uk)
  * @author Aad van Moorsel (aad.vanmoorsel@ncl.ac.uk)
  */
-public class RefreshTokenValidator extends AbstractValidator {
+public class RefreshTokenValidator extends AbstractValidator<HttpServletRequest> {
 
     public RefreshTokenValidator() {
         requiredParams.add(OAuth.OAUTH_GRANT_TYPE);

@@ -83,7 +83,7 @@ public class AccessTokenTestAuthCodeTest extends ClientServerOAuthTest {
     public void testNoneGrantType() throws Exception {
         OAuthClientRequest request = OAuthClientRequest
             .tokenLocation(Common.ACCESS_TOKEN_ENDPOINT)
-            .setGrantType(GrantType.NONE)
+            .setGrantType(null)
             .setClientId(Common.CLIENT_ID)
             .buildBodyMessage();
 

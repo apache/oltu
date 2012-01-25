@@ -24,6 +24,7 @@ package org.apache.amber.oauth2.as.request;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.amber.oauth2.common.OAuth;
@@ -44,8 +45,9 @@ public abstract class OAuthRequest {
     private Logger log = LoggerFactory.getLogger(OAuthRequest.class);
 
     protected HttpServletRequest request;
-    protected OAuthValidator validator;
-    protected Map<String, Class> validators = new HashMap<String, Class>();
+    protected OAuthValidator<HttpServletRequest> validator;
+    protected Map<String, Class<? extends OAuthValidator<HttpServletRequest>>> validators =
+        new HashMap<String, Class<? extends OAuthValidator<HttpServletRequest>>>();
 
     public OAuthRequest(HttpServletRequest request) throws OAuthSystemException, OAuthProblemException {
         this.request = request;
@@ -69,8 +71,7 @@ public abstract class OAuthRequest {
                 }
             } catch (Exception ex) {
                 if (log.isDebugEnabled()) {
-                    log.debug("Cannot read redirect_url from the request: {}",
-                        new String[] {ex.getMessage()});
+                    log.debug("Cannot read redirect_url from the request: {}", new String[] {ex.getMessage()});
                 }
             }
 
@@ -79,14 +80,11 @@ public abstract class OAuthRequest {
 
     }
 
-    protected abstract OAuthValidator initValidator() throws OAuthProblemException, OAuthSystemException;
+    protected abstract OAuthValidator<HttpServletRequest> initValidator() throws OAuthProblemException,
+        OAuthSystemException;
 
     public String getParam(String name) {
         return request.getParameter(name);
-    }
-
-    public String getRefreshToken() {
-        return getParam(OAuth.OAUTH_REFRESH_TOKEN);
     }
 
     public String getClientId() {

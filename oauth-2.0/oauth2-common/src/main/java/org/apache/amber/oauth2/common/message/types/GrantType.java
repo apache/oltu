@@ -27,13 +27,11 @@ package org.apache.amber.oauth2.common.message.types;
  * @author Aad van Moorsel (aad.vanmoorsel@ncl.ac.uk)
  */
 public enum GrantType {
+    // NONE("none"),
     AUTHORIZATION_CODE("authorization_code"),
     PASSWORD("password"),
-    @Deprecated
-    ASSERTION("assertion"),
     REFRESH_TOKEN("refresh_token"),
-    CLIENT_CREDENTIALS("client_credentials"),
-    NONE("none");
+    CLIENT_CREDENTIALS("client_credentials");
 
     private String grantType;
 

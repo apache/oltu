@@ -29,9 +29,7 @@ package org.apache.amber.oauth2.common.message.types;
 public enum ResponseType {
 
     CODE("code"),
-    TOKEN("token"),
-    @Deprecated
-    CODE_AND_TOKEN("code_and_token");
+    TOKEN("token");
 
     private String code;
 

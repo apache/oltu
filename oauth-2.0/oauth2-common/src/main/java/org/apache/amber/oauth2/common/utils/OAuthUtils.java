@@ -39,6 +39,7 @@ import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.amber.oauth2.common.OAuth;
@@ -289,9 +290,9 @@ public final class OAuthUtils {
         return false;
     }
 
-    public static Object instantiateClass(Class clazz) throws OAuthSystemException {
+    public static <T> T instantiateClass(Class<T> clazz) throws OAuthSystemException {
         try {
-            return (Object)clazz.newInstance();
+            return (T)clazz.newInstance();
         } catch (Exception e) {
             throw new OAuthSystemException(e);
         }

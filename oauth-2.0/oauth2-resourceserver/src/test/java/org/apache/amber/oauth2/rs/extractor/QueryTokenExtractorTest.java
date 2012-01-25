@@ -21,18 +21,17 @@
 
 package org.apache.amber.oauth2.rs.extractor;
 
+import static org.easymock.EasyMock.createStrictMock;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.verify;
+
 import javax.servlet.http.HttpServletRequest;
 
 import junit.framework.Assert;
 
 import org.apache.amber.oauth2.common.OAuth;
-import org.apache.amber.oauth2.rs.extractor.QueryTokenExtractor;
 import org.junit.Test;
-
-import static org.easymock.EasyMock.createStrictMock;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.verify;
 
 
 /**
@@ -59,6 +58,7 @@ public class QueryTokenExtractorTest {
 
         HttpServletRequest request = createStrictMock(HttpServletRequest.class);
         expect(request.getParameter(OAuth.OAUTH_TOKEN)).andStubReturn(null);
+        expect(request.getParameter(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(null);
         replay(request);
         QueryTokenExtractor qte = new QueryTokenExtractor();
         Assert.assertNull(qte.getAccessToken(request));
