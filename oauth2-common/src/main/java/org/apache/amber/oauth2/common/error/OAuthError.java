@@ -39,15 +39,12 @@ public abstract class OAuthError {
         unsupported parameter value, or is otherwise malformed.
          */
         public static final String INVALID_REQUEST = "invalid_request";
-
-        public static final String INVALID_CLIENT = "invalid_client";
-
+        
         /**
          * The client is not authorized to request an authorization
         code using this method.
          */
         public static final String UNAUTHORIZED_CLIENT = "unauthorized_client";
-        public static final String REDIRECT_URI_MISMATCH = "redirect_uri_mismatch";
 
         /**
          * The resource owner or authorization server denied the
@@ -89,7 +86,6 @@ public abstract class OAuthError {
         mechanism for authenticating the client, or is otherwise
         malformed.
         */
-
         public static final String INVALID_REQUEST = "invalid_request";
         /**
         Client authentication failed (e.g. unknown client, no
@@ -129,15 +125,32 @@ public abstract class OAuthError {
         /**
          * The requested scope is invalid, unknown, malformed, or exceeds the scope granted by the resource owner.
          */
-
         public static final String INVALID_SCOPE = "invalid_scope";
-        public static final String REDIRECT_URI_MISMATCH = "redirect_uri_mismatch";
     }
 
     public static final class ResourceResponse {
+    	/**
+        The request is missing a required parameter, includes an
+        unsupported parameter value, repeats a parameter,
+        includes multiple credentials, utilizes more than one
+        mechanism for authenticating the client, or is otherwise
+        malformed.
+        */
         public static final String INVALID_REQUEST = "invalid_request";
+        
+        
         public static final String EXPIRED_TOKEN = "expired_token";
+        
+        /**
+         * The request requires higher privileges than provided by the
+         * access token.
+         */
         public static final String INSUFFICIENT_SCOPE = "insufficient_scope";
+        
+        /**
+         * The access token provided is expired, revoked, malformed, or
+         * invalid for other reasons.
+         */
         public static final String INVALID_TOKEN = "invalid_token";
     }
 
