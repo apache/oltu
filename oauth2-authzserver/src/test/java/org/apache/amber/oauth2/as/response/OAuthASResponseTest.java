@@ -21,6 +21,12 @@
 
 package org.apache.amber.oauth2.as.response;
 
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.replay;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.amber.oauth2.common.OAuth;
 import org.apache.amber.oauth2.common.error.OAuthError;
 import org.apache.amber.oauth2.common.exception.OAuthProblemException;
@@ -37,7 +43,8 @@ public class OAuthASResponseTest {
 
     @Test
     public void testAuthzResponse() throws Exception {
-        OAuthResponse oAuthResponse = OAuthASResponse.authorizationResponse(200)
+    	HttpServletRequest request = createMock(HttpServletRequest.class);
+        OAuthResponse oAuthResponse = OAuthASResponse.authorizationResponse(request,200)
             .location("http://www.example.com")
             .setCode("code")
             .setAccessToken("access_111")
@@ -47,12 +54,34 @@ public class OAuthASResponseTest {
             .buildQueryMessage();
 
         String url = oAuthResponse.getLocationUri();
-
+         
         Assert.assertEquals("http://www.example.com?testValue=value2&code=code"
             + "#access_token=access_111&state=ok&expires_in=400", url);
         Assert.assertEquals(200, oAuthResponse.getResponseStatus());
 
     }
+    
+    @Test
+    public void testAuthzResponseWithState() throws Exception {
+    	HttpServletRequest request = createMock(HttpServletRequest.class);
+    	expect(request.getParameter(OAuth.OAUTH_STATE)).andStubReturn("ok");
+    	replay(request);
+        OAuthResponse oAuthResponse = OAuthASResponse.authorizationResponse(request,200)
+            .location("http://www.example.com")
+            .setCode("code")
+            .setAccessToken("access_111")
+            .setExpiresIn("400")
+            .setParam("testValue", "value2")
+            .buildQueryMessage();
+
+        String url = oAuthResponse.getLocationUri();
+ 
+        Assert.assertEquals("http://www.example.com?testValue=value2&code=code"
+            + "#access_token=access_111&state=ok&expires_in=400", url);
+        Assert.assertEquals(200, oAuthResponse.getResponseStatus());
+
+    }
+
 
     @Test
     public void testTokenResponse() throws Exception {
@@ -125,7 +154,8 @@ public class OAuthASResponseTest {
 
     @Test
     public void testHeaderResponse() throws Exception {
-        OAuthResponse oAuthResponse = OAuthASResponse.authorizationResponse(400).setCode("oauth_code")
+    	HttpServletRequest request = createMock(HttpServletRequest.class);
+        OAuthResponse oAuthResponse = OAuthASResponse.authorizationResponse(request,400).setCode("oauth_code")
             .setState("state_ok")
             .buildHeaderMessage();
 
