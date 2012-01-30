@@ -66,7 +66,7 @@ public class AuthzEndpoint {
             String responseType = oauthRequest.getParam(OAuth.OAUTH_RESPONSE_TYPE);
 
             OAuthASResponse.OAuthAuthorizationResponseBuilder builder = OAuthASResponse
-                .authorizationResponse(HttpServletResponse.SC_FOUND);
+                .authorizationResponse(request,HttpServletResponse.SC_FOUND);
 
             if (responseType.equals(ResponseType.CODE.toString())) {
                 builder.setCode(oauthIssuerImpl.authorizationCode());

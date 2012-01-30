@@ -22,6 +22,8 @@
 package org.apache.amber.oauth2.as.response;
 
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.amber.oauth2.common.OAuth;
 import org.apache.amber.oauth2.common.message.OAuthResponse;
 
@@ -36,8 +38,8 @@ public class OAuthASResponse extends OAuthResponse {
         super(uri, responseStatus);
     }
 
-    public static OAuthAuthorizationResponseBuilder authorizationResponse(int code) {
-        return new OAuthAuthorizationResponseBuilder(code);
+    public static OAuthAuthorizationResponseBuilder authorizationResponse(HttpServletRequest request,int code) {
+        return new OAuthAuthorizationResponseBuilder(request,code);
     }
 
     public static OAuthTokenResponseBuilder tokenResponse(int code) {
@@ -46,11 +48,16 @@ public class OAuthASResponse extends OAuthResponse {
 
     public static class OAuthAuthorizationResponseBuilder extends OAuthResponseBuilder {
 
-        public OAuthAuthorizationResponseBuilder(int responseCode) {
+        public OAuthAuthorizationResponseBuilder(HttpServletRequest request,int responseCode) {
             super(responseCode);
+            //AMBER-45
+            String state=request.getParameter(OAuth.OAUTH_STATE);
+            if (state!=null){
+            	this.setState(state);
+            }
         }
 
-        public OAuthAuthorizationResponseBuilder setState(String state) {
+        OAuthAuthorizationResponseBuilder setState(String state) {
             this.parameters.put(OAuth.OAUTH_STATE, state);
             return this;
         }
