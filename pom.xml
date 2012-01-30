@@ -226,12 +226,7 @@
       <archive>http://mail-archives.apache.org/mod_mbox/incubator-amber-commits/</archive>
     </mailingList>
   </mailingLists>
-  
-  <ciManagement>
-    <system>Jenkins</system>
-    <url>https://builds.apache.org/job/Amber/</url>
-  </ciManagement>  
- 
+
   <modules>
     <module>spec-api</module>
     <module>signature-api</module>
@@ -249,6 +244,10 @@
     <system>JIRA</system>
     <url>https://issues.apache.org/jira/browse/AMBER</url>
   </issueManagement>
+  <ciManagement>
+    <system>Jenkins</system>
+    <url>https://builds.apache.org/job/Amber/</url>
+  </ciManagement>  
   <distributionManagement>
     <site>
       <id>amber.website</id>
