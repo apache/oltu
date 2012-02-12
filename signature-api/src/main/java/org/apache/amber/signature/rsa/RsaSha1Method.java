@@ -20,15 +20,13 @@ import java.security.Signature;
 
 import org.apache.amber.signature.AbstractMethod;
 import org.apache.amber.signature.SignatureException;
-import org.apache.amber.signature.SigningKey;
-import org.apache.amber.signature.VerifyingKey;
 
 /**
  * RSA-SHA1 Method implementation.
  *
  * @version $Id$
  */
-public final class RsaSha1Method extends AbstractMethod {
+public final class RsaSha1Method extends AbstractMethod<RsaSha1SigningKey, RsaSha1VerifyingKey> {
 
     /**
      * RSA+SHA1 algorithm name.
@@ -52,12 +50,12 @@ public final class RsaSha1Method extends AbstractMethod {
      * {@inheritDoc}
      */
     @Override
-    protected String calculate(SigningKey signingKey,
+    protected String calculate(RsaSha1SigningKey signingKey,
             String tokenSecret,
             String baseString) throws SignatureException {
         try {
             Signature signer = Signature.getInstance(RSA_SHA1_ALGORITHM);
-            signer.initSign(((RsaSha1SigningKey) signingKey).getPrivateKey());
+            signer.initSign(signingKey.getPrivateKey());
             signer.update(toUTF8Bytes(baseString));
             byte[] signature = signer.sign();
 
@@ -73,12 +71,12 @@ public final class RsaSha1Method extends AbstractMethod {
      */
     @Override
     protected boolean verify(String signature,
-            VerifyingKey verifyingKey,
+            RsaSha1VerifyingKey verifyingKey,
             String tokenSecret,
             String baseString) throws SignatureException {
         try {
             Signature verifier = Signature.getInstance(RSA_SHA1_ALGORITHM);
-            verifier.initVerify(((RsaSha1VerifyingKey) verifyingKey).getPublicKey());
+            verifier.initVerify(verifyingKey.getPublicKey());
             verifier.update(toUTF8Bytes(baseString));
 
             return verifier.verify(decodeBase64(signature));

@@ -24,7 +24,7 @@ import org.apache.amber.OAuthToken;
  *
  * @version $Id$
  */
-public interface SignatureMethod {
+public interface SignatureMethod<SK extends SigningKey, VK extends VerifyingKey> {
 
     /**
      * Returns the signing algorithm method.
@@ -43,7 +43,7 @@ public interface SignatureMethod {
      * @return the calculated signature.
      * @throws SignatureException if any error occurs.
      */
-    String calculate(SigningKey signingKey,
+    String calculate(SK signingKey,
             OAuthToken token,
             OAuthRequest request) throws SignatureException;
 
@@ -59,7 +59,7 @@ public interface SignatureMethod {
      * @throws SignatureException if any error occurs.
      */
     boolean verify(String signature,
-            VerifyingKey verifyingKey,
+            VK verifyingKey,
             OAuthToken token,
             OAuthRequest request) throws SignatureException;
 

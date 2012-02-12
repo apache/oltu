@@ -26,7 +26,7 @@ import org.apache.amber.signature.VerifyingKey;
  *
  * @version $Id$
  */
-public final class PlaintextMethod extends AbstractMethod {
+public final class PlaintextMethod extends AbstractMethod<SigningKey, VerifyingKey> {
 
     private static final String PLAINTEXT = "PLAINTEXT";
 

@@ -38,7 +38,8 @@ import org.apache.commons.logging.LogFactory;
  *
  * @version $Id$
  */
-public abstract class AbstractMethod implements SignatureMethod {
+public abstract class AbstractMethod<SK extends SigningKey, VK extends VerifyingKey>
+    implements SignatureMethod<SK, VK> {
 
     /**
      * HTTP protocol name.
@@ -123,7 +124,7 @@ public abstract class AbstractMethod implements SignatureMethod {
     /**
      * {@inheritDoc}
      */
-    public final String calculate(SigningKey signingKey,
+    public final String calculate(SK signingKey,
             OAuthToken token,
             OAuthRequest request) throws SignatureException {
         if (signingKey == null) {
@@ -148,13 +149,13 @@ public abstract class AbstractMethod implements SignatureMethod {
      * @return the calculated signature.
      * @throws SignatureException if any error occurs.
      */
-    protected abstract String calculate(SigningKey signingKey, String tokenSecret, String baseString) throws SignatureException;
+    protected abstract String calculate(SK signingKey, String tokenSecret, String baseString) throws SignatureException;
 
     /**
      * {@inheritDoc}
      */
     public final boolean verify(String signature,
-            VerifyingKey verifyingKey,
+            VK verifyingKey,
             OAuthToken token,
             OAuthRequest request) throws SignatureException {
         if (signature == null) {
@@ -183,7 +184,7 @@ public abstract class AbstractMethod implements SignatureMethod {
      * @return true if the signature is verified, false otherwise.
      * @throws SignatureException if any error occurs.
      */
-    protected abstract boolean verify(String signature, VerifyingKey verifyingKey, String tokenSecret, String baseString) throws SignatureException;
+    protected abstract boolean verify(String signature, VK verifyingKey, String tokenSecret, String baseString) throws SignatureException;
 
     /**
      *

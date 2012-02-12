@@ -35,8 +35,8 @@ import org.apache.amber.Version;
  */
 public abstract class AbstractMethodTestCase {
 
-    protected void verifySignature(VerifyingKey verifyingKey,
-            SignatureMethod signatureMethod,
+    protected <SK extends SigningKey, VK extends VerifyingKey> void verifySignature(VK verifyingKey,
+            SignatureMethod<SK, VK> signatureMethod,
             String expectedSignature) throws Exception {
         OAuthRequest request = new FakeOAuthRequest();
         request.setRequestURL(URI.create("http://photos.example.net/photos"));

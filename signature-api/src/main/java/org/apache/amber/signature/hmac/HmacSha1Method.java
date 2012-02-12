@@ -32,7 +32,7 @@ import org.apache.amber.signature.VerifyingKey;
  *
  * @version $Id$
  */
-public final class HmacSha1Method extends AbstractMethod {
+public final class HmacSha1Method extends AbstractMethod<SigningKey, VerifyingKey> {
 
     private static final String HMAC_SHA1 = "HMAC-SHA1";
 
