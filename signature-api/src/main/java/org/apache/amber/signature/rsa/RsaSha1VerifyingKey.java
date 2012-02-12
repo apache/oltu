@@ -17,43 +17,38 @@
 package org.apache.amber.signature.rsa;
 
 import java.io.File;
-import java.io.InputStream;
 import java.net.URL;
-import java.security.interfaces.RSAPublicKey;
+import java.security.GeneralSecurityException;
+import java.security.PublicKey;
 
 import org.apache.amber.signature.SignatureException;
 import org.apache.amber.signature.VerifyingKey;
 
 /**
- * 
+ *
  *
  * @version $Id$
  */
-public final class PemRsaSha1VerifyingKey
-        extends AbstractRsaSha1Key<RSAPublicKey>
+public final class RsaSha1VerifyingKey
+        extends AbstractRsaSha1Key
         implements VerifyingKey {
 
-    public PemRsaSha1VerifyingKey(File certificateFileLocation)
+    public RsaSha1VerifyingKey(File certificateFileLocation, String password)
             throws SignatureException {
-        super(certificateFileLocation);
+        super(certificateFileLocation, password);
     }
 
-    public PemRsaSha1VerifyingKey(String certificateClasspathLocation)
+    public RsaSha1VerifyingKey(String certificateClasspathLocation, String password)
             throws SignatureException {
-        super(certificateClasspathLocation);
+        super(certificateClasspathLocation, password);
     }
 
-    public PemRsaSha1VerifyingKey(URL certificateURL) throws SignatureException {
-        super(certificateURL);
+    public RsaSha1VerifyingKey(URL certificateURL, String password) throws SignatureException {
+        super(certificateURL, password);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected RSAPublicKey readCertificate(InputStream input) throws Exception {
-        PemCertificateParser pemCertificateParser = new PemCertificateParser(input);
-        return pemCertificateParser.parsePublicCertificate();
+    public PublicKey getPublicKey() throws GeneralSecurityException {
+        return getRsaKey().getPublicKey();
     }
 
 }

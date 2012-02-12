@@ -186,7 +186,7 @@ public abstract class AbstractMethod implements SignatureMethod {
     protected abstract boolean verify(String signature, VerifyingKey verifyingKey, String tokenSecret, String baseString) throws SignatureException;
 
     /**
-     * 
+     *
      *
      * @param key
      * @throws SignatureException

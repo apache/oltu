@@ -17,8 +17,6 @@
 package org.apache.amber.signature.rsa;
 
 import java.security.Signature;
-import java.security.interfaces.RSAPrivateKey;
-import java.security.interfaces.RSAPublicKey;
 
 import org.apache.amber.signature.AbstractMethod;
 import org.apache.amber.signature.SignatureException;
@@ -54,13 +52,12 @@ public final class RsaSha1Method extends AbstractMethod {
      * {@inheritDoc}
      */
     @Override
-    @SuppressWarnings("unchecked")
     protected String calculate(SigningKey signingKey,
             String tokenSecret,
             String baseString) throws SignatureException {
         try {
             Signature signer = Signature.getInstance(RSA_SHA1_ALGORITHM);
-            signer.initSign(((AbstractRsaSha1Key<RSAPrivateKey>) signingKey).getRsaKey());
+            signer.initSign(((RsaSha1SigningKey) signingKey).getPrivateKey());
             signer.update(toUTF8Bytes(baseString));
             byte[] signature = signer.sign();
 
@@ -75,14 +72,13 @@ public final class RsaSha1Method extends AbstractMethod {
      * {@inheritDoc}
      */
     @Override
-    @SuppressWarnings("unchecked")
     protected boolean verify(String signature,
             VerifyingKey verifyingKey,
             String tokenSecret,
             String baseString) throws SignatureException {
         try {
             Signature verifier = Signature.getInstance(RSA_SHA1_ALGORITHM);
-            verifier.initVerify(((AbstractRsaSha1Key<RSAPublicKey>) verifyingKey).getRsaKey());
+            verifier.initVerify(((RsaSha1VerifyingKey) verifyingKey).getPublicKey());
             verifier.update(toUTF8Bytes(baseString));
 
             return verifier.verify(decodeBase64(signature));

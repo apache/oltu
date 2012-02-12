@@ -17,43 +17,37 @@
 package org.apache.amber.signature.rsa;
 
 import java.io.File;
-import java.io.InputStream;
 import java.net.URL;
-import java.security.interfaces.RSAPrivateKey;
+import java.security.PrivateKey;
 
 import org.apache.amber.signature.SignatureException;
 import org.apache.amber.signature.SigningKey;
 
 /**
- * 
+ *
  *
  * @version $Id$
  */
-public final class PemRsaSha1SigningKey
-        extends AbstractRsaSha1Key<RSAPrivateKey>
+public final class RsaSha1SigningKey
+        extends AbstractRsaSha1Key
         implements SigningKey {
 
-    public PemRsaSha1SigningKey(File certificateFileLocation)
+    public RsaSha1SigningKey(File certificateFileLocation, String password)
             throws SignatureException {
-        super(certificateFileLocation);
+        super(certificateFileLocation, password);
     }
 
-    public PemRsaSha1SigningKey(String certificateClasspathLocation)
+    public RsaSha1SigningKey(String certificateClasspathLocation, String password)
             throws SignatureException {
-        super(certificateClasspathLocation);
+        super(certificateClasspathLocation, password);
     }
 
-    public PemRsaSha1SigningKey(URL certificateURL) throws SignatureException {
-        super(certificateURL);
+    public RsaSha1SigningKey(URL certificateURL, String password) throws SignatureException {
+        super(certificateURL, password);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected RSAPrivateKey readCertificate(InputStream input) throws Exception {
-        PemCertificateParser pemCertificateParser = new PemCertificateParser(input);
-        return pemCertificateParser.parsePrivateKey();
+    public PrivateKey getPrivateKey() {
+        return getRsaKey().getPrivateKey();
     }
 
 }

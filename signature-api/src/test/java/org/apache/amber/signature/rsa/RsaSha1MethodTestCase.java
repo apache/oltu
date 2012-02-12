@@ -17,24 +17,20 @@
 package org.apache.amber.signature.rsa;
 
 import org.apache.amber.signature.AbstractMethodTestCase;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
- * 
+ *
  *
  * @version $Id$
  */
 public final class RsaSha1MethodTestCase extends AbstractMethodTestCase {
 
-    // TODO delete me once next test will be re-enabled
     @Test
-    public void doNothing() {
-        // do nothing
-    }
-
-    // TODO test disabled, expected signature has to be calculated
+    @Ignore
     public void verifyRsaSha1MethodAlgorithm() throws Exception {
-        this.verifySignature(new PemRsaSha1VerifyingKey("kd94hf93k423kf44"),
+        this.verifySignature(new RsaSha1VerifyingKey("org/apache/amber/signature/rsa/public.pem", ""),
                 new RsaSha1Method(),
                 "kd94hf93k423kf44&pfkkdhi9sl3r4s00");
     }

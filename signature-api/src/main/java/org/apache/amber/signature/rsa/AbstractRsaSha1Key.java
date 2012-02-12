@@ -24,26 +24,29 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
+import org.apache.amber.signature.Key;
 import org.apache.amber.signature.SignatureException;
+import org.apache.commons.ssl.PKCS8Key;
 
 /**
  * Abstract implementation of RSA-SHA1 key.
  *
  * @version $Id$
  */
-abstract class AbstractRsaSha1Key<T extends java.security.Key> implements org.apache.amber.signature.Key {
+abstract class AbstractRsaSha1Key implements Key {
 
     private static final String[] METHODS = { "RSA-SHA1" };
 
-    private final T rsaKey;
+    private final PKCS8Key rsaKey;
 
     /**
      * Loads a key from a certificate located in the classpath.
      *
      * @param certificateClasspathLocation
+     * @param the certificate password
      * @throws SignatureException
      */
-    public AbstractRsaSha1Key(String certificateClasspathLocation) throws SignatureException {
+    public AbstractRsaSha1Key(String certificateClasspathLocation, String password) throws SignatureException {
         if (certificateClasspathLocation == null) {
             throw new SignatureException("parameter 'certificateClasspathLocation' must not be null");
         }
@@ -62,16 +65,17 @@ abstract class AbstractRsaSha1Key<T extends java.security.Key> implements org.ap
                     + "' not found, please make sure it exists in the classpath");
         }
 
-        this.rsaKey = this.readCertificate(certificateURL);
+        this.rsaKey = this.readCertificate(certificateURL, password);
     }
 
     /**
      * Loads a key from a certificate located in a file.
      *
      * @param certificateFileLocation
+     * @param the certificate password
      * @throws SignatureException
      */
-    public AbstractRsaSha1Key(File certificateFileLocation) throws SignatureException {
+    public AbstractRsaSha1Key(File certificateFileLocation, String password) throws SignatureException {
         if (certificateFileLocation == null) {
             throw new SignatureException("parameter 'certificateFileLocation' must not be null");
         }
@@ -82,7 +86,7 @@ abstract class AbstractRsaSha1Key<T extends java.security.Key> implements org.ap
         }
 
         try {
-            this.rsaKey = this.readCertificate(certificateFileLocation.toURI().toURL());
+            this.rsaKey = this.readCertificate(certificateFileLocation.toURI().toURL(), password);
         } catch (MalformedURLException e) {
             throw new SignatureException("Impossible to read the certificate from '"
                     + certificateFileLocation
@@ -94,25 +98,32 @@ abstract class AbstractRsaSha1Key<T extends java.security.Key> implements org.ap
      * Loads a key from a certificate located in an URL.
      *
      * @param certificateURL
+     * @param the certificate password
      * @throws SignatureException
      */
-    public AbstractRsaSha1Key(URL certificateURL) throws SignatureException {
+    public AbstractRsaSha1Key(URL certificateURL, String password) throws SignatureException {
         if (certificateURL == null) {
             throw new SignatureException("parameter 'certificateURL' must not be null");
         }
 
-        this.rsaKey = this.readCertificate(certificateURL);
+        this.rsaKey = this.readCertificate(certificateURL, password);
     }
 
-    private T readCertificate(URL certificateURL) throws SignatureException {
+    private PKCS8Key readCertificate(URL certificateURL, String password) throws SignatureException {
         URLConnection urlConnection = null;
         InputStream input = null;
+
+        if (password == null) {
+            password = "";
+        }
+
+        final char[] pwd = password.toCharArray();
 
         try {
             urlConnection = certificateURL.openConnection();
             input = urlConnection.getInputStream();
 
-            return this.readCertificate(input);
+            return new PKCS8Key(input, pwd);
         } catch (Exception e) {
             throw new SignatureException("Impossible to read the certificate from '"
                     + certificateURL
@@ -132,16 +143,14 @@ abstract class AbstractRsaSha1Key<T extends java.security.Key> implements org.ap
         }
     }
 
-    public final T getRsaKey() {
-        return this.rsaKey;
+    protected PKCS8Key getRsaKey() {
+        return rsaKey;
     }
 
     @Override
     public final String getValue() {
         return String.valueOf(this.rsaKey);
     }
-
-    protected abstract T readCertificate(InputStream input) throws Exception;
 
     /**
      * {@inheritDoc}
