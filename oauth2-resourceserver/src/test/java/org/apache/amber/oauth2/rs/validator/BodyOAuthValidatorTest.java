@@ -21,6 +21,11 @@
 
 package org.apache.amber.oauth2.rs.validator;
 
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.verify;
+
 import javax.servlet.http.HttpServletRequest;
 
 import junit.framework.Assert;
@@ -28,13 +33,7 @@ import junit.framework.Assert;
 import org.apache.amber.oauth2.common.OAuth;
 import org.apache.amber.oauth2.common.error.OAuthError;
 import org.apache.amber.oauth2.common.exception.OAuthProblemException;
-import org.apache.amber.oauth2.rs.validator.BodyOAuthValidator;
 import org.junit.Test;
-
-import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.verify;
 
 /**
  * @author Maciej Machulak (m.p.machulak@ncl.ac.uk)
@@ -101,7 +100,7 @@ public class BodyOAuthValidatorTest {
         expect(request.getMethod()).andStubReturn(OAuth.HttpMethod.POST);
         expect(request.getContentType()).andStubReturn(OAuth.ContentType.URL_ENCODED);
         expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn("HMAC-SHA1");
-        expect(request.getParameterValues(OAuth.OAUTH_TOKEN)).andStubReturn(new String[] {"access_token"});
+        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(new String[] {"access_token"});
         replay(request);
         try {
             BodyOAuthValidator bov = new BodyOAuthValidator();
@@ -120,6 +119,7 @@ public class BodyOAuthValidatorTest {
         expect(request.getMethod()).andStubReturn(OAuth.HttpMethod.POST);
         expect(request.getContentType()).andStubReturn(OAuth.ContentType.URL_ENCODED);
         expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn(null);
+        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(null);
         expect(request.getParameterValues(OAuth.OAUTH_TOKEN)).andStubReturn(null);
         replay(request);
         try {
@@ -139,7 +139,7 @@ public class BodyOAuthValidatorTest {
         expect(request.getMethod()).andStubReturn(OAuth.HttpMethod.POST);
         expect(request.getContentType()).andStubReturn(OAuth.ContentType.URL_ENCODED);
         expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn(null);
-        expect(request.getParameterValues(OAuth.OAUTH_TOKEN))
+        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN))
             .andStubReturn(new String[] {"access_token1", "access_token2"});
         replay(request);
         try {
@@ -159,7 +159,7 @@ public class BodyOAuthValidatorTest {
         expect(request.getMethod()).andStubReturn(OAuth.HttpMethod.POST);
         expect(request.getContentType()).andStubReturn(OAuth.ContentType.URL_ENCODED);
         expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn(null);
-        expect(request.getParameterValues(OAuth.OAUTH_TOKEN)).andStubReturn(new String[] {"access_token"});
+        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(new String[] {"access_token"});
         replay(request);
         BodyOAuthValidator bov = new BodyOAuthValidator();
         bov.performAllValidations(request);
