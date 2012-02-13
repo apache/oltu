@@ -46,7 +46,7 @@ public class HeaderTokenExtractorTest {
     public void testGetAccessToken() throws Exception {
 
         HttpServletRequest request = createStrictMock(HttpServletRequest.class);
-        expect(request.getHeader(OAuth.HeaderType.AUTHORIZATION)).andStubReturn("OAuth sometoken");
+        expect(request.getHeader(OAuth.HeaderType.AUTHORIZATION)).andStubReturn("Bearer sometoken");
         replay(request);
         HeaderTokenExtractor hte = new HeaderTokenExtractor();
         Assert.assertEquals("sometoken", hte.getAccessToken(request));

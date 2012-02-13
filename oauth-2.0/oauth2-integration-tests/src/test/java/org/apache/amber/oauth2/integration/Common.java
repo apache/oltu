@@ -48,15 +48,15 @@ public final class Common {
     public static final String OAUTH_VERSION_2_INSUFFICIENT = ACCESS_TOKEN_INSUFFICIENT;
 
     public static final String OAUTH_URL_ENCODED_VERSION_1 = OAUTH_VERSION_1;
-    public static final String OAUTH_URL_ENCODED_VERSION_2 = "oauth_token=" + OAUTH_VERSION_2;
-    public static final String OAUTH_URL_ENCODED_VERSION_2_EXPIRED = "oauth_token=" + OAUTH_VERSION_2_EXPIRED;
-    public static final String OAUTH_URL_ENCODED_VERSION_2_INSUFFICIENT = "oauth_token="
+    public static final String OAUTH_URL_ENCODED_VERSION_2 = "access_token=" + OAUTH_VERSION_2;
+    public static final String OAUTH_URL_ENCODED_VERSION_2_EXPIRED = "access_token=" + OAUTH_VERSION_2_EXPIRED;
+    public static final String OAUTH_URL_ENCODED_VERSION_2_INSUFFICIENT = "access_token="
         + OAUTH_VERSION_2_INSUFFICIENT;
 
     public static final String AUTHORIZATION_HEADER_OAUTH1 = "OAuth " + OAUTH_VERSION_1;
-    public static final String AUTHORIZATION_HEADER_OAUTH2 = "OAuth " + OAUTH_VERSION_2;
-    public static final String AUTHORIZATION_HEADER_OAUTH2_EXPIRED = "OAuth " + OAUTH_VERSION_2_EXPIRED;
-    public static final String AUTHORIZATION_HEADER_OAUTH2_INSUFFICIENT = "OAuth "
+    public static final String AUTHORIZATION_HEADER_OAUTH2 = "Bearer " + OAUTH_VERSION_2;
+    public static final String AUTHORIZATION_HEADER_OAUTH2_EXPIRED = "Bearer " + OAUTH_VERSION_2_EXPIRED;
+    public static final String AUTHORIZATION_HEADER_OAUTH2_INSUFFICIENT = "Bearer "
         + OAUTH_VERSION_2_INSUFFICIENT;
 
     public static final String BODY_OAUTH1 = OAUTH_URL_ENCODED_VERSION_1;

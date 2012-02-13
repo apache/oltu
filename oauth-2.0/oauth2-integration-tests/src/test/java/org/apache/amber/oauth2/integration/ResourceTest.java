@@ -80,10 +80,10 @@ public class ResourceTest extends ClientResourceOAuthTest {
             httpURLConnection.setAllowUserInteraction(false);
             httpURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             httpURLConnection.setRequestProperty("Content-Length",
-                Integer.toString("oauth_token=randominvalidtoken".length()));
+                Integer.toString("access_token=randominvalidtoken".length()));
             OutputStream ost = httpURLConnection.getOutputStream();
             PrintWriter pw = new PrintWriter(ost);
-            pw.print("oauth_token=randominvalidtoken");
+            pw.print("access_token=randominvalidtoken");
             pw.flush();
             pw.close();
 
@@ -123,10 +123,10 @@ public class ResourceTest extends ClientResourceOAuthTest {
             httpURLConnection.setAllowUserInteraction(false);
             httpURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             httpURLConnection.setRequestProperty("Content-Length",
-                Integer.toString("oauth_token=randominvalidtoken&oauth_signature_method=HMAC-SHA1".length()));
+                Integer.toString("access_token=randominvalidtoken&oauth_signature_method=HMAC-SHA1".length()));
             OutputStream ost = httpURLConnection.getOutputStream();
             PrintWriter pw = new PrintWriter(ost);
-            pw.print("oauth_token=randominvalidtoken&oauth_signature_method=HMAC-SHA1");
+            pw.print("access_token=randominvalidtoken&oauth_signature_method=HMAC-SHA1");
             pw.flush();
             pw.close();
 
@@ -215,7 +215,7 @@ public class ResourceTest extends ClientResourceOAuthTest {
     public void testResourceAccessQueryInvalidToken() throws Exception {
 
         URL url = new URL(Common.RESOURCE_SERVER + Common.PROTECTED_RESOURCE_QUERY + "?"
-            + "oauth_token=randominvalidtoken");
+            + "access_token=randominvalidtoken");
         URLConnection c = url.openConnection();
 
         if (c instanceof HttpURLConnection) {

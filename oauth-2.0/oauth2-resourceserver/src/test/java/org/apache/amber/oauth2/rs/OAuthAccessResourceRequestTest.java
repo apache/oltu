@@ -41,7 +41,7 @@ import org.junit.Test;
  */
 public class OAuthAccessResourceRequestTest {
 
-    public static final String AUTHORIZATION_HEADER_OAUTH2 = "OAuth sometoken";
+    public static final String AUTHORIZATION_HEADER_OAUTH2 = "Bearer sometoken";
 
     @Test
     public void testCreateNoHeaderRequest() throws Exception {
@@ -89,7 +89,7 @@ public class OAuthAccessResourceRequestTest {
         HttpServletRequest request = createMock(HttpServletRequest.class);
         expect(request.getMethod()).andStubReturn(OAuth.HttpMethod.POST);
         expect(request.getContentType()).andStubReturn(OAuth.ContentType.JSON);
-        expect(request.getHeader(OAuth.HeaderType.AUTHORIZATION)).andStubReturn("OAuth ");
+        expect(request.getHeader(OAuth.HeaderType.AUTHORIZATION)).andStubReturn("Bearer ");
         replay(request);
 
         try {
@@ -110,7 +110,7 @@ public class OAuthAccessResourceRequestTest {
         expect(request.getMethod()).andStubReturn(OAuth.HttpMethod.POST);
         expect(request.getContentType()).andStubReturn(OAuth.ContentType.JSON);
         expect(request.getHeader(OAuth.HeaderType.AUTHORIZATION))
-            .andStubReturn("OAuth sadfasfd,oauth_signature_method=\"HMAC-SHA1\"");
+            .andStubReturn("Bearer sadfasfd,oauth_signature_method=\"HMAC-SHA1\"");
         replay(request);
 
         try {
@@ -131,7 +131,7 @@ public class OAuthAccessResourceRequestTest {
         HttpServletRequest request = createMock(HttpServletRequest.class);
         expect(request.getMethod()).andStubReturn(OAuth.HttpMethod.POST);
         expect(request.getContentType()).andStubReturn(OAuth.ContentType.JSON);
-        expect(request.getHeader(OAuth.HeaderType.AUTHORIZATION)).andStubReturn("OAuth token");
+        expect(request.getHeader(OAuth.HeaderType.AUTHORIZATION)).andStubReturn("Bearer token");
         replay(request);
         try {
             new OAuthAccessResourceRequest(request);
@@ -214,7 +214,7 @@ public class OAuthAccessResourceRequestTest {
         expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(new String[] {"sometoken"});
         expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn(null);
         expect(request.getHeader(OAuth.HeaderType.AUTHORIZATION))
-            .andStubReturn("OAuth sadfasfd,oauth_signature_method=\"HMAC-SHA1\"");
+            .andStubReturn("Bearer sadfasfd,oauth_signature_method=\"HMAC-SHA1\"");
         replay(request);
 
         try {
