@@ -23,11 +23,11 @@ package org.apache.amber.oauth2.rs.validator;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.amber.oauth2.common.OAuth;
 import org.apache.amber.oauth2.common.error.OAuthError;
 import org.apache.amber.oauth2.common.exception.OAuthProblemException;
 import org.apache.amber.oauth2.common.utils.OAuthUtils;
 import org.apache.amber.oauth2.common.validators.AbstractValidator;
-import org.apache.amber.oauth2.common.OAuth;
 
 
 /**
@@ -68,9 +68,12 @@ public class BodyOAuthValidator extends AbstractValidator {
         }
 
 
-        String[] tokens = request.getParameterValues(OAuth.OAUTH_TOKEN);
+        String[] tokens = request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN);
         if (OAuthUtils.hasEmptyValues(tokens)) {
-            throw OAuthProblemException.error(null, "Missing OAuth token.");
+            tokens = request.getParameterValues(OAuth.OAUTH_TOKEN);
+            if (OAuthUtils.hasEmptyValues(tokens)) {
+                throw OAuthProblemException.error(null, "Missing OAuth token.");
+            }
         }
 
         if (tokens.length > 1) {

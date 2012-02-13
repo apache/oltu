@@ -45,7 +45,7 @@ public class QueryTokenExtractorTest {
     public void testGetAccessToken() throws Exception {
 
         HttpServletRequest request = createStrictMock(HttpServletRequest.class);
-        expect(request.getParameter(OAuth.OAUTH_TOKEN)).andStubReturn("sometoken");
+        expect(request.getParameter(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn("sometoken");
         replay(request);
         QueryTokenExtractor qte = new QueryTokenExtractor();
         Assert.assertEquals("sometoken", qte.getAccessToken(request));

@@ -21,18 +21,17 @@
 
 package org.apache.amber.oauth2.rs.extractor;
 
-import javax.servlet.http.HttpServletRequest;
-
-import junit.framework.Assert;
-
-import org.apache.amber.oauth2.rs.extractor.BodyTokenExtractor;
-import org.junit.Test;
-import org.apache.amber.oauth2.common.OAuth;
-
 import static org.easymock.EasyMock.createStrictMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
+
+import javax.servlet.http.HttpServletRequest;
+
+import junit.framework.Assert;
+
+import org.apache.amber.oauth2.common.OAuth;
+import org.junit.Test;
 
 
 /**
@@ -46,7 +45,7 @@ public class BodyTokenExtractorTest {
     public void testGetAccessToken() throws Exception {
 
         HttpServletRequest request = createStrictMock(HttpServletRequest.class);
-        expect(request.getParameter(OAuth.OAUTH_TOKEN)).andStubReturn("sometoken");
+        expect(request.getParameter(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn("sometoken");
         replay(request);
         BodyTokenExtractor bte = new BodyTokenExtractor();
         Assert.assertEquals("sometoken", bte.getAccessToken(request));
@@ -57,6 +56,7 @@ public class BodyTokenExtractorTest {
     public void testGetAccessTokenNull() throws Exception {
 
         HttpServletRequest request = createStrictMock(HttpServletRequest.class);
+        expect(request.getParameter(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(null);
         expect(request.getParameter(OAuth.OAUTH_TOKEN)).andStubReturn(null);
         replay(request);
         BodyTokenExtractor bte = new BodyTokenExtractor();

@@ -35,7 +35,11 @@ public class BodyTokenExtractor implements TokenExtractor {
 
     @Override
     public String getAccessToken(HttpServletRequest request) {
-        return request.getParameter(OAuth.OAUTH_TOKEN);
+        String token = request.getParameter(OAuth.OAUTH_BEARER_TOKEN);
+        if (token == null) {
+            token = request.getParameter(OAuth.OAUTH_TOKEN);
+        }
+        return token;
     }
 
     @Override

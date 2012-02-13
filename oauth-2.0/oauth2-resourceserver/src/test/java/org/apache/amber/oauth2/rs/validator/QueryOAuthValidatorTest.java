@@ -21,6 +21,11 @@
 
 package org.apache.amber.oauth2.rs.validator;
 
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.verify;
+
 import javax.servlet.http.HttpServletRequest;
 
 import junit.framework.Assert;
@@ -28,14 +33,8 @@ import junit.framework.Assert;
 import org.apache.amber.oauth2.common.OAuth;
 import org.apache.amber.oauth2.common.error.OAuthError;
 import org.apache.amber.oauth2.common.exception.OAuthProblemException;
-import org.apache.amber.oauth2.rs.validator.QueryOAuthValidator;
-import org.junit.Test;
 import org.apache.amber.oauth2.common.utils.OAuthUtils;
-
-import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.verify;
+import org.junit.Test;
 
 /**
  * @author Maciej Machulak (m.p.machulak@ncl.ac.uk)
@@ -50,7 +49,7 @@ public class QueryOAuthValidatorTest {
 
         HttpServletRequest request = createMock(HttpServletRequest.class);
         expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn("HMAC-SHA1");
-        expect(request.getParameterValues(OAuth.OAUTH_TOKEN)).andStubReturn(new String[] {"access_token"});
+        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(new String[] {"access_token"});
         replay(request);
         try {
             QueryOAuthValidator qov = new QueryOAuthValidator();
@@ -69,6 +68,7 @@ public class QueryOAuthValidatorTest {
 
         HttpServletRequest request = createMock(HttpServletRequest.class);
         expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn(null);
+        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(null);
         expect(request.getParameterValues(OAuth.OAUTH_TOKEN)).andStubReturn(null);
         replay(request);
         try {
@@ -88,7 +88,7 @@ public class QueryOAuthValidatorTest {
 
         HttpServletRequest request = createMock(HttpServletRequest.class);
         expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn(null);
-        expect(request.getParameterValues(OAuth.OAUTH_TOKEN))
+        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN))
             .andStubReturn(new String[] {"access_token1", "access_token2"});
         replay(request);
         try {
@@ -108,7 +108,7 @@ public class QueryOAuthValidatorTest {
 
         HttpServletRequest request = createMock(HttpServletRequest.class);
         expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn(null);
-        expect(request.getParameterValues(OAuth.OAUTH_TOKEN)).andStubReturn(new String[] {"access_token1"});
+        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(new String[] {"access_token1"});
         replay(request);
         QueryOAuthValidator qov = new QueryOAuthValidator();
         qov.performAllValidations(request);
