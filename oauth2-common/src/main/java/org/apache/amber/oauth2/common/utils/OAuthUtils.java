@@ -63,7 +63,7 @@ public final class OAuthUtils {
     private static final String PARAMETER_SEPARATOR = "&";
     private static final String NAME_VALUE_SEPARATOR = "=";
 
-    public static final String AUTH_SCHEME = "OAuth";
+    public static final String AUTH_SCHEME = OAuth.OAUTH_HEADER_NAME;
 
     private static final Pattern OAUTH_HEADER = Pattern.compile("\\s*(\\w*)\\s+(.*)");
     private static final Pattern NVP = Pattern.compile("(\\S*)\\s*\\=\\s*\"([^\"]*)\"");

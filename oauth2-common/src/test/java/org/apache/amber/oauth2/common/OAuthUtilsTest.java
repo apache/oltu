@@ -71,7 +71,7 @@ public class OAuthUtilsTest extends Assert {
         entries.put("error", "invalid_token");
 
         String header = OAuthUtils.encodeOAuthHeader(entries);
-        assertEquals("OAuth error=\"invalid_token\",realm=\"Some Example Realm\"", header);
+        assertEquals("Bearer error=\"invalid_token\",realm=\"Some Example Realm\"", header);
 
     }
 }

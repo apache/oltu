@@ -160,10 +160,10 @@ public class OAuthASResponseTest {
             .buildHeaderMessage();
 
         String header = oAuthResponse.getHeader(OAuth.HeaderType.WWW_AUTHENTICATE);
-        Assert.assertEquals("OAuth state=\"state_ok\",code=\"oauth_code\"", header);
+        Assert.assertEquals("Bearer state=\"state_ok\",code=\"oauth_code\"", header);
 
         header = oAuthResponse.getHeaders().get(OAuth.HeaderType.WWW_AUTHENTICATE);
-        Assert.assertEquals("OAuth state=\"state_ok\",code=\"oauth_code\"", header);
+        Assert.assertEquals("Bearer state=\"state_ok\",code=\"oauth_code\"", header);
     }
 
 }
