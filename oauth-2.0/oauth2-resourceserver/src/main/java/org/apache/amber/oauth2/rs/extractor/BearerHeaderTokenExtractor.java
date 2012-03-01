@@ -21,17 +21,10 @@
 
 package org.apache.amber.oauth2.rs.extractor;
 
-import static org.easymock.EasyMock.createStrictMock;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.verify;
-
 import javax.servlet.http.HttpServletRequest;
 
-import junit.framework.Assert;
-
+import org.apache.amber.oauth2.common.utils.OAuthUtils;
 import org.apache.amber.oauth2.common.OAuth;
-import org.junit.Test;
 
 
 /**
@@ -39,31 +32,20 @@ import org.junit.Test;
  * @author Lukasz Moren (lukasz.moren@ncl.ac.uk)
  * @author Aad van Moorsel (aad.vanmoorsel@ncl.ac.uk)
  */
-public class QueryTokenExtractorTest {
+public class BearerHeaderTokenExtractor implements TokenExtractor {
 
-    @Test
-    public void testGetAccessToken() throws Exception {
 
-        HttpServletRequest request = createStrictMock(HttpServletRequest.class);
-        expect(request.getParameter(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn("sometoken");
-        replay(request);
-        BearerQueryTokenExtractor qte = new BearerQueryTokenExtractor();
-        Assert.assertEquals("sometoken", qte.getAccessToken(request));
-        verify(request);
-
+    @Override
+    public String getAccessToken(HttpServletRequest request) {
+        String authzHeader = request.getHeader(OAuth.HeaderType.AUTHORIZATION);
+        return OAuthUtils.getAuthHeaderField(authzHeader);
     }
 
-    @Test
-    public void testGetAccessTokenNull() throws Exception {
-
-        HttpServletRequest request = createStrictMock(HttpServletRequest.class);
-        expect(request.getParameter(OAuth.OAUTH_TOKEN)).andStubReturn(null);
-        expect(request.getParameter(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(null);
-        replay(request);
-        BearerQueryTokenExtractor qte = new BearerQueryTokenExtractor();
-        Assert.assertNull(qte.getAccessToken(request));
-        verify(request);
-
+    @Override
+    public String getAccessToken(HttpServletRequest request, String tokenName) {
+        String authzHeader = request.getHeader(OAuth.HeaderType.AUTHORIZATION);
+        return OAuthUtils.getAuthHeaderField(authzHeader);
     }
+
 
 }

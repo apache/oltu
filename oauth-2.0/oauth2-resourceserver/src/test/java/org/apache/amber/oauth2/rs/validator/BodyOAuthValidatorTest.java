@@ -50,7 +50,7 @@ public class BodyOAuthValidatorTest {
         expect(request.getContentType()).andStubReturn(OAuth.ContentType.URL_ENCODED);
         replay(request);
         try {
-            BodyOAuthValidator bov = new BodyOAuthValidator();
+            BearerBodyOAuthValidator bov = new BearerBodyOAuthValidator();
             bov.performAllValidations(request);
             Assert.fail("Exception not thrown.");
         } catch (OAuthProblemException e) {
@@ -67,7 +67,7 @@ public class BodyOAuthValidatorTest {
         expect(request.getContentType()).andStubReturn("multipart/form-data");
         replay(request);
         try {
-            BodyOAuthValidator bov = new BodyOAuthValidator();
+            BearerBodyOAuthValidator bov = new BearerBodyOAuthValidator();
             bov.performAllValidations(request);
             Assert.fail("Exception not thrown.");
         } catch (OAuthProblemException e) {
@@ -84,7 +84,7 @@ public class BodyOAuthValidatorTest {
         expect(request.getContentType()).andStubReturn(OAuth.ContentType.JSON);
         replay(request);
         try {
-            BodyOAuthValidator bov = new BodyOAuthValidator();
+            BearerBodyOAuthValidator bov = new BearerBodyOAuthValidator();
             bov.performAllValidations(request);
             Assert.fail("Exception not thrown.");
         } catch (OAuthProblemException e) {
@@ -103,7 +103,7 @@ public class BodyOAuthValidatorTest {
         expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(new String[] {"access_token"});
         replay(request);
         try {
-            BodyOAuthValidator bov = new BodyOAuthValidator();
+            BearerBodyOAuthValidator bov = new BearerBodyOAuthValidator();
             bov.performAllValidations(request);
             Assert.fail("Exception not thrown.");
         } catch (OAuthProblemException e) {
@@ -123,7 +123,7 @@ public class BodyOAuthValidatorTest {
         expect(request.getParameterValues(OAuth.OAUTH_TOKEN)).andStubReturn(null);
         replay(request);
         try {
-            BodyOAuthValidator bov = new BodyOAuthValidator();
+            BearerBodyOAuthValidator bov = new BearerBodyOAuthValidator();
             bov.performAllValidations(request);
             Assert.fail("Exception not thrown.");
         } catch (OAuthProblemException e) {
@@ -143,7 +143,7 @@ public class BodyOAuthValidatorTest {
             .andStubReturn(new String[] {"access_token1", "access_token2"});
         replay(request);
         try {
-            BodyOAuthValidator bov = new BodyOAuthValidator();
+            BearerBodyOAuthValidator bov = new BearerBodyOAuthValidator();
             bov.performAllValidations(request);
             Assert.fail("Exception not thrown.");
         } catch (OAuthProblemException e) {
@@ -161,7 +161,7 @@ public class BodyOAuthValidatorTest {
         expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn(null);
         expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(new String[] {"access_token"});
         replay(request);
-        BodyOAuthValidator bov = new BodyOAuthValidator();
+        BearerBodyOAuthValidator bov = new BearerBodyOAuthValidator();
         bov.performAllValidations(request);
         verify(request);
     }

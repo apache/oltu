@@ -47,7 +47,7 @@ public class BodyTokenExtractorTest {
         HttpServletRequest request = createStrictMock(HttpServletRequest.class);
         expect(request.getParameter(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn("sometoken");
         replay(request);
-        BodyTokenExtractor bte = new BodyTokenExtractor();
+        BearerBodyTokenExtractor bte = new BearerBodyTokenExtractor();
         Assert.assertEquals("sometoken", bte.getAccessToken(request));
         verify(request);
     }
@@ -59,7 +59,7 @@ public class BodyTokenExtractorTest {
         expect(request.getParameter(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(null);
         expect(request.getParameter(OAuth.OAUTH_TOKEN)).andStubReturn(null);
         replay(request);
-        BodyTokenExtractor bte = new BodyTokenExtractor();
+        BearerBodyTokenExtractor bte = new BearerBodyTokenExtractor();
         Assert.assertNull(bte.getAccessToken(request));
         verify(request);
     }
