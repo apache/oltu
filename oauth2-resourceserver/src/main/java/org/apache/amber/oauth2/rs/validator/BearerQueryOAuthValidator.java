@@ -35,37 +35,18 @@ import org.apache.amber.oauth2.common.validators.AbstractValidator;
  * @author Lukasz Moren (lukasz.moren@ncl.ac.uk)
  * @author Aad van Moorsel (aad.vanmoorsel@ncl.ac.uk)
  */
-public class BodyOAuthValidator extends AbstractValidator {
-
-    @Override
-    public void validateMethod(HttpServletRequest request) throws OAuthProblemException {
-        // Check if the method is POST, PUT, or DELETE
-        String method = request.getMethod();
-        if (!(OAuth.HttpMethod.POST.equals(method) || OAuth.HttpMethod.PUT.equals(method) || OAuth.HttpMethod
-            .DELETE.equals(method))) {
-            throw OAuthProblemException
-                .error(OAuthError.TokenResponse.INVALID_REQUEST)
-                .description("Incorrect method. POST, PUT, DELETE are supported.");
-        }
-    }
+public class BearerQueryOAuthValidator extends AbstractValidator {
 
     @Override
     public void validateContentType(HttpServletRequest request) throws OAuthProblemException {
-        if (OAuthUtils.isMultipart(request)) {
-            throw OAuthProblemException.error(OAuthError.CodeResponse.INVALID_REQUEST).
-                description("Request is not single part.");
-        }
-        super.validateContentType(request);
     }
 
+    @Override
+    public void validateMethod(HttpServletRequest request) throws OAuthProblemException {
+    }
 
     @Override
     public void validateRequiredParameters(HttpServletRequest request) throws OAuthProblemException {
-
-        if (OAuthUtils.isMultipart(request)) {
-            throw OAuthProblemException.error(OAuthError.TokenResponse.INVALID_REQUEST).
-                description("Request is not single part.");
-        }
 
 
         String[] tokens = request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN);
@@ -75,17 +56,17 @@ public class BodyOAuthValidator extends AbstractValidator {
                 throw OAuthProblemException.error(null, "Missing OAuth token.");
             }
         }
-
-        if (tokens.length > 1) {
-            throw OAuthProblemException.error(OAuthError.TokenResponse.INVALID_REQUEST)
-                .description("Multiple tokens attached.");
+        
+        if (tokens != null && tokens.length > 1) {
+            throw OAuthProblemException
+                .error(OAuthError.TokenResponse.INVALID_REQUEST, "Multiple tokens attached.");
         }
 
         String oauthVersionDiff = request.getParameter(OAuth.OAUTH_VERSION_DIFFER);
         if (!OAuthUtils.isEmpty(oauthVersionDiff)) {
-            throw OAuthProblemException.error(OAuthError.TokenResponse.INVALID_REQUEST)
-                .description("Incorrect OAuth version. Found OAuth V1.0.");
+            throw OAuthProblemException
+                .error(OAuthError.TokenResponse.INVALID_REQUEST,
+                    "Incorrect OAuth version. Found OAuth V1.0.");
         }
-
     }
 }

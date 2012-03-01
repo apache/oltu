@@ -25,22 +25,17 @@ package org.apache.amber.oauth2.rs.request;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
-
 import org.apache.amber.oauth2.common.error.OAuthError;
 import org.apache.amber.oauth2.common.exception.OAuthProblemException;
 import org.apache.amber.oauth2.common.exception.OAuthSystemException;
 import org.apache.amber.oauth2.common.message.types.ParameterStyle;
+import org.apache.amber.oauth2.common.message.types.TokenType;
 import org.apache.amber.oauth2.common.utils.OAuthUtils;
 import org.apache.amber.oauth2.common.validators.OAuthValidator;
-import org.apache.amber.oauth2.common.OAuth;
-import org.apache.amber.oauth2.rs.extractor.HeaderTokenExtractor;
-import org.apache.amber.oauth2.rs.extractor.QueryTokenExtractor;
+import org.apache.amber.oauth2.common.OAuth; 
+import org.apache.amber.oauth2.rs.BearerResourceServer;
+import org.apache.amber.oauth2.rs.ResourceServer;
 import org.apache.amber.oauth2.rs.extractor.TokenExtractor;
-import org.apache.amber.oauth2.rs.validator.BodyOAuthValidator;
-import org.apache.amber.oauth2.rs.validator.HeaderOAuthValidator;
-import org.apache.amber.oauth2.rs.extractor.BodyTokenExtractor;
-import org.apache.amber.oauth2.rs.validator.QueryOAuthValidator;
-
 
 /**
  * @author Maciej Machulak (m.p.machulak@ncl.ac.uk)
@@ -50,32 +45,39 @@ import org.apache.amber.oauth2.rs.validator.QueryOAuthValidator;
 public class OAuthAccessResourceRequest {
 
     private HttpServletRequest request;
-    private ParameterStyle[] parameterStyles = new ParameterStyle[] {OAuth.DEFAULT_PARAMETER_STYLE};
+    private ParameterStyle[] parameterStyles=new ParameterStyle[] {OAuth.DEFAULT_PARAMETER_STYLE};
+    private TokenType[] tokenTypes=new TokenType []{OAuth.DEFAULT_TOKEN_TYPE};
     private ParameterStyle usedParameterStyle;
+    private ResourceServer usedResourceServer;
 
-    private Map<ParameterStyle, Class> extractors = new HashMap<ParameterStyle, Class>();
-    private Map<ParameterStyle, Class> validators = new HashMap<ParameterStyle, Class>();
+    protected static Map<TokenType, Class> tokens = new HashMap<TokenType, Class>();
 
     private TokenExtractor extractor;
-
+    
     {
-        extractors.put(ParameterStyle.HEADER, HeaderTokenExtractor.class);
-        extractors.put(ParameterStyle.BODY, BodyTokenExtractor.class);
-        extractors.put(ParameterStyle.QUERY, QueryTokenExtractor.class);
-
-        validators.put(ParameterStyle.HEADER, HeaderOAuthValidator.class);
-        validators.put(ParameterStyle.BODY, BodyOAuthValidator.class);
-        validators.put(ParameterStyle.QUERY, QueryOAuthValidator.class);
+        tokens.put(TokenType.BEARER, BearerResourceServer.class);
+        //TODO add MACResourceServer - see AMBER-41
     }
-
+  
     public OAuthAccessResourceRequest(HttpServletRequest request)
         throws OAuthSystemException, OAuthProblemException {
-        this(request, OAuth.DEFAULT_PARAMETER_STYLE);
+        this(request,new TokenType []{OAuth.DEFAULT_TOKEN_TYPE}, new ParameterStyle[] {OAuth.DEFAULT_PARAMETER_STYLE});
     }
 
     public OAuthAccessResourceRequest(HttpServletRequest request, ParameterStyle... parameterStyles)
+    throws OAuthSystemException, OAuthProblemException {
+    	this(request,new TokenType []{OAuth.DEFAULT_TOKEN_TYPE}, parameterStyles);
+    }
+    
+    public OAuthAccessResourceRequest(HttpServletRequest request, TokenType... tokenTypes)
+    throws OAuthSystemException, OAuthProblemException {
+    	this(request,tokenTypes,  new ParameterStyle[] {OAuth.DEFAULT_PARAMETER_STYLE});
+    }
+    
+    public OAuthAccessResourceRequest(HttpServletRequest request, TokenType[] tokenTypes ,ParameterStyle[] parameterStyles)
         throws OAuthSystemException, OAuthProblemException {
         this.request = request;
+        this.tokenTypes = tokenTypes;
         this.parameterStyles = parameterStyles;
         this.validate();
     }
@@ -90,25 +92,29 @@ public class OAuthAccessResourceRequest {
         boolean lackAuthInfo = false;
         OAuthProblemException ex = null;
         String lackAuthReason = "OAuth parameters were not found";
-        for (ParameterStyle style : parameterStyles) {
-            try {
+        for (TokenType tokenType : tokenTypes) {
+        	ResourceServer resourceServer=instantiateResourceServer(tokenType);
+        	for (ParameterStyle style : parameterStyles) {
+        		try {
+        			 
+        			OAuthValidator validator = resourceServer.instantiateValidator(style);
+        			validator.validateContentType(request);
+        			validator.validateMethod(request);
+        			validator.validateRequiredParameters(request);
 
-                OAuthValidator validator = instantiateValidator(style);
-                validator.validateContentType(request);
-                validator.validateMethod(request);
-                validator.validateRequiredParameters(request);
-
-                usedParameterStyle = style;
-                foundValidStyles++;
-            } catch (OAuthProblemException e) {
-                //request lacks any authentication information?
-                if (OAuthUtils.isEmpty(e.getError())) {
-                    lackAuthInfo = true;
-                    lackAuthReason = e.getDescription();
-                } else {
-                    ex = OAuthProblemException.error(e.getError(), e.getDescription());
-                }
-            }
+        			usedParameterStyle = style;
+        			usedResourceServer = resourceServer;
+        			foundValidStyles++;
+        		} catch (OAuthProblemException e) {
+        			//request lacks any authentication information?
+        			if (OAuthUtils.isEmpty(e.getError())) {
+        				lackAuthInfo = true;
+        				lackAuthReason = e.getDescription();
+        			} else {        				 
+        				ex = OAuthProblemException.error(e.getError(), e.getDescription());
+        			}
+        		}
+        	}
         }
 
         if (foundValidStyles > 1) {
@@ -129,22 +135,15 @@ public class OAuthAccessResourceRequest {
                 "OAuth parameters were not found");
         }
 
-        instantiateExtractor(usedParameterStyle);
+        extractor= usedResourceServer.instantiateExtractor(usedParameterStyle);
     }
 
-    private OAuthValidator instantiateValidator(ParameterStyle ps) throws OAuthSystemException {
-        Class clazz = validators.get(ps);
+    public static ResourceServer instantiateResourceServer(TokenType tokenType) throws OAuthSystemException {
+        Class clazz = tokens.get(tokenType);
         if (clazz == null) {
-            throw new OAuthSystemException("Cannot instantiate a message validator.");
+            throw new OAuthSystemException("Cannot instantiate a resource server.");
         }
-        return (OAuthValidator)OAuthUtils.instantiateClass(clazz);
+        return (ResourceServer)OAuthUtils.instantiateClass(clazz);
     }
-
-    private void instantiateExtractor(ParameterStyle ps) throws OAuthSystemException {
-        Class clazz = extractors.get(ps);
-        if (clazz == null) {
-            throw new OAuthSystemException("Cannot instantiate a token extractor.");
-        }
-        extractor = (TokenExtractor)OAuthUtils.instantiateClass(clazz);
-    }
+    
 }

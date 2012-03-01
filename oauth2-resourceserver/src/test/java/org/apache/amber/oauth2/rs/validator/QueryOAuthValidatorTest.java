@@ -52,7 +52,7 @@ public class QueryOAuthValidatorTest {
         expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(new String[] {"access_token"});
         replay(request);
         try {
-            QueryOAuthValidator qov = new QueryOAuthValidator();
+            BearerQueryOAuthValidator qov = new BearerQueryOAuthValidator();
             qov.performAllValidations(request);
             Assert.fail("Exception not thrown.");
         } catch (OAuthProblemException e) {
@@ -72,7 +72,7 @@ public class QueryOAuthValidatorTest {
         expect(request.getParameterValues(OAuth.OAUTH_TOKEN)).andStubReturn(null);
         replay(request);
         try {
-            QueryOAuthValidator qov = new QueryOAuthValidator();
+            BearerQueryOAuthValidator qov = new BearerQueryOAuthValidator();
             qov.performAllValidations(request);
             Assert.fail("Exception not thrown.");
         } catch (OAuthProblemException e) {
@@ -92,7 +92,7 @@ public class QueryOAuthValidatorTest {
             .andStubReturn(new String[] {"access_token1", "access_token2"});
         replay(request);
         try {
-            QueryOAuthValidator qov = new QueryOAuthValidator();
+            BearerQueryOAuthValidator qov = new BearerQueryOAuthValidator();
             qov.performAllValidations(request);
             Assert.fail("Exception not thrown.");
         } catch (OAuthProblemException e) {
@@ -110,7 +110,7 @@ public class QueryOAuthValidatorTest {
         expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn(null);
         expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(new String[] {"access_token1"});
         replay(request);
-        QueryOAuthValidator qov = new QueryOAuthValidator();
+        BearerQueryOAuthValidator qov = new BearerQueryOAuthValidator();
         qov.performAllValidations(request);
         verify(request);
 

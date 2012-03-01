@@ -22,6 +22,7 @@
 package org.apache.amber.oauth2.common;
 
 import org.apache.amber.oauth2.common.message.types.ParameterStyle;
+import org.apache.amber.oauth2.common.message.types.TokenType;
 
 /**
  * @author Maciej Machulak (m.p.machulak@ncl.ac.uk)
@@ -80,5 +81,7 @@ public final class OAuth {
     public static final String OAUTH_BEARER_TOKEN = "access_token";
 
     public static final ParameterStyle DEFAULT_PARAMETER_STYLE = ParameterStyle.HEADER;
+    public static final TokenType DEFAULT_TOKEN_TYPE = TokenType.BEARER;
+    
     public static final String OAUTH_VERSION_DIFFER = "oauth_signature_method";
 }

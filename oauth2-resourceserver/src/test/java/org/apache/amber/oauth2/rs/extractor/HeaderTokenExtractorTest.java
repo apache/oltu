@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 import junit.framework.Assert;
 
 import org.apache.amber.oauth2.common.OAuth;
-import org.apache.amber.oauth2.rs.extractor.HeaderTokenExtractor;
+import org.apache.amber.oauth2.rs.extractor.BearerHeaderTokenExtractor;
 import org.junit.Test;
 
 import static org.easymock.EasyMock.createStrictMock;
@@ -48,7 +48,7 @@ public class HeaderTokenExtractorTest {
         HttpServletRequest request = createStrictMock(HttpServletRequest.class);
         expect(request.getHeader(OAuth.HeaderType.AUTHORIZATION)).andStubReturn("Bearer sometoken");
         replay(request);
-        HeaderTokenExtractor hte = new HeaderTokenExtractor();
+        BearerHeaderTokenExtractor hte = new BearerHeaderTokenExtractor();
         Assert.assertEquals("sometoken", hte.getAccessToken(request));
         verify(request);
     }
@@ -59,7 +59,7 @@ public class HeaderTokenExtractorTest {
         HttpServletRequest request = createStrictMock(HttpServletRequest.class);
         expect(request.getHeader(OAuth.HeaderType.AUTHORIZATION)).andStubReturn(null);
         replay(request);
-        HeaderTokenExtractor hte = new HeaderTokenExtractor();
+        BearerHeaderTokenExtractor hte = new BearerHeaderTokenExtractor();
         Assert.assertNull(hte.getAccessToken(request));
         verify(request);
     }

@@ -28,7 +28,7 @@ import junit.framework.Assert;
 import org.apache.amber.oauth2.common.OAuth;
 import org.apache.amber.oauth2.common.error.OAuthError;
 import org.apache.amber.oauth2.common.exception.OAuthProblemException;
-import org.apache.amber.oauth2.rs.validator.HeaderOAuthValidator;
+import org.apache.amber.oauth2.rs.validator.BearerHeaderOAuthValidator;
 import org.junit.Test;
 import org.apache.amber.oauth2.common.utils.OAuthUtils;
 
@@ -52,7 +52,7 @@ public class HeaderOAuthValidatorTest {
         expect(request.getHeader(OAuth.HeaderType.AUTHORIZATION)).andStubReturn(null);
         replay(request);
         try {
-            HeaderOAuthValidator bov = new HeaderOAuthValidator();
+            BearerHeaderOAuthValidator bov = new BearerHeaderOAuthValidator();
             bov.performAllValidations(request);
             Assert.fail("Exception not thrown.");
         } catch (OAuthProblemException e) {
@@ -70,7 +70,7 @@ public class HeaderOAuthValidatorTest {
         expect(request.getHeader(OAuth.HeaderType.AUTHORIZATION)).andStubReturn("Basic arawersadf");
         replay(request);
         try {
-            HeaderOAuthValidator bov = new HeaderOAuthValidator();
+            BearerHeaderOAuthValidator bov = new BearerHeaderOAuthValidator();
             bov.performAllValidations(request);
             Assert.fail("Exception not thrown.");
         } catch (OAuthProblemException e) {
@@ -89,7 +89,7 @@ public class HeaderOAuthValidatorTest {
         expect(request.getHeader(OAuth.HeaderType.AUTHORIZATION)).andStubReturn("Bearer  ");
         replay(request);
         try {
-            HeaderOAuthValidator bov = new HeaderOAuthValidator();
+            BearerHeaderOAuthValidator bov = new BearerHeaderOAuthValidator();
             bov.performAllValidations(request);
             Assert.fail("Exception not thrown.");
         } catch (OAuthProblemException e) {
@@ -109,7 +109,7 @@ public class HeaderOAuthValidatorTest {
             .andStubReturn("Bearer sdfsadfsadf,oauth_signature_method=\"HMAC-SHA1\"");
         replay(request);
         try {
-            HeaderOAuthValidator bov = new HeaderOAuthValidator();
+            BearerHeaderOAuthValidator bov = new BearerHeaderOAuthValidator();
             bov.performAllValidations(request);
             Assert.fail("Exception not thrown.");
         } catch (OAuthProblemException e) {
@@ -125,7 +125,7 @@ public class HeaderOAuthValidatorTest {
         HttpServletRequest request = createMock(HttpServletRequest.class);
         expect(request.getHeader(OAuth.HeaderType.AUTHORIZATION)).andStubReturn("Bearer sdfsadfsadf");
         replay(request);
-        HeaderOAuthValidator bov = new HeaderOAuthValidator();
+        BearerHeaderOAuthValidator bov = new BearerHeaderOAuthValidator();
         bov.performAllValidations(request);
 
         verify(request);
