@@ -262,7 +262,7 @@
     <site>
       <id>amber.website</id>
       <name>Apache Amber website</name>
-      <url>scp://people.apache.org/www/incubator.apache.org/amber/</url>
+      <url>${site.deploymentBaseUrl}</url>
     </site>
   </distributionManagement>
 
@@ -274,6 +274,18 @@
     <javac.target.version>1.6</javac.target.version>
     <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ssZ</maven.build.timestamp.format>
     <implementation.build>${scmBranch}@r${buildNumber}</implementation.build>
+    <!--
+     | Amber website has to be stored in SVN
+     |
+     | using the appropriate wagon, site deploy is slow, because deploy works file-by-file
+     | So consider the alternative of
+     | deploying the site in a local dir (where you checked out the site dir)
+     | then committing in one shot, i.e.
+     |
+     | svn co https://svn.apache.org/repos/asf/incubator/amber/site
+     | mvn site-deploy -Dsite.deploymentBaseUrl=file://path/to/checked/out/site
+    -->
+    <site.deploymentBaseUrl>svn:https://svn.apache.org/repos/asf/incubator/amber/site</site.deploymentBaseUrl>
   </properties>
 
   <dependencyManagement>
@@ -500,9 +512,9 @@
         <version>3.0</version>
         <dependencies>
           <dependency>
-            <groupId>org.apache.maven.wagon</groupId>
-            <artifactId>wagon-ssh</artifactId>
-            <version>1.0</version>
+            <groupId>org.jvnet.wagon-svn</groupId>
+            <artifactId>wagon-svn</artifactId>
+            <version>1.12</version>
           </dependency>
         </dependencies>
       </plugin>
