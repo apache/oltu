@@ -214,7 +214,7 @@ public class OAuthAccessResourceRequestTest {
         expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(new String[] {"sometoken"});
         expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn(null);
         expect(request.getHeader(OAuth.HeaderType.AUTHORIZATION))
-            .andStubReturn("Bearer sadfasfd,oauth_signature_method=\"HMAC-SHA1\"");
+            .andStubReturn("Bearer sadfasfd");
         replay(request);
 
         try {
@@ -228,6 +228,29 @@ public class OAuthAccessResourceRequestTest {
         verify(request);
     }
 
+    @Test
+    public void testCreateBodyHeaderMixedTokensAndWrongVersion() throws Exception {
+
+        HttpServletRequest request = createMock(HttpServletRequest.class);
+        expect(request.getMethod()).andStubReturn(OAuth.HttpMethod.POST);
+        expect(request.getContentType()).andStubReturn(OAuth.ContentType.URL_ENCODED);
+        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(new String[] {"sometoken"});
+        expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn(null);
+        expect(request.getHeader(OAuth.HeaderType.AUTHORIZATION))
+            .andStubReturn("Bearer sadfasfd,oauth_signature_method=\"HMAC-SHA1\"");
+        replay(request);
+
+        try {
+            new OAuthAccessResourceRequest(request, ParameterStyle.BODY, ParameterStyle.HEADER);
+            fail("Exception expected");
+        } catch (OAuthProblemException e) {
+            Assert
+                .assertTrue(
+                    OAuthError.TokenResponse.INVALID_REQUEST.equals(e.getError()));
+        }
+        verify(request);
+    }
+    
     @Test
     public void testCreateBodyNoToken() throws Exception {
 
