@@ -21,8 +21,7 @@
 
 package org.apache.amber.oauth2.rs.extractor;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
+import static org.apache.amber.oauth2.rs.ResourceServer.getQueryParameterValue;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -37,48 +36,16 @@ public class BearerQueryTokenExtractor implements TokenExtractor {
 
     @Override
     public String getAccessToken(HttpServletRequest request) {
-        String token = getQueryParameter(request, OAuth.OAUTH_BEARER_TOKEN);
+        String token = getQueryParameterValue(request, OAuth.OAUTH_BEARER_TOKEN);
         if (token == null) {
-            token = getQueryParameter(request, OAuth.OAUTH_TOKEN);
+            token = getQueryParameterValue(request, OAuth.OAUTH_TOKEN);
         }
         return token;
     }
 
     @Override
     public String getAccessToken(HttpServletRequest request, String tokenName) {
-        return getQueryParameter(request, tokenName);
-    }
-
-    /**
-     * A replacement for HttpServletRequest.getParameter() as it will mess up with HTTP POST body
-     * @param request
-     * @param name
-     * @return
-     */
-    private String getQueryParameter(HttpServletRequest request, String name) {
-        String query = request.getQueryString();
-        if (query == null) {
-            return null;
-        }
-        String[] params = query.split("&");
-        for (String param : params) {
-            try {
-                param = URLDecoder.decode(param, "UTF-8");
-            } catch (UnsupportedEncodingException e) {
-                // Ignore
-            }
-            int index = param.indexOf('=');
-            String key = param;
-            String value = null;
-            if (index != -1) {
-                key = param.substring(0, index);
-                value = param.substring(index + 1);
-            }
-            if (key.equals(name)) {
-                return value;
-            }
-        }
-        return null;
+        return getQueryParameterValue(request, tokenName);
     }
 
 }

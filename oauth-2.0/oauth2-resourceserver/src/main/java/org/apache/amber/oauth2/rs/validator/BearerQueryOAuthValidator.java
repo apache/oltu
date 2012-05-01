@@ -21,6 +21,8 @@
 
 package org.apache.amber.oauth2.rs.validator;
 
+import static org.apache.amber.oauth2.rs.ResourceServer.getQueryParameterValues;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.amber.oauth2.common.OAuth;
@@ -28,7 +30,7 @@ import org.apache.amber.oauth2.common.error.OAuthError;
 import org.apache.amber.oauth2.common.exception.OAuthProblemException;
 import org.apache.amber.oauth2.common.utils.OAuthUtils;
 import org.apache.amber.oauth2.common.validators.AbstractValidator;
-
+import org.apache.amber.oauth2.rs.ResourceServer;
 
 /**
  * @author Maciej Machulak (m.p.machulak@ncl.ac.uk)
@@ -48,25 +50,22 @@ public class BearerQueryOAuthValidator extends AbstractValidator {
     @Override
     public void validateRequiredParameters(HttpServletRequest request) throws OAuthProblemException {
 
-
-        String[] tokens = request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN);
+        String[] tokens = getQueryParameterValues(request, OAuth.OAUTH_BEARER_TOKEN);
         if (OAuthUtils.hasEmptyValues(tokens)) {
-            tokens = request.getParameterValues(OAuth.OAUTH_TOKEN);
+            tokens = getQueryParameterValues(request, OAuth.OAUTH_TOKEN);
             if (OAuthUtils.hasEmptyValues(tokens)) {
                 throw OAuthProblemException.error(null, "Missing OAuth token.");
             }
         }
-        
+
         if (tokens != null && tokens.length > 1) {
-            throw OAuthProblemException
-                .error(OAuthError.TokenResponse.INVALID_REQUEST, "Multiple tokens attached.");
+            throw OAuthProblemException.error(OAuthError.TokenResponse.INVALID_REQUEST, "Multiple tokens attached.");
         }
 
-        String oauthVersionDiff = request.getParameter(OAuth.OAUTH_VERSION_DIFFER);
+        String oauthVersionDiff = ResourceServer.getQueryParameterValue(request, OAuth.OAUTH_VERSION_DIFFER);
         if (!OAuthUtils.isEmpty(oauthVersionDiff)) {
-            throw OAuthProblemException
-                .error(OAuthError.TokenResponse.INVALID_REQUEST,
-                    "Incorrect OAuth version. Found OAuth V1.0.");
+            throw OAuthProblemException.error(OAuthError.TokenResponse.INVALID_REQUEST,
+                                              "Incorrect OAuth version. Found OAuth V1.0.");
         }
     }
 }
