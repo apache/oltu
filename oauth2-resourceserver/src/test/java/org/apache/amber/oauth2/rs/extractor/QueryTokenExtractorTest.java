@@ -30,7 +30,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import junit.framework.Assert;
 
-import org.apache.amber.oauth2.common.OAuth;
 import org.junit.Test;
 
 
@@ -45,7 +44,8 @@ public class QueryTokenExtractorTest {
     public void testGetAccessToken() throws Exception {
 
         HttpServletRequest request = createStrictMock(HttpServletRequest.class);
-        expect(request.getParameter(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn("sometoken");
+        // expect(request.getParameter(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn("sometoken");
+        expect(request.getQueryString()).andStubReturn("access_token=sometoken");
         replay(request);
         BearerQueryTokenExtractor qte = new BearerQueryTokenExtractor();
         Assert.assertEquals("sometoken", qte.getAccessToken(request));
@@ -57,8 +57,10 @@ public class QueryTokenExtractorTest {
     public void testGetAccessTokenNull() throws Exception {
 
         HttpServletRequest request = createStrictMock(HttpServletRequest.class);
-        expect(request.getParameter(OAuth.OAUTH_TOKEN)).andStubReturn(null);
-        expect(request.getParameter(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(null);
+        expect(request.getQueryString()).andStubReturn(null);
+
+//        expect(request.getParameter(OAuth.OAUTH_TOKEN)).andStubReturn(null);
+//        expect(request.getParameter(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(null);
         replay(request);
         BearerQueryTokenExtractor qte = new BearerQueryTokenExtractor();
         Assert.assertNull(qte.getAccessToken(request));

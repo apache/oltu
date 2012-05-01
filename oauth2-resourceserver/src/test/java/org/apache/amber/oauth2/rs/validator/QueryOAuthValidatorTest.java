@@ -43,13 +43,15 @@ import org.junit.Test;
  */
 public class QueryOAuthValidatorTest {
 
-
     @Test
     public void testValidateWrongVersion() throws Exception {
 
         HttpServletRequest request = createMock(HttpServletRequest.class);
-        expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn("HMAC-SHA1");
-        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(new String[] {"access_token"});
+        expect(request.getQueryString()).andStubReturn(OAuth.OAUTH_VERSION_DIFFER + "=HMAC-SHA1&"
+            + OAuth.OAUTH_BEARER_TOKEN
+            + "=access_token");
+        //        expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn("HMAC-SHA1");
+        //        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(new String[] {"access_token"});
         replay(request);
         try {
             BearerQueryOAuthValidator qov = new BearerQueryOAuthValidator();
@@ -67,9 +69,10 @@ public class QueryOAuthValidatorTest {
     public void testValidateNoQuery() throws Exception {
 
         HttpServletRequest request = createMock(HttpServletRequest.class);
-        expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn(null);
-        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(null);
-        expect(request.getParameterValues(OAuth.OAUTH_TOKEN)).andStubReturn(null);
+        expect(request.getQueryString()).andStubReturn(null);
+        //        expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn(null);
+        //        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(null);
+        //        expect(request.getParameterValues(OAuth.OAUTH_TOKEN)).andStubReturn(null);
         replay(request);
         try {
             BearerQueryOAuthValidator qov = new BearerQueryOAuthValidator();
@@ -87,9 +90,12 @@ public class QueryOAuthValidatorTest {
     public void testValidateMultipleTokens() throws Exception {
 
         HttpServletRequest request = createMock(HttpServletRequest.class);
-        expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn(null);
-        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN))
-            .andStubReturn(new String[] {"access_token1", "access_token2"});
+        expect(request.getQueryString()).andStubReturn(OAuth.OAUTH_BEARER_TOKEN + "=access_token1&"
+            + OAuth.OAUTH_BEARER_TOKEN
+            + "=access_token2");
+        //        expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn(null);
+        //        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(new String[] {"access_token1",
+        //                                                                                                 "access_token2"});
         replay(request);
         try {
             BearerQueryOAuthValidator qov = new BearerQueryOAuthValidator();
@@ -107,14 +113,14 @@ public class QueryOAuthValidatorTest {
     public void testValidateToken() throws Exception {
 
         HttpServletRequest request = createMock(HttpServletRequest.class);
-        expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn(null);
-        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(new String[] {"access_token1"});
+        expect(request.getQueryString()).andStubReturn(OAuth.OAUTH_BEARER_TOKEN + "=access_token1");
+        //        expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn(null);
+        //        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(new String[] {"access_token1"});
         replay(request);
         BearerQueryOAuthValidator qov = new BearerQueryOAuthValidator();
         qov.performAllValidations(request);
         verify(request);
 
     }
-
 
 }

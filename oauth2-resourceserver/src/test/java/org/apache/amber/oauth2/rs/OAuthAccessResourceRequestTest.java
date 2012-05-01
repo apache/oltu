@@ -34,7 +34,6 @@ import org.apache.amber.oauth2.rs.request.OAuthAccessResourceRequest;
 import org.junit.Assert;
 import org.junit.Test;
 
-
 /**
  * @author Maciej Machulak
  * @author Lukasz Moren
@@ -51,7 +50,6 @@ public class OAuthAccessResourceRequestTest {
         expect(request.getContentType()).andStubReturn(OAuth.ContentType.JSON);
         expect(request.getHeader(OAuth.HeaderType.AUTHORIZATION)).andStubReturn(null);
         replay(request);
-
 
         OAuthAccessResourceRequest req = null;
         try {
@@ -96,9 +94,7 @@ public class OAuthAccessResourceRequestTest {
             new OAuthAccessResourceRequest(request);
             fail("Exception expected");
         } catch (OAuthProblemException e) {
-            Assert
-                .assertTrue(
-                    OAuthError.TokenResponse.INVALID_REQUEST.equals(e.getError()));
+            Assert.assertTrue(OAuthError.TokenResponse.INVALID_REQUEST.equals(e.getError()));
         }
         verify(request);
     }
@@ -117,13 +113,10 @@ public class OAuthAccessResourceRequestTest {
             new OAuthAccessResourceRequest(request);
             fail("Exception expected");
         } catch (OAuthProblemException e) {
-            Assert
-                .assertTrue(
-                    OAuthError.TokenResponse.INVALID_REQUEST.equals(e.getError()));
+            Assert.assertTrue(OAuthError.TokenResponse.INVALID_REQUEST.equals(e.getError()));
         }
         verify(request);
     }
-
 
     @Test
     public void testCreateValidHeaderRequest() throws Exception {
@@ -156,9 +149,7 @@ public class OAuthAccessResourceRequestTest {
             new OAuthAccessResourceRequest(request, ParameterStyle.BODY);
             fail("Exception expeted");
         } catch (OAuthProblemException e) {
-            Assert
-                .assertTrue(
-                    OAuthError.TokenResponse.INVALID_REQUEST.equals(e.getError()));
+            Assert.assertTrue(OAuthError.TokenResponse.INVALID_REQUEST.equals(e.getError()));
         }
         verify(request);
     }
@@ -176,9 +167,7 @@ public class OAuthAccessResourceRequestTest {
             new OAuthAccessResourceRequest(request, ParameterStyle.BODY);
             fail("Exception expeted");
         } catch (OAuthProblemException e) {
-            Assert
-                .assertTrue(
-                    OAuthError.TokenResponse.INVALID_REQUEST.equals(e.getError()));
+            Assert.assertTrue(OAuthError.TokenResponse.INVALID_REQUEST.equals(e.getError()));
         }
         verify(request);
     }
@@ -196,12 +185,8 @@ public class OAuthAccessResourceRequestTest {
             new OAuthAccessResourceRequest(request, ParameterStyle.BODY);
             fail("Exception expeted");
         } catch (OAuthProblemException e) {
-            Assert
-                .assertTrue(
-                    OAuthError.TokenResponse.INVALID_REQUEST.equals(e.getError()));
-            Assert
-                .assertEquals("Incorrect OAuth version. Found OAuth V1.0.",
-                    e.getDescription());
+            Assert.assertTrue(OAuthError.TokenResponse.INVALID_REQUEST.equals(e.getError()));
+            Assert.assertEquals("Incorrect OAuth version. Found OAuth V1.0.", e.getDescription());
         }
     }
 
@@ -213,17 +198,14 @@ public class OAuthAccessResourceRequestTest {
         expect(request.getContentType()).andStubReturn(OAuth.ContentType.URL_ENCODED);
         expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(new String[] {"sometoken"});
         expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn(null);
-        expect(request.getHeader(OAuth.HeaderType.AUTHORIZATION))
-            .andStubReturn("Bearer sadfasfd");
+        expect(request.getHeader(OAuth.HeaderType.AUTHORIZATION)).andStubReturn("Bearer sadfasfd");
         replay(request);
 
         try {
             new OAuthAccessResourceRequest(request, ParameterStyle.BODY, ParameterStyle.HEADER);
             fail("Exception expected");
         } catch (OAuthProblemException e) {
-            Assert
-                .assertTrue(
-                    OAuthError.TokenResponse.INVALID_REQUEST.equals(e.getError()));
+            Assert.assertTrue(OAuthError.TokenResponse.INVALID_REQUEST.equals(e.getError()));
         }
         verify(request);
     }
@@ -244,13 +226,11 @@ public class OAuthAccessResourceRequestTest {
             new OAuthAccessResourceRequest(request, ParameterStyle.BODY, ParameterStyle.HEADER);
             fail("Exception expected");
         } catch (OAuthProblemException e) {
-            Assert
-                .assertTrue(
-                    OAuthError.TokenResponse.INVALID_REQUEST.equals(e.getError()));
+            Assert.assertTrue(OAuthError.TokenResponse.INVALID_REQUEST.equals(e.getError()));
         }
         verify(request);
     }
-    
+
     @Test
     public void testCreateBodyNoToken() throws Exception {
 
@@ -277,8 +257,8 @@ public class OAuthAccessResourceRequestTest {
         HttpServletRequest request = createMock(HttpServletRequest.class);
         expect(request.getMethod()).andStubReturn(OAuth.HttpMethod.POST);
         expect(request.getContentType()).andStubReturn(OAuth.ContentType.URL_ENCODED);
-        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN))
-            .andStubReturn(new String[] {"sometoken", "othertoken"});
+        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(new String[] {"sometoken",
+                                                                                                 "othertoken"});
         expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn(null);
         replay(request);
 
@@ -286,9 +266,7 @@ public class OAuthAccessResourceRequestTest {
             new OAuthAccessResourceRequest(request, ParameterStyle.BODY);
             fail("Exception expeted");
         } catch (OAuthProblemException e) {
-            Assert
-                .assertTrue(
-                    OAuthError.TokenResponse.INVALID_REQUEST.equals(e.getError()));
+            Assert.assertTrue(OAuthError.TokenResponse.INVALID_REQUEST.equals(e.getError()));
         }
         verify(request);
     }
@@ -317,9 +295,10 @@ public class OAuthAccessResourceRequestTest {
 
         HttpServletRequest request = createMock(HttpServletRequest.class);
         expect(request.getMethod()).andStubReturn(OAuth.HttpMethod.GET);
-        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(null);
-        expect(request.getParameterValues(OAuth.OAUTH_TOKEN)).andStubReturn(null);
-        expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn(null);
+        expect(request.getQueryString()).andStubReturn(null);
+        //        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(null);
+        //        expect(request.getParameterValues(OAuth.OAUTH_TOKEN)).andStubReturn(null);
+        //        expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn(null);
         replay(request);
 
         try {
@@ -337,17 +316,18 @@ public class OAuthAccessResourceRequestTest {
 
         HttpServletRequest request = createMock(HttpServletRequest.class);
         expect(request.getMethod()).andStubReturn(OAuth.HttpMethod.GET);
-        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(new String[] {"sometoken"});
-        expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn("HMAC-SHA1");
+        expect(request.getQueryString()).andStubReturn(OAuth.OAUTH_VERSION_DIFFER + "=HMAC-SHA1&"
+            + OAuth.OAUTH_BEARER_TOKEN
+            + "=sometoken");
+        //        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(new String[] {"sometoken"});
+        //        expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn("HMAC-SHA1");
         replay(request);
 
         try {
             new OAuthAccessResourceRequest(request, ParameterStyle.QUERY);
             fail("Exception expeted");
         } catch (OAuthProblemException e) {
-            Assert
-                .assertTrue(
-                    OAuthError.TokenResponse.INVALID_REQUEST.equals(e.getError()));
+            Assert.assertTrue(OAuthError.TokenResponse.INVALID_REQUEST.equals(e.getError()));
         }
         verify(request);
     }
@@ -357,18 +337,19 @@ public class OAuthAccessResourceRequestTest {
 
         HttpServletRequest request = createMock(HttpServletRequest.class);
         expect(request.getMethod()).andStubReturn(OAuth.HttpMethod.GET);
-        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN))
-            .andStubReturn(new String[] {"sometoken", "othertoken"});
-        expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn(null);
+        expect(request.getQueryString()).andStubReturn(OAuth.OAUTH_BEARER_TOKEN + "=sometoken&"
+            + OAuth.OAUTH_BEARER_TOKEN
+            + "=othertoken");
+        //        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN))
+        //            .andStubReturn(new String[] {"sometoken", "othertoken"});
+        //        expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn(null);
         replay(request);
 
         try {
             new OAuthAccessResourceRequest(request, ParameterStyle.QUERY);
             fail("Exception expeted");
         } catch (OAuthProblemException e) {
-            Assert
-                .assertTrue(
-                    OAuthError.TokenResponse.INVALID_REQUEST.equals(e.getError()));
+            Assert.assertTrue(OAuthError.TokenResponse.INVALID_REQUEST.equals(e.getError()));
         }
         verify(request);
     }
@@ -378,8 +359,9 @@ public class OAuthAccessResourceRequestTest {
 
         HttpServletRequest request = createMock(HttpServletRequest.class);
         expect(request.getMethod()).andStubReturn(OAuth.HttpMethod.GET);
-        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(new String[] {"sometoken"});
-        expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn(null);
+        expect(request.getQueryString()).andStubReturn(OAuth.OAUTH_BEARER_TOKEN + "=sometoken");
+        //        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(new String[] {"sometoken"});
+        //        expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn(null);
         replay(request);
 
         try {
@@ -394,11 +376,12 @@ public class OAuthAccessResourceRequestTest {
     @Test
     public void testGetAccessTokenWrongQueryRequest() throws Exception {
         HttpServletRequest request = createMock(HttpServletRequest.class);
-        expect(request.getParameter(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(null);
-        expect(request.getParameterValues(OAuth.OAUTH_TOKEN)).andStubReturn(null);        
-        expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn(null);
-        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN))
-            .andStubReturn(new String[] {null});
+        expect(request.getQueryString()).andStubReturn(null);
+        //        expect(request.getParameter(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(null);
+        //        expect(request.getParameterValues(OAuth.OAUTH_TOKEN)).andStubReturn(null);        
+        //        expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn(null);
+        //        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN))
+        //            .andStubReturn(new String[] {null});
 
         replay(request);
 
@@ -417,8 +400,7 @@ public class OAuthAccessResourceRequestTest {
         expect(request.getParameter(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(null);
         expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn(null);
         expect(request.getHeader("Authorization")).andStubReturn(null);
-        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN))
-            .andStubReturn(new String[] {null});
+        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(new String[] {null});
 
         replay(request);
 
@@ -438,10 +420,8 @@ public class OAuthAccessResourceRequestTest {
         expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn(null);
         expect(request.getMethod()).andStubReturn(OAuth.HttpMethod.POST);
         expect(request.getContentType()).andStubReturn(OAuth.ContentType.URL_ENCODED);
-        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN))
-            .andStubReturn(new String[] {null});
-        expect(request.getParameterValues(OAuth.OAUTH_TOKEN))
-        .andStubReturn(new String[] {null});
+        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(new String[] {null});
+        expect(request.getParameterValues(OAuth.OAUTH_TOKEN)).andStubReturn(new String[] {null});
         replay(request);
 
         try {
@@ -462,8 +442,7 @@ public class OAuthAccessResourceRequestTest {
         expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn(null);
         expect(request.getMethod()).andStubReturn(OAuth.HttpMethod.POST);
         expect(request.getContentType()).andStubReturn(OAuth.ContentType.URL_ENCODED);
-        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN))
-            .andStubReturn(new String[] {"sometoken"});
+        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(new String[] {"sometoken"});
 
         replay(request);
         OAuthAccessResourceRequest req = null;
@@ -481,8 +460,7 @@ public class OAuthAccessResourceRequestTest {
         expect(request.getParameter(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn("sometoken");
         expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn(null);
         expect(request.getHeader("Authorization")).andStubReturn(AUTHORIZATION_HEADER_OAUTH2);
-        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN))
-            .andStubReturn(new String[] {"sometoken"});
+        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(new String[] {"sometoken"});
 
         replay(request);
         try {
@@ -496,10 +474,11 @@ public class OAuthAccessResourceRequestTest {
 
         reset(request);
         //test uri query
-        expect(request.getParameter(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn("sometoken");
-        expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn(null);
-        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN))
-            .andStubReturn(new String[] {"sometoken"});
+        expect(request.getQueryString()).andStubReturn(OAuth.OAUTH_BEARER_TOKEN + "=sometoken");
+
+        //        expect(request.getParameter(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn("sometoken");
+        //        expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn(null);
+        //        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(new String[] {"sometoken"});
 
         replay(request);
         req = new OAuthAccessResourceRequest(request, ParameterStyle.QUERY);
@@ -511,21 +490,20 @@ public class OAuthAccessResourceRequestTest {
     @Test
     public void testMultipleStylesValidRequest() throws Exception {
         HttpServletRequest request = createMock(HttpServletRequest.class);
+        expect(request.getQueryString()).andStubReturn(null);
+
         expect(request.getParameter(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(null);
         expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn(null);
         expect(request.getMethod()).andStubReturn(OAuth.HttpMethod.POST);
         expect(request.getContentType()).andStubReturn(OAuth.ContentType.URL_ENCODED);
-        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN))
-            .andStubReturn(new String[] {null});
-        expect(request.getParameterValues(OAuth.OAUTH_TOKEN))
-        .andStubReturn(new String[] {null});
+        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(new String[] {null});
+        expect(request.getParameterValues(OAuth.OAUTH_TOKEN)).andStubReturn(new String[] {null});
         expect(request.getHeader("Authorization")).andStubReturn(AUTHORIZATION_HEADER_OAUTH2);
 
         replay(request);
 
         try {
-            new OAuthAccessResourceRequest(request, ParameterStyle.QUERY, ParameterStyle.BODY,
-                ParameterStyle.HEADER);
+            new OAuthAccessResourceRequest(request, ParameterStyle.QUERY, ParameterStyle.BODY, ParameterStyle.HEADER);
         } catch (OAuthProblemException e) {
             fail("Exception not expected");
         }
@@ -535,27 +513,24 @@ public class OAuthAccessResourceRequestTest {
     @Test
     public void testMultipleStylesInvalidRequest() throws Exception {
         HttpServletRequest request = createMock(HttpServletRequest.class);
+        expect(request.getQueryString()).andStubReturn(null);
+
         expect(request.getParameter(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn("sometoken");
         expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn(null);
         expect(request.getMethod()).andStubReturn(OAuth.HttpMethod.POST);
         expect(request.getContentType()).andStubReturn(OAuth.ContentType.URL_ENCODED);
-        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN))
-            .andStubReturn(new String[] {"sometoken"});
+        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(new String[] {"sometoken"});
         expect(request.getHeader("Authorization")).andStubReturn(AUTHORIZATION_HEADER_OAUTH2);
 
         replay(request);
 
         OAuthAccessResourceRequest req = null;
         try {
-            new OAuthAccessResourceRequest(request, ParameterStyle.BODY,
-                ParameterStyle.QUERY, ParameterStyle.HEADER);
+            new OAuthAccessResourceRequest(request, ParameterStyle.BODY, ParameterStyle.QUERY, ParameterStyle.HEADER);
             fail("Exception expeted");
         } catch (OAuthProblemException e) {
-            Assert
-                .assertTrue(
-                    OAuthError.TokenResponse.INVALID_REQUEST.equals(e.getError()));
+            Assert.assertTrue(OAuthError.TokenResponse.INVALID_REQUEST.equals(e.getError()));
         }
-
 
         verify(request);
     }
