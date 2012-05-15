@@ -36,7 +36,7 @@ import org.apache.amber.oauth2.common.utils.OAuthUtils;
  */
 public class ClientHeaderParametersApplier implements OAuthParametersApplier {
 
-    public OAuthMessage applyOAuthParameters(OAuthMessage message, Map<String, String> params)
+    public OAuthMessage applyOAuthParameters(OAuthMessage message, Map<String, Object> params)
         throws OAuthSystemException {
 
         String header = OAuthUtils.encodeOAuthHeader(params);

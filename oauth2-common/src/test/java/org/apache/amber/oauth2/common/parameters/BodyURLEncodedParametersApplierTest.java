@@ -24,11 +24,11 @@ package org.apache.amber.oauth2.common.parameters;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.amber.oauth2.common.OAuth;
+import org.apache.amber.oauth2.common.message.OAuthMessage;
 import org.apache.amber.oauth2.common.utils.DummyOAuthMessage;
 import org.junit.Assert;
 import org.junit.Test;
-import org.apache.amber.oauth2.common.OAuth;
-import org.apache.amber.oauth2.common.message.OAuthMessage;
 
 /**
  * @author Maciej Machulak (m.p.machulak@ncl.ac.uk)
@@ -42,8 +42,8 @@ public class BodyURLEncodedParametersApplierTest {
 
         OAuthParametersApplier app = new BodyURLEncodedParametersApplier();
 
-        Map<String, String> params = new HashMap<String, String>();
-        params.put(OAuth.OAUTH_EXPIRES_IN, "3600");
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put(OAuth.OAUTH_EXPIRES_IN, 3600l);
         params.put(OAuth.OAUTH_ACCESS_TOKEN, "token_authz");
         params.put(OAuth.OAUTH_CODE, "code_");
         params.put(OAuth.OAUTH_SCOPE, "read");

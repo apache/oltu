@@ -73,9 +73,14 @@ public class OAuthASResponse extends OAuthResponse {
         }
 
         public OAuthAuthorizationResponseBuilder setExpiresIn(String expiresIn) {
-            this.parameters.put(OAuth.OAUTH_EXPIRES_IN, expiresIn);
+            this.parameters.put(OAuth.OAUTH_EXPIRES_IN, expiresIn == null ? null : Long.valueOf(expiresIn));
             return this;
         }
+        
+        public OAuthAuthorizationResponseBuilder setExpiresIn(Long expiresIn) {
+            this.parameters.put(OAuth.OAUTH_EXPIRES_IN, expiresIn);
+            return this;
+        }        
 
         public OAuthAuthorizationResponseBuilder location(String location) {
             this.location = location;
@@ -101,7 +106,7 @@ public class OAuthASResponse extends OAuthResponse {
         }
 
         public OAuthTokenResponseBuilder setExpiresIn(String expiresIn) {
-            this.parameters.put(OAuth.OAUTH_EXPIRES_IN, expiresIn);
+            this.parameters.put(OAuth.OAUTH_EXPIRES_IN, expiresIn == null ? null : Long.valueOf(expiresIn));
             return this;
         }
 

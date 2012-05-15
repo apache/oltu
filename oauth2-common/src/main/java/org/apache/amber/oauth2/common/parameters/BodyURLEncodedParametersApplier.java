@@ -34,7 +34,7 @@ import org.apache.amber.oauth2.common.utils.OAuthUtils;
  */
 public class BodyURLEncodedParametersApplier implements OAuthParametersApplier {
 
-    public OAuthMessage applyOAuthParameters(OAuthMessage message, Map<String, String> params)
+    public OAuthMessage applyOAuthParameters(OAuthMessage message, Map<String, Object> params)
         throws OAuthSystemException {
 
         String body = OAuthUtils.format(params.entrySet(), "UTF-8");

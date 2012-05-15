@@ -40,6 +40,6 @@ public final class CommonExt {
     public static final String CLIENT_ID = "someclientid";
     public static final String CLIENT_SECRET = "someclientsecret";
     public static final String ISSUED_AT = "0123456789";
-    public static final String EXPIRES_IN = "987654321";
+    public static final Long EXPIRES_IN = 987654321l;
 
 }

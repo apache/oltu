@@ -21,10 +21,10 @@
 
 package org.apache.amber.oauth2.client.response;
 
+import org.apache.amber.oauth2.common.OAuth;
 import org.apache.amber.oauth2.common.token.BasicOAuthToken;
 import org.apache.amber.oauth2.common.token.OAuthToken;
 import org.apache.amber.oauth2.common.utils.OAuthUtils;
-import org.apache.amber.oauth2.common.OAuth;
 
 
 /**
@@ -36,19 +36,20 @@ public class GitHubTokenResponse extends OAuthAccessTokenResponse {
 
 
     public String getAccessToken() {
-        return parameters.get(OAuth.OAUTH_ACCESS_TOKEN);
+        return getParam(OAuth.OAUTH_ACCESS_TOKEN);
     }
 
-    public String getExpiresIn() {
-        return parameters.get(OAuth.OAUTH_EXPIRES_IN);
+    public Long getExpiresIn() {
+        String value = getParam(OAuth.OAUTH_EXPIRES_IN);
+        return value == null? null: Long.valueOf(value);
     }
 
     public String getRefreshToken() {
-        return parameters.get(OAuth.OAUTH_EXPIRES_IN);
+        return getParam(OAuth.OAUTH_EXPIRES_IN);
     }
 
     public String getScope() {
-        return parameters.get(OAuth.OAUTH_SCOPE);
+        return getParam(OAuth.OAUTH_SCOPE);
     }
 
     public OAuthToken getOAuthToken() {
@@ -67,11 +68,6 @@ public class GitHubTokenResponse extends OAuthAccessTokenResponse {
     protected void setResponseCode(int code) {
         this.responseCode = code;
     }
-
-    public String getParam(String name) {
-        return parameters.get(name);
-    }
-
 
 
 }

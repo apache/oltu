@@ -23,12 +23,12 @@ package org.apache.amber.oauth2.client.response;
 
 import org.apache.amber.oauth2.client.utils.TestUtils;
 import org.apache.amber.oauth2.common.OAuth;
+import org.apache.amber.oauth2.common.error.OAuthError;
 import org.apache.amber.oauth2.common.exception.OAuthProblemException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.apache.amber.oauth2.common.error.OAuthError;
 
 /**
  * @author Maciej Machulak (m.p.machulak@ncl.ac.uk)
@@ -147,7 +147,7 @@ public class OAuthJSONAccessTokenResponseTest extends Assert {
         }
 
         String accessToken = r.getAccessToken();
-        String expiresIn = r.getExpiresIn();
+        Long expiresIn = r.getExpiresIn();
 
         Assert.assertEquals(TestUtils.EXPIRES_IN, expiresIn);
         Assert.assertEquals(TestUtils.ACCESS_TOKEN, accessToken);

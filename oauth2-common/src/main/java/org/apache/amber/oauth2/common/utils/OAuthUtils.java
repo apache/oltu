@@ -82,14 +82,14 @@ public final class OAuthUtils {
      * @return Translated string
      */
     public static String format(
-        final Collection<? extends Map.Entry<String, String>> parameters,
+        final Collection<? extends Map.Entry<String, Object>> parameters,
         final String encoding) {
         final StringBuilder result = new StringBuilder();
-        for (final Map.Entry<String, String> parameter : parameters) {
+        for (final Map.Entry<String, Object> parameter : parameters) {
+            String value = parameter.getValue() == null? null : String.valueOf(parameter.getValue());
             if (!OAuthUtils.isEmpty(parameter.getKey())
-                && !OAuthUtils.isEmpty(parameter.getValue())) {
+                && !OAuthUtils.isEmpty(value)) {
                 final String encodedName = encode(parameter.getKey(), encoding);
-                final String value = parameter.getValue();
                 final String encodedValue = value != null ? encode(value, encoding) : "";
                 if (result.length() > 0) {
                     result.append(PARAMETER_SEPARATOR);
@@ -204,8 +204,8 @@ public final class OAuthUtils {
     /**
      * Parse a form-urlencoded document.
      */
-    public static Map<String, String> decodeForm(String form) {
-        Map<String, String> params = new HashMap<String, String>();
+    public static Map<String, Object> decodeForm(String form) {
+        Map<String, Object> params = new HashMap<String, Object>();
         if (!OAuthUtils.isEmpty(form)) {
             for (String nvp : form.split("\\&")) {
                 int equals = nvp.indexOf('=');
@@ -366,14 +366,15 @@ public final class OAuthUtils {
     /**
      * Construct a WWW-Authenticate or Authorization header with the OAuth challenge/credentials
      */
-    public static String encodeOAuthHeader(Map<String, String> entries) {
+    public static String encodeOAuthHeader(Map<String, Object> entries) {
         StringBuffer sb = new StringBuffer();
         sb.append(OAuth.OAUTH_HEADER_NAME).append(" ");
-        for (Map.Entry<String, String> entry : entries.entrySet()) {
-            if (!OAuthUtils.isEmpty(entry.getKey()) && !OAuthUtils.isEmpty(entry.getValue())) {
+        for (Map.Entry<String, Object> entry : entries.entrySet()) {
+            String value = entry.getValue() == null? null: String.valueOf(entry.getValue());
+            if (!OAuthUtils.isEmpty(entry.getKey()) && !OAuthUtils.isEmpty(value)) {
                 sb.append(entry.getKey());
                 sb.append("=\"");
-                sb.append(entry.getValue());
+                sb.append(value);
                 sb.append("\",");
             }
         }

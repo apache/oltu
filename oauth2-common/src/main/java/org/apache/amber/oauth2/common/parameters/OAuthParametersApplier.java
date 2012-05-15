@@ -44,6 +44,6 @@ import org.apache.amber.oauth2.common.message.OAuthMessage;
  */
 public interface OAuthParametersApplier {
 
-    OAuthMessage applyOAuthParameters(OAuthMessage message, Map<String, String> params) throws
+    OAuthMessage applyOAuthParameters(OAuthMessage message, Map<String, Object> params) throws
         OAuthSystemException;
 }

@@ -21,13 +21,13 @@
 
 package org.apache.amber.oauth2.ext.dynamicreg.client.response;
 
+import org.apache.amber.oauth2.client.response.OAuthClientResponse;
 import org.apache.amber.oauth2.common.error.OAuthError;
 import org.apache.amber.oauth2.common.exception.OAuthProblemException;
 import org.apache.amber.oauth2.common.utils.JSONUtils;
 import org.apache.amber.oauth2.ext.dynamicreg.client.validators.RegistrationValidator;
 import org.apache.amber.oauth2.ext.dynamicreg.common.OAuthRegistration;
 import org.codehaus.jettison.json.JSONException;
-import org.apache.amber.oauth2.client.response.OAuthClientResponse;
 
 
 /**
@@ -46,10 +46,6 @@ public class OAuthClientRegistrationResponse extends OAuthClientResponse {
         super.init(body, contentType, responseCode);
     }
 
-    @Override
-    public String getParam(String param) {
-        return parameters.get(param);
-    }
 
     protected void setBody(String body) throws OAuthProblemException {
         try {
@@ -70,19 +66,20 @@ public class OAuthClientRegistrationResponse extends OAuthClientResponse {
     }
 
     public String getClientId() {
-        return parameters.get(OAuthRegistration.Response.CLIENT_ID);
+        return getParam(OAuthRegistration.Response.CLIENT_ID);
     }
 
     public String getClientSecret() {
-        return parameters.get(OAuthRegistration.Response.CLIENT_SECRET);
+        return getParam(OAuthRegistration.Response.CLIENT_SECRET);
     }
 
     public String getIssuedAt() {
-        return parameters.get(OAuthRegistration.Response.ISSUED_AT);
+        return getParam(OAuthRegistration.Response.ISSUED_AT);
     }
 
-    public String getExpiresIn() {
-        return parameters.get(OAuthRegistration.Response.EXPIRES_IN);
+    public Long getExpiresIn() {
+        String value = getParam(OAuthRegistration.Response.EXPIRES_IN);
+        return value == null? null: Long.valueOf(value);
     }
 
 }

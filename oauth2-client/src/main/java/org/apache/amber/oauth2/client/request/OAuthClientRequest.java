@@ -98,7 +98,7 @@ public class OAuthClientRequest implements OAuthMessage {
     public abstract static class OAuthRequestBuilder {
 
         protected OAuthParametersApplier applier;
-        protected Map<String, String> parameters = new HashMap<String, String>();
+        protected Map<String, Object> parameters = new HashMap<String, Object>();
 
         protected String url;
 

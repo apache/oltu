@@ -39,9 +39,12 @@ public abstract class OAuthClientResponse {
     protected int responseCode;
 
     protected OAuthClientValidator validator;
-    protected Map<String, String> parameters = new HashMap<String, String>();
+    protected Map<String, Object> parameters = new HashMap<String, Object>();
 
-    public abstract String getParam(String param);
+    public String getParam(String param) {
+        Object value = parameters.get(param);
+        return value == null ? null : String.valueOf(value);
+    }
 
     protected abstract void setBody(String body) throws OAuthProblemException;
 
@@ -60,4 +63,5 @@ public abstract class OAuthClientResponse {
     protected void validate() throws OAuthProblemException {
         validator.validate(this);
     }
+    
 }

@@ -61,6 +61,11 @@ public class OAuthServerRegistrationResponse extends OAuthASResponse {
         }
 
         public OAuthRegistrationResponseBuilder setExpiresIn(String value) {
+            this.parameters.put(OAuthRegistration.Response.EXPIRES_IN, Long.parseLong(value));
+            return this;
+        }
+        
+        public OAuthRegistrationResponseBuilder setExpiresIn(Long value) {
             this.parameters.put(OAuthRegistration.Response.EXPIRES_IN, value);
             return this;
         }

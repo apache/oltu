@@ -23,11 +23,10 @@ package org.apache.amber.oauth2.common.parameters;
 
 import java.util.Map;
 
+import org.apache.amber.oauth2.common.exception.OAuthSystemException;
 import org.apache.amber.oauth2.common.message.OAuthMessage;
 import org.apache.amber.oauth2.common.utils.JSONUtils;
 import org.codehaus.jettison.json.JSONException;
-
-import org.apache.amber.oauth2.common.exception.OAuthSystemException;
 
 /**
  * @author Maciej Machulak (m.p.machulak@ncl.ac.uk)
@@ -35,7 +34,7 @@ import org.apache.amber.oauth2.common.exception.OAuthSystemException;
  * @author Aad van Moorsel (aad.vanmoorsel@ncl.ac.uk)
  */
 public class JSONBodyParametersApplier implements OAuthParametersApplier {
-    public OAuthMessage applyOAuthParameters(OAuthMessage message, Map<String, String> params)
+    public OAuthMessage applyOAuthParameters(OAuthMessage message, Map<String, Object> params)
         throws OAuthSystemException {
         String json = null;
         try {

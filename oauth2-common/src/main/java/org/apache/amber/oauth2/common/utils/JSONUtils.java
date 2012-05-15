@@ -35,9 +35,9 @@ import org.codehaus.jettison.json.JSONObject;
  */
 public final class JSONUtils {
 
-    public static String buildJSON(Map<String, String> params) throws JSONException {
+    public static String buildJSON(Map<String, Object> params) throws JSONException {
         JSONObject jsonObject = new JSONObject();
-        for (Map.Entry<String, String> param : params.entrySet()) {
+        for (Map.Entry<String, Object> param : params.entrySet()) {
             if (param.getKey() != null && !"".equals(param.getKey()) && param.getValue() != null && !""
                 .equals(param.getValue())) {
                 jsonObject.put(param.getKey(), param.getValue());
@@ -47,16 +47,16 @@ public final class JSONUtils {
         return jsonObject.toString();
     }
 
-    public static Map<String, String> parseJSON(String jsonBody) throws JSONException {
+    public static Map<String, Object> parseJSON(String jsonBody) throws JSONException {
 
-        Map<String, String> params = new HashMap<String, String>();
+        Map<String, Object> params = new HashMap<String, Object>();
         JSONObject obj = new JSONObject(jsonBody);
         Iterator it = obj.keys();
         while (it.hasNext()) {
             Object o = it.next();
             if (o instanceof String) {
                 String key = (String)o;
-                params.put(key, obj.getString(key));
+                params.put(key, obj.get(key));
             }
         }
         return params;

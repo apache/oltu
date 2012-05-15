@@ -22,6 +22,7 @@
 package org.apache.amber.oauth2.client.demo.controller;
 
 import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.amber.oauth2.client.OAuthClient;
@@ -30,17 +31,16 @@ import org.apache.amber.oauth2.client.demo.Utils;
 import org.apache.amber.oauth2.client.demo.exception.ApplicationException;
 import org.apache.amber.oauth2.client.demo.model.OAuthParams;
 import org.apache.amber.oauth2.client.request.OAuthClientRequest;
+import org.apache.amber.oauth2.client.response.GitHubTokenResponse;
 import org.apache.amber.oauth2.client.response.OAuthAccessTokenResponse;
+import org.apache.amber.oauth2.client.response.OAuthJSONAccessTokenResponse;
 import org.apache.amber.oauth2.common.exception.OAuthProblemException;
 import org.apache.amber.oauth2.common.exception.OAuthSystemException;
 import org.apache.amber.oauth2.common.message.types.GrantType;
-import org.apache.amber.oauth2.client.response.GitHubTokenResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import org.apache.amber.oauth2.client.response.OAuthJSONAccessTokenResponse;
 
 
 /**
@@ -84,7 +84,7 @@ public class TokenController {
             oauthResponse = client.accessToken(request, cl);
 
             oauthParams.setAccessToken(oauthResponse.getAccessToken());
-            oauthParams.setExpiresIn(Utils.isIssued(oauthResponse.getExpiresIn()));
+            oauthParams.setExpiresIn(oauthResponse.getExpiresIn());
             oauthParams.setRefreshToken(Utils.isIssued(oauthResponse.getRefreshToken()));
 
             return new ModelAndView("get_resource");

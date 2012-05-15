@@ -21,11 +21,11 @@
 
 package org.apache.amber.oauth2.client.utils;
 
+import static org.easymock.EasyMock.expect;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.amber.oauth2.common.error.OAuthError;
-
-import static org.easymock.EasyMock.expect;
 
 
 /**
@@ -41,7 +41,7 @@ public final class TestUtils {
         = "{\"expires_in\":3600,\"access_token\":\"b52d434791fd52316232b6cf2d3\",\"scope\":\"read\","
         + "\"refresh_token\":\"test_refresh_token\"}";
 
-    public static final String EXPIRES_IN = "3600";
+    public static final Long EXPIRES_IN = 3600l;
     public static final String ACCESS_TOKEN = "b52d434791fd52316232b6cf2d3";
     public static final String SCOPE = "read";
     public static final String REFRESH_TOKEN = "test_refresh_token";

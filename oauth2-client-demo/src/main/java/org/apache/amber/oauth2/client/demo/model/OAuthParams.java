@@ -36,7 +36,7 @@ public class OAuthParams {
     private String tokenEndpoint;
     private String authzCode;
     private String accessToken;
-    private String expiresIn;
+    private long expiresIn;
     private String refreshToken;
     private String scope;
     private String resourceUrl;
@@ -109,11 +109,15 @@ public class OAuthParams {
         this.accessToken = accessToken;
     }
 
-    public String getExpiresIn() {
+    public long getExpiresIn() {
         return expiresIn;
     }
 
     public void setExpiresIn(String expiresIn) {
+        this.expiresIn = Long.parseLong(expiresIn);
+    }
+    
+    public void setExpiresIn(long expiresIn) {
         this.expiresIn = expiresIn;
     }
 
