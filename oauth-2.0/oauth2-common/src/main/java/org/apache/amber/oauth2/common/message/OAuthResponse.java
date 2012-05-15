@@ -107,7 +107,7 @@ public class OAuthResponse implements OAuthMessage {
     public static class OAuthResponseBuilder {
 
         protected OAuthParametersApplier applier;
-        protected Map<String, String> parameters = new HashMap<String, String>();
+        protected Map<String, Object> parameters = new HashMap<String, Object>();
         protected int responseCode;
         protected String location;
 

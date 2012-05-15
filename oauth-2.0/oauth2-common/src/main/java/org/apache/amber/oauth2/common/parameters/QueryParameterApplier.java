@@ -35,7 +35,7 @@ import org.apache.amber.oauth2.common.utils.OAuthUtils;
  */
 public class QueryParameterApplier implements OAuthParametersApplier {
 
-    public OAuthMessage applyOAuthParameters(OAuthMessage message, Map<String, String> params) {
+    public OAuthMessage applyOAuthParameters(OAuthMessage message, Map<String, Object> params) {
 
         String messageUrl = message.getLocationUri();
         if (messageUrl != null) {
@@ -43,7 +43,7 @@ public class QueryParameterApplier implements OAuthParametersApplier {
             StringBuffer url = new StringBuffer(messageUrl);
 
             //apply uri fragment component if exist access_toke param
-            Map<String, String> fragmentParams = new LinkedHashMap<String, String>();
+            Map<String, Object> fragmentParams = new LinkedHashMap<String, Object>();
             if (params.containsKey(OAuth.OAUTH_ACCESS_TOKEN)) {
                 fragmentParams.put(OAuth.OAUTH_ACCESS_TOKEN, params.remove(OAuth.OAUTH_ACCESS_TOKEN));
 

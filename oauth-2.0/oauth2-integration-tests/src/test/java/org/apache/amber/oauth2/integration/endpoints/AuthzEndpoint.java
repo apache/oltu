@@ -73,7 +73,7 @@ public class AuthzEndpoint {
             }
             if (responseType.equals(ResponseType.TOKEN.toString())) {
                 builder.setAccessToken(oauthIssuerImpl.accessToken());
-                builder.setExpiresIn(String.valueOf(3600));
+                builder.setExpiresIn(3600l);
             }
 
             String redirectURI = oauthRequest.getParam(OAuth.OAUTH_REDIRECT_URI);

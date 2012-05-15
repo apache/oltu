@@ -23,10 +23,10 @@ package org.apache.amber.oauth2.common.parameters;
 
 import java.util.Map;
 
+import org.apache.amber.oauth2.common.OAuth;
 import org.apache.amber.oauth2.common.exception.OAuthSystemException;
 import org.apache.amber.oauth2.common.message.OAuthMessage;
 import org.apache.amber.oauth2.common.utils.OAuthUtils;
-import org.apache.amber.oauth2.common.OAuth;
 
 /**
  * @author Maciej Machulak (m.p.machulak@ncl.ac.uk)
@@ -35,7 +35,7 @@ import org.apache.amber.oauth2.common.OAuth;
  */
 public class WWWAuthHeaderParametersApplier implements OAuthParametersApplier {
 
-    public OAuthMessage applyOAuthParameters(OAuthMessage message, Map<String, String> params)
+    public OAuthMessage applyOAuthParameters(OAuthMessage message, Map<String, Object> params)
         throws OAuthSystemException {
         String header = OAuthUtils.encodeOAuthHeader(params);
         message.addHeader(OAuth.HeaderType.WWW_AUTHENTICATE, header);

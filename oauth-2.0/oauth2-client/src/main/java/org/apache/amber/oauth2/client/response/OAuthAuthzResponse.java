@@ -22,6 +22,7 @@
 package org.apache.amber.oauth2.client.response;
 
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.amber.oauth2.client.validator.CodeTokenValidator;
@@ -80,8 +81,9 @@ public class OAuthAuthzResponse extends OAuthClientResponse {
         return getParam(OAuth.OAUTH_ACCESS_TOKEN);
     }
 
-    public String getExpiresIn() {
-        return getParam(OAuth.OAUTH_EXPIRES_IN);
+    public Long getExpiresIn() {
+        String value = getParam(OAuth.OAUTH_EXPIRES_IN);
+        return value == null? null: Long.valueOf(value);
     }
 
     public String getScope() {
@@ -98,10 +100,6 @@ public class OAuthAuthzResponse extends OAuthClientResponse {
 
     public HttpServletRequest getRequest() {
         return request;
-    }
-
-    public String getParam(String key) {
-        return this.parameters.get(key);
     }
 
     protected void setBody(String body) {

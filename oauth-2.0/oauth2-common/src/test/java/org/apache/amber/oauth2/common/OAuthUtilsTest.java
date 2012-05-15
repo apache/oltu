@@ -23,17 +23,17 @@ package org.apache.amber.oauth2.common;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.xml.stream.XMLStreamReader;
 
 import org.apache.amber.oauth2.common.error.OAuthError;
+import org.apache.amber.oauth2.common.utils.JSONUtils;
+import org.apache.amber.oauth2.common.utils.OAuthUtils;
 import org.codehaus.jettison.AbstractXMLStreamReader;
 import org.codehaus.jettison.json.JSONObject;
 import org.codehaus.jettison.mapped.MappedXMLStreamReader;
 import org.junit.Assert;
 import org.junit.Test;
-import org.apache.amber.oauth2.common.utils.OAuthUtils;
-
-import org.apache.amber.oauth2.common.utils.JSONUtils;
 
 /**
  * @author Maciej Machulak (m.p.machulak@ncl.ac.uk)
@@ -44,7 +44,7 @@ public class OAuthUtilsTest extends Assert {
 
     @Test
     public void testBuildJSON() throws Exception {
-        Map<String, String> params = new HashMap<String, String>();
+        Map<String, Object> params = new HashMap<String, Object>();
         params.put(OAuthError.OAUTH_ERROR, OAuthError.TokenResponse.INVALID_REQUEST);
 
         String json = JSONUtils.buildJSON(params);
@@ -66,7 +66,7 @@ public class OAuthUtilsTest extends Assert {
     @Test
     public void testEncodeOAuthHeader() throws Exception {
 
-        Map<String, String> entries = new HashMap<String, String>();
+        Map<String, Object> entries = new HashMap<String, Object>();
         entries.put("realm", "Some Example Realm");
         entries.put("error", "invalid_token");
 

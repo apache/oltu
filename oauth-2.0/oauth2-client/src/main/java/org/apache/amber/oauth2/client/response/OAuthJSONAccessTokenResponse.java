@@ -41,16 +41,17 @@ public class OAuthJSONAccessTokenResponse extends OAuthAccessTokenResponse {
 
     @Override
     public String getAccessToken() {
-        return parameters.get(OAuth.OAUTH_ACCESS_TOKEN);
+        return getParam(OAuth.OAUTH_ACCESS_TOKEN);
     }
 
     @Override
-    public String getExpiresIn() {
-        return parameters.get(OAuth.OAUTH_EXPIRES_IN);
+    public Long getExpiresIn() {
+        String value = getParam(OAuth.OAUTH_EXPIRES_IN);
+        return value == null? null: Long.valueOf(value);
     }
 
     public String getScope() {
-        return parameters.get(OAuth.OAUTH_SCOPE);
+        return getParam(OAuth.OAUTH_SCOPE);
     }
 
     public OAuthToken getOAuthToken() {
@@ -58,7 +59,7 @@ public class OAuthJSONAccessTokenResponse extends OAuthAccessTokenResponse {
     }
 
     public String getRefreshToken() {
-        return parameters.get(OAuth.OAUTH_REFRESH_TOKEN);
+        return getParam(OAuth.OAUTH_REFRESH_TOKEN);
     }
 
     protected void setBody(String body) throws OAuthProblemException {
@@ -79,10 +80,6 @@ public class OAuthJSONAccessTokenResponse extends OAuthAccessTokenResponse {
 
     protected void setResponseCode(int code) {
         this.responseCode = code;
-    }
-
-    public String getParam(String name) {
-        return parameters.get(name);
     }
 
 }

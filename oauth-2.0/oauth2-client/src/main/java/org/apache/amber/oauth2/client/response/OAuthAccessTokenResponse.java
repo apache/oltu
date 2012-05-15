@@ -34,7 +34,7 @@ public abstract class OAuthAccessTokenResponse extends OAuthClientResponse {
 
     public abstract String getAccessToken();
 
-    public abstract String getExpiresIn();
+    public abstract Long getExpiresIn();
 
     public abstract String getRefreshToken();
 

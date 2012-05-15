@@ -48,7 +48,7 @@ public class OAuthASResponseTest {
             .location("http://www.example.com")
             .setCode("code")
             .setAccessToken("access_111")
-            .setExpiresIn("400")
+            .setExpiresIn(400l)
             .setState("ok")
             .setParam("testValue", "value2")
             .buildQueryMessage();

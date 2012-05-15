@@ -28,13 +28,11 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.amber.oauth2.common.OAuth;
+import org.apache.amber.oauth2.common.error.OAuthError;
 import org.apache.amber.oauth2.common.exception.OAuthProblemException;
-import org.apache.amber.oauth2.common.utils.OAuthUtils;
 import org.junit.Assert;
 import org.junit.Test;
-import org.apache.amber.oauth2.common.OAuth;
-
-import org.apache.amber.oauth2.common.error.OAuthError;
 
 /**
  * @author Maciej Machulak (m.p.machulak@ncl.ac.uk)
@@ -44,7 +42,7 @@ import org.apache.amber.oauth2.common.error.OAuthError;
 public class OAuthUtilsTest {
     @Test
     public void testFormat() throws Exception {
-        Map<String, String> parameters = new HashMap<String, String>();
+        Map<String, Object> parameters = new HashMap<String, Object>();
         parameters.put("movie", "Kiler");
         parameters.put("director", "Machulski");
 

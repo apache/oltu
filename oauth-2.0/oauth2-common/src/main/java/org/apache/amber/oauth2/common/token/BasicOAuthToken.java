@@ -5,14 +5,14 @@ package org.apache.amber.oauth2.common.token;
  */
 public class BasicOAuthToken implements OAuthToken {
     protected String accessToken;
-    protected String expiresIn;
+    protected Long expiresIn;
     protected String refreshToken;
     protected String scope;
 
     public BasicOAuthToken() {
     }
 
-    public BasicOAuthToken(String accessToken, String expiresIn, String refreshToken, String scope) {
+    public BasicOAuthToken(String accessToken, Long expiresIn, String refreshToken, String scope) {
         this.accessToken = accessToken;
         this.expiresIn = expiresIn;
         this.refreshToken = refreshToken;
@@ -23,11 +23,11 @@ public class BasicOAuthToken implements OAuthToken {
         this(accessToken, null, null, null);
     }
 
-    public BasicOAuthToken(String accessToken, String expiresIn) {
+    public BasicOAuthToken(String accessToken, Long expiresIn) {
         this(accessToken, expiresIn, null, null);
     }
 
-    public BasicOAuthToken(String accessToken, String expiresIn, String scope) {
+    public BasicOAuthToken(String accessToken, Long expiresIn, String scope) {
         this(accessToken, expiresIn, null, scope);
     }
 
@@ -35,7 +35,7 @@ public class BasicOAuthToken implements OAuthToken {
         return accessToken;
     }
 
-    public String getExpiresIn() {
+    public Long getExpiresIn() {
         return expiresIn;
     }
 

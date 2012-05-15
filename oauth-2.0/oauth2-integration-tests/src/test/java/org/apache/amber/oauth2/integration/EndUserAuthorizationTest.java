@@ -23,6 +23,7 @@ package org.apache.amber.oauth2.integration;
 
 import java.net.HttpURLConnection;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.GET;
@@ -31,14 +32,14 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
 import org.apache.amber.oauth2.client.request.OAuthClientRequest;
-import org.apache.amber.oauth2.common.OAuth;
-import org.apache.amber.oauth2.common.message.types.ResponseType;
-import org.junit.Test;
 import org.apache.amber.oauth2.client.response.OAuthAuthzResponse;
 import org.apache.amber.oauth2.client.response.OAuthClientResponse;
+import org.apache.amber.oauth2.common.OAuth;
 import org.apache.amber.oauth2.common.error.OAuthError;
 import org.apache.amber.oauth2.common.exception.OAuthProblemException;
+import org.apache.amber.oauth2.common.message.types.ResponseType;
 import org.apache.amber.oauth2.common.utils.OAuthUtils;
+import org.junit.Test;
 
 /**
  * @author Maciej Machulak (m.p.machulak@ncl.ac.uk)
@@ -87,7 +88,7 @@ public class EndUserAuthorizationTest extends ClientServerOAuthTest {
 
         HttpURLConnection c = Common.doRequest(request);
         String fragment = c.getURL().toURI().getFragment();
-        Map<String, String> map = OAuthUtils.decodeForm(fragment);
+        Map<String, Object> map = OAuthUtils.decodeForm(fragment);
 
         assertNotNull(map.get(OAuth.OAUTH_EXPIRES_IN));
         assertNotNull(map.get(OAuth.OAUTH_ACCESS_TOKEN));

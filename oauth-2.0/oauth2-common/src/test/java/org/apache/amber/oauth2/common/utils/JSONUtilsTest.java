@@ -23,10 +23,10 @@ package org.apache.amber.oauth2.common.utils;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.xml.stream.XMLStreamReader;
 
 import org.apache.amber.oauth2.common.error.OAuthError;
-import org.apache.amber.oauth2.common.utils.JSONUtils;
 import org.codehaus.jettison.AbstractXMLStreamReader;
 import org.codehaus.jettison.json.JSONObject;
 import org.codehaus.jettison.mapped.MappedXMLStreamReader;
@@ -43,7 +43,7 @@ public class JSONUtilsTest {
     @Test
     public void testBuildJSON() throws Exception {
 
-        Map<String, String> params = new HashMap<String, String>();
+        Map<String, Object> params = new HashMap<String, Object>();
         params.put(OAuthError.OAUTH_ERROR, OAuthError.TokenResponse.INVALID_REQUEST);
 
         String json = JSONUtils.buildJSON(params);
@@ -64,12 +64,12 @@ public class JSONUtilsTest {
 
     @Test
     public void testParseJson() throws Exception {
-        Map<String, String> jsonParams = new HashMap<String, String>();
+        Map<String, Object> jsonParams = new HashMap<String, Object>();
         jsonParams.put("author", "John B. Smith");
         jsonParams.put("year", "2000");
 
         String s = JSONUtils.buildJSON(jsonParams);
-        Map<String, String> map = JSONUtils.parseJSON(s);
+        Map<String, Object> map = JSONUtils.parseJSON(s);
         Assert.assertEquals("John B. Smith", map.get("author"));
         Assert.assertEquals("2000", map.get("year"));
 
