@@ -320,6 +320,10 @@ GQ==
 =EfW1
 -----END PGP PUBLIC KEY BLOCK-----
 
+pub   4096R/891768A5 2012-06-07
+      Key fingerprint = 4089 6E15 E256 D790 92DA  42F6 E1BE E911 8917 68A5
+uid                  Tommaso Teofili <tommaso@apache.org>
+sub   4096R/6F037735 2012-06-07
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 Version: GnuPG/MacGPG2 v2.0.17 (Darwin)
 
