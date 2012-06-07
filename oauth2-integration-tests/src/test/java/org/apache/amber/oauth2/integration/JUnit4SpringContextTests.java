@@ -26,9 +26,9 @@ import org.junit.BeforeClass;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
- * @author Maciej Machulak (m.p.machulak@ncl.ac.uk)
- * @author Lukasz Moren (lukasz.moren@ncl.ac.uk)
- * @author Aad van Moorsel (aad.vanmoorsel@ncl.ac.uk)
+ *
+ *
+ *
  */
 public class JUnit4SpringContextTests extends Assert {
 

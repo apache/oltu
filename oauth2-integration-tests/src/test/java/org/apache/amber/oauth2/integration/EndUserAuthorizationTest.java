@@ -42,9 +42,9 @@ import org.apache.amber.oauth2.common.utils.OAuthUtils;
 import org.junit.Test;
 
 /**
- * @author Maciej Machulak (m.p.machulak@ncl.ac.uk)
- * @author Lukasz Moren (lukasz.moren@ncl.ac.uk)
- * @author Aad van Moorsel (aad.vanmoorsel@ncl.ac.uk)
+ *
+ *
+ *
  */
 @Path("/")
 public class EndUserAuthorizationTest extends ClientServerOAuthTest {

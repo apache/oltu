@@ -21,7 +21,6 @@
 package org.apache.amber.oauth2.common.domain.client;
 
 /**
- * @author Maciej Machulak
  */
 public class BasicClientInfoBuilder {
 

@@ -35,9 +35,9 @@ import org.apache.amber.oauth2.ext.dynamicreg.client.response.OAuthClientRegistr
 
 
 /**
- * @author Maciej Machulak (m.p.machulak@ncl.ac.uk)
- * @author Lukasz Moren (lukasz.moren@ncl.ac.uk)
- * @author Aad van Moorsel (aad.vanmoorsel@ncl.ac.uk)
+ *
+ *
+ *
  */
 public class OAuthRegistrationClient extends OAuthClient {
 

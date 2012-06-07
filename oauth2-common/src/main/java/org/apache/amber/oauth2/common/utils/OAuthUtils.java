@@ -53,9 +53,9 @@ import org.apache.amber.oauth2.common.exception.OAuthSystemException;
  * Some methods based on the Utils class from OAuth V1.0a library available at:
  * http://oauth.googlecode.com/svn/code/java/core/
  *
- * @author Maciej Machulak (m.p.machulak@ncl.ac.uk)
- * @author Lukasz Moren (lukasz.moren@ncl.ac.uk)
- * @author Aad van Moorsel (aad.vanmoorsel@ncl.ac.uk)
+ *
+ *
+ *
  */
 public final class OAuthUtils {
 

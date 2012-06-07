@@ -21,17 +21,15 @@
 
 package org.apache.amber.oauth2.client.validator;
 
-import org.apache.amber.oauth2.client.validator.CodeTokenValidator;
-import org.apache.amber.oauth2.client.validator.OAuthClientValidator;
 import org.apache.amber.oauth2.common.OAuth;
 import org.junit.Assert;
 import org.junit.Test;
 
 
 /**
- * @author Maciej Machulak (m.p.machulak@ncl.ac.uk)
- * @author Lukasz Moren (lukasz.moren@ncl.ac.uk)
- * @author Aad van Moorsel (aad.vanmoorsel@ncl.ac.uk)
+ *
+ *
+ *
  */
 public class CodeTokenValidatorTest {
 
@@ -42,8 +40,8 @@ public class CodeTokenValidatorTest {
         OAuthClientValidator validator = new CodeTokenValidator();
         Assert.assertNotNull(validator.requiredParams);
         Assert.assertEquals(2, validator.requiredParams.size());
-        Assert.assertArrayEquals(new String[] {}, validator.requiredParams.get(OAuth.OAUTH_CODE));
-        Assert.assertArrayEquals(new String[] {}, validator.requiredParams.get(OAuth.OAUTH_ACCESS_TOKEN));
+        Assert.assertArrayEquals(new String[]{}, validator.requiredParams.get(OAuth.OAUTH_CODE));
+        Assert.assertArrayEquals(new String[]{}, validator.requiredParams.get(OAuth.OAUTH_ACCESS_TOKEN));
         Assert.assertNotNull(validator.notAllowedParams);
         Assert.assertEquals(1, validator.notAllowedParams.size());
         Assert.assertTrue(validator.notAllowedParams.contains(OAuth.OAUTH_ACCESS_TOKEN));
