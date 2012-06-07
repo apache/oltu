@@ -652,6 +652,7 @@
                     <exclude>DISCLAIMER</exclude>
                     <exclude>KEYS</exclude>
                     <exclude>NOTICE</exclude>
+                    <exclude>.idea/**</exclude>
                   </excludes>
                 </configuration>
               </execution>
