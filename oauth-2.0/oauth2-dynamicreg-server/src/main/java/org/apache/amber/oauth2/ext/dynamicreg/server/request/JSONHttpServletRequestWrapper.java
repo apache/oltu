@@ -40,7 +40,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * @author Lukasz Moren
+ *
  */
 public class JSONHttpServletRequestWrapper extends HttpServletRequestWrapper {
     private Logger log = LoggerFactory.getLogger(JSONHttpServletRequestWrapper.class);

@@ -35,8 +35,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * @author Maciej Machulak
- * @author Lukasz Moren
+ *
+ *
  */
 public class OAuthAccessResourceRequestTest {
 

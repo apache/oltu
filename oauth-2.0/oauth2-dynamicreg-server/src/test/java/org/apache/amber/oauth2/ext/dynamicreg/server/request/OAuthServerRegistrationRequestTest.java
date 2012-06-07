@@ -28,7 +28,7 @@ import org.junit.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 
 /**
- * @author Lukasz Moren
+ *
  */
 public class OAuthServerRegistrationRequestTest {
 

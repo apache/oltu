@@ -21,7 +21,6 @@
 package org.apache.amber.oauth2.common.exception;
 
 /**
- * @author Lukasz Moren
  */
 public class OAuthRuntimeException extends RuntimeException {
     public OAuthRuntimeException() {

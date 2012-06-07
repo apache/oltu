@@ -45,8 +45,6 @@ import org.apache.amber.oauth2.client.demo.Utils;
 /**
  * Handles requests for the application welcome page.
  *
- * @author Maciej Machulak
- * @author Lukasz Moren
  */
 @Controller
 @RequestMapping("/")

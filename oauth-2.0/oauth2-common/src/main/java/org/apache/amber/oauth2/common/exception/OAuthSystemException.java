@@ -22,8 +22,8 @@
 package org.apache.amber.oauth2.common.exception;
 
 /**
- * @author Maciej Machulak
- * @author Lukasz Moren
+ *
+ *
  */
 public class OAuthSystemException extends Exception {
 

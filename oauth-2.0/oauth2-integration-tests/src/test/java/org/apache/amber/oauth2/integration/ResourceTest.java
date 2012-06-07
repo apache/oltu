@@ -37,9 +37,9 @@ import org.junit.Test;
 /**
  * This tests against Section 5 of the OAuth 2.0 Draft 10 implementation
  *
- * @author Maciej Machulak (m.p.machulak@ncl.ac.uk)
- * @author Lukasz Moren (lukasz.moren@ncl.ac.uk)
- * @author Aad van Moorsel (aad.vanmoorsel@ncl.ac.uk)
+ *
+ *
+ *
  */
 public class ResourceTest extends ClientResourceOAuthTest {
 

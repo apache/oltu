@@ -21,7 +21,6 @@
 package org.apache.amber.oauth2.common.domain.credentials;
 
 /**
- * @author Maciej Machulak
  */
 public class BasicCredentialsBuilder {
 

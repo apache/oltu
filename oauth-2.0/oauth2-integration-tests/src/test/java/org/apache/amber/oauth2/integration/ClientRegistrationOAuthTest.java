@@ -28,7 +28,6 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 
 /**
- * @author Maciej P. Machulak
  */
 public abstract class ClientRegistrationOAuthTest extends ClientServerOAuthTest {
 

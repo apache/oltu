@@ -26,7 +26,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 
 /**
- * @author Lukasz Moren
+ *
  */
 public class FileUtils {
     private FileUtils() {

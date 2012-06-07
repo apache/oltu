@@ -34,9 +34,9 @@ import org.apache.amber.oauth2.common.exception.OAuthProblemException;
 import org.apache.amber.oauth2.common.utils.OAuthUtils;
 
 /**
- * @author Maciej Machulak (m.p.machulak@ncl.ac.uk)
- * @author Lukasz Moren (lukasz.moren@ncl.ac.uk)
- * @author Aad van Moorsel (aad.vanmoorsel@ncl.ac.uk)
+ *
+ *
+ *
  */
 //todo add client secret in header, sect 2.1
 public abstract class AbstractValidator<T extends HttpServletRequest> implements OAuthValidator<T> {

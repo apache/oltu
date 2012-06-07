@@ -44,9 +44,9 @@ import org.apache.amber.oauth2.common.message.types.ResponseType;
 import org.apache.amber.oauth2.common.utils.OAuthUtils;
 
 /**
- * @author Maciej Machulak (m.p.machulak@ncl.ac.uk)
- * @author Lukasz Moren (lukasz.moren@ncl.ac.uk)
- * @author Aad van Moorsel (aad.vanmoorsel@ncl.ac.uk)
+ *
+ *
+ *
  */
 @Path("/authz")
 public class AuthzEndpoint {
