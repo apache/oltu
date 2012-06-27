@@ -228,8 +228,6 @@
   </mailingLists>
 
   <modules>
-    <module>spec-api</module>
-    <module>signature-api</module>
     <module>oauth-2.0</module>
   </modules>
 
