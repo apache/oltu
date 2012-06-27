@@ -230,7 +230,6 @@
   <modules>
     <module>spec-api</module>
     <module>signature-api</module>
-    <module>server</module>
     <module>oauth-2.0</module>
   </modules>
 
