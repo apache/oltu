@@ -244,17 +244,17 @@
   <ciManagement>
     <system>Jenkins</system>
     <url>https://builds.apache.org/job/Amber/</url>
-    <notifiers> 
-     <notifier> 
-       <type>mail</type> 
-       <sendOnError>true</sendOnError> 
-       <sendOnFailure>true</sendOnFailure> 
-       <sendOnSuccess>false</sendOnSuccess> 
-       <sendOnWarning>false</sendOnWarning> 
+    <notifiers>
+     <notifier>
+       <type>mail</type>
+       <sendOnError>true</sendOnError>
+       <sendOnFailure>true</sendOnFailure>
+       <sendOnSuccess>false</sendOnSuccess>
+       <sendOnWarning>false</sendOnWarning>
        <configuration><address>amber-dev@incubator.apache.org</address></configuration> 
-     </notifier> 
+     </notifier>
    </notifiers>
-  </ciManagement>  
+  </ciManagement>
   <distributionManagement>
     <site>
       <id>amber.website</id>
