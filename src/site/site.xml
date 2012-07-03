@@ -42,6 +42,10 @@
   <body>
     <menu name="${project.name}"/>
 
+    <menu name="Committers guide">
+      <item href="./release-howto.html" name="HowTo Release"/>
+    </menu>
+
     <menu name="Miscellaneous">
       <item name="Project stats" href="stats.html"/>
     </menu>
