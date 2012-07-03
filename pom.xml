@@ -230,6 +230,7 @@
 
   <modules>
     <module>oauth-2.0</module>
+    <module>sources-dist</module>
   </modules>
 
   <scm>
