@@ -415,6 +415,7 @@
             <mavenExecutorId>forked-path</mavenExecutorId>
             <useReleaseProfile>false</useReleaseProfile>
             <autoVersionSubmodules>true</autoVersionSubmodules>
+            <tagNameFormat>amber-@{project.version}</tagNameFormat>
             <arguments>-Prelease,apache</arguments>
           </configuration>
         </plugin>
