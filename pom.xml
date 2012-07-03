@@ -606,6 +606,7 @@
                 </goals>
                 <configuration>
                   <excludes>
+                    <exclude>CHANGES</exclude>
                     <exclude>DISCLAIMER</exclude>
                     <exclude>KEYS</exclude>
                     <exclude>NOTICE</exclude>
