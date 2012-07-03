@@ -488,22 +488,6 @@
         <artifactId>maven-surefire-plugin</artifactId>
       </plugin>
     </plugins>
-
-    <resources>
-      <resource>
-        <directory>${basedir}/src/main/resources</directory>
-      </resource>
-
-      <resource>
-        <directory>${basedir}</directory>
-        <targetPath>META-INF</targetPath>
-        <includes>
-          <include>LICENSE</include>
-          <include>NOTICE</include>
-          <include>DISCLAIMER</include>
-        </includes>
-      </resource>
-    </resources>
   </build>
 
   <reporting>
