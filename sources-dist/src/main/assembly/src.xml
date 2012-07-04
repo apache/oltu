@@ -24,7 +24,7 @@
     <format>zip</format>
   </formats>
   <includeBaseDirectory>true</includeBaseDirectory>
-  <baseDirectory>apache-amber-${project.version}</baseDirectory>
+  <baseDirectory>${assembly.finalName}-src</baseDirectory>
 
   <fileSets>
     <!--
