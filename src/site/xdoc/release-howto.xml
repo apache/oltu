@@ -255,10 +255,10 @@ Subject: [VOTE] Release Apache Amber X.Y
 Hi,
 
 We solved N issues:
-http://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12312323&styleName=Html&version=X.Y
+http://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12311100&styleName=Html&version=X.Y
 
 There are still a couple of issues left in JIRA:
-http://issues.apache.org/jira/secure/IssueNavigator.jspa?reset=true&pid=12312323&status=1
+http://issues.apache.org/jira/secure/IssueNavigator.jspa?reset=true&pid=12311100&status=1
 
 SVN source tag (r9999999):
 https://svn.apache.org/repos/asf/incubator/amber/tags/X.Y/
