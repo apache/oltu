@@ -37,31 +37,31 @@
     <version>1.2.1</version>
   </skin>
 
-  <version position="left"/>
+  <version position="left" />
 
   <body>
     <menu name="${project.name}">
-      <item href="./download.html" name="Download"/>
+      <item href="./download.html" name="Download" />
     </menu>
 
     <menu name="Committers guide">
-      <item href="./release-howto.html" name="HowTo Release"/>
+      <item href="./release-howto.html" name="HowTo Release" />
     </menu>
 
     <menu name="Miscellaneous">
-      <item name="Project stats" href="stats.html"/>
+      <item name="Project stats" href="stats.html" />
     </menu>
 
-    <menu ref="reports"/>
+    <menu ref="reports" />
 
-    <menu ref="modules"/>
+    <menu ref="modules" />
 
     <menu name="ASF">
-      <item name="How Apache Works" href="http://www.apache.org/foundation/how-it-works.html"/>
-      <item name="Foundation" href="http://www.apache.org/foundation/"/>
-      <item name="Sponsoring Apache" href="http://www.apache.org/foundation/sponsorship.html"/>
-      <item name="Thanks" href="http://www.apache.org/foundation/thanks.html"/>
-      <item name="Apache Incubator" href="http://incubator.apache.org/"/>
+      <item name="How Apache Works" href="http://www.apache.org/foundation/how-it-works.html" />
+      <item name="Foundation" href="http://www.apache.org/foundation/" />
+      <item name="Sponsoring Apache" href="http://www.apache.org/foundation/sponsorship.html" />
+      <item name="Thanks" href="http://www.apache.org/foundation/thanks.html" />
+      <item name="Apache Incubator" href="http://incubator.apache.org/" />
     </menu>
 
     <footer>
