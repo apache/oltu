@@ -40,7 +40,9 @@
   <version position="left"/>
 
   <body>
-    <menu name="${project.name}"/>
+    <menu name="${project.name}">
+      <item href="./download.html" name="Download"/>
+    </menu>
 
     <menu name="Committers guide">
       <item href="./release-howto.html" name="HowTo Release"/>
