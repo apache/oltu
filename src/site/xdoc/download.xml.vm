@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+  <properties>
+    <title>Apache Amber - Download</title>
+    <author email="amber-dev@incubator.apache.org">Apache Amber Team</author>
+  </properties>
+
+  <body>
+    <section name="Download Apache Amber">
+      <p>Apache Amber is distributed in several formats for your convenience. Use a source archive if you intend to build
+   Apache Amber yourself. Otherwise, simply pick a ready-made binary distribution and follow the installation
+   instructions given inside the archives.</p>
+
+      <p>You will be prompted for a mirror - if the file is not found on yours, please be patient, as it may take 24
+   hours to reach all mirrors.</p>
+
+      <p>In order to guard against corrupted downloads/installations, it is highly recommended to
+   <a href="http://www.apache.org/dev/release-signing#verifying-signature">verify the signature</a>
+   of the release bundles against the public <a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/KEYS">KEYS</a> used by the Apache Amber
+   developers.</p>
+
+      <p>Apache Amber is distributed under the <a href="http://amber.apache.org/license.html"> Apache License, version 2.0</a>.</p>
+
+      <subsection name="Apache Amber Sources">
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>Mirrors</th>
+              <th>Checksum</th>
+              <th>Signature</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Apache Amber ${project.version} (Source tar.gz)</td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/apache-amber-${project.version}-src.tar.gz"> apache-amber-${project.version}-src.tar.gz</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/apache-amber-${project.version}-src.tar.gz.md5"> apache-amber-${project.version}-src.tar.gz.md5</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/apache-amber-${project.version}-src.tar.gz.asc"> apache-amber-${project.version}-src.tar.gz.asc</a></td>
+            </tr>
+            <tr>
+              <td>Apache Amber ${project.version} (Source zip)</td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/apache-amber-${project.version}-src.zip"> apache-amber-${project.version}-src.zip</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/apache-amber-${project.version}-src.zip.md5"> apache-amber-${project.version}-src.zip.md5</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/apache-amber-${project.version}-src.zip.asc"> apache-amber-${project.version}-src.zip.asc</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </subsection>
+    </section>
+  </body>
+</document>
