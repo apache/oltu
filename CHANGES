@@ -1,3 +1,45 @@
                              Apache Amber 0.22-incubating
                               Release Notes
                             2012/07/03 - yyyymmdd
+
+Sub-task
+
+  [AMBER-2] - Request User accounts from Infra
+
+Bug
+
+  [AMBER-5] - Design of server API
+  [AMBER-14] -   [oauth2-rs-filter] comma-separated oauth.rs.tokens isn't parsed properly
+  [AMBER-17] - Remove GPL code from Amber code base
+  [AMBER-28] - OAuthAccessResourceRequest and extractors using old version of spec to find access token
+  [AMBER-29] - OAUTH_HEADER_NAME needs to be updated to latest spec
+  [AMBER-30] - CodeValidator needs to be updated to latest spec
+  [AMBER-31] - End User Authorization Endpoint (namely OAuthAuthzRequest) needs to be updated to latest spec
+  [AMBER-34] - Fix the pom.xml so that we can run mvn eclipse:eclipse
+  [AMBER-45] - Authorization Response needs to be updated to latest spec
+  [AMBER-47] - Update OAuthError class using the error code as for version 22 of the spec
+  [AMBER-53] - "expires_in" field in JSON responses should be a number not a string
+
+Improvement
+
+  [AMBER-16] - HttpServletRequest.getRemoteUser() should return the name of the security principal, not null.
+  [AMBER-35] - Add a shutdown method to OAuthClient/HttpClient to allow graceful release of resources
+  [AMBER-36] - Add support for token_type and make sure state is passed back from the URL fragment for the callback
+  [AMBER-37] - Specify the CI url inside the Maven POM
+  [AMBER-40] - Unify maven version id's for all artifacts in Amber
+  [AMBER-42] - Update amber based on the latest oauth 2.0 draft v22
+  [AMBER-43] - Missing OAuth parameter is ambiguous for a resource request
+  [AMBER-44] - Add method to OAuthClient that allows sending GET request to OAuth token endpoint
+  [AMBER-48] - Resource Server module extension
+
+New Feature
+
+  [AMBER-1] - Setting up Amber project
+  [AMBER-11] - OAuth 2.0 Client from leeloo
+
+Task
+
+  [AMBER-10] - Refactor project structure to welcome Leelo
+  [AMBER-23] - Update svn:ignore property to ignore target folder and eclipse project files
+  [AMBER-39] - Create a branch for OAuth draft-10 implementation
+  [AMBER-55] - Move Amber OAuth 1.0 related modules to attic
