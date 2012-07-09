@@ -64,6 +64,7 @@
       <groupId>org.apache.amber</groupId>
       <artifactId>amber-oauth2-test-utils</artifactId>
       <version>${project.version}</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 
