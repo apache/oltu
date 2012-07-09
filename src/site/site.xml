@@ -42,6 +42,7 @@
   <body>
     <menu name="${project.name}">
       <item href="https://cwiki.apache.org/confluence/display/AMBER/Index" name="Documentation" />
+      <item href="./apidocs/index.html" name="APIs Documentation" />
       <item href="./download.html" name="Download" />
     </menu>
 
@@ -50,7 +51,7 @@
     </menu>
 
     <menu name="Miscellaneous">
-      <item name="Project stats" href="stats.html" />
+      <item name="Project stats" href="./stats.html" />
     </menu>
 
     <menu ref="reports" />
