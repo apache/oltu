@@ -400,9 +400,9 @@
           </executions>
           <configuration>
             <attach>true</attach>
+            <appendAssemblyId>false</appendAssemblyId>
             <skipAssembly>${assembly.skip}</skipAssembly>
             <tarLongFileMode>gnu</tarLongFileMode>
-            <finalName>${assembly.finalName}</finalName>
           </configuration>
         </plugin>
 
