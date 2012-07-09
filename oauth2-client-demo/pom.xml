@@ -101,23 +101,59 @@
   </dependencies>
 
   <build>
-    <resources>
-      <resource>
-        <directory>${basedir}/src/main/resources</directory>
-      </resource>
-
-      <resource>
-        <directory>${basedir}../../</directory>
-        <targetPath>META-INF</targetPath>
-        <includes>
-          <include>LICENSE</include>
-          <include>NOTICE</include>
-          <include>DISCLAIMER</include>
-        </includes>
-      </resource>
-    </resources>
-
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>2.2</version>
+        <configuration>
+          <webResources>
+            <resource>
+              <directory>${basedir}/src/main/resources/</directory>
+            </resource>
+            <resource>
+              <directory>${basedir}/../../</directory>
+              <targetPath>/META-INF</targetPath>
+              <includes>
+                <include>DISCLAIMER</include>
+              </includes>
+            </resource>
+            <resource>
+              <directory>${project.build.directory}/war-legals/</directory>
+              <targetPath>/META-INF</targetPath>
+            </resource>
+          </webResources>
+        </configuration>
+      </plugin>
+
+      <!-- Generates the distribution package -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>prepare-package</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <attach>false</attach>
+              <finalName>war-legals</finalName>
+              <appendAssemblyId>false</appendAssemblyId>
+              <descriptors>
+                <descriptor>${basedir}/src/main/assembly/prepare-war-legals.xml</descriptor>
+              </descriptors>
+            </configuration>
+          </execution>
+        </executions>
+        <configuration>
+          <descriptors>
+            <descriptor>${basedir}/src/main/assembly/bin.xml</descriptor>
+          </descriptors>
+        </configuration>
+      </plugin>
+
       <plugin>
         <groupId>org.mortbay.jetty</groupId>
         <artifactId>maven-jetty-plugin</artifactId>
