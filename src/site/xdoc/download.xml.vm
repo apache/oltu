@@ -52,15 +52,15 @@
           <tbody>
             <tr>
               <td>Apache Amber ${project.version} (Source tar.gz)</td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/amber-sources-${project.version}.tar.gz"> amber-sources-${project.version}.tar.gz</a></td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/amber-sources-${project.version}.tar.gz.md5"> amber-sources-${project.version}.tar.gz.md5</a></td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/amber-sources-${project.version}.tar.gz.asc"> amber-sources-${project.version}.tar.gz.asc</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/sources/amber-sources-${project.version}.tar.gz">amber-sources-${project.version}.tar.gz</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/sources/amber-sources-${project.version}.tar.gz.md5">amber-sources-${project.version}.tar.gz.md5</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/sources/amber-sources-${project.version}.tar.gz.asc">amber-sources-${project.version}.tar.gz.asc</a></td>
             </tr>
             <tr>
               <td>Apache Amber ${project.version} (Source zip)</td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/amber-sources-${project.version}.zip"> amber-sources-${project.version}.zip</a></td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/amber-sources-${project.version}.zip.md5"> amber-sources-${project.version}.zip.md5</a></td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/amber-sources-${project.version}.zip.asc"> amber-sources-${project.version}.zip.asc</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/sources/amber-sources-${project.version}.zip">amber-sources-${project.version}.zip</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/sources/amber-sources-${project.version}.zip.md5">amber-sources-${project.version}.zip.md5</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/sources/amber-sources-${project.version}.zip.asc">amber-sources-${project.version}.zip.asc</a></td>
             </tr>
           </tbody>
         </table>
