@@ -505,6 +505,9 @@
         <configuration>
           <source>${javac.src.version}</source>
           <target>${javac.target.version}</target>
+          <optimize>true</optimize>
+          <showDeprecation>true</showDeprecation>
+          <showWarnings>true</showWarnings>
         </configuration>
       </plugin>
 
