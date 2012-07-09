@@ -41,6 +41,7 @@
 
   <body>
     <menu name="${project.name}">
+      <item href="https://cwiki.apache.org/confluence/display/AMBER/Index" name="Documentation" />
       <item href="./download.html" name="Download" />
     </menu>
 
