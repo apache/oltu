@@ -25,26 +25,26 @@
     <version>0.22-incubating-SNAPSHOT</version>
   </parent>
 
-  <artifactId>oauth2-dynamicreg-server</artifactId>
+  <artifactId>amber-oauth2-dynamicreg-server</artifactId>
 
   <name>Apache Amber: OAuth 2.0 Implementation - Dynamic Registration Server</name>
 
   <dependencies>
     <dependency>
       <groupId>org.apache.amber</groupId>
-      <artifactId>oauth2-common</artifactId>
+      <artifactId>amber-oauth2-common</artifactId>
       <version>${project.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.apache.amber</groupId>
-      <artifactId>oauth2-authzserver</artifactId>
+      <artifactId>amber-oauth2-authzserver</artifactId>
       <version>${project.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.apache.amber</groupId>
-      <artifactId>oauth2-dynamicreg-common</artifactId>
+      <artifactId>amber-oauth2-dynamicreg-common</artifactId>
       <version>${project.version}</version>
     </dependency>
 
@@ -62,7 +62,7 @@
 
     <dependency>
       <groupId>org.apache.amber</groupId>
-      <artifactId>oauth2-test-utils</artifactId>
+      <artifactId>amber-oauth2-test-utils</artifactId>
       <version>${project.version}</version>
     </dependency>
   </dependencies>

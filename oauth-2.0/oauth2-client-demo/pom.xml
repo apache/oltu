@@ -25,7 +25,7 @@
     <version>0.22-incubating-SNAPSHOT</version>
   </parent>
 
-  <artifactId>oauth2-client-demo</artifactId>
+  <artifactId>amber-oauth2-client-demo</artifactId>
   <packaging>war</packaging>
 
   <name>Apache Amber: OAuth 2.0 Implementation - Demo Application</name>
@@ -39,7 +39,7 @@
 
     <!-- OAuth Dependency -->
     <dependency>
-      <artifactId>oauth2-common</artifactId>
+      <artifactId>amber-oauth2-common</artifactId>
       <groupId>org.apache.amber</groupId>
       <version>${project.version}</version>
     </dependency>
@@ -47,13 +47,13 @@
     <!-- OAuth Dynamic Registration Dependency -->
 
     <dependency>
-      <artifactId>oauth2-dynamicreg-common</artifactId>
+      <artifactId>amber-oauth2-dynamicreg-common</artifactId>
       <groupId>org.apache.amber</groupId>
       <version>${project.version}</version>
     </dependency>
 
     <dependency>
-      <artifactId>oauth2-dynamicreg-client</artifactId>
+      <artifactId>amber-oauth2-dynamicreg-client</artifactId>
       <groupId>org.apache.amber</groupId>
       <version>${project.version}</version>
     </dependency>

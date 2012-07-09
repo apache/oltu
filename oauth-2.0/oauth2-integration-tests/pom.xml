@@ -26,48 +26,48 @@
 
   <name>Apache Amber: OAuth 2.0 Implementation - Integration Tests</name>
 
-  <artifactId>oauth2-integration-tests</artifactId>
+  <artifactId>amber-oauth2-integration-tests</artifactId>
 
   <dependencies>
     <dependency>
       <groupId>org.apache.amber</groupId>
-      <artifactId>oauth2-common</artifactId>
+      <artifactId>amber-oauth2-common</artifactId>
       <version>${project.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.apache.amber</groupId>
-      <artifactId>oauth2-client</artifactId>
+      <artifactId>amber-oauth2-client</artifactId>
       <version>${project.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.apache.amber</groupId>
-      <artifactId>oauth2-authzserver</artifactId>
+      <artifactId>amber-oauth2-authzserver</artifactId>
       <version>${project.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.apache.amber</groupId>
-      <artifactId>oauth2-httpclient4</artifactId>
+      <artifactId>amber-oauth2-httpclient4</artifactId>
       <version>${project.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.apache.amber</groupId>
-      <artifactId>oauth2-resourceserver</artifactId>
+      <artifactId>amber-oauth2-resourceserver</artifactId>
       <version>${project.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.apache.amber</groupId>
-      <artifactId>oauth2-dynamicreg-client</artifactId>
+      <artifactId>amber-oauth2-dynamicreg-client</artifactId>
       <version>${project.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.apache.amber</groupId>
-      <artifactId>oauth2-dynamicreg-server</artifactId>
+      <artifactId>amber-oauth2-dynamicreg-server</artifactId>
       <version>${project.version}</version>
     </dependency>
 
