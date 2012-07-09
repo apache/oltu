@@ -613,6 +613,11 @@
                     <exclude>DISCLAIMER</exclude>
                     <exclude>**/NOTICE*</exclude>
                     <exclude>.idea/**</exclude>
+                    <exclude>.classpath</exclude>
+                    <exclude>.project</exclude>
+                    <exclude>.settings</exclude>
+                    <exclude>maven-eclipse.xml</exclude>
+                    <exclude>.externalToolBuilders/**</exclude>
                     <exclude>**/*.json</exclude>
                   </excludes>
                 </configuration>
