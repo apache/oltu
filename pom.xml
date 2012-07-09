@@ -31,18 +31,18 @@
   <name>Apache Amber: OAuth 2.0 Implementation - Parent</name>
 
   <modules>
-    <module>oauth2-common</module>
-    <module>oauth2-client</module>
-    <module>oauth2-httpclient4</module>
-    <module>oauth2-client-demo</module>
-    <module>oauth2-dynamicreg-client</module>
-    <module>oauth2-dynamicreg-common</module>
-    <module>oauth2-authzserver</module>
-    <module>oauth2-resourceserver</module>
-    <module>oauth2-rs-filter</module>
-    <module>oauth2-dynamicreg-server</module>
-    <module>oauth2-test-utils</module>
-    <module>oauth2-integration-tests</module>
+    <module>common</module>
+    <module>client</module>
+    <module>httpclient4</module>
+    <module>client-demo</module>
+    <module>dynamicreg-client</module>
+    <module>dynamicreg-common</module>
+    <module>authzserver</module>
+    <module>resourceserver</module>
+    <module>resourceserver-filter</module>
+    <module>dynamicreg-server</module>
+    <module>test-utils</module>
+    <module>integration-tests</module>
   </modules>
 
   <properties>
