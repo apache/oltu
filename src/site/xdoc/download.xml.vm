@@ -39,7 +39,38 @@
 
       <p>Apache Amber is distributed under the <a href="http://amber.apache.org/license.html"> Apache License, version 2.0</a>.</p>
 
-      <subsection name="Apache Amber Sources">
+    </section>
+
+    <section name="Apache Amber sources">
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>Mirrors</th>
+            <th>Checksum</th>
+            <th>Signature</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Apache Amber ${project.version} (Source tar.gz)</td>
+            <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/sources/amber-sources-${project.version}.tar.gz">amber-sources-${project.version}.tar.gz</a></td>
+            <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/sources/amber-sources-${project.version}.tar.gz.md5">amber-sources-${project.version}.tar.gz.md5</a></td>
+            <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/sources/amber-sources-${project.version}.tar.gz.asc">amber-sources-${project.version}.tar.gz.asc</a></td>
+          </tr>
+          <tr>
+            <td>Apache Amber ${project.version} (Source zip)</td>
+            <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/sources/amber-sources-${project.version}.zip">amber-sources-${project.version}.zip</a></td>
+            <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/sources/amber-sources-${project.version}.zip.md5">amber-sources-${project.version}.zip.md5</a></td>
+            <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/sources/amber-sources-${project.version}.zip.asc">amber-sources-${project.version}.zip.asc</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section name="Apache Amber precompiled binaries">
+
+      <subsection name="Client">
         <table>
           <thead>
             <tr>
@@ -51,16 +82,118 @@
           </thead>
           <tbody>
             <tr>
-              <td>Apache Amber ${project.version} (Source tar.gz)</td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/sources/amber-sources-${project.version}.tar.gz">amber-sources-${project.version}.tar.gz</a></td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/sources/amber-sources-${project.version}.tar.gz.md5">amber-sources-${project.version}.tar.gz.md5</a></td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/sources/amber-sources-${project.version}.tar.gz.asc">amber-sources-${project.version}.tar.gz.asc</a></td>
+              <td>Apache Amber Client ${project.version} (Source tar.gz)</td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/binaries/amber-oauth2-client-${project.version}.tar.gz">amber-oauth2-client-${project.version}.tar.gz</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/binaries/amber-oauth2-client-${project.version}.tar.gz.md5">amber-oauth2-client-${project.version}.tar.gz.md5</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/binaries/amber-oauth2-client-${project.version}.tar.gz.asc">amber-oauth2-client-${project.version}.tar.gz.asc</a></td>
             </tr>
             <tr>
-              <td>Apache Amber ${project.version} (Source zip)</td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/sources/amber-sources-${project.version}.zip">amber-sources-${project.version}.zip</a></td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/sources/amber-sources-${project.version}.zip.md5">amber-sources-${project.version}.zip.md5</a></td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/sources/amber-sources-${project.version}.zip.asc">amber-sources-${project.version}.zip.asc</a></td>
+              <td>Apache Amber Client ${project.version} (Source zip)</td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/binaries/amber-oauth2-client-${project.version}.zip">amber-oauth2-client-${project.version}.zip</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/binaries/amber-oauth2-client-${project.version}.zip.md5">amber-oauth2-client-${project.version}.zip.md5</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/binaries/amber-oauth2-client-${project.version}.zip.asc">amber-oauth2-client-${project.version}.zip.asc</a></td>
+            </tr>
+            <tr>
+              <td>Apache Amber Dynamic Registration Client ${project.version} (Source tar.gz)</td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/binaries/amber-oauth2-dynamicreg-client-${project.version}.tar.gz">amber-oauth2-dynamicreg-client-${project.version}.tar.gz</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/binaries/amber-oauth2-dynamicreg-client-${project.version}.tar.gz.md5">amber-oauth2-dynamicreg-client-${project.version}.tar.gz.md5</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/binaries/amber-oauth2-dynamicreg-client-${project.version}.tar.gz.asc">amber-oauth2-dynamicreg-client-${project.version}.tar.gz.asc</a></td>
+            </tr>
+            <tr>
+              <td>Apache Amber Dynamic Registration Client ${project.version} (Source zip)</td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/binaries/amber-oauth2-dynamicreg-client-${project.version}.zip">amber-oauth2-dynamicreg-client-${project.version}.zip</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/binaries/amber-oauth2-dynamicreg-client-${project.version}.zip.md5">amber-oauth2-dynamicreg-client-${project.version}.zip.md5</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/binaries/amber-oauth2-dynamicreg-client-${project.version}.zip.asc">amber-oauth2-dynamicreg-client-${project.version}.zip.asc</a></td>
+            </tr>
+            <tr>
+              <td>Apache Amber HttpClient integration ${project.version} (Source tar.gz)</td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/binaries/amber-oauth2-httpclient4-${project.version}.tar.gz">amber-oauth2-httpclient4-${project.version}.tar.gz</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/binaries/amber-oauth2-httpclient4-${project.version}.tar.gz.md5">amber-oauth2-httpclient4-${project.version}.tar.gz.md5</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/binaries/amber-oauth2-httpclient4-${project.version}.tar.gz.asc">amber-oauth2-httpclient4-${project.version}.tar.gz.asc</a></td>
+            </tr>
+            <tr>
+              <td>Apache Amber HttpClient integration Client ${project.version} (Source zip)</td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/binaries/amber-oauth2-httpclient4-${project.version}.zip">amber-oauth2-httpclient4-${project.version}.zip</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/binaries/amber-oauth2-httpclient4-${project.version}.zip.md5">amber-oauth2-httpclient4-${project.version}.zip.md5</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/binaries/amber-oauth2-httpclient4-${project.version}.zip.asc">amber-oauth2-httpclient4-${project.version}.zip.asc</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </subsection>
+
+      <subsection name="Server">
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>Mirrors</th>
+              <th>Checksum</th>
+              <th>Signature</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Apache Amber Authorization Server ${project.version} (Source tar.gz)</td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/binaries/amber-oauth2-authzserver-${project.version}.tar.gz">amber-oauth2-authzserver-${project.version}.tar.gz</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/binaries/amber-oauth2-authzserver-${project.version}.tar.gz.md5">amber-oauth2-authzserver-${project.version}.tar.gz.md5</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/binaries/amber-oauth2-authzserver-${project.version}.tar.gz.asc">amber-oauth2-authzserver-${project.version}.tar.gz.asc</a></td>
+            </tr>
+            <tr>
+              <td>Apache Amber Authorization Server ${project.version} (Source zip)</td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/binaries/amber-oauth2-authzserver-${project.version}.zip">amber-oauth2-authzserver-${project.version}.zip</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/binaries/amber-oauth2-authzserver-${project.version}.zip.md5">amber-oauth2-authzserver-${project.version}.zip.md5</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/binaries/amber-oauth2-authzserver-${project.version}.zip.asc">amber-oauth2-authzserver-${project.version}.zip.asc</a></td>
+            </tr>
+            <tr>
+              <td>Apache Amber Resource Server ${project.version} (Source tar.gz)</td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/binaries/amber-oauth2-resourceserver-${project.version}.tar.gz">amber-oauth2-resourceserver-${project.version}.tar.gz</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/binaries/amber-oauth2-resourceserver-${project.version}.tar.gz.md5">amber-oauth2-resourceserver-${project.version}.tar.gz.md5</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/binaries/amber-oauth2-resourceserver-${project.version}.tar.gz.asc">amber-oauth2-resourceserver-${project.version}.tar.gz.asc</a></td>
+            </tr>
+            <tr>
+              <td>Apache Amber Resource Server ${project.version} (Source zip)</td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/binaries/amber-oauth2-resourceserver-${project.version}.zip">amber-oauth2-resourceserver-${project.version}.zip</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/binaries/amber-oauth2-resourceserver-${project.version}.zip.md5">amber-oauth2-resourceserver-${project.version}.zip.md5</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/binaries/amber-oauth2-resourceserver-${project.version}.zip.asc">amber-oauth2-resourceserver-${project.version}.zip.asc</a></td>
+            </tr>
+            <tr>
+              <td>Apache Amber Resource Server ${project.version} (Source tar.gz)</td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/binaries/amber-oauth2-resourceserver-filter-${project.version}.tar.gz">amber-oauth2-resourceserver-filter-${project.version}.tar.gz</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/binaries/amber-oauth2-resourceserver-filter-${project.version}.tar.gz.md5">amber-oauth2-resourceserver-filter-${project.version}.tar.gz.md5</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/binaries/amber-oauth2-resourceserver-filter-${project.version}.tar.gz.asc">amber-oauth2-resourceserver-filter-${project.version}.tar.gz.asc</a></td>
+            </tr>
+            <tr>
+              <td>Apache Amber Resource Server ${project.version} (Source zip)</td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/binaries/amber-oauth2-resourceserver-filter-${project.version}.zip">amber-oauth2-resourceserver-filter-${project.version}.zip</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/binaries/amber-oauth2-resourceserver-filter-${project.version}.zip.md5">amber-oauth2-resourceserver-filter-${project.version}.zip.md5</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/binaries/amber-oauth2-resourceserver-filter-${project.version}.zip.asc">amber-oauth2-resourceserver-filter-${project.version}.zip.asc</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </subsection>
+
+      <subsection name="Demo">
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>Mirrors</th>
+              <th>Checksum</th>
+              <th>Signature</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Apache Amber Client Demo ${project.version} (Source tar.gz)</td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/binaries/amber-oauth2-client-demo-${project.version}.tar.gz">amber-oauth2-client-demo-${project.version}.tar.gz</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/binaries/amber-oauth2-client-demo-${project.version}.tar.gz.md5">amber-oauth2-client-demo-${project.version}.tar.gz.md5</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/binaries/amber-oauth2-client-demo-${project.version}.tar.gz.asc">amber-oauth2-client-demo-${project.version}.tar.gz.asc</a></td>
+            </tr>
+            <tr>
+              <td>Apache Amber Client Demo ${project.version} (Source zip)</td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/binaries/amber-oauth2-client-demo-${project.version}.zip">amber-oauth2-client-demo-${project.version}.zip</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/binaries/amber-oauth2-client-demo-${project.version}.zip.md5">amber-oauth2-client-demo-${project.version}.zip.md5</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/incuabtor/amber/binaries/amber-oauth2-client-demo-${project.version}.zip.asc">amber-oauth2-client-demo-${project.version}.zip.asc</a></td>
             </tr>
           </tbody>
         </table>
