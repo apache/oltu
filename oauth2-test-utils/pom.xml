@@ -25,7 +25,7 @@
     <version>0.22-incubating-SNAPSHOT</version>
   </parent>
 
-  <artifactId>oauth2-test-utils</artifactId>
+  <artifactId>amber-oauth2-test-utils</artifactId>
 
   <name>Apache Amber: OAuth 2.0 Implementation - Test Utils</name>
 

@@ -24,14 +24,14 @@
      <version>0.22-incubating-SNAPSHOT</version>
   </parent>
 
-  <artifactId>oauth2-dynamicreg-common</artifactId>
+  <artifactId>amber-oauth2-dynamicreg-common</artifactId>
 
   <name>Apache Amber: OAuth 2.0 Implementation - Dynamic Registration Common</name>
 
   <dependencies>
     <dependency>
       <groupId>org.apache.amber</groupId>
-      <artifactId>oauth2-common</artifactId>
+      <artifactId>amber-oauth2-common</artifactId>
       <version>${project.version}</version>
     </dependency>
   </dependencies>

@@ -23,14 +23,14 @@
      <version>0.22-incubating-SNAPSHOT</version>
   </parent>
 
-  <artifactId>oauth2-httpclient4</artifactId>
+  <artifactId>amber-oauth2-httpclient4</artifactId>
 
   <name>Apache Amber: OAuth 2.0 Implementation - HttpClient</name>
 
   <dependencies>
     <dependency>
       <groupId>org.apache.amber</groupId>
-      <artifactId>oauth2-client</artifactId>
+      <artifactId>amber-oauth2-client</artifactId>
       <version>${project.version}</version>
     </dependency>
 
