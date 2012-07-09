@@ -28,6 +28,16 @@
       <p><span style="font-weight: bold">Apache Amber</span> is an OAuth protocol implementation in Java.</p>
     </section>
 
+    <section name="Documentation">
+      <p>Looking for documentation? The best place where finding the latest up-to-date documentation is the
+      <a href="https://cwiki.apache.org/confluence/display/AMBER/Index">Wiki</a>.</p>
+      <p>Please help us on keeping the documentation updated! Every contribution is more than welcome!</p>
+    </section>
+
+    <section name="Download">
+      <p>Looking for distribution packages? Have a look at the latest published <a href="./download.html">release</a>!</p>
+    </section>
+
     <div class="alert-message warning">
       <h2>Disclaimer</h2>
       <p>Apache Amber is an effort undergoing <a href="http://incubator.apache.org/">incubation</a> at
