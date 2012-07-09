@@ -29,10 +29,6 @@
 
   <name>Apache Amber :: Sources distribution module</name>
 
-  <properties>
-    <assembly.finalName>apache-amber-${project.version}</assembly.finalName>
-  </properties>
-
   <build>
     <plugins>
       <!-- Generates the distribution package -->
@@ -40,7 +36,6 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
         <configuration>
-          <finalName>${assembly.finalName}</finalName>
           <descriptors>
             <descriptor>${basedir}/src/main/assembly/src.xml</descriptor>
           </descriptors>

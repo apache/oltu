@@ -277,7 +277,6 @@
      | mvn site-deploy -Dsite.deploymentBaseUrl=file://path/to/checked/out/site
     -->
     <site.deploymentBaseUrl>svn:https://svn.apache.org/repos/asf/incubator/amber/site</site.deploymentBaseUrl>
-    <assembly.finalName>apache-${project.build.finalName}</assembly.finalName>
     <assembly.skip>false</assembly.skip>
   </properties>
 
