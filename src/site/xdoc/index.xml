@@ -39,6 +39,10 @@
       <p>Looking for distribution packages? Have a look at the latest published <a href="./download.html">release</a>!</p>
     </section>
 
+    <section name="Apache Maven Artifacts">
+      <p>Looking for apache maven artifacts? Just query the <a href="http://search.maven.org/#search%7Cga%7C1%7Corg.apache.amber">Search</a> service!</p>
+    </section>
+
     <div class="alert-message warning">
       <h2>Disclaimer</h2>
       <p>Apache Amber is an effort undergoing <a href="http://incubator.apache.org/">incubation</a> at
