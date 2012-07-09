@@ -611,7 +611,7 @@
                   <excludes>
                     <exclude>CHANGES</exclude>
                     <exclude>DISCLAIMER</exclude>
-                    <exclude>NOTICE</exclude>
+                    <exclude>**/NOTICE*</exclude>
                     <exclude>.idea/**</exclude>
                     <exclude>**/*.json</exclude>
                   </excludes>
