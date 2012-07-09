@@ -15,8 +15,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
@@ -27,7 +26,7 @@
 
   <groupId>org.apache.amber</groupId>
   <artifactId>amber-parent</artifactId>
-  <version>0.22-incubating-SNAPSHOT</version>
+  <version>0.22-incubating</version>
   <packaging>pom</packaging>
 
   <name>Apache Amber</name>
@@ -234,9 +233,9 @@
   </modules>
 
   <scm>
-    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/incubator/amber/trunk/</developerConnection>
-    <connection>scm:svn:https://svn.apache.org/repos/asf/incubator/amber/trunk/</connection>
-    <url>https://svn.apache.org/repos/asf/incubator/amber/trunk/</url>
+    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/incubator/amber/tags/amber-0.22-incubating</developerConnection>
+    <connection>scm:svn:https://svn.apache.org/repos/asf/incubator/amber/tags/amber-0.22-incubating</connection>
+    <url>https://svn.apache.org/repos/asf/incubator/amber/tags/amber-0.22-incubating</url>
   </scm>
   <issueManagement>
     <system>JIRA</system>
