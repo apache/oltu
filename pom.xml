@@ -581,7 +581,7 @@
         <configuration>
           <linkXref>true</linkXref>
           <minimumTokens>100</minimumTokens>
-          <targetJdk>1.5</targetJdk>
+          <targetJdk>1.6</targetJdk>
         </configuration>
       </plugin>
     </plugins>
