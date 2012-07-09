@@ -84,6 +84,9 @@
   </profiles>
   ...
 </settings>]]></source>
+
+        <p>You can find a <a href="https://svn.apache.org/repos/asf/incubator/amber/committers/maven/settings.xml"><code>settings.xml</code></a>
+        template in our SVN committers space</p>
       </subsection>
     </section>
 
@@ -215,20 +218,12 @@ gpg: Signature made ...</source>
                 </ol>
               </li>
 
-              <li>Add the distribution artifacts to the build area
-                <source>ssh people.apache.org
+              <li>Add the distribution artifacts to the build area (the <a href="https://svn.apache.org/repos/asf/incubator/amber/committers/scripts/grab-binaries.sh">grab-binaries.sh</a>
+              script is versioned under the committer space of Amber SVN).
+                <source>ssh asf-id@people.apache.org
 cd /x1/builds/incubator/amber
 
-cd sources
-
-wget -e robots=off -nH --cut-dirs=7 -np --no-check-certificate -m -A *.tar.gz*  -R .asc.sha1,.asc.md5 \
-https://repository.apache.org/content/repositories/releases/org/apache/amber/amber-sources-dist/&lt;version&gt;/
-wget -e robots=off -nH --cut-dirs=7 -np --no-check-certificate -m -A *.zip*  -R .asc.sha1,.asc.md5 \
-https://repository.apache.org/content/repositories/releases/org/apache/amber/amber-sources-dist/&lt;version&gt;/
-
-cd ../binaries
-
-TODO add missing assemblies...</source>
+bash grab-binaries.sh REPO_ID VERSION</source>
               </li>
             </ol>
           </li>
@@ -265,6 +260,9 @@ https://svn.apache.org/repos/asf/incubator/amber/tags/X.Y/
 
 Staging repo:
 https://repository.apache.org/content/repositories/orgapacheamber-[YOUR REPOSITORY ID]/
+
+Staging binaries:
+http://people.apache.org/builds/incubator/amber/
 
 Staging site:
 http://incubator.apache.org/amber/X.Y/
@@ -343,7 +341,7 @@ I will promote the artifacts to the central repo.]]></pre>
           </li>
 
           <li>Add the distribution artifacts to the distribution area
-            <source>ssh people.apache.org
+            <source>ssh asf-id@people.apache.org
 cd /x1/www/www.apache.org/dist/incubator/amber/
 
 mv /x1/builds/incubator/amber/sources/* sources/
