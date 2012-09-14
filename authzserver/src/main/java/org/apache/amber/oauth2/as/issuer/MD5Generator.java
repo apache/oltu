@@ -40,6 +40,20 @@ public class MD5Generator implements ValueGenerator {
         return generateValue(UUID.randomUUID().toString());
     }
 
+    private static final char[] hexCode = "0123456789abcdef".toCharArray();
+
+    public static String toHexString(byte[] data) {
+        if(data == null) {
+            return null;
+        }
+        StringBuilder r = new StringBuilder(data.length*2);
+        for ( byte b : data) {
+            r.append(hexCode[(b >> 4) & 0xF]);
+            r.append(hexCode[(b & 0xF)]);
+        }
+        return r.toString();
+    }
+
     @Override
     public String generateValue(String param) throws OAuthSystemException {
         try {
@@ -47,12 +61,7 @@ public class MD5Generator implements ValueGenerator {
             algorithm.reset();
             algorithm.update(param.getBytes());
             byte[] messageDigest = algorithm.digest();
-            StringBuffer hexString = new StringBuffer();
-            for (int i = 0; i < messageDigest.length; i++) {
-                hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
-            }
-
-            return hexString.toString();
+            return toHexString(messageDigest);
         } catch (Exception e) {
             throw new OAuthSystemException("OAuth Token cannot be generated.", e);
         }
