@@ -40,6 +40,8 @@ public final class OAuthProblemException extends Exception {
     private String scope;
     private String redirectUri;
 
+    private int responseStatus;
+
     private Map<String, String> parameters = new HashMap<String, String>();
 
     private OAuthProblemException(String error) {
@@ -81,6 +83,11 @@ public final class OAuthProblemException extends Exception {
         return this;
     }
 
+    public OAuthProblemException responseStatus(int responseStatus) {
+        this.responseStatus = responseStatus;
+        return this;
+    }
+
     public OAuthProblemException setParameter(String name, String value) {
         parameters.put(name, value);
         return this;
@@ -104,6 +111,10 @@ public final class OAuthProblemException extends Exception {
 
     public String getScope() {
         return scope;
+    }
+
+    public int getResponseStatus() {
+        return responseStatus == 0 ? 400 : responseStatus;
     }
 
     public String get(String name) {
