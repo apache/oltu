@@ -95,6 +95,11 @@ public class HttpClient4 implements HttpClient {
                     req.setHeader(header.getKey(), header.getValue());
                 }
             }
+            if (request.getHeaders() != null) {
+                for (Map.Entry<String, String> header : request.getHeaders().entrySet()) {
+                    req.setHeader(header.getKey(), header.getValue());
+                }
+            }
             HttpResponse response = client.execute(req);
             Header contentTypeHeader = null;
             HttpEntity entity = response.getEntity();

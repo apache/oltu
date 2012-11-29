@@ -48,6 +48,7 @@ public class OAuthClientRequest implements OAuthMessage {
 
     protected OAuthClientRequest(String url) {
         this.url = url;
+        this.headers=new HashMap<String, String>();
     }
 
     public static AuthenticationRequestBuilder authorizationLocation(String url) {
