@@ -71,6 +71,12 @@ public class URLConnectionClient implements HttpClient {
                         httpURLConnection.addRequestProperty(header.getKey(), header.getValue());
                     }
                 }
+                
+                if (request.getHeaders() != null) {
+                    for (Map.Entry<String, String> header : request.getHeaders().entrySet()) {
+                    	httpURLConnection.addRequestProperty(header.getKey(), header.getValue());
+                    }
+                }
 
                 if (!OAuthUtils.isEmpty(requestMethod)) {
                     httpURLConnection.setRequestMethod(requestMethod);
