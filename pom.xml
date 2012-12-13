@@ -255,6 +255,12 @@
      </notifier>
    </notifiers>
   </ciManagement>
+  <distributionManagement>
+    <site>
+      <id>apache.website</id>
+      <url>${amber.siteUrlDeployment}</url>
+    </site>
+  </distributionManagement>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -267,15 +273,11 @@
     <!--
      | Amber website has to be stored in SVN
      |
-     | using the appropriate wagon, site deploy is slow, because deploy works file-by-file
-     | So consider the alternative of
-     | deploying the site in a local dir (where you checked out the site dir)
-     | then committing in one shot, i.e.
-     |
-     | svn co https://svn.apache.org/repos/asf/incubator/amber/site
-     | mvn site-deploy -Dsite.deploymentBaseUrl=file://path/to/checked/out/site
+     | mvn clean site-deploy scm-publish:publish-scm -Dusername=uid -Dpassword=pwd
     -->
-    <site.deploymentBaseUrl>svn:https://svn.apache.org/repos/asf/incubator/amber/site</site.deploymentBaseUrl>
+    <amber.siteFilePath>${user.home}/amber-site/</amber.siteFilePath>
+    <amber.siteUrlDeployment>file://${amber.siteFilePath}</amber.siteUrlDeployment>
+    <amber.scmPubCheckoutDirectory>${user.home}/amber-site/</amber.scmPubCheckoutDirectory>
     <assembly.skip>false</assembly.skip>
   </properties>
 
@@ -415,6 +417,19 @@
             <autoVersionSubmodules>true</autoVersionSubmodules>
             <tagNameFormat>amber-@{project.version}</tagNameFormat>
             <arguments>-Prelease,apache</arguments>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-scm-publish-plugin</artifactId>
+          <version>1.0-beta-2</version>
+          <configuration>
+            <tryUpdate>true</tryUpdate>
+            <checkoutDirectory>${amber.scmPubCheckoutDirectory}</checkoutDirectory>
+            <pubScmUrl>scm:svn:https://svn.apache.org/repos/asf/incubator/amber/site</pubScmUrl>
+            <checkinComment>Apache Amber site deployment</checkinComment>
+            <content>${amber.siteFilePath}</content>
           </configuration>
         </plugin>
       </plugins>
