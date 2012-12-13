@@ -156,6 +156,17 @@
     </developer>
 
     <developer>
+      <id>rfeng</id>
+      <name>Raymond Zhaohui Feng</name>
+      <email>rfeng[at]apache[dot]org</email>
+      <roles>
+        <role>PPMC Member</role>
+        <role>Mentor</role>
+        <role>Committer</role>
+      </roles>
+    </developer>
+
+    <developer>
       <id>tommaso</id>
       <name>Tommaso Teofili</name>
       <email>tommaso[at]apache[dot]org</email>
