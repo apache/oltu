@@ -266,12 +266,6 @@
      </notifier>
    </notifiers>
   </ciManagement>
-  <distributionManagement>
-    <site>
-      <id>apache.website</id>
-      <url>${amber.siteUrlDeployment}</url>
-    </site>
-  </distributionManagement>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -286,9 +280,9 @@
      |
      | mvn clean site-deploy scm-publish:publish-scm -Dusername=uid -Dpassword=pwd
     -->
-    <amber.siteFilePath>${user.home}/amber-site/</amber.siteFilePath>
-    <amber.siteUrlDeployment>file://${amber.siteFilePath}</amber.siteUrlDeployment>
-    <amber.scmPubCheckoutDirectory>${user.home}/amber-site/</amber.scmPubCheckoutDirectory>
+    <site.siteFilePath>${user.home}/amber-site/</site.siteFilePath>
+    <site.deploymentBaseUrl>file://${site.siteFilePath}</site.deploymentBaseUrl>
+    <site.scmPubCheckoutDirectory>${user.home}/amber-site/</site.scmPubCheckoutDirectory>
     <assembly.skip>false</assembly.skip>
   </properties>
 
@@ -437,10 +431,10 @@
           <version>1.0-beta-2</version>
           <configuration>
             <tryUpdate>true</tryUpdate>
-            <checkoutDirectory>${amber.scmPubCheckoutDirectory}</checkoutDirectory>
+            <checkoutDirectory>${site.scmPubCheckoutDirectory}</checkoutDirectory>
             <pubScmUrl>scm:svn:https://svn.apache.org/repos/asf/incubator/amber/site</pubScmUrl>
             <checkinComment>Apache Amber site deployment</checkinComment>
-            <content>${amber.siteFilePath}</content>
+            <content>${site.siteFilePath}</content>
           </configuration>
         </plugin>
       </plugins>
