@@ -46,6 +46,10 @@ public final class Utils {
     public static final String FACEBOOK = "facebook";
     public static final String FACEBOOK_AUTHZ = "https://graph.facebook.com/oauth/authorize";
     public static final String FACEBOOK_TOKEN = "https://graph.facebook.com/oauth/access_token";
+    
+    public static final String GOOGLE = "google";
+    public static final String GOOGLE_AUTHZ = "https://accounts.google.com/o/oauth2/auth";
+    public static final String GOOGLE_TOKEN = "https://accounts.google.com/o/oauth2/token";
 
     public static final String GOWALLA = "gowalla";
     public static final String GOWALLA_AUTHZ = "https://gowalla.com/api/oauth/authorize";

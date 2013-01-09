@@ -40,6 +40,7 @@
 
 <a href="/main/smart_gallery">Smart Gallery</a>
 <a href="/main/facebook">Facebook</a>
+<a href="/main/google">Google</a>
 <a href="/main/github">Github</a>
 <a href="/main/gowalla">Gowalla</a>
 

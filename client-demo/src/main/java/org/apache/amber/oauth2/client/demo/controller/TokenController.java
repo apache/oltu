@@ -57,7 +57,7 @@ public class TokenController {
                                   HttpServletRequest req) throws OAuthSystemException, IOException {
 
         try {
-
+ 
             Utils.validateTokenParams(oauthParams);
 
             OAuthClientRequest request = OAuthClientRequest
@@ -67,11 +67,11 @@ public class TokenController {
                 .setRedirectURI(oauthParams.getRedirectUri())
                 .setCode(oauthParams.getAuthzCode())
                 .setGrantType(GrantType.AUTHORIZATION_CODE)
-                .buildQueryMessage();
+                .buildBodyMessage();
 
             OAuthClient client = new OAuthClient(new URLConnectionClient());
             String app = Utils.findCookieValue(req, "app");
-
+  
             OAuthAccessTokenResponse oauthResponse = null;
             Class<? extends OAuthAccessTokenResponse> cl = OAuthJSONAccessTokenResponse.class;
 

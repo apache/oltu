@@ -71,6 +71,10 @@ public class MainController {
             selected = true;
             oauthParams.setAuthzEndpoint(Utils.FACEBOOK_AUTHZ);
             oauthParams.setTokenEndpoint(Utils.FACEBOOK_TOKEN);
+        }else if (Utils.GOOGLE.equals(app)) {
+                selected = true;
+                oauthParams.setAuthzEndpoint(Utils.GOOGLE_AUTHZ);
+                oauthParams.setTokenEndpoint(Utils.GOOGLE_TOKEN);
         } else if (Utils.GOWALLA.equals(app)) {
             selected = true;
             oauthParams.setAuthzEndpoint(Utils.GOWALLA_AUTHZ);
