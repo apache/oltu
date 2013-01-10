@@ -38,6 +38,7 @@
 
 <h3>Choose Application</h3>
 
+<a href="/main/generic">Generic OAuth2 Application</a> 
 <a href="/main/smart_gallery">Smart Gallery</a>
 <a href="/main/facebook">Facebook</a>
 <a href="/main/google">Google</a>

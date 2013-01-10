@@ -43,6 +43,8 @@ public final class Utils {
     public static final String REG_TYPE_PULL = "pull";
     public static final String REG_TYPE_PUSH = "push";
 
+    public static final String GENERIC = "generic"; 
+    
     public static final String FACEBOOK = "facebook";
     public static final String FACEBOOK_AUTHZ = "https://graph.facebook.com/oauth/authorize";
     public static final String FACEBOOK_TOKEN = "https://graph.facebook.com/oauth/access_token";

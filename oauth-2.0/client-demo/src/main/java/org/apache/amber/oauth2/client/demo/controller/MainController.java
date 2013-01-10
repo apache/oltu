@@ -62,7 +62,9 @@ public class MainController {
         throws OAuthSystemException, IOException {
 
         boolean selected = false;
-        if (Utils.GITHUB.equals(app)) {
+        if (Utils.GENERIC.equals(app)) {
+            selected = true;
+        }else if (Utils.GITHUB.equals(app)) {
             selected = true;
             oauthParams.setAuthzEndpoint(Utils.GITHUB_AUTHZ);
             oauthParams.setTokenEndpoint(Utils.GITHUB_TOKEN);
