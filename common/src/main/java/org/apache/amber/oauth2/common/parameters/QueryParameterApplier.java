@@ -25,6 +25,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.apache.amber.oauth2.common.OAuth;
+import org.apache.amber.oauth2.common.error.OAuthError;
 import org.apache.amber.oauth2.common.message.OAuthMessage;
 import org.apache.amber.oauth2.common.utils.OAuthUtils;
 
@@ -60,6 +61,22 @@ public class QueryParameterApplier implements OAuthParametersApplier {
                     fragmentParams.put(OAuth.OAUTH_TOKEN_TYPE, params.remove(OAuth.OAUTH_TOKEN_TYPE));
                 }
                 
+                if (params.containsKey(OAuth.OAUTH_SCOPE)) {
+                    fragmentParams.put(OAuth.OAUTH_SCOPE, params.remove(OAuth.OAUTH_SCOPE));
+                }
+                
+                if (params.containsKey(OAuthError.OAUTH_ERROR)) {
+                    fragmentParams.put(OAuthError.OAUTH_ERROR, params.remove(OAuthError.OAUTH_ERROR));
+                }
+                
+                if (params.containsKey(OAuthError.OAUTH_ERROR_DESCRIPTION)) {
+                    fragmentParams.put(OAuthError.OAUTH_ERROR_DESCRIPTION, params.remove(OAuthError.OAUTH_ERROR_DESCRIPTION));
+                }
+                
+                if (params.containsKey(OAuthError.OAUTH_ERROR_URI)) {
+                    fragmentParams.put(OAuthError.OAUTH_ERROR_URI, params.remove(OAuthError.OAUTH_ERROR_URI));
+                }
+                
             }
 
             StringBuffer query = new StringBuffer(OAuthUtils.format(params.entrySet(), "UTF-8"));
@@ -77,7 +94,15 @@ public class QueryParameterApplier implements OAuthParametersApplier {
             }
 
             if (!OAuthUtils.isEmpty(fragmentQuery)) {
-                url.append("#").append(fragmentQuery);
+            	if (fragmentParams.size()>1){
+            		url.append("#").append(fragmentQuery);
+            	}else{
+            		if (containsQuestionMark) {
+                        url.append("&").append(fragmentQuery);
+                    } else {
+                        url.append("?").append(fragmentQuery);
+                    }
+            	}
             }
 
             message.setLocationUri(url.toString());
