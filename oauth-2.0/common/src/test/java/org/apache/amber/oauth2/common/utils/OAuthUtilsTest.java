@@ -123,6 +123,23 @@ public class OAuthUtilsTest {
 
     @Test
     public void testEncodeOAuthHeader() throws Exception {
+    	Map<String, Object> parameters = new HashMap<String, Object>();
+    	parameters.put("realm", "example");
+    	
+    	///rfc6750#section-3
+    	String header = OAuthUtils.encodeOAuthHeader(parameters);
+        Assert.assertEquals("Bearer realm=\"example\"", header);
+
+    }
+    
+    @Test
+    public void testEncodeAuthorizationBearerHeader() throws Exception {
+    	Map<String, Object> parameters = new HashMap<String, Object>();
+    	parameters.put("accessToken", "mF_9.B5f-4.1JqM");
+    	
+    	//rfc6749#section-7.1
+    	String header = OAuthUtils.encodeAuthorizationBearerHeader(parameters);
+        Assert.assertEquals("Bearer mF_9.B5f-4.1JqM", header);
 
     }
 

@@ -364,7 +364,7 @@ public final class OAuthUtils {
     // todo: implement method to decode header form (with no challenge)
 
     /**
-     * Construct a WWW-Authenticate or Authorization header with the OAuth challenge/credentials
+     * Construct a WWW-Authenticate header
      */
     public static String encodeOAuthHeader(Map<String, Object> entries) {
         StringBuffer sb = new StringBuffer();
@@ -380,6 +380,22 @@ public final class OAuthUtils {
         }
 
         return sb.substring(0, sb.length() - 1);
+    }
+    
+    /**
+     * Construct an Authorization Bearer header
+     */
+    public static String encodeAuthorizationBearerHeader(Map<String, Object> entries) {
+        StringBuffer sb = new StringBuffer();
+        sb.append(OAuth.OAUTH_HEADER_NAME).append(" ");
+        for (Map.Entry<String, Object> entry : entries.entrySet()) {
+            String value = entry.getValue() == null? null: String.valueOf(entry.getValue());
+            if (!OAuthUtils.isEmpty(entry.getKey()) && !OAuthUtils.isEmpty(value)) {
+                sb.append(value);
+            }
+        }
+
+        return sb.toString();
     }
 
     public static boolean isEmpty(String value) {
