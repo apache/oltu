@@ -26,6 +26,7 @@ import java.util.Map;
 
 import org.apache.amber.oauth2.client.request.OAuthClientRequest;
 import org.apache.amber.oauth2.client.response.OAuthAccessTokenResponse;
+import org.apache.amber.oauth2.client.response.OAuthClientResponse;
 import org.apache.amber.oauth2.client.response.OAuthJSONAccessTokenResponse;
 import org.apache.amber.oauth2.common.OAuth;
 import org.apache.amber.oauth2.common.exception.OAuthProblemException;
@@ -74,6 +75,10 @@ public class OAuthClient {
         OAuthClientRequest request, String requestMethod)
         throws OAuthSystemException, OAuthProblemException {
         return accessToken(request, requestMethod, OAuthJSONAccessTokenResponse.class);
+    }
+    
+    public  <T extends OAuthClientResponse> T resource(OAuthClientRequest request, String requestMethod,Class<T> responseClass) throws OAuthSystemException, OAuthProblemException{
+    	return httpClient.execute(request, null, requestMethod, responseClass);     
     }
 
     public void shutdown() {

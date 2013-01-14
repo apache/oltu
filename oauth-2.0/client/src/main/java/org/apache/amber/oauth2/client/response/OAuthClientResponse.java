@@ -48,7 +48,7 @@ public abstract class OAuthClientResponse {
 
     protected abstract void setBody(String body) throws OAuthProblemException;
 
-    protected abstract void setContentType(String contentTypr);
+    protected abstract void setContentType(String contentType);
 
     protected abstract void setResponseCode(int responseCode);
 
