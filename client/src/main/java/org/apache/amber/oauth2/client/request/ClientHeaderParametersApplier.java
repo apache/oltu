@@ -39,7 +39,7 @@ public class ClientHeaderParametersApplier implements OAuthParametersApplier {
     public OAuthMessage applyOAuthParameters(OAuthMessage message, Map<String, Object> params)
         throws OAuthSystemException {
 
-        String header = OAuthUtils.encodeOAuthHeader(params);
+        String header = OAuthUtils.encodeAuthorizationBearerHeader(params);
         message.addHeader(OAuth.HeaderType.AUTHORIZATION, header);
         return message;
 
