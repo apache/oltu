@@ -52,6 +52,21 @@
             <td><form:input size="70" path="resourceUrl"/></td>
         </tr>
         <tr>
+            <td>Authenticated Request Type:</td>
+            <td><form:select path="requestType">
+                <form:option value="queryParameter"/>
+                <form:option value="headerField"/>
+                <form:option value="bodyParameter"/>
+            </form:select></td>
+        </tr>
+        <tr>
+            <td>Request Method:</td>
+            <td><form:select path="requestMethod">
+                <form:option value="GET"/>
+                <form:option value="POST"/>
+            </form:select></td>
+        </tr>
+        <tr>
             <td>Access Token:</td>
             <td><form:input size="70" path="accessToken" readonly="true"/></td>
         </tr>

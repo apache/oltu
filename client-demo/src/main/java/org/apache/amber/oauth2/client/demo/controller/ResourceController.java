@@ -20,16 +20,17 @@
  */
 
 package org.apache.amber.oauth2.client.demo.controller;
-
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
+ 
 import javax.servlet.http.HttpServletRequest;
-
+import org.apache.amber.oauth2.client.OAuthClient;
+import org.apache.amber.oauth2.client.URLConnectionClient;
 import org.apache.amber.oauth2.client.demo.Utils;
 import org.apache.amber.oauth2.client.demo.model.OAuthParams;
-import org.apache.amber.oauth2.common.utils.OAuthUtils;
-import org.apache.amber.oauth2.common.OAuth;
+import org.apache.amber.oauth2.client.request.OAuthBearerClientRequest;
+import org.apache.amber.oauth2.client.request.OAuthClientRequest;
+import org.apache.amber.oauth2.client.response.OAuthResourceResponse;
+import org.apache.amber.oauth2.common.exception.OAuthProblemException;
+import org.apache.amber.oauth2.common.exception.OAuthSystemException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,23 +50,31 @@ public class ResourceController {
                                   HttpServletRequest req) {
 
         try {
-            String tokenName = OAuth.OAUTH_TOKEN_DRAFT_0;
-            if (Utils.SMART_GALLERY.equals(oauthParams.getApplication())) {
-                tokenName = OAuth.OAUTH_TOKEN;
-            }
-            URL url = new URL(
-                oauthParams.getResourceUrl() + "?" + tokenName + "=" + oauthParams.getAccessToken());
-            HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-            if (conn.getResponseCode() == 200) {
-                oauthParams.setResource(OAuthUtils.saveStreamAsString(conn.getInputStream()));
-            } else {
-                oauthParams.setErrorMessage(
-                    "Could not access resource: " + conn.getResponseCode() + " " + conn.getResponseMessage());
-            }
-        } catch (IOException e) {
-            oauthParams.setErrorMessage(e.getMessage());
-        }
-
+			OAuthClientRequest request=null; 
+			
+			if (Utils.REQUEST_TYPE_QUERY.equals(oauthParams.getRequestType())){
+				request= new OAuthBearerClientRequest(oauthParams.getResourceUrl()).setAccessToken(oauthParams.getAccessToken()).buildQueryMessage();
+			}else if (Utils.REQUEST_TYPE_HEADER.equals(oauthParams.getRequestType())){
+				request= new OAuthBearerClientRequest(oauthParams.getResourceUrl()).setAccessToken(oauthParams.getAccessToken()).buildHeaderMessage();
+			}else if (Utils.REQUEST_TYPE_BODY.equals(oauthParams.getRequestType())){
+				request= new OAuthBearerClientRequest(oauthParams.getResourceUrl()).setAccessToken(oauthParams.getAccessToken()).buildBodyMessage();
+			}			
+			
+			OAuthClient client = new OAuthClient(new URLConnectionClient());
+			OAuthResourceResponse resourceResponse= client.resource(request, oauthParams.getRequestMethod(), OAuthResourceResponse.class);
+			
+			if (resourceResponse.getResponseCode()==200){			
+				oauthParams.setResource(resourceResponse.getBody());
+			}else{
+				oauthParams.setErrorMessage(
+	                    "Could not access resource: " + resourceResponse.getResponseCode() + " " + resourceResponse.getBody());
+			}
+		} catch (OAuthSystemException e) {
+			 oauthParams.setErrorMessage(e.getMessage());
+		} catch (OAuthProblemException e) {
+			 oauthParams.setErrorMessage(e.getMessage());
+		}
+  
         return new ModelAndView("resource");
 
 
