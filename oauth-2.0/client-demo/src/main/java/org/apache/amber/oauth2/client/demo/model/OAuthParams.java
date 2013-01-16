@@ -42,6 +42,8 @@ public class OAuthParams {
     private String resourceUrl;
     private String resource;
     private String application;
+    private String requestType;
+    private String requestMethod;
 
     private String errorMessage;
 
@@ -160,4 +162,20 @@ public class OAuthParams {
     public void setApplication(String application) {
         this.application = application;
     }
+
+	public String getRequestType() {
+		return requestType;
+	}
+
+	public void setRequestType(String requestType) {
+		this.requestType = requestType;
+	}
+
+	public String getRequestMethod() {
+		return requestMethod;
+	}
+
+	public void setRequestMethod(String requestMethod) {
+		this.requestMethod = requestMethod;
+	}
 }

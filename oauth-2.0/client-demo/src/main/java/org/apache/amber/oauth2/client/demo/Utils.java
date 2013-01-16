@@ -42,6 +42,10 @@ public final class Utils {
 
     public static final String REG_TYPE_PULL = "pull";
     public static final String REG_TYPE_PUSH = "push";
+    
+    public static final String REQUEST_TYPE_QUERY= "queryParameter";
+    public static final String REQUEST_TYPE_HEADER= "headerField";
+    public static final String REQUEST_TYPE_BODY= "bodyParameter";
 
     public static final String GENERIC = "generic"; 
     
