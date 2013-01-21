@@ -20,8 +20,8 @@
   name="${project.name}">
 
   <bannerLeft>
-    <name>Apache Amber OAuth reference implementation</name>
-    <src>images/amber_head.png</src>
+    <name>Apache Oltu OAuth reference implementation</name>
+    <src>images/oltu_head.png</src>
     <href>${project.url}/index.html</href>
   </bannerLeft>
 
@@ -68,7 +68,7 @@
     </menu>
 
     <footer>
-      <div class="row span16">Apache Amber, Apache, the Apache feather logo, and the Apache Amber project logos are trademarks of The Apache Software Foundation.
+      <div class="row span16">Apache Oltu, Apache, the Apache feather logo, and the Apache Oltu project logos are trademarks of The Apache Software Foundation.
       All other marks mentioned may be trademarks or registered trademarks of their respective owners.</div>
     </footer>
   </body>

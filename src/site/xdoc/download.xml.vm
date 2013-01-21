@@ -19,14 +19,14 @@
           xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
 
   <properties>
-    <title>Apache Amber - Download</title>
-    <author email="amber-dev@incubator.apache.org">Apache Amber Team</author>
+    <title>Apache Oltu - Download</title>
+    <author email="oltu-dev@incubator.apache.org">Apache Oltu Team</author>
   </properties>
 
   <body>
-    <section name="Download Apache Amber">
-      <p>Apache Amber is distributed in several formats for your convenience. Use a source archive if you intend to build
-   Apache Amber yourself. Otherwise, simply pick a ready-made binary distribution and follow the installation
+    <section name="Download Apache Oltu">
+      <p>Apache Oltu is distributed in several formats for your convenience. Use a source archive if you intend to build
+   Apache Oltu yourself. Otherwise, simply pick a ready-made binary distribution and follow the installation
    instructions given inside the archives.</p>
 
       <p>You will be prompted for a mirror - if the file is not found on yours, please be patient, as it may take 24
@@ -34,14 +34,14 @@
 
       <p>In order to guard against corrupted downloads/installations, it is highly recommended to
    <a href="http://www.apache.org/dev/release-signing#verifying-signature">verify the signature</a>
-   of the release bundles against the public <a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/KEYS">KEYS</a> used by the Apache Amber
+   of the release bundles against the public <a href="http://www.apache.org/dyn/closer.cgi/oltu/KEYS">KEYS</a> used by the Apache Oltu
    developers.</p>
 
-      <p>Apache Amber is distributed under the <a href="http://amber.apache.org/license.html"> Apache License, version 2.0</a>.</p>
+      <p>Apache Oltu is distributed under the <a href="http://oltu.apache.org/license.html"> Apache License, version 2.0</a>.</p>
 
     </section>
 
-    <section name="Apache Amber sources">
+    <section name="Apache Oltu sources">
       <table>
         <thead>
           <tr>
@@ -53,22 +53,22 @@
         </thead>
         <tbody>
           <tr>
-            <td>Apache Amber ${project.version} (Source tar.gz)</td>
-            <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/sources/amber-sources-${project.version}.tar.gz">amber-sources-${project.version}.tar.gz</a></td>
-            <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/sources/amber-sources-${project.version}.tar.gz.md5">amber-sources-${project.version}.tar.gz.md5</a></td>
-            <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/sources/amber-sources-${project.version}.tar.gz.asc">amber-sources-${project.version}.tar.gz.asc</a></td>
+            <td>Apache Oltu ${project.version} (Source tar.gz)</td>
+            <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/sources/oltu-sources-${project.version}.tar.gz">oltu-sources-${project.version}.tar.gz</a></td>
+            <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/sources/oltu-sources-${project.version}.tar.gz.md5">oltu-sources-${project.version}.tar.gz.md5</a></td>
+            <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/sources/oltu-sources-${project.version}.tar.gz.asc">oltu-sources-${project.version}.tar.gz.asc</a></td>
           </tr>
           <tr>
-            <td>Apache Amber ${project.version} (Source zip)</td>
-            <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/sources/amber-sources-${project.version}.zip">amber-sources-${project.version}.zip</a></td>
-            <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/sources/amber-sources-${project.version}.zip.md5">amber-sources-${project.version}.zip.md5</a></td>
-            <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/sources/amber-sources-${project.version}.zip.asc">amber-sources-${project.version}.zip.asc</a></td>
+            <td>Apache Oltu ${project.version} (Source zip)</td>
+            <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/sources/oltu-sources-${project.version}.zip">oltu-sources-${project.version}.zip</a></td>
+            <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/sources/oltu-sources-${project.version}.zip.md5">oltu-sources-${project.version}.zip.md5</a></td>
+            <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/sources/oltu-sources-${project.version}.zip.asc">oltu-sources-${project.version}.zip.asc</a></td>
           </tr>
         </tbody>
       </table>
     </section>
 
-    <section name="Apache Amber precompiled binaries">
+    <section name="Apache Oltu precompiled binaries">
 
       <subsection name="Client">
         <table>
@@ -82,40 +82,40 @@
           </thead>
           <tbody>
             <tr>
-              <td>Apache Amber Client ${project.version} (Source tar.gz)</td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/binaries/amber-oauth2-client-${project.version}.tar.gz">amber-oauth2-client-${project.version}.tar.gz</a></td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/binaries/amber-oauth2-client-${project.version}.tar.gz.md5">amber-oauth2-client-${project.version}.tar.gz.md5</a></td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/binaries/amber-oauth2-client-${project.version}.tar.gz.asc">amber-oauth2-client-${project.version}.tar.gz.asc</a></td>
+              <td>Apache Oltu Client ${project.version} (Source tar.gz)</td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/binaries/oltu-oauth2-client-${project.version}.tar.gz">oltu-oauth2-client-${project.version}.tar.gz</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/binaries/oltu-oauth2-client-${project.version}.tar.gz.md5">oltu-oauth2-client-${project.version}.tar.gz.md5</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/binaries/oltu-oauth2-client-${project.version}.tar.gz.asc">oltu-oauth2-client-${project.version}.tar.gz.asc</a></td>
             </tr>
             <tr>
-              <td>Apache Amber Client ${project.version} (Source zip)</td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/binaries/amber-oauth2-client-${project.version}.zip">amber-oauth2-client-${project.version}.zip</a></td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/binaries/amber-oauth2-client-${project.version}.zip.md5">amber-oauth2-client-${project.version}.zip.md5</a></td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/binaries/amber-oauth2-client-${project.version}.zip.asc">amber-oauth2-client-${project.version}.zip.asc</a></td>
+              <td>Apache Oltu Client ${project.version} (Source zip)</td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/binaries/oltu-oauth2-client-${project.version}.zip">oltu-oauth2-client-${project.version}.zip</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/binaries/oltu-oauth2-client-${project.version}.zip.md5">oltu-oauth2-client-${project.version}.zip.md5</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/binaries/oltu-oauth2-client-${project.version}.zip.asc">oltu-oauth2-client-${project.version}.zip.asc</a></td>
             </tr>
             <tr>
-              <td>Apache Amber Dynamic Registration Client ${project.version} (Source tar.gz)</td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/binaries/amber-oauth2-dynamicreg-client-${project.version}.tar.gz">amber-oauth2-dynamicreg-client-${project.version}.tar.gz</a></td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/binaries/amber-oauth2-dynamicreg-client-${project.version}.tar.gz.md5">amber-oauth2-dynamicreg-client-${project.version}.tar.gz.md5</a></td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/binaries/amber-oauth2-dynamicreg-client-${project.version}.tar.gz.asc">amber-oauth2-dynamicreg-client-${project.version}.tar.gz.asc</a></td>
+              <td>Apache Oltu Dynamic Registration Client ${project.version} (Source tar.gz)</td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/binaries/oltu-oauth2-dynamicreg-client-${project.version}.tar.gz">oltu-oauth2-dynamicreg-client-${project.version}.tar.gz</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/binaries/oltu-oauth2-dynamicreg-client-${project.version}.tar.gz.md5">oltu-oauth2-dynamicreg-client-${project.version}.tar.gz.md5</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/binaries/oltu-oauth2-dynamicreg-client-${project.version}.tar.gz.asc">oltu-oauth2-dynamicreg-client-${project.version}.tar.gz.asc</a></td>
             </tr>
             <tr>
-              <td>Apache Amber Dynamic Registration Client ${project.version} (Source zip)</td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/binaries/amber-oauth2-dynamicreg-client-${project.version}.zip">amber-oauth2-dynamicreg-client-${project.version}.zip</a></td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/binaries/amber-oauth2-dynamicreg-client-${project.version}.zip.md5">amber-oauth2-dynamicreg-client-${project.version}.zip.md5</a></td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/binaries/amber-oauth2-dynamicreg-client-${project.version}.zip.asc">amber-oauth2-dynamicreg-client-${project.version}.zip.asc</a></td>
+              <td>Apache Oltu Dynamic Registration Client ${project.version} (Source zip)</td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/binaries/oltu-oauth2-dynamicreg-client-${project.version}.zip">oltu-oauth2-dynamicreg-client-${project.version}.zip</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/binaries/oltu-oauth2-dynamicreg-client-${project.version}.zip.md5">oltu-oauth2-dynamicreg-client-${project.version}.zip.md5</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/binaries/oltu-oauth2-dynamicreg-client-${project.version}.zip.asc">oltu-oauth2-dynamicreg-client-${project.version}.zip.asc</a></td>
             </tr>
             <tr>
-              <td>Apache Amber HttpClient integration ${project.version} (Source tar.gz)</td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/binaries/amber-oauth2-httpclient4-${project.version}.tar.gz">amber-oauth2-httpclient4-${project.version}.tar.gz</a></td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/binaries/amber-oauth2-httpclient4-${project.version}.tar.gz.md5">amber-oauth2-httpclient4-${project.version}.tar.gz.md5</a></td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/binaries/amber-oauth2-httpclient4-${project.version}.tar.gz.asc">amber-oauth2-httpclient4-${project.version}.tar.gz.asc</a></td>
+              <td>Apache Oltu HttpClient integration ${project.version} (Source tar.gz)</td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/binaries/oltu-oauth2-httpclient4-${project.version}.tar.gz">oltu-oauth2-httpclient4-${project.version}.tar.gz</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/binaries/oltu-oauth2-httpclient4-${project.version}.tar.gz.md5">oltu-oauth2-httpclient4-${project.version}.tar.gz.md5</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/binaries/oltu-oauth2-httpclient4-${project.version}.tar.gz.asc">oltu-oauth2-httpclient4-${project.version}.tar.gz.asc</a></td>
             </tr>
             <tr>
-              <td>Apache Amber HttpClient integration Client ${project.version} (Source zip)</td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/binaries/amber-oauth2-httpclient4-${project.version}.zip">amber-oauth2-httpclient4-${project.version}.zip</a></td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/binaries/amber-oauth2-httpclient4-${project.version}.zip.md5">amber-oauth2-httpclient4-${project.version}.zip.md5</a></td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/binaries/amber-oauth2-httpclient4-${project.version}.zip.asc">amber-oauth2-httpclient4-${project.version}.zip.asc</a></td>
+              <td>Apache Oltu HttpClient integration Client ${project.version} (Source zip)</td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/binaries/oltu-oauth2-httpclient4-${project.version}.zip">oltu-oauth2-httpclient4-${project.version}.zip</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/binaries/oltu-oauth2-httpclient4-${project.version}.zip.md5">oltu-oauth2-httpclient4-${project.version}.zip.md5</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/binaries/oltu-oauth2-httpclient4-${project.version}.zip.asc">oltu-oauth2-httpclient4-${project.version}.zip.asc</a></td>
             </tr>
           </tbody>
         </table>
@@ -133,40 +133,40 @@
           </thead>
           <tbody>
             <tr>
-              <td>Apache Amber Authorization Server ${project.version} (Source tar.gz)</td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/binaries/amber-oauth2-authzserver-${project.version}.tar.gz">amber-oauth2-authzserver-${project.version}.tar.gz</a></td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/binaries/amber-oauth2-authzserver-${project.version}.tar.gz.md5">amber-oauth2-authzserver-${project.version}.tar.gz.md5</a></td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/binaries/amber-oauth2-authzserver-${project.version}.tar.gz.asc">amber-oauth2-authzserver-${project.version}.tar.gz.asc</a></td>
+              <td>Apache Oltu Authorization Server ${project.version} (Source tar.gz)</td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/binaries/oltu-oauth2-authzserver-${project.version}.tar.gz">oltu-oauth2-authzserver-${project.version}.tar.gz</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/binaries/oltu-oauth2-authzserver-${project.version}.tar.gz.md5">oltu-oauth2-authzserver-${project.version}.tar.gz.md5</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/binaries/oltu-oauth2-authzserver-${project.version}.tar.gz.asc">oltu-oauth2-authzserver-${project.version}.tar.gz.asc</a></td>
             </tr>
             <tr>
-              <td>Apache Amber Authorization Server ${project.version} (Source zip)</td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/binaries/amber-oauth2-authzserver-${project.version}.zip">amber-oauth2-authzserver-${project.version}.zip</a></td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/binaries/amber-oauth2-authzserver-${project.version}.zip.md5">amber-oauth2-authzserver-${project.version}.zip.md5</a></td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/binaries/amber-oauth2-authzserver-${project.version}.zip.asc">amber-oauth2-authzserver-${project.version}.zip.asc</a></td>
+              <td>Apache Oltu Authorization Server ${project.version} (Source zip)</td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/binaries/oltu-oauth2-authzserver-${project.version}.zip">oltu-oauth2-authzserver-${project.version}.zip</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/binaries/oltu-oauth2-authzserver-${project.version}.zip.md5">oltu-oauth2-authzserver-${project.version}.zip.md5</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/binaries/oltu-oauth2-authzserver-${project.version}.zip.asc">oltu-oauth2-authzserver-${project.version}.zip.asc</a></td>
             </tr>
             <tr>
-              <td>Apache Amber Resource Server ${project.version} (Source tar.gz)</td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/binaries/amber-oauth2-resourceserver-${project.version}.tar.gz">amber-oauth2-resourceserver-${project.version}.tar.gz</a></td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/binaries/amber-oauth2-resourceserver-${project.version}.tar.gz.md5">amber-oauth2-resourceserver-${project.version}.tar.gz.md5</a></td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/binaries/amber-oauth2-resourceserver-${project.version}.tar.gz.asc">amber-oauth2-resourceserver-${project.version}.tar.gz.asc</a></td>
+              <td>Apache Oltu Resource Server ${project.version} (Source tar.gz)</td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/binaries/oltu-oauth2-resourceserver-${project.version}.tar.gz">oltu-oauth2-resourceserver-${project.version}.tar.gz</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/binaries/oltu-oauth2-resourceserver-${project.version}.tar.gz.md5">oltu-oauth2-resourceserver-${project.version}.tar.gz.md5</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/binaries/oltu-oauth2-resourceserver-${project.version}.tar.gz.asc">oltu-oauth2-resourceserver-${project.version}.tar.gz.asc</a></td>
             </tr>
             <tr>
-              <td>Apache Amber Resource Server ${project.version} (Source zip)</td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/binaries/amber-oauth2-resourceserver-${project.version}.zip">amber-oauth2-resourceserver-${project.version}.zip</a></td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/binaries/amber-oauth2-resourceserver-${project.version}.zip.md5">amber-oauth2-resourceserver-${project.version}.zip.md5</a></td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/binaries/amber-oauth2-resourceserver-${project.version}.zip.asc">amber-oauth2-resourceserver-${project.version}.zip.asc</a></td>
+              <td>Apache Oltu Resource Server ${project.version} (Source zip)</td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/binaries/oltu-oauth2-resourceserver-${project.version}.zip">oltu-oauth2-resourceserver-${project.version}.zip</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/binaries/oltu-oauth2-resourceserver-${project.version}.zip.md5">oltu-oauth2-resourceserver-${project.version}.zip.md5</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/binaries/oltu-oauth2-resourceserver-${project.version}.zip.asc">oltu-oauth2-resourceserver-${project.version}.zip.asc</a></td>
             </tr>
             <tr>
-              <td>Apache Amber Resource Server ${project.version} (Source tar.gz)</td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/binaries/amber-oauth2-resourceserver-filter-${project.version}.tar.gz">amber-oauth2-resourceserver-filter-${project.version}.tar.gz</a></td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/binaries/amber-oauth2-resourceserver-filter-${project.version}.tar.gz.md5">amber-oauth2-resourceserver-filter-${project.version}.tar.gz.md5</a></td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/binaries/amber-oauth2-resourceserver-filter-${project.version}.tar.gz.asc">amber-oauth2-resourceserver-filter-${project.version}.tar.gz.asc</a></td>
+              <td>Apache Oltu Resource Server ${project.version} (Source tar.gz)</td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/binaries/oltu-oauth2-resourceserver-filter-${project.version}.tar.gz">oltu-oauth2-resourceserver-filter-${project.version}.tar.gz</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/binaries/oltu-oauth2-resourceserver-filter-${project.version}.tar.gz.md5">oltu-oauth2-resourceserver-filter-${project.version}.tar.gz.md5</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/binaries/oltu-oauth2-resourceserver-filter-${project.version}.tar.gz.asc">oltu-oauth2-resourceserver-filter-${project.version}.tar.gz.asc</a></td>
             </tr>
             <tr>
-              <td>Apache Amber Resource Server ${project.version} (Source zip)</td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/binaries/amber-oauth2-resourceserver-filter-${project.version}.zip">amber-oauth2-resourceserver-filter-${project.version}.zip</a></td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/binaries/amber-oauth2-resourceserver-filter-${project.version}.zip.md5">amber-oauth2-resourceserver-filter-${project.version}.zip.md5</a></td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/binaries/amber-oauth2-resourceserver-filter-${project.version}.zip.asc">amber-oauth2-resourceserver-filter-${project.version}.zip.asc</a></td>
+              <td>Apache Oltu Resource Server ${project.version} (Source zip)</td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/binaries/oltu-oauth2-resourceserver-filter-${project.version}.zip">oltu-oauth2-resourceserver-filter-${project.version}.zip</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/binaries/oltu-oauth2-resourceserver-filter-${project.version}.zip.md5">oltu-oauth2-resourceserver-filter-${project.version}.zip.md5</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/binaries/oltu-oauth2-resourceserver-filter-${project.version}.zip.asc">oltu-oauth2-resourceserver-filter-${project.version}.zip.asc</a></td>
             </tr>
           </tbody>
         </table>
@@ -184,16 +184,16 @@
           </thead>
           <tbody>
             <tr>
-              <td>Apache Amber Client Demo ${project.version} (Source tar.gz)</td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/binaries/amber-oauth2-client-demo-${project.version}.tar.gz">amber-oauth2-client-demo-${project.version}.tar.gz</a></td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/binaries/amber-oauth2-client-demo-${project.version}.tar.gz.md5">amber-oauth2-client-demo-${project.version}.tar.gz.md5</a></td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/binaries/amber-oauth2-client-demo-${project.version}.tar.gz.asc">amber-oauth2-client-demo-${project.version}.tar.gz.asc</a></td>
+              <td>Apache Oltu Client Demo ${project.version} (Source tar.gz)</td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/binaries/oltu-oauth2-client-demo-${project.version}.tar.gz">oltu-oauth2-client-demo-${project.version}.tar.gz</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/binaries/oltu-oauth2-client-demo-${project.version}.tar.gz.md5">oltu-oauth2-client-demo-${project.version}.tar.gz.md5</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/binaries/oltu-oauth2-client-demo-${project.version}.tar.gz.asc">oltu-oauth2-client-demo-${project.version}.tar.gz.asc</a></td>
             </tr>
             <tr>
-              <td>Apache Amber Client Demo ${project.version} (Source zip)</td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/binaries/amber-oauth2-client-demo-${project.version}.zip">amber-oauth2-client-demo-${project.version}.zip</a></td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/binaries/amber-oauth2-client-demo-${project.version}.zip.md5">amber-oauth2-client-demo-${project.version}.zip.md5</a></td>
-              <td><a href="http://www.apache.org/dyn/closer.cgi/incubator/amber/binaries/amber-oauth2-client-demo-${project.version}.zip.asc">amber-oauth2-client-demo-${project.version}.zip.asc</a></td>
+              <td>Apache Oltu Client Demo ${project.version} (Source zip)</td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/binaries/oltu-oauth2-client-demo-${project.version}.zip">oltu-oauth2-client-demo-${project.version}.zip</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/binaries/oltu-oauth2-client-demo-${project.version}.zip.md5">oltu-oauth2-client-demo-${project.version}.zip.md5</a></td>
+              <td><a href="http://www.apache.org/dyn/closer.cgi/oltu/binaries/oltu-oauth2-client-demo-${project.version}.zip.asc">oltu-oauth2-client-demo-${project.version}.zip.asc</a></td>
             </tr>
           </tbody>
         </table>

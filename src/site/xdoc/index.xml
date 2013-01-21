@@ -20,12 +20,12 @@
 
   <properties>
     <title>Home</title>
-    <author email="amber-dev@incubator.apache.org">Apache Amber Documentation Team</author>
+    <author email="oltu-dev@incubator.apache.org">Apache Amber Documentation Team</author>
   </properties>
 
   <body>
     <section name="Apache Amber">
-      <p><span style="font-weight: bold">Apache Amber</span> is an OAuth protocol implementation in Java.</p>
+      <p><span style="font-weight: bold">Apache Oltu</span> is an OAuth protocol implementation in Java.</p>
     </section>
 
     <section name="Documentation">
@@ -40,19 +40,8 @@
     </section>
 
     <section name="Apache Maven Artifacts">
-      <p>Looking for apache maven artifacts? Just query the <a href="http://search.maven.org/#search%7Cga%7C1%7Corg.apache.amber">Search</a> service!</p>
+      <p>Looking for apache maven artifacts? Just query the <a href="http://search.maven.org/#search%7Cga%7C1%7Corg.apache.oltu">Search</a> service!</p>
     </section>
 
-    <div class="alert-message warning">
-      <h2>Disclaimer</h2>
-      <p>Apache Amber is an effort undergoing <a href="http://incubator.apache.org/">incubation</a> at
-      The Apache Software Foundation (ASF), sponsored by the Apache Incubator PMC. Incubation is required of all newly
-      accepted projects until a further review indicates that the infrastructure, communications, and decision making
-      process have stabilized in a manner consistent with other successful ASF projects.
-      While incubation status is not necessarily a reflection of the completeness or stability of the code,
-      it does indicate that the project has yet to be fully endorsed by the ASF.</p>
-      <p>You can view our current <a href="http://incubator.apache.org/projects/amber.html">incubation status</a>
-      for more details.</p>
-    </div>
   </body>
 </document>
