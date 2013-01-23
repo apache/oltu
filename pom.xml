@@ -29,8 +29,8 @@
   <version>0.31-incubating-SNAPSHOT</version>
   <packaging>pom</packaging>
 
-  <name>Apache Amber</name>
-  <url>https://incubator.apache.org/amber</url>
+  <name>Apache Oltu</name>
+  <url>https://oltu.apache.org/</url>
   <inceptionYear>2010</inceptionYear>
 
   <developers>
