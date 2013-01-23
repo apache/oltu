@@ -283,9 +283,13 @@
     <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ssZ</maven.build.timestamp.format>
     <implementation.build>${scmBranch}@r${buildNumber}</implementation.build>
     <!--
-     | Amber website has to be stored in SVN
+     | Oltu website has to be stored in SVN
      |
-     | mvn clean site-deploy scm-publish:publish-scm -Dusername=uid -Dpassword=pwd
+     | mvn clean site-deploy scm-publish:publish-scm -Dusername=${uid} -Dpassword=${pwd}
+     |
+     | or
+     |
+     | sh deploySite.sh -Dusername=${uid} -Dpassword=${pwd}
     -->
     <site.siteFilePath>${user.home}/oltu-site/</site.siteFilePath>
     <site.deploymentBaseUrl>file://${site.siteFilePath}</site.deploymentBaseUrl>
