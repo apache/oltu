@@ -281,9 +281,9 @@
      |
      | mvn clean site-deploy scm-publish:publish-scm -Dusername=uid -Dpassword=pwd
     -->
-    <site.siteFilePath>${user.home}/amber-site/</site.siteFilePath>
+    <site.siteFilePath>${user.home}/oltu-site/</site.siteFilePath>
     <site.deploymentBaseUrl>file://${site.siteFilePath}</site.deploymentBaseUrl>
-    <site.scmPubCheckoutDirectory>${user.home}/amber-site/</site.scmPubCheckoutDirectory>
+    <site.scmPubCheckoutDirectory>${user.home}/oltu-site/</site.scmPubCheckoutDirectory>
     <assembly.skip>false</assembly.skip>
   </properties>
 
