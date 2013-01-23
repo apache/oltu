@@ -24,7 +24,7 @@
     <version>0.31-incubating-SNAPSHOT</version>
   </parent>
 
-  <name>Apache Amber: OAuth 2.0 Implementation - Integration Tests</name>
+  <name>Apache Oltu: OAuth 2.0 Implementation - Integration Tests</name>
 
   <artifactId>amber-oauth2-integration-tests</artifactId>
 

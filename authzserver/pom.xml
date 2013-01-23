@@ -26,7 +26,7 @@
 
   <artifactId>amber-oauth2-authzserver</artifactId>
 
-  <name>Apache Amber: OAuth 2.0 Implementation - Authorization Server</name>
+  <name>Apache Oltu: OAuth 2.0 Implementation - Authorization Server</name>
 
   <dependencies>
     <dependency>

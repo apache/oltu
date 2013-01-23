@@ -27,7 +27,7 @@
   <artifactId>amber-oauth2-client-demo</artifactId>
   <packaging>war</packaging>
 
-  <name>Apache Amber: OAuth 2.0 Implementation - Demo Application</name>
+  <name>Apache Oltu: OAuth 2.0 Implementation - Demo Application</name>
 
   <dependencies>
     <dependency>
