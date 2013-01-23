@@ -440,7 +440,7 @@
             <tryUpdate>true</tryUpdate>
             <checkoutDirectory>${site.scmPubCheckoutDirectory}</checkoutDirectory>
             <pubScmUrl>scm:svn:https://svn.apache.org/repos/asf/oltu/site</pubScmUrl>
-            <checkinComment>Apache Amber site deployment</checkinComment>
+            <checkinComment>Apache Oltu site deployment</checkinComment>
             <content>${site.siteFilePath}</content>
           </configuration>
         </plugin>
