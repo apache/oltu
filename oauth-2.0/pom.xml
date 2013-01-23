@@ -27,7 +27,7 @@
   <artifactId>amber-oauth2-parent</artifactId>
   <packaging>pom</packaging>
 
-  <name>Apache Amber: OAuth 2.0 Implementation - Parent</name>
+  <name>Apache Oltu: OAuth 2.0 Implementation - Parent</name>
 
   <modules>
     <module>common</module>

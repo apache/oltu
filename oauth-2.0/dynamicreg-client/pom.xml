@@ -26,7 +26,7 @@
 
   <artifactId>amber-oauth2-dynamicreg-client</artifactId>
 
-  <name>Apache Amber: OAuth 2.0 Implementation - Dynamic Registration Client</name>
+  <name>Apache Oltu: OAuth 2.0 Implementation - Dynamic Registration Client</name>
 
   <dependencies>
     <dependency>
