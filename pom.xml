@@ -294,7 +294,7 @@
     -->
     <site.siteFilePath>${user.home}/oltu-site/</site.siteFilePath>
     <site.deploymentBaseUrl>file://${site.siteFilePath}</site.deploymentBaseUrl>
-    <site.scmPubCheckoutDirectory>${user.home}/oltu-site/</site.scmPubCheckoutDirectory>
+    <site.scmPubCheckoutDirectory>${user.home}/oltu-site-content/</site.scmPubCheckoutDirectory>
     <assembly.skip>false</assembly.skip>
   </properties>
 
