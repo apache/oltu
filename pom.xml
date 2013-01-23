@@ -35,6 +35,20 @@
 
   <developers>
     <developer>
+      <id>asanso</id>
+      <name>Antonio Sanso</name>
+      <email>asanso@apache.org</email>
+      <organization>Adobe</organization>
+      <organizationUrl>http://www.day.com</organizationUrl>
+      <roles>
+        <role>Chair</role>
+        <role>PMC Member</role>
+        <role>Committer</role>
+      </roles>
+      <timezone>+1</timezone>
+    </developer>
+
+    <developer>
       <id>brianm</id>
       <name>Brian McCallister</name>
       <email>brianm@apache.org</email>
@@ -191,19 +205,6 @@
     <developer>
       <id>pablo</id>
       <name>Pablo Fernandez</name>
-      <roles>
-        <role>PMC Member</role>
-        <role>Committer</role>
-      </roles>
-      <timezone>+1</timezone>
-    </developer>
-
-    <developer>
-      <id>asanso</id>
-      <name>Antonio Sanso</name>
-      <email>asanso@apache.org</email>
-      <organization>Adobe</organization>
-      <organizationUrl>http://www.day.com</organizationUrl>
       <roles>
         <role>PMC Member</role>
         <role>Committer</role>
