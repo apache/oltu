@@ -37,7 +37,7 @@
     <developer>
       <id>brianm</id>
       <name>Brian McCallister</name>
-      <email>brianm[at]apache[dot]org</email>
+      <email>brianm[at]apache.org</email>
       <roles>
         <role>Mentor</role>
         <role>PMC Member</role>
@@ -49,7 +49,7 @@
     <developer>
       <id>henning</id>
       <name>Henning Schmiedehausen</name>
-      <email>henning[at]apache[dot]org</email>
+      <email>henning[at]apache.org</email>
       <roles>
         <role>Mentor</role>
         <role>PMC Member</role>
@@ -60,7 +60,7 @@
     <developer>
       <id>jfclere</id>
       <name>Jean-Frederic Clere</name>
-      <email>jfclere[at]apache[dot]org</email>
+      <email>jfclere[at]apache.org</email>
       <roles>
         <role>Mentor</role>
         <role>PMC Member</role>
@@ -71,7 +71,7 @@
     <developer>
       <id>gianugo</id>
       <name>Gianugo Rabellino</name>
-      <email>gianugo[at]apache[dot]org</email>
+      <email>gianugo[at]apache.org</email>
       <roles>
         <role>Mentor</role>
         <role>PMC Member</role>
@@ -82,7 +82,7 @@
     <developer>
       <id>djencks</id>
       <name>David Jencks</name>
-      <email>djencks[at]apache[dot]org</email>
+      <email>djencks[at]apache.org</email>
       <roles>
         <role>Mentor</role>
         <role>PMC Member</role>
@@ -93,7 +93,7 @@
     <developer>
       <id>lmoren</id>
       <name>Lukasz Moren</name>
-      <email>lmoren[at]apache[dot]org</email>
+      <email>lmoren[at]apache.org</email>
       <roles>
         <role>Committer</role>
       </roles>
@@ -103,7 +103,7 @@
     <developer>
       <id>mmachulak</id>
       <name>Maciej Machulak</name>
-      <email>mmachulak[at]apache[dot]org</email>
+      <email>mmachulak[at]apache.org</email>
       <roles>
         <role>Committer</role>
       </roles>
@@ -113,7 +113,7 @@
     <developer>
       <id>simoneg</id>
       <name>Simone Gianni</name>
-      <email>simoneg[at]apache[dot]org</email>
+      <email>simoneg[at]apache.org</email>
       <organization>Semeru S.r.l.</organization>
       <organizationUrl>http://www.semeru.it/</organizationUrl>
       <roles>
@@ -126,7 +126,7 @@
     <developer>
       <id>simonetripodi</id>
       <name>Simone Tripodi</name>
-      <email>simonetripodi[at]apache[dot]org</email>
+      <email>simonetripodi[at]apache.org</email>
       <roles>
         <role>PMC Member</role>
         <role>Committer</role>
@@ -147,7 +147,7 @@
     <developer>
       <id>recordond</id>
       <name>David Recordon</name>
-      <email>recordond[at]apache[dot]org</email>
+      <email>recordond[at]apache.org</email>
       <roles>
         <role>PMC Member</role>
         <role>Committer</role>
@@ -158,7 +158,7 @@
     <developer>
       <id>rfeng</id>
       <name>Raymond Zhaohui Feng</name>
-      <email>rfeng[at]apache[dot]org</email>
+      <email>rfeng[at]apache.org</email>
       <roles>
         <role>PMC Member</role>
         <role>Mentor</role>
@@ -169,7 +169,7 @@
     <developer>
       <id>tommaso</id>
       <name>Tommaso Teofili</name>
-      <email>tommaso[at]apache[dot]org</email>
+      <email>tommaso[at]apache.org</email>
       <roles>
         <role>PMC Member</role>
         <role>Committer</role>
@@ -180,7 +180,7 @@
     <developer>
       <id>lindner</id>
       <name>Paul Lindner</name>
-      <email>lindner[at]apache[dot]org</email>
+      <email>lindner[at]apache.org</email>
       <roles>
         <role>PMC Member</role>
         <role>Committer</role>
@@ -201,7 +201,7 @@
     <developer>
       <id>asanso</id>
       <name>Antonio Sanso</name>
-      <email>asanso[at]apache[dot]org</email>
+      <email>asanso[at]apache.org</email>
       <organization>Adobe</organization>
       <organizationUrl>http://www.day.com</organizationUrl>
       <roles>
@@ -215,26 +215,26 @@
   <mailingLists>
     <mailingList>
       <name>Dev Mailing List</name>
-      <post>amber-dev[at]incubator[dot]apache[dot]org</post>
-      <subscribe>amber-dev-subscribe[at]incubator[dot]apache[dot]org</subscribe>
-      <unsubscribe>amber-dev-unsubscribe[at]incubator[dot]apache[dot]org</unsubscribe>
-      <archive>http://mail-archives.apache.org/mod_mbox/incubator-amber-dev/</archive>
+      <post>dev@oltu.apache.org</post>
+      <subscribe>dev-subscribe@oltu.apache.org</subscribe>
+      <unsubscribe>dev-unsubscribe@oltu.apache.org</unsubscribe>
+      <archive>http://mail-archives.apache.org/mod_mbox/incubator-oltu-dev/</archive>
     </mailingList>
 
     <mailingList>
       <name>User Mailing List</name>
-      <post>amber-user[at]incubator[dot]apache[dot]org</post>
-      <subscribe>amber-user-subscribe[at]incubator[dot]apache[dot]org</subscribe>
-      <unsubscribe>amber-user-unsubscribe[at]incubator[dot]apache[dot]org</unsubscribe>
-      <archive>http://mail-archives.apache.org/mod_mbox/incubator-amber-user/</archive>
+      <post>user@oltu.apache.org</post>
+      <subscribe>user-subscribe@oltu.apache.org</subscribe>
+      <unsubscribe>user-unsubscribe@oltu.apache.org</unsubscribe>
+      <archive>http://mail-archives.apache.org/mod_mbox/incubator-oltu-user/</archive>
     </mailingList>
 
     <mailingList>
       <name>Commits Mailing List</name>
-      <post>amber-commits[at]incubator[dot]apache[dot]org</post>
-      <subscribe>amber-commits-subscribe[at]incubator[dot]apache[dot]org</subscribe>
-      <unsubscribe>amber-commits-unsubscribe[at]incubator[dot]apache[dot]org</unsubscribe>
-      <archive>http://mail-archives.apache.org/mod_mbox/incubator-amber-commits/</archive>
+      <post>commits@oltu.apache.org</post>
+      <subscribe>commits-subscribe@oltu.apache.org</subscribe>
+      <unsubscribe>commits-unsubscribe@oltu.apache.org</unsubscribe>
+      <archive>http://mail-archives.apache.org/mod_mbox/incubator-oltu-commits/</archive>
     </mailingList>
   </mailingLists>
 
@@ -420,7 +420,7 @@
             <mavenExecutorId>forked-path</mavenExecutorId>
             <useReleaseProfile>false</useReleaseProfile>
             <autoVersionSubmodules>true</autoVersionSubmodules>
-            <tagNameFormat>amber-@{project.version}</tagNameFormat>
+            <tagNameFormat>oltu-@{project.version}</tagNameFormat>
             <arguments>-Prelease,apache</arguments>
           </configuration>
         </plugin>
