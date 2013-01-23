@@ -26,9 +26,9 @@
   </bannerLeft>
 
   <bannerRight>
-    <name>Apache Incubator</name>
-    <src>http://incubator.apache.org/images/apache-incubator-logo.png</src>
-    <href>http://incubator.apache.org/</href>
+    <name>The Apache Software Foundation</name>
+    <src>http://www.apache.org/images/asf_logo.gif</src>
+    <href>http://www.apache.org/</href>
   </bannerRight>
 
   <skin>
