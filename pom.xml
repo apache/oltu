@@ -263,7 +263,7 @@
        <sendOnFailure>true</sendOnFailure>
        <sendOnSuccess>false</sendOnSuccess>
        <sendOnWarning>false</sendOnWarning>
-       <configuration><address>amber-dev@incubator.apache.org</address></configuration> 
+       <configuration><address>dev@oltu.apache.org</address></configuration> 
      </notifier>
    </notifiers>
   </ciManagement>
