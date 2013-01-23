@@ -244,9 +244,9 @@
   </modules>
 
   <scm>
-    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/incubator/amber/trunk/</developerConnection>
-    <connection>scm:svn:https://svn.apache.org/repos/asf/incubator/amber/trunk/</connection>
-    <url>https://svn.apache.org/repos/asf/incubator/amber/trunk/</url>
+    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/oltu/trunk</developerConnection>
+    <connection>scm:svn:https://svn.apache.org/repos/asf/oltu/trunk</connection>
+    <url>https://svn.apache.org/repos/asf/oltu/trunk</url>
   </scm>
   <issueManagement>
     <system>JIRA</system>
