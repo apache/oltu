@@ -267,6 +267,12 @@
      </notifier>
    </notifiers>
   </ciManagement>
+  <distributionManagement>
+    <site>
+      <id>oltu.website</id>
+      <url>${site.deploymentBaseUrl}</url>
+    </site>
+  </distributionManagement>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -433,7 +439,7 @@
           <configuration>
             <tryUpdate>true</tryUpdate>
             <checkoutDirectory>${site.scmPubCheckoutDirectory}</checkoutDirectory>
-            <pubScmUrl>scm:svn:https://svn.apache.org/repos/asf/incubator/amber/site</pubScmUrl>
+            <pubScmUrl>scm:svn:https://svn.apache.org/repos/asf/oltu/site</pubScmUrl>
             <checkinComment>Apache Amber site deployment</checkinComment>
             <content>${site.siteFilePath}</content>
           </configuration>
