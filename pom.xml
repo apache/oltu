@@ -73,6 +73,7 @@
     <developer>
       <id>pidster</id>
       <name>Stuart "Pid" Williams</name>
+      <email>pidster@apache.org</email>
       <roles>
         <role>PMC Member</role>
         <role>Committer</role>
