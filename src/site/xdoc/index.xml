@@ -24,7 +24,7 @@
   </properties>
 
   <body>
-    <section name="Apache Amber">
+    <section name="Apache Oltu">
       <p><span style="font-weight: bold">Apache Oltu</span> is an OAuth protocol implementation in Java.</p>
     </section>
 
