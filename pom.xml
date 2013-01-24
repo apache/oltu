@@ -47,24 +47,24 @@
       </roles>
       <timezone>+1</timezone>
     </developer>
-    
+
     <developer>
       <id>lmoren</id>
       <name>Lukasz Moren</name>
       <email>lmoren@apache.org</email>
       <roles>
-     	<role>PMC Member</role>
+        <role>PMC Member</role>
         <role>Committer</role>
       </roles>
       <timezone>0</timezone>
     </developer>
-    
+
     <developer>
       <id>mmachulak</id>
       <name>Maciej Machulak</name>
       <email>mmachulak@apache.org</email>
       <roles>
-     	<role>PMC Member</role>
+        <role>PMC Member</role>
         <role>Committer</role>
       </roles>
       <timezone>0</timezone>
@@ -79,8 +79,8 @@
       </roles>
       <timezone>+1</timezone>
     </developer>
-    
-   	<developer>
+
+    <developer>
       <id>rfeng</id>
       <name>Raymond Zhaohui Feng</name>
       <email>rfeng@apache.org</email>
@@ -100,8 +100,8 @@
       </roles>
       <timezone>+1</timezone>
     </developer>
-    
-  	<developer>
+
+    <developer>
       <id>tommaso</id>
       <name>Tommaso Teofili</name>
       <email>tommaso@apache.org</email>
@@ -111,8 +111,8 @@
       </roles>
       <timezone>+1</timezone>
     </developer>
-    
-  	<developer>
+
+    <developer>
       <id>brianm</id>
       <name>Brian McCallister</name>
       <email>brianm@apache.org</email>
@@ -123,8 +123,8 @@
         <role>Emeritus</role>
       </roles>
     </developer>
-    
-  	<developer>
+
+    <developer>
       <id>djencks</id>
       <name>David Jencks</name>
       <email>djencks@apache.org</email>
@@ -135,8 +135,8 @@
         <role>Emeritus</role>
       </roles>
     </developer>
-    
-  	<developer>
+
+    <developer>
       <id>gianugo</id>
       <name>Gianugo Rabellino</name>
       <email>gianugo@apache.org</email>
@@ -147,8 +147,8 @@
         <role>Emeritus</role>
       </roles>
     </developer>
-    
-  	<developer>
+
+    <developer>
       <id>henning</id>
       <name>Henning Schmiedehausen</name>
       <email>henning@apache.org</email>
@@ -159,8 +159,8 @@
         <role>Emeritus</role>
       </roles>
     </developer>
-    
-  	<developer>
+
+    <developer>
       <id>jfclere</id>
       <name>Jean-Frederic Clere</name>
       <email>jfclere@apache.org</email>
@@ -171,8 +171,8 @@
        	<role>Emeritus</role>
       </roles>
     </developer>
-    
-   	<developer>
+
+    <developer>
       <id>lindner</id>
       <name>Paul Lindner</name>
       <email>lindner@apache.org</email>
@@ -183,7 +183,7 @@
       </roles>
       <timezone>+1</timezone>
     </developer>
-    
+
     <developer>
       <id>pablo</id>
       <name>Pablo Fernandez</name>
@@ -195,8 +195,8 @@
       </roles>
       <timezone>+1</timezone>
     </developer>
-    
-  	<developer>
+
+    <developer>
       <id>recordond</id>
       <name>David Recordon</name>
       <email>recordond@apache.org</email>
@@ -207,7 +207,7 @@
       </roles>
       <timezone>+1</timezone>
     </developer>
-    
+
     <developer>
       <id>simoneg</id>
       <name>Simone Gianni</name>
