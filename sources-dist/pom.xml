@@ -27,7 +27,7 @@
 
   <artifactId>amber-sources</artifactId>
 
-  <name>Apache Oltu :: Sources distribution module</name>
+  <name>Apache Oltu: Sources distribution module</name>
 
   <build>
     <plugins>
