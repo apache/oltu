@@ -19,19 +19,19 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <artifactId>amber-oauth2-parent</artifactId>
-    <groupId>org.apache.amber</groupId>
+    <artifactId>oltu-oauth2-parent</artifactId>
+    <groupId>org.apache.oltu</groupId>
     <version>0.31-SNAPSHOT</version>
   </parent>
 
-  <artifactId>amber-oauth2-client</artifactId>
+  <artifactId>oltu-oauth2-client</artifactId>
 
   <name>Apache Oltu: OAuth 2.0 Implementation - Client</name>
 
   <dependencies>
     <dependency>
-      <groupId>org.apache.amber</groupId>
-      <artifactId>amber-oauth2-common</artifactId>
+      <groupId>org.apache.oltu</groupId>
+      <artifactId>oltu-oauth2-common</artifactId>
       <version>${project.version}</version>
     </dependency>
 

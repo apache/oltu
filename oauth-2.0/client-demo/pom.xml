@@ -19,12 +19,12 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.apache.amber</groupId>
-    <artifactId>amber-oauth2-parent</artifactId>
+    <groupId>org.apache.oltu</groupId>
+    <artifactId>oltu-oauth2-parent</artifactId>
     <version>0.31-SNAPSHOT</version>
   </parent>
 
-  <artifactId>amber-oauth2-client-demo</artifactId>
+  <artifactId>oltu-oauth2-client-demo</artifactId>
   <packaging>war</packaging>
 
   <name>Apache Oltu: OAuth 2.0 Implementation - Demo Application</name>
@@ -38,22 +38,22 @@
 
     <!-- OAuth Dependency -->
     <dependency>
-      <artifactId>amber-oauth2-common</artifactId>
-      <groupId>org.apache.amber</groupId>
+      <artifactId>oltu-oauth2-common</artifactId>
+      <groupId>org.apache.oltu</groupId>
       <version>${project.version}</version>
     </dependency>
 
     <!-- OAuth Dynamic Registration Dependency -->
 
     <dependency>
-      <artifactId>amber-oauth2-dynamicreg-common</artifactId>
-      <groupId>org.apache.amber</groupId>
+      <artifactId>oltu-oauth2-dynamicreg-common</artifactId>
+      <groupId>org.apache.oltu</groupId>
       <version>${project.version}</version>
     </dependency>
 
     <dependency>
-      <artifactId>amber-oauth2-dynamicreg-client</artifactId>
-      <groupId>org.apache.amber</groupId>
+      <artifactId>oltu-oauth2-dynamicreg-client</artifactId>
+      <groupId>org.apache.oltu</groupId>
       <version>${project.version}</version>
     </dependency>
 

@@ -19,13 +19,13 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.apache.amber</groupId>
-    <artifactId>amber-parent</artifactId>
+    <groupId>org.apache.oltu</groupId>
+    <artifactId>oltu-parent</artifactId>
     <version>0.31-SNAPSHOT</version>
     <relativePath>../</relativePath>
   </parent>
 
-  <artifactId>amber-sources</artifactId>
+  <artifactId>oltu-sources</artifactId>
 
   <name>Apache Oltu: Sources distribution module</name>
 

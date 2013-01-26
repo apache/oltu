@@ -24,8 +24,8 @@
     <version>10</version>
   </parent>
 
-  <groupId>org.apache.amber</groupId>
-  <artifactId>amber-parent</artifactId>
+  <groupId>org.apache.oltu</groupId>
+  <artifactId>oltu-parent</artifactId>
   <version>0.31-SNAPSHOT</version>
   <packaging>pom</packaging>
 
