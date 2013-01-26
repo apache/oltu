@@ -29,7 +29,7 @@
 
     <servlet>
         <servlet-name>testServlet</servlet-name>
-        <servlet-class>org.apache.amber.oauth2.integration.server.ExampleServlet</servlet-class>
+        <servlet-class>org.apache.oltu.oauth2.integration.server.ExampleServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>

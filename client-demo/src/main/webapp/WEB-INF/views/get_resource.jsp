@@ -24,7 +24,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page session="false" %>
-<%--@elvariable id="oauthParams" type="org.apache.amber.oauth2.client.demo.model.OAuthParams"--%>
+<%--@elvariable id="oauthParams" type="org.apache.oltu.oauth2.client.demo.model.OAuthParams"--%>
 
 <html>
 <head>
