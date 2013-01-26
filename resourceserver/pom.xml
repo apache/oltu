@@ -19,19 +19,19 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.apache.amber</groupId>
-    <artifactId>amber-oauth2-parent</artifactId>
+    <groupId>org.apache.oltu</groupId>
+    <artifactId>oltu-oauth2-parent</artifactId>
     <version>0.31-SNAPSHOT</version>
   </parent>
 
-  <artifactId>amber-oauth2-resourceserver</artifactId>
+  <artifactId>oltu-oauth2-resourceserver</artifactId>
 
   <name>Apache Oltu: OAuth 2.0 Implementation - Resource Server</name>
 
   <dependencies>
     <dependency>
-      <groupId>org.apache.amber</groupId>
-      <artifactId>amber-oauth2-common</artifactId>
+      <groupId>org.apache.oltu</groupId>
+      <artifactId>oltu-oauth2-common</artifactId>
       <version>${project.version}</version>
     </dependency>
   </dependencies>

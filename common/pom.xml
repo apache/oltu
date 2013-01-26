@@ -19,12 +19,12 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.apache.amber</groupId>
-    <artifactId>amber-oauth2-parent</artifactId>
+    <groupId>org.apache.oltu</groupId>
+    <artifactId>oltu-oauth2-parent</artifactId>
     <version>0.31-SNAPSHOT</version>
   </parent>
 
-  <artifactId>amber-oauth2-common</artifactId>
+  <artifactId>oltu-oauth2-common</artifactId>
 
   <name>Apache Oltu: OAuth 2.0 Implementation - Common</name>
   <description>OAuth 2.0 library - Common</description>
@@ -73,8 +73,8 @@
         <configuration>
           <instrumentation>
             <excludes>
-              <exclude>org/apache/amber/oauth2/common/message/types/**.class</exclude>
-              <exclude>org/apache/amber/oauth2/common/OAuth**.class</exclude>
+              <exclude>org/apache/oltu/oauth2/common/message/types/**.class</exclude>
+              <exclude>org/apache/oltu/oauth2/common/OAuth**.class</exclude>
             </excludes>
           </instrumentation>
         </configuration>
