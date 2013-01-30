@@ -44,6 +44,21 @@
     <module>integration-tests</module>
   </modules>
 
+  <ciManagement>
+    <system>Jenkins</system>
+    <url>https://builds.apache.org/job/Oltu-OAuth-2.0/</url>
+    <notifiers>
+     <notifier>
+       <type>mail</type>
+       <sendOnError>true</sendOnError>
+       <sendOnFailure>true</sendOnFailure>
+       <sendOnSuccess>false</sendOnSuccess>
+       <sendOnWarning>false</sendOnWarning>
+       <configuration><address>dev@oltu.apache.org</address></configuration> 
+     </notifier>
+   </notifiers>
+  </ciManagement>
+
   <properties>
     <cxf.version>2.2.10</cxf.version>
     <org.springframework.version>3.0.3.RELEASE</org.springframework.version>

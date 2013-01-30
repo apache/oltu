@@ -266,7 +266,7 @@
   </issueManagement>
   <ciManagement>
     <system>Jenkins</system>
-    <url>https://builds.apache.org/job/Amber/</url>
+    <url>https://builds.apache.org/job/Oltu/</url>
     <notifiers>
      <notifier>
        <type>mail</type>
