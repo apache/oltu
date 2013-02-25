@@ -18,36 +18,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.apache.oltu.oauth2.common.parameters;
 
 import java.util.Map;
+
+import org.apache.oltu.oauth2.common.OAuth;
+import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 import org.apache.oltu.oauth2.common.message.OAuthMessage;
 import org.apache.oltu.oauth2.common.utils.OAuthUtils;
 
-/**
- *
- *
- *
- */
-public class QueryParameterApplier implements OAuthParametersApplier {
+public class FragmentParametersApplier implements OAuthParametersApplier {
 
-    public OAuthMessage applyOAuthParameters(OAuthMessage message, Map<String, Object> params) {
+    public OAuthMessage applyOAuthParameters(OAuthMessage message, Map<String, Object> params) throws OAuthSystemException {
 
         String messageUrl = message.getLocationUri();
         if (messageUrl != null) {
-            boolean containsQuestionMark = messageUrl.contains("?");
-            StringBuffer url = new StringBuffer(messageUrl);
- 
-            StringBuffer query = new StringBuffer(OAuthUtils.format(params.entrySet(), "UTF-8"));
-  
-            if (!OAuthUtils.isEmpty(query.toString())) {
-                if (containsQuestionMark) {
-                    url.append("&").append(query);
-                } else {
-                    url.append("?").append(query);
+            StringBuilder url = new StringBuilder(messageUrl);
+
+            if (params.containsKey(OAuth.OAUTH_REFRESH_TOKEN)) {
+                params.remove(OAuth.OAUTH_REFRESH_TOKEN);
+            }
+
+            String fragmentQuery = OAuthUtils.format(params.entrySet(), "UTF-8");
+
+            if (!OAuthUtils.isEmpty(fragmentQuery)) {
+                if (params.size() > 0) {
+                        url.append("#").append(fragmentQuery);
                 }
-            }   
+            }
             message.setLocationUri(url.toString());
         }
         return message;
