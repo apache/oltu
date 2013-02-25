@@ -29,6 +29,7 @@ import org.apache.oltu.oauth2.common.error.OAuthError;
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 import org.apache.oltu.oauth2.common.parameters.BodyURLEncodedParametersApplier;
+import org.apache.oltu.oauth2.common.parameters.FragmentParametersApplier;
 import org.apache.oltu.oauth2.common.parameters.JSONBodyParametersApplier;
 import org.apache.oltu.oauth2.common.parameters.OAuthParametersApplier;
 import org.apache.oltu.oauth2.common.parameters.QueryParameterApplier;
@@ -133,6 +134,13 @@ public class OAuthResponse implements OAuthMessage {
         public OAuthResponse buildQueryMessage() throws OAuthSystemException {
             OAuthResponse msg = new OAuthResponse(location, responseCode);
             this.applier = new QueryParameterApplier();
+
+            if (parameters.containsKey(OAuth.OAUTH_ACCESS_TOKEN)) {
+            	this.applier = new FragmentParametersApplier();
+            }else{
+            	this.applier = new QueryParameterApplier();
+            }
+            
             return (OAuthResponse)applier.applyOAuthParameters(msg, parameters);
         }
 

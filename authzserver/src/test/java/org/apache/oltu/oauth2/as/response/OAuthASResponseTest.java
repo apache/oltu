@@ -48,16 +48,13 @@ public class OAuthASResponseTest {
         OAuthResponse oAuthResponse = OAuthASResponse.authorizationResponse(request,200)
             .location("http://www.example.com")
             .setCode("code")
-            .setAccessToken("access_111")
-            .setExpiresIn(400l)
             .setState("ok")
             .setParam("testValue", "value2")
             .buildQueryMessage();
 
         String url = oAuthResponse.getLocationUri();
          
-        Assert.assertEquals("http://www.example.com?testValue=value2&code=code"
-            + "#access_token=access_111&state=ok&expires_in=400", url);
+        Assert.assertEquals("http://www.example.com?testValue=value2&state=ok&code=code", url);
         Assert.assertEquals(200, oAuthResponse.getResponseStatus());
 
     }
@@ -70,17 +67,31 @@ public class OAuthASResponseTest {
         OAuthResponse oAuthResponse = OAuthASResponse.authorizationResponse(request,200)
             .location("http://www.example.com")
             .setCode("code")
-            .setAccessToken("access_111")
-            .setExpiresIn("400")
             .setParam("testValue", "value2")
             .buildQueryMessage();
 
         String url = oAuthResponse.getLocationUri();
  
-        Assert.assertEquals("http://www.example.com?testValue=value2&code=code"
-            + "#access_token=access_111&state=ok&expires_in=400", url);
+        Assert.assertEquals("http://www.example.com?testValue=value2&state=ok&code=code", url);
         Assert.assertEquals(200, oAuthResponse.getResponseStatus());
 
+    }
+    
+    @Test
+    public void testAuthzImplicitResponseWithState() throws Exception {
+    	HttpServletRequest request = createMock(HttpServletRequest.class);
+    	expect(request.getParameter(OAuth.OAUTH_STATE)).andStubReturn("ok");
+    	replay(request);
+    	OAuthResponse oAuthResponse = OAuthASResponse.authorizationResponse(request,200)
+    	.location("http://www.example.com")
+    	.setAccessToken("access_111")
+    	.setExpiresIn("400")
+    	.setParam("testValue", "value2")
+    	.buildQueryMessage();
+
+    	String url = oAuthResponse.getLocationUri();
+    	Assert.assertEquals("http://www.example.com#testValue=value2&state=ok&expires_in=400&access_token=access_111", url);
+    	Assert.assertEquals(200, oAuthResponse.getResponseStatus());
     }
 
 
