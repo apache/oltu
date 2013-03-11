@@ -222,6 +222,17 @@
       </roles>
       <timezone>+1</timezone>
     </developer>
+    <developer>
+      <id>stein</id>
+      <name>Stein Welberg</name>
+      <email>stein@apache.org</email>
+      <organization>Innovation District</organization>
+      <organizationUrl>http://www.innovation-district.com</organizationUrl>
+      <roles>
+        <role>Committer</role>
+      </roles>
+      <timezone>+1</timezone>
+    </developer>
   </developers>
 
   <mailingLists>
