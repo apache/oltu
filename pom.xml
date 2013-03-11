@@ -222,6 +222,7 @@
       </roles>
       <timezone>+1</timezone>
     </developer>
+
     <developer>
       <id>stein</id>
       <name>Stein Welberg</name>
