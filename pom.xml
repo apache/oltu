@@ -300,7 +300,7 @@
   </scm>
   <issueManagement>
     <system>JIRA</system>
-    <url>https://issues.apache.org/jira/browse/AMBER</url>
+    <url>https://issues.apache.org/jira/browse/OLTU</url>
   </issueManagement>
   <ciManagement>
     <system>Jenkins</system>
