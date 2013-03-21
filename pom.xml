@@ -235,10 +235,9 @@
       <timezone>+1</timezone>
     </developer>
   </developers>
-  
+
   <contributors>
-	
-	<contributor>
+    <contributor>
       <name>Markus Sabadello</name>
       <email></email>
       <url></url>
@@ -248,8 +247,8 @@
       <timezone>-</timezone>
       <properties></properties>
     </contributor>
-    
-   	<contributor>
+
+    <contributor>
       <name>Ben Noordhuis</name>
       <email></email>
       <url></url>
@@ -259,9 +258,8 @@
       <timezone>-</timezone>
       <properties></properties>
     </contributor>
-
   </contributors>
-  
+
   <mailingLists>
     <mailingList>
       <name>Dev Mailing List</name>
