@@ -340,6 +340,14 @@
     <site.deploymentBaseUrl>file://${site.siteFilePath}</site.deploymentBaseUrl>
     <site.scmPubCheckoutDirectory>${user.home}/oltu-site-content/</site.scmPubCheckoutDirectory>
     <assembly.skip>false</assembly.skip>
+    <!--
+     | OSGi settings
+    -->
+    <osgi.export>${project.groupId}*;version=${project.version}</osgi.export>
+    <osgi.import>*</osgi.import>
+    <osgi.dynamicImport />
+    <osgi.private />
+    <osgi.activator />
   </properties>
 
   <dependencyManagement>
@@ -561,11 +569,55 @@
       </plugin>
 
       <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <version>2.3.7</version>
+        <configuration>
+          <!--
+           | dummy entry to stop bundle plugin from picking up jar config and reporting
+           | WARNING: Duplicate name in Manifest
+           | See http://markmail.org/message/mpkl24wk3jrjhhjg
+          -->
+          <archive>
+            <forced>true</forced>
+          </archive>
+          <excludeDependencies>true</excludeDependencies>
+          <manifestLocation>${project.build.directory}/osgi</manifestLocation>
+          <instructions>
+            <!--
+             | Stop the JAVA_1_n_HOME variables from being treated as headers by Bnd
+            -->
+            <_removeheaders>JAVA_1_3_HOME,JAVA_1_4_HOME,JAVA_1_5_HOME,JAVA_1_6_HOME,JAVA_1_7_HOME</_removeheaders>
+            <Bundle-Name>${project.groupId}.${project.artifactId}</Bundle-Name>
+            <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+            <Bundle-Description>${project.description}</Bundle-Description>
+            <Export-Package>${osgi.export}</Export-Package>
+            <Private-Package>${osgi.private}</Private-Package>
+            <Import-Package>${osgi.import}</Import-Package>
+            <DynamicImport-Package>${osgi.dynamicImport}</DynamicImport-Package>
+            <Bundle-DocURL>${project.url}</Bundle-DocURL>
+            <Bundle-RequiredExecutionEnvironment>J2SE-${javac.target.version}</Bundle-RequiredExecutionEnvironment>
+            <Bundle-Activator>${osgi.activator}</Bundle-Activator>
+          </instructions>
+        </configuration>
+        <executions>
+          <execution>
+            <id>bundle-manifest</id>
+            <phase>process-classes</phase>
+            <goals>
+              <goal>manifest</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
         <version>2.4</version>
         <configuration>
           <archive>
+            <manifestFile>${project.build.directory}/osgi/MANIFEST.MF</manifestFile>
             <manifest>
               <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
               <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
