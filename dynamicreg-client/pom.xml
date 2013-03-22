@@ -19,7 +19,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.apache.oltu.aouth2</groupId>
+    <groupId>org.apache.oltu.oauth2</groupId>
     <artifactId>oltu-oauth2-parent</artifactId>
     <version>0.31-SNAPSHOT</version>
   </parent>
@@ -30,19 +30,19 @@
 
   <dependencies>
     <dependency>
-      <groupId>org.apache.oltu.aouth2</groupId>
+      <groupId>org.apache.oltu.oauth2</groupId>
       <artifactId>oltu-oauth2-common</artifactId>
       <version>${project.version}</version>
     </dependency>
 
     <dependency>
-      <groupId>org.apache.oltu.aouth2</groupId>
+      <groupId>org.apache.oltu.oauth2</groupId>
       <artifactId>oltu-oauth2-client</artifactId>
       <version>${project.version}</version>
     </dependency>
 
     <dependency>
-      <groupId>org.apache.oltu.aouth2</groupId>
+      <groupId>org.apache.oltu.oauth2</groupId>
       <artifactId>oltu-oauth2-dynamicreg-common</artifactId>
       <version>${project.version}</version>
     </dependency>

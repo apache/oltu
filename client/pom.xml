@@ -20,7 +20,7 @@
 
   <parent>
     <artifactId>oltu-oauth2-parent</artifactId>
-    <groupId>org.apache.oltu.aouth2</groupId>
+    <groupId>org.apache.oltu.oauth2</groupId>
     <version>0.31-SNAPSHOT</version>
   </parent>
 
@@ -30,7 +30,7 @@
 
   <dependencies>
     <dependency>
-      <groupId>org.apache.oltu.aouth2</groupId>
+      <groupId>org.apache.oltu.oauth2</groupId>
       <artifactId>oltu-oauth2-common</artifactId>
       <version>${project.version}</version>
     </dependency>
