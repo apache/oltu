@@ -19,7 +19,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.apache.oltu</groupId>
+    <groupId>org.apache.oltu.aouth2</groupId>
     <artifactId>oltu-oauth2-parent</artifactId>
     <version>0.31-SNAPSHOT</version>
   </parent>
