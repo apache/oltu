@@ -24,6 +24,7 @@
     <version>0.31-SNAPSHOT</version>
   </parent>
 
+  <groupId>org.apache.oltu.aouth2</groupId>
   <artifactId>oltu-oauth2-parent</artifactId>
   <packaging>pom</packaging>
 
