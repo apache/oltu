@@ -20,12 +20,13 @@
 
   <parent>
     <groupId>org.apache.oltu</groupId>
-    <artifactId>oltu-parent</artifactId>
-    <version>0.31-SNAPSHOT</version>
+    <artifactId>org.apache.oltu.parent</artifactId>
+    <version>1-SNAPSHOT</version>
   </parent>
 
   <groupId>org.apache.oltu.oauth2</groupId>
   <artifactId>oltu-oauth2-parent</artifactId>
+  <version>0.31-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Apache Oltu: OAuth 2.0 Implementation - Parent</name>
