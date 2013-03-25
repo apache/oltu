@@ -584,7 +584,7 @@
              | Stop the JAVA_1_n_HOME variables from being treated as headers by Bnd
             -->
             <_removeheaders>JAVA_1_3_HOME,JAVA_1_4_HOME,JAVA_1_5_HOME,JAVA_1_6_HOME,JAVA_1_7_HOME</_removeheaders>
-            <Bundle-Name>${project.groupId}.${project.artifactId}</Bundle-Name>
+            <Bundle-Name>${project.artifactId}</Bundle-Name>
             <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
             <Bundle-Description>${project.description}</Bundle-Description>
             <Export-Package>${osgi.export}</Export-Package>
