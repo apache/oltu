@@ -26,7 +26,7 @@
 
   <artifactId>org.apache.oltu.oauth2.test-utils</artifactId>
 
-  <name>Apache Oltu: OAuth 2.0 Implementation - Test Utils</name>
+  <name>Apache Oltu - OAuth 2.0 - Test Utils</name>
 
   <dependencies>
     <dependency>

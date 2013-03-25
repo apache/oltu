@@ -25,7 +25,7 @@
 
   <artifactId>org.apache.oltu.oauth2.httpclient4</artifactId>
 
-  <name>Apache Oltu: OAuth 2.0 Implementation - HttpClient</name>
+  <name>Apache Oltu - OAuth 2.0 - HttpClient</name>
 
   <dependencies>
     <dependency>

@@ -24,9 +24,9 @@
      <version>0.31-SNAPSHOT</version>
   </parent>
 
-  <artifactId>org.apache.oltu.oauth2.dynamicreg-common</artifactId>
+  <artifactId>org.apache.oltu.oauth2.dynamicreg.common</artifactId>
 
-  <name>Apache Oltu: OAuth 2.0 Implementation - Dynamic Registration Common</name>
+  <name>Apache Oltu - OAuth 2.0 - Dynamic Registration Common</name>
 
   <dependencies>
     <dependency>

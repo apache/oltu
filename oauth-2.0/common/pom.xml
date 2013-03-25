@@ -26,7 +26,7 @@
 
   <artifactId>org.apache.oltu.oauth2.common</artifactId>
 
-  <name>Apache Oltu: OAuth 2.0 Implementation - Common</name>
+  <name>Apache Oltu - OAuth 2.0 - Common</name>
   <description>OAuth 2.0 library - Common</description>
 
   <dependencies>

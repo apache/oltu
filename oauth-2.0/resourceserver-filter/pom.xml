@@ -26,7 +26,7 @@
 
   <artifactId>org.apache.oltu.oauth2.resourceserver-filter</artifactId>
 
-  <name>Apache Oltu: OAuth 2.0 Implementation - Resource Server Filter</name>
+  <name>Apache Oltu - OAuth 2.0 - Resource Server Filter</name>
 
   <dependencies>
     <dependency>

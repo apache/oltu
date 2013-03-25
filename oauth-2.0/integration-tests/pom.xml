@@ -24,7 +24,7 @@
     <version>0.31-SNAPSHOT</version>
   </parent>
 
-  <name>Apache Oltu: OAuth 2.0 Implementation - Integration Tests</name>
+  <name>Apache Oltu - OAuth 2.0 - Integration Tests</name>
 
   <artifactId>org.apache.oltu.oauth2.integration-tests</artifactId>
 
