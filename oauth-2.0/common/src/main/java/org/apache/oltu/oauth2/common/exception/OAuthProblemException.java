@@ -135,7 +135,7 @@ public final class OAuthProblemException extends Exception {
 
     @Override
     public String getMessage() {
-        StringBuffer b = new StringBuffer();
+        StringBuilder b = new StringBuilder();
         if (!OAuthUtils.isEmpty(error)) {
             b.append(error);
         }
@@ -163,12 +163,15 @@ public final class OAuthProblemException extends Exception {
 
     @Override
     public String toString() {
-        return "OAuthProblemException{"
-            + "description='" + description + '\''
-            + ", error='" + error + '\''
-            + ", uri='" + uri + '\''
-            + ", state='" + state + '\''
-            + ", scope='" + scope + '\''
-            + '}';
+        return "OAuthProblemException{" +
+                "error='" + error + '\'' +
+                ", description='" + description + '\'' +
+                ", uri='" + uri + '\'' +
+                ", state='" + state + '\'' +
+                ", scope='" + scope + '\'' +
+                ", redirectUri='" + redirectUri + '\'' +
+                ", responseStatus=" + responseStatus +
+                ", parameters=" + parameters +
+                '}';
     }
 }
