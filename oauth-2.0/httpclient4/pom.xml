@@ -19,18 +19,18 @@
 
   <parent>
     <groupId>org.apache.oltu.oauth2</groupId>
-    <artifactId>oltu-oauth2-parent</artifactId>
+    <artifactId>org.apache.oltu.oauth2.parent</artifactId>
      <version>0.31-SNAPSHOT</version>
   </parent>
 
-  <artifactId>oltu-oauth2-httpclient4</artifactId>
+  <artifactId>org.apache.oltu.oauth2.httpclient4</artifactId>
 
   <name>Apache Oltu: OAuth 2.0 Implementation - HttpClient</name>
 
   <dependencies>
     <dependency>
       <groupId>org.apache.oltu.oauth2</groupId>
-      <artifactId>oltu-oauth2-client</artifactId>
+      <artifactId>org.apache.oltu.oauth2.client</artifactId>
       <version>${project.version}</version>
     </dependency>
 

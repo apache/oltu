@@ -20,54 +20,54 @@
 
   <parent>
     <groupId>org.apache.oltu.oauth2</groupId>
-    <artifactId>oltu-oauth2-parent</artifactId>
+    <artifactId>org.apache.oltu.oauth2.parent</artifactId>
     <version>0.31-SNAPSHOT</version>
   </parent>
 
   <name>Apache Oltu: OAuth 2.0 Implementation - Integration Tests</name>
 
-  <artifactId>oltu-oauth2-integration-tests</artifactId>
+  <artifactId>org.apache.oltu.oauth2.integration-tests</artifactId>
 
   <dependencies>
     <dependency>
       <groupId>org.apache.oltu.oauth2</groupId>
-      <artifactId>oltu-oauth2-common</artifactId>
+      <artifactId>org.apache.oltu.oauth2.common</artifactId>
       <version>${project.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.apache.oltu.oauth2</groupId>
-      <artifactId>oltu-oauth2-client</artifactId>
+      <artifactId>org.apache.oltu.oauth2.client</artifactId>
       <version>${project.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.apache.oltu.oauth2</groupId>
-      <artifactId>oltu-oauth2-authzserver</artifactId>
+      <artifactId>org.apache.oltu.oauth2.authzserver</artifactId>
       <version>${project.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.apache.oltu.oauth2</groupId>
-      <artifactId>oltu-oauth2-httpclient4</artifactId>
+      <artifactId>org.apache.oltu.oauth2.httpclient4</artifactId>
       <version>${project.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.apache.oltu.oauth2</groupId>
-      <artifactId>oltu-oauth2-resourceserver</artifactId>
+      <artifactId>org.apache.oltu.oauth2.resourceserver</artifactId>
       <version>${project.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.apache.oltu.oauth2</groupId>
-      <artifactId>oltu-oauth2-dynamicreg-client</artifactId>
+      <artifactId>org.apache.oltu.oauth2.dynamicreg-client</artifactId>
       <version>${project.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.apache.oltu.oauth2</groupId>
-      <artifactId>oltu-oauth2-dynamicreg-server</artifactId>
+      <artifactId>org.apache.oltu.oauth2.dynamicreg-server</artifactId>
       <version>${project.version}</version>
     </dependency>
 
