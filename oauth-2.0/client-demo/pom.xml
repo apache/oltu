@@ -43,17 +43,23 @@
       <version>${project.version}</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.apache.oltu.oauth2</groupId>
+      <artifactId>org.apache.oltu.oauth2.client</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
     <!-- OAuth Dynamic Registration Dependency -->
 
     <dependency>
-      <artifactId>org.apache.oltu.oauth2.dynamicreg-common</artifactId>
       <groupId>org.apache.oltu.oauth2</groupId>
+      <artifactId>org.apache.oltu.oauth2.dynamicreg.client</artifactId>
       <version>${project.version}</version>
     </dependency>
 
     <dependency>
-      <artifactId>org.apache.oltu.oauth2.dynamicreg-client</artifactId>
       <groupId>org.apache.oltu.oauth2</groupId>
+      <artifactId>org.apache.oltu.oauth2.dynamicreg.common</artifactId>
       <version>${project.version}</version>
     </dependency>
 

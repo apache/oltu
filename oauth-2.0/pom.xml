@@ -22,6 +22,7 @@
     <groupId>org.apache.oltu</groupId>
     <artifactId>org.apache.oltu.parent</artifactId>
     <version>1-SNAPSHOT</version>
+    <relativePath>../parent</relativePath>
   </parent>
 
   <groupId>org.apache.oltu.oauth2</groupId>
@@ -35,7 +36,6 @@
     <module>common</module>
     <module>client</module>
     <module>httpclient4</module>
-    <module>client-demo</module>
     <module>dynamicreg-client</module>
     <module>dynamicreg-common</module>
     <module>authzserver</module>
@@ -43,6 +43,7 @@
     <module>resourceserver-filter</module>
     <module>dynamicreg-server</module>
     <module>test-utils</module>
+    <module>client-demo</module>
     <module>integration-tests</module>
   </modules>
 
@@ -56,12 +57,13 @@
        <sendOnFailure>true</sendOnFailure>
        <sendOnSuccess>false</sendOnSuccess>
        <sendOnWarning>false</sendOnWarning>
-       <configuration><address>dev@oltu.apache.org</address></configuration> 
+       <configuration><address>dev@oltu.apache.org</address></configuration>
      </notifier>
    </notifiers>
   </ciManagement>
 
   <properties>
+    <commons-codec.version>1.7</commons-codec.version>
     <cxf.version>2.2.10</cxf.version>
     <org.springframework.version>3.0.3.RELEASE</org.springframework.version>
     <spring-mock.version>2.0.8</spring-mock.version>
