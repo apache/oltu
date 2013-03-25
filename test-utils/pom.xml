@@ -20,11 +20,11 @@
 
   <parent>
     <groupId>org.apache.oltu.oauth2</groupId>
-    <artifactId>oltu-oauth2-parent</artifactId>
+    <artifactId>org.apache.oltu.oauth2.parent</artifactId>
     <version>0.31-SNAPSHOT</version>
   </parent>
 
-  <artifactId>oltu-oauth2-test-utils</artifactId>
+  <artifactId>org.apache.oltu.oauth2.test-utils</artifactId>
 
   <name>Apache Oltu: OAuth 2.0 Implementation - Test Utils</name>
 

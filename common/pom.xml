@@ -20,11 +20,11 @@
 
   <parent>
     <groupId>org.apache.oltu.oauth2</groupId>
-    <artifactId>oltu-oauth2-parent</artifactId>
+    <artifactId>org.apache.oltu.oauth2.parent</artifactId>
     <version>0.31-SNAPSHOT</version>
   </parent>
 
-  <artifactId>oltu-oauth2-common</artifactId>
+  <artifactId>org.apache.oltu.oauth2.common</artifactId>
 
   <name>Apache Oltu: OAuth 2.0 Implementation - Common</name>
   <description>OAuth 2.0 library - Common</description>

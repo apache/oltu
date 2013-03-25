@@ -20,30 +20,30 @@
 
   <parent>
     <groupId>org.apache.oltu.oauth2</groupId>
-    <artifactId>oltu-oauth2-parent</artifactId>
+    <artifactId>org.apache.oltu.oauth2.parent</artifactId>
     <version>0.31-SNAPSHOT</version>
   </parent>
 
-  <artifactId>oltu-oauth2-dynamicreg-server</artifactId>
+  <artifactId>org.apache.oltu.oauth2.dynamicreg-server</artifactId>
 
   <name>Apache Oltu: OAuth 2.0 Implementation - Dynamic Registration Server</name>
 
   <dependencies>
     <dependency>
       <groupId>org.apache.oltu.oauth2</groupId>
-      <artifactId>oltu-oauth2-common</artifactId>
+      <artifactId>org.apache.oltu.oauth2.common</artifactId>
       <version>${project.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.apache.oltu.oauth2</groupId>
-      <artifactId>oltu-oauth2-authzserver</artifactId>
+      <artifactId>org.apache.oltu.oauth2.authzserver</artifactId>
       <version>${project.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.apache.oltu.oauth2</groupId>
-      <artifactId>oltu-oauth2-dynamicreg-common</artifactId>
+      <artifactId>org.apache.oltu.oauth2.dynamicreg-common</artifactId>
       <version>${project.version}</version>
     </dependency>
 
@@ -61,7 +61,7 @@
 
     <dependency>
       <groupId>org.apache.oltu.oauth2</groupId>
-      <artifactId>oltu-oauth2-test-utils</artifactId>
+      <artifactId>org.apache.oltu.oauth2.test-utils</artifactId>
       <version>${project.version}</version>
       <scope>test</scope>
     </dependency>
