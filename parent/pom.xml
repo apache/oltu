@@ -24,6 +24,7 @@
   <packaging>pom</packaging>
 
   <name>Apache Oltu - Parent</name>
+  <description>Apache Oltu is an OAuth protocol implementation in Java.</description>
   <url>https://oltu.apache.org/</url>
   <inceptionYear>2010</inceptionYear>
 
