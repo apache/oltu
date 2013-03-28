@@ -338,7 +338,6 @@
     <site.siteFilePath>${user.home}/oltu-site/</site.siteFilePath>
     <site.deploymentBaseUrl>file://${site.siteFilePath}</site.deploymentBaseUrl>
     <site.scmPubCheckoutDirectory>${user.home}/oltu-site-content/</site.scmPubCheckoutDirectory>
-    <assembly.skip>false</assembly.skip>
     <!--
      | OSGi settings
     -->
@@ -452,19 +451,15 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-assembly-plugin</artifactId>
           <version>2.3</version>
-          <executions>
-            <execution>
-              <id>assembly</id>
-              <phase>package</phase>
-              <goals>
-                <goal>single</goal>
-              </goals>
-            </execution>
-          </executions>
+          <dependencies>
+            <dependency>
+              <groupId>org.codehaus.plexus</groupId>
+              <artifactId>plexus-utils</artifactId>
+              <version>3.0.8</version>
+            </dependency>
+          </dependencies>
           <configuration>
             <attach>true</attach>
-            <appendAssemblyId>false</appendAssemblyId>
-            <skipAssembly>${assembly.skip}</skipAssembly>
             <tarLongFileMode>gnu</tarLongFileMode>
           </configuration>
         </plugin>
@@ -711,8 +706,41 @@
   <profiles>
     <profile>
       <id>release</id>
+
       <build>
         <plugins>
+          <!--
+           | Create a source-release artifact that contains the fully buildable
+           | project directory source structure.
+           | This is the artifact which is the official subject of any release vote.
+          -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <dependencies>
+              <dependency>
+                <groupId>org.apache.apache.resources</groupId>
+                <artifactId>apache-source-release-assembly-descriptor</artifactId>
+                <version>1.0.4</version>
+              </dependency>
+            </dependencies>
+            <executions>
+              <execution>
+                <id>source-release-assembly</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>single</goal>
+                </goals>
+                <configuration>
+                  <runOnlyAtExecutionRoot>true</runOnlyAtExecutionRoot>
+                  <descriptorRefs>
+                    <descriptorRef>${sourceReleaseAssemblyDescriptor}</descriptorRef>
+                  </descriptorRefs>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+
           <plugin>
             <groupId>org.apache.rat</groupId>
             <artifactId>apache-rat-plugin</artifactId>
