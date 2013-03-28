@@ -820,14 +820,6 @@
     <profile>
       <id>site</id>
 
-      <distributionManagement>
-        <site>
-          <id>any23.website</id>
-          <name>Apache Any23 website</name>
-          <url>${site.deploymentBaseUrl}</url>
-        </site>
-      </distributionManagement>
-
       <build>
         <plugins>
           <plugin>
