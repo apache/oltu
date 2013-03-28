@@ -144,12 +144,20 @@
               </descriptors>
             </configuration>
           </execution>
+
+          <execution>
+            <id>release-assembly</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <descriptors>
+                <descriptor>${basedir}/src/main/assembly/bin.xml</descriptor>
+              </descriptors>
+            </configuration>
+          </execution>
         </executions>
-        <configuration>
-          <descriptors>
-            <descriptor>${basedir}/src/main/assembly/bin.xml</descriptor>
-          </descriptors>
-        </configuration>
       </plugin>
 
       <plugin>
