@@ -40,6 +40,10 @@
   <version position="left" />
 
   <body>
+    <head>
+      <link rel="meta" title="DOAP" href="./doap_org.apache.oltu.parent.rdf" type="application/rdf+xml" />
+    </head>
+
     <menu name="${project.name}">
       <item href="./index.html" name="Overview" />
       <item href="https://cwiki.apache.org/confluence/display/OLTU/Documentation" name="Documentation" />
@@ -58,14 +62,6 @@
     <menu ref="reports" />
 
     <menu ref="modules" />
-
-    <menu name="ASF">
-      <item name="How Apache Works" href="http://www.apache.org/foundation/how-it-works.html" />
-      <item name="Foundation" href="http://www.apache.org/foundation/" />
-      <item name="Sponsoring Apache" href="http://www.apache.org/foundation/sponsorship.html" />
-      <item name="Thanks" href="http://www.apache.org/foundation/thanks.html" />
-      <item name="Apache Incubator" href="http://incubator.apache.org/" />
-    </menu>
 
     <footer>
       <div class="row span16">Apache Oltu, Apache, the Apache feather logo, and the Apache Oltu project logos are trademarks of The Apache Software Foundation.
