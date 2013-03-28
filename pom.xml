@@ -105,6 +105,18 @@
     </developer>
 
     <developer>
+      <id>stein</id>
+      <name>Stein Welberg</name>
+      <email>stein@apache.org</email>
+      <organization>Innovation District</organization>
+      <organizationUrl>http://www.innovation-district.com</organizationUrl>
+      <roles>
+        <role>Committer</role>
+      </roles>
+      <timezone>+1</timezone>
+    </developer>
+
+    <developer>
       <id>tommaso</id>
       <name>Tommaso Teofili</name>
       <email>tommaso@apache.org</email>
@@ -114,6 +126,8 @@
       </roles>
       <timezone>+1</timezone>
     </developer>
+
+    <!-- EMERITUS members -->
 
     <developer>
       <id>brianm</id>
@@ -221,18 +235,6 @@
         <role>PMC Member</role>
         <role>Committer</role>
         <role>Emeritus</role> 
-      </roles>
-      <timezone>+1</timezone>
-    </developer>
-
-    <developer>
-      <id>stein</id>
-      <name>Stein Welberg</name>
-      <email>stein@apache.org</email>
-      <organization>Innovation District</organization>
-      <organizationUrl>http://www.innovation-district.com</organizationUrl>
-      <roles>
-        <role>Committer</role>
       </roles>
       <timezone>+1</timezone>
     </developer>
