@@ -96,6 +96,7 @@
       <id>simonetripodi</id>
       <name>Simone Tripodi</name>
       <email>simonetripodi@apache.org</email>
+      <organization>Adobe</organization>
       <roles>
         <role>PMC Member</role>
         <role>Committer</role>
