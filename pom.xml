@@ -310,6 +310,9 @@
      </notifier>
    </notifiers>
   </ciManagement>
+  <distributionManagement>
+    <downloadUrl>http://oltu.apache.org/download.html</downloadUrl>
+  </distributionManagement>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
