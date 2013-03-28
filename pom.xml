@@ -650,7 +650,7 @@
         <configuration>
           <doapFile>doap.rdf</doapFile>
           <doapOptions>
-            <created>${project.inceptionYear}</created>
+            <created>${project.inceptionYear}-05-09</created>
           </doapOptions>
           <asfExtOptions>
             <charter>${project.description}</charter>
