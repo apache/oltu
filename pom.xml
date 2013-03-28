@@ -120,6 +120,7 @@
       <id>tommaso</id>
       <name>Tommaso Teofili</name>
       <email>tommaso@apache.org</email>
+      <organization>Adobe</organization>
       <roles>
         <role>PMC Member</role>
         <role>Committer</role>
