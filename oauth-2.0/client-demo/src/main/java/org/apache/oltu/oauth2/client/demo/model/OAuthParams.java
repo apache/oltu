@@ -44,6 +44,7 @@ public class OAuthParams {
     private String application;
     private String requestType;
     private String requestMethod;
+    private String idToken;
 
     private String errorMessage;
 
@@ -178,4 +179,13 @@ public class OAuthParams {
 	public void setRequestMethod(String requestMethod) {
 		this.requestMethod = requestMethod;
 	}
+	
+	public String getIdToken() {
+		return idToken;
+	}
+
+	public void setIdToken(String idToken) {
+		this.idToken = idToken;
+	}
+	
 }

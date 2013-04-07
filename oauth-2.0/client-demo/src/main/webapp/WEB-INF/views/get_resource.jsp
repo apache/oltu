@@ -110,5 +110,15 @@
         </tr>
     </table>
 </form:form>
+<form:form commandName="oauthParams" action="/get_resource">
+ 	<table>
+		<h4>OpenId Connect</h4></p>
+		<tr>
+            <td>ID Token:</td>
+            <td><form:input size="70" path="idToken" readonly="true"/></td>
+        </tr>
+	</table>
+</form:form>
+	
 </body>
 </html>
