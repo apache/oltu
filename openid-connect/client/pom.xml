@@ -7,7 +7,7 @@
   (the "License"); you may not use this file except in compliance with
   the License.  You may obtain a copy of the License at
 
-     http://www.apache.org/licenses/LICENSE-2.0
+   http://www.apache.org/licenses/LICENSE-2.0
 
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,42 +19,44 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.apache.oltu</groupId>
-    <artifactId>org.apache.oltu.parent</artifactId>
-    <version>1-SNAPSHOT</version>
-    <relativePath>../parent</relativePath>
+    <groupId>org.apache.oltu.openidconnect</groupId>
+    <artifactId>org.apache.oltu.openidconnect.parent</artifactId>
+    <version>0.1-SNAPSHOT</version>
   </parent>
 
-  <groupId>org.apache.oltu.openidconnect</groupId>
-  <artifactId>org.apache.oltu.openidconnect.parent</artifactId>
-  <version>0.1-SNAPSHOT</version>
-  <packaging>pom</packaging>
+  <artifactId>org.apache.oltu.openidconnect.client</artifactId>
 
-  <name>Apache Oltu - OpenId Connect - Parent</name>
-
-  <modules>
-    <module>common</module>
-    <module>client</module>
-  </modules>
-
-  <ciManagement>
-    <system>Jenkins</system>
-    <url>https://builds.apache.org/job/Oltu-OAuth-2.0/</url>
-    <notifiers>
-     <notifier>
-       <type>mail</type>
-       <sendOnError>true</sendOnError>
-       <sendOnFailure>true</sendOnFailure>
-       <sendOnSuccess>false</sendOnSuccess>
-       <sendOnWarning>false</sendOnWarning>
-       <configuration><address>dev@oltu.apache.org</address></configuration>
-     </notifier>
-   </notifiers>
-  </ciManagement>
-
-  <properties>
-  </properties>
+  <name>Apache Oltu -  OpenId Connect - Client</name>
+  <description> OpenId Connect library - Client</description>
 
   <dependencies>
+  	<dependency>
+      <groupId>org.apache.oltu.oauth2</groupId>
+      <artifactId>org.apache.oltu.oauth2.client</artifactId>
+      <version>0.31-SNAPSHOT</version>
+   </dependency>
+   <dependency>
+      <groupId>org.apache.oltu.openidconnect</groupId>
+      <artifactId>org.apache.oltu.openidconnect.common</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  
   </dependencies>
+
+  <build>
+    <resources>
+      <resource>
+        <directory>${basedir}../../</directory>
+        <targetPath>META-INF</targetPath>
+        <includes>
+          <include>LICENSE</include>
+          <include>NOTICE</include>
+        </includes>
+      </resource>
+    </resources>
+
+    <plugins>
+    </plugins>
+  </build>
+
 </project>
