@@ -37,6 +37,7 @@ import org.apache.oltu.oauth2.client.response.OAuthJSONAccessTokenResponse;
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 import org.apache.oltu.oauth2.common.message.types.GrantType;
+import org.apache.oltu.openidconnect.client.response.OpenIdConnectResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -79,6 +80,8 @@ public class TokenController {
                 cl = GitHubTokenResponse.class;
             } else if (Utils.GITHUB.equals(app)) {
                 cl = GitHubTokenResponse.class;
+            }else if (Utils.GOOGLE.equals(app)){
+            	cl = OpenIdConnectResponse.class;
             }
 
             oauthResponse = client.accessToken(request, cl);
@@ -86,6 +89,10 @@ public class TokenController {
             oauthParams.setAccessToken(oauthResponse.getAccessToken());
             oauthParams.setExpiresIn(oauthResponse.getExpiresIn());
             oauthParams.setRefreshToken(Utils.isIssued(oauthResponse.getRefreshToken()));
+            
+            if (Utils.GOOGLE.equals(app)){
+            	oauthParams.setIdToken(((OpenIdConnectResponse)oauthResponse).getIdToken());
+            }
 
             return new ModelAndView("get_resource");
 
