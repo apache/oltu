@@ -595,7 +595,7 @@
             <Import-Package>${osgi.import}</Import-Package>
             <DynamicImport-Package>${osgi.dynamicImport}</DynamicImport-Package>
             <Bundle-DocURL>${project.url}</Bundle-DocURL>
-            <Bundle-RequiredExecutionEnvironment>J2SE-${javac.target.version}</Bundle-RequiredExecutionEnvironment>
+            <!-- Bundle-RequiredExecutionEnvironment>J2SE-${javac.target.version}</Bundle-RequiredExecutionEnvironment-->
             <Bundle-Activator>${osgi.activator}</Bundle-Activator>
           </instructions>
         </configuration>
