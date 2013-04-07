@@ -48,6 +48,19 @@
       <artifactId>org.apache.oltu.oauth2.client</artifactId>
       <version>${project.version}</version>
     </dependency>
+    
+    <!-- OpenId Connect Dependency -->
+    <dependency>
+      <groupId>org.apache.oltu.openidconnect</groupId>
+      <artifactId>org.apache.oltu.openidconnect.common</artifactId>
+      <version>0.1-SNAPSHOT</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.apache.oltu.openidconnect</groupId>
+      <artifactId>org.apache.oltu.openidconnect.client</artifactId>
+      <version>0.1-SNAPSHOT</version>
+    </dependency>
 
     <!-- OAuth Dynamic Registration Dependency -->
 
