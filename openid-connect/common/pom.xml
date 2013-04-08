@@ -26,8 +26,8 @@
 
   <artifactId>org.apache.oltu.openidconnect.common</artifactId>
 
-  <name>Apache Oltu -  OpenId Connect - Common</name>
-  <description> OpenId Connect library - Common</description>
+  <name>Apache Oltu - OpenId Connect - Common</name>
+  <description>OpenId Connect library - Common</description>
 
   <build>
     <resources>
