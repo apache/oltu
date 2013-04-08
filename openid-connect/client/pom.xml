@@ -54,9 +54,6 @@
         </includes>
       </resource>
     </resources>
-
-    <plugins>
-    </plugins>
   </build>
 
 </project>
