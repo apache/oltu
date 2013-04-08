@@ -29,9 +29,6 @@
   <name>Apache Oltu -  OpenId Connect - Common</name>
   <description> OpenId Connect library - Common</description>
 
-  <dependencies>
-  </dependencies>
-
   <build>
     <resources>
       <resource>
@@ -43,9 +40,6 @@
         </includes>
       </resource>
     </resources>
-
-    <plugins>
-    </plugins>
   </build>
 
 </project>
