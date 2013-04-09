@@ -19,15 +19,22 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.apache.oltu.oauth2</groupId>
-    <artifactId>org.apache.oltu.oauth2.parent</artifactId>
-    <version>0.31-SNAPSHOT</version>
+    <groupId>org.apache.oltu.demos</groupId>
+    <artifactId>org.apache.oltu.demos.parent</artifactId>
+    <version>1-SNAPSHOT</version>
   </parent>
 
-  <artifactId>org.apache.oltu.oauth2.client-demo</artifactId>
+  <artifactId>org.apache.oltu.demos.client</artifactId>
   <packaging>war</packaging>
 
-  <name>Apache Oltu - OAuth 2.0 - Demo Application</name>
+  <name>Apache Oltu - Demos - Client</name>
+
+  <properties>
+    <oltu.oauth2.version>0.31-SNAPSHOT</oltu.oauth2.version>
+    <oltu.oidc.version>0.1-SNAPSHOT</oltu.oidc.version>
+    <org.springframework.version>3.0.3.RELEASE</org.springframework.version>
+    <servlet-api.version>2.5</servlet-api.version>
+  </properties>
 
   <dependencies>
     <dependency>
@@ -40,26 +47,26 @@
     <dependency>
       <artifactId>org.apache.oltu.oauth2.common</artifactId>
       <groupId>org.apache.oltu.oauth2</groupId>
-      <version>${project.version}</version>
+      <version>${oltu.oauth2.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.apache.oltu.oauth2</groupId>
       <artifactId>org.apache.oltu.oauth2.client</artifactId>
-      <version>${project.version}</version>
+      <version>${oltu.oauth2.version}</version>
     </dependency>
 
     <!-- OpenId Connect Dependency -->
     <dependency>
       <groupId>org.apache.oltu.openidconnect</groupId>
       <artifactId>org.apache.oltu.openidconnect.common</artifactId>
-      <version>0.1-SNAPSHOT</version>
+      <version>${oltu.oidc.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.apache.oltu.openidconnect</groupId>
       <artifactId>org.apache.oltu.openidconnect.client</artifactId>
-      <version>0.1-SNAPSHOT</version>
+      <version>${oltu.oidc.version}</version>
     </dependency>
 
     <!-- OAuth Dynamic Registration Dependency -->
@@ -67,13 +74,13 @@
     <dependency>
       <groupId>org.apache.oltu.oauth2</groupId>
       <artifactId>org.apache.oltu.oauth2.dynamicreg.client</artifactId>
-      <version>${project.version}</version>
+      <version>${oltu.oauth2.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.apache.oltu.oauth2</groupId>
       <artifactId>org.apache.oltu.oauth2.dynamicreg.common</artifactId>
-      <version>${project.version}</version>
+      <version>${oltu.oauth2.version}</version>
     </dependency>
 
     <!-- Spring MVC -->
@@ -104,6 +111,13 @@
       <artifactId>urlrewritefilter</artifactId>
       <version>3.1.0</version>
       <scope>runtime</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>${servlet-api.version}</version>
+      <scope>provided</scope>
     </dependency>
 
     <!--
