@@ -43,7 +43,6 @@
     <module>resourceserver-filter</module>
     <module>dynamicreg-server</module>
     <module>test-utils</module>
-    <module>client-demo</module>
     <module>integration-tests</module>
      <module>jwt</module>
   </modules>
