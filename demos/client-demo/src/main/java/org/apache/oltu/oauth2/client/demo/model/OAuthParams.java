@@ -45,6 +45,8 @@ public class OAuthParams {
     private String requestType;
     private String requestMethod;
     private String idToken;
+    private String header;
+    private String claimsSet;
 
     private String errorMessage;
 
@@ -187,5 +189,20 @@ public class OAuthParams {
 	public void setIdToken(String idToken) {
 		this.idToken = idToken;
 	}
-	
+
+	public String getHeader() {
+		return header;
+	}
+
+	public void setHeader(String header) {
+		this.header = header;
+	}
+
+	public String getClaimsSet() {
+		return claimsSet;
+	}
+
+	public void setClaimsSet(String claimsSet) {
+		this.claimsSet = claimsSet;
+	}
 }

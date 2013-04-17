@@ -117,6 +117,14 @@
             <td>ID Token:</td>
             <td><form:input size="70" path="idToken" readonly="true"/></td>
         </tr>
+        <tr>
+            <td>Header:</td>
+            <td><textarea rows="15" cols="80" disabled="true">${oauthParams.header}</textarea></td>
+        </tr>
+        <tr>
+            <td>Claims Set:</td>
+            <td><textarea rows="15" cols="80" disabled="true">${oauthParams.claimsSet}</textarea></td>
+        </tr>
 	</table>
 </form:form>
 	

@@ -37,6 +37,7 @@ import org.apache.oltu.oauth2.client.response.OAuthJSONAccessTokenResponse;
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 import org.apache.oltu.oauth2.common.message.types.GrantType;
+import org.apache.oltu.oauth2.jwt.JWTUtil;
 import org.apache.oltu.openidconnect.client.response.OpenIdConnectResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -91,7 +92,12 @@ public class TokenController {
             oauthParams.setRefreshToken(Utils.isIssued(oauthResponse.getRefreshToken()));
             
             if (Utils.GOOGLE.equals(app)){
-            	oauthParams.setIdToken(((OpenIdConnectResponse)oauthResponse).getIdToken());
+            	String idToken = ((OpenIdConnectResponse)oauthResponse).getIdToken();
+            	
+            	oauthParams.setIdToken(idToken);
+            	oauthParams.setHeader(JWTUtil.getHeader(idToken));
+            	oauthParams.setClaimsSet(JWTUtil.getClaimsSet(idToken));
+            	
             }
 
             return new ModelAndView("get_resource");
