@@ -47,6 +47,7 @@ public class OAuthParams {
     private String idToken;
     private String header;
     private String claimsSet;
+    private String jwt;
 
     private String errorMessage;
 
@@ -204,5 +205,13 @@ public class OAuthParams {
 
 	public void setClaimsSet(String claimsSet) {
 		this.claimsSet = claimsSet;
+	}
+
+	public String getJwt() {
+		return jwt;
+	}
+
+	public void setJwt(String jwt) {
+		this.jwt = jwt;
 	}
 }

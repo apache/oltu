@@ -45,5 +45,37 @@
 <a href="/main/github">Github</a>
 <a href="/main/gowalla">Gowalla</a>
 
+
+<h2>JWT decoder</h2>
+
+<c:if test="${!empty oauthParams.errorMessage}">
+    <p><font color="red">${oauthParams.errorMessage}</font></p>
+</c:if>
+
+<form:form commandName="oauthParams" action="/decode">
+	<table>
+		
+		<tr>
+            <td>JWT</td>
+            <td><form:input size="170" path="jwt" /></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <form:hidden path="application"/>
+                <input type="submit" value="Decode"/>
+            </td>
+        </tr>
+        <tr>
+            <td>Header:</td>
+            <td><textarea rows="15" cols="80" disabled="true">${oauthParams.header}</textarea></td>
+        </tr>
+        <tr>
+            <td>Claims Set:</td>
+            <td><textarea rows="15" cols="80" disabled="true">${oauthParams.claimsSet}</textarea></td>
+        </tr>
+  	</table>
+</form:form>
+
+
 </body>
 </html>

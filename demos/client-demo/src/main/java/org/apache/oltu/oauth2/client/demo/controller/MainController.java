@@ -30,6 +30,7 @@ import org.apache.oltu.oauth2.client.demo.Utils;
 import org.apache.oltu.oauth2.client.demo.model.OAuthParams;
 import org.apache.oltu.oauth2.client.demo.model.OAuthRegParams;
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
+import org.apache.oltu.oauth2.jwt.JWTUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -98,4 +99,23 @@ public class MainController {
 
         return new ModelAndView("index");
     }
+    
+    @RequestMapping("/decode")
+    public ModelAndView decode(@ModelAttribute("oauthParams") OAuthParams oauthParams){
+    	
+    	try{
+    	
+    		String jwt = oauthParams.getJwt();
+     	
+    		oauthParams.setHeader(JWTUtil.getHeader(jwt));
+    		oauthParams.setClaimsSet(JWTUtil.getClaimsSet(jwt));
+    	} catch (Exception e){
+    		oauthParams.setErrorMessage(
+                    "Error while decoding the token: " + e);
+    	}
+    	
+    	return new ModelAndView("index");
+	}
+    
+    
 }
