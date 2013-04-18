@@ -67,6 +67,7 @@ public class RedirectController {
             String tokenEndpoint = Utils.findCookieValue(request, "tokenEndpoint");
             String redirectUri = Utils.findCookieValue(request, "redirectUri");
             String scope = Utils.findCookieValue(request, "scope");
+            String state = Utils.findCookieValue(request, "state");
 
             String app = Utils.findCookieValue(request, "app");
             response.addCookie(new Cookie("app", app));
@@ -78,6 +79,7 @@ public class RedirectController {
             oauthParams.setTokenEndpoint(tokenEndpoint);
             oauthParams.setRedirectUri(redirectUri);
             oauthParams.setScope(Utils.isIssued(scope));
+            oauthParams.setState(Utils.isIssued(state));
             oauthParams.setApplication(app);
 
 

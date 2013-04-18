@@ -43,7 +43,7 @@
 <a href="/main/facebook">Facebook</a>
 <a href="/main/google">Google</a>
 <a href="/main/github">Github</a>
-<a href="/main/gowalla">Gowalla</a>
+<a href="/main/linkedin">LinkedIn</a>
 
 
 <h2>JWT decoder</h2>

@@ -78,10 +78,10 @@ public class MainController {
                 selected = true;
                 oauthParams.setAuthzEndpoint(Utils.GOOGLE_AUTHZ);
                 oauthParams.setTokenEndpoint(Utils.GOOGLE_TOKEN);
-        } else if (Utils.GOWALLA.equals(app)) {
+        } else if (Utils.LINKEDIN.equals(app)) {
             selected = true;
-            oauthParams.setAuthzEndpoint(Utils.GOWALLA_AUTHZ);
-            oauthParams.setTokenEndpoint(Utils.GOWALLA_TOKEN);
+            oauthParams.setAuthzEndpoint(Utils.LINKEDIN_AUTHZ);
+            oauthParams.setTokenEndpoint(Utils.LINKEDIN_TOKEN);
         } else if (Utils.SMART_GALLERY.equals(app)) {
             selected = true;
             oauthRegParams.setAuthzEndpoint(Utils.SMART_GALLERY_AUTHZ);

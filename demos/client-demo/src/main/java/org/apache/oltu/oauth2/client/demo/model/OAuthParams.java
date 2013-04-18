@@ -39,6 +39,7 @@ public class OAuthParams {
     private Long expiresIn;
     private String refreshToken;
     private String scope;
+    private String state;
     private String resourceUrl;
     private String resource;
     private String application;
@@ -158,6 +159,14 @@ public class OAuthParams {
     public void setScope(String scope) {
         this.scope = scope;
     }
+    
+    public String getState() {
+		return state;
+	}
+    
+    public void setState(String state) {
+		this.state = state;
+	}
 
     public String getApplication() {
         return application;

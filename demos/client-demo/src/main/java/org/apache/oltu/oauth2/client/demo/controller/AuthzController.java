@@ -69,6 +69,7 @@ public class AuthzController {
             res.addCookie(new Cookie("tokenEndpoint", oauthParams.getTokenEndpoint()));
             res.addCookie(new Cookie("redirectUri", oauthParams.getRedirectUri()));
             res.addCookie(new Cookie("scope", oauthParams.getScope()));
+            res.addCookie(new Cookie("state", oauthParams.getState()));
             res.addCookie(new Cookie("app", oauthParams.getApplication()));
 
             OAuthClientRequest request = OAuthClientRequest
@@ -77,6 +78,7 @@ public class AuthzController {
                 .setRedirectURI(oauthParams.getRedirectUri())
                 .setResponseType(ResponseType.CODE.toString())
                 .setScope(oauthParams.getScope())
+                .setState(oauthParams.getState())
                 .buildQueryMessage();
 
             return new ModelAndView(new RedirectView(request.getLocationUri()));

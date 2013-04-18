@@ -57,9 +57,9 @@ public final class Utils {
     public static final String GOOGLE_AUTHZ = "https://accounts.google.com/o/oauth2/auth";
     public static final String GOOGLE_TOKEN = "https://accounts.google.com/o/oauth2/token";
 
-    public static final String GOWALLA = "gowalla";
-    public static final String GOWALLA_AUTHZ = "https://gowalla.com/api/oauth/authorize";
-    public static final String GOWALLA_TOKEN = "https://gowalla.com/api/oauth/access_token";
+    public static final String LINKEDIN = "linkedin";
+    public static final String LINKEDIN_AUTHZ = "https://www.linkedin.com/uas/oauth2/authorization";
+    public static final String LINKEDIN_TOKEN = "https://www.linkedin.com/uas/oauth2/accessToken";
 
     public static final String GITHUB = "github";
     public static final String GITHUB_AUTHZ = "https://github.com/login/oauth/authorize";

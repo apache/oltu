@@ -72,6 +72,10 @@
             <td><form:input size="70" path="redirectUri"/></td>
         </tr>
         <tr>
+            <td>Client State:</td>
+            <td><form:input size="70" path="state"/></td>
+        </tr>
+        <tr>
             <td colspan="2">
                 <form:hidden path="application"/>
                 <input type="submit" value="Get Authorization"/>
