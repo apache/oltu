@@ -31,6 +31,7 @@ import org.apache.oltu.oauth2.client.OAuthClient;
 import org.apache.oltu.oauth2.client.URLConnectionClient;
 import org.apache.oltu.oauth2.client.request.OAuthClientRequest;
 import org.apache.oltu.oauth2.client.response.GitHubTokenResponse;
+import org.apache.oltu.oauth2.common.OAuthProviderType;
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 import org.apache.oltu.oauth2.common.message.types.GrantType;
@@ -49,7 +50,7 @@ public class OAuthClientTest {
 
         try {
             OAuthClientRequest request = OAuthClientRequest
-                .authorizationLocation("https://graph.facebook.com/oauth/authorize")
+                .authorizationProvider(OAuthProviderType.FACEBOOK)
                 .setClientId("131804060198305")
                 .setRedirectURI("http://localhost:8080/")
                 .buildQueryMessage();
@@ -62,7 +63,7 @@ public class OAuthClientTest {
             String code = br.readLine();
 
             request = OAuthClientRequest
-                .tokenLocation("https://graph.facebook.com/oauth/access_token")
+            	.tokenProvider(OAuthProviderType.FACEBOOK)
                 .setGrantType(GrantType.AUTHORIZATION_CODE)
                 .setClientId("131804060198305")
                 .setClientSecret("3acb294b071c9aec86d60ae3daf32a93")

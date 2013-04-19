@@ -65,20 +65,20 @@ public class MainController {
         boolean selected = false;
         if (Utils.GENERIC.equals(app)) {
             selected = true;
-        }else if (Utils.GITHUB.equals(app)) {
+        }else if (Utils.GITHUB.equalsIgnoreCase(app)) {
             selected = true;
             oauthParams.setAuthzEndpoint(Utils.GITHUB_AUTHZ);
             oauthParams.setTokenEndpoint(Utils.GITHUB_TOKEN);
 
-        } else if (Utils.FACEBOOK.equals(app)) {
+        } else if (Utils.FACEBOOK.equalsIgnoreCase(app)) {
             selected = true;
             oauthParams.setAuthzEndpoint(Utils.FACEBOOK_AUTHZ);
             oauthParams.setTokenEndpoint(Utils.FACEBOOK_TOKEN);
-        }else if (Utils.GOOGLE.equals(app)) {
+        }else if (Utils.GOOGLE.equalsIgnoreCase(app)) {
                 selected = true;
                 oauthParams.setAuthzEndpoint(Utils.GOOGLE_AUTHZ);
                 oauthParams.setTokenEndpoint(Utils.GOOGLE_TOKEN);
-        } else if (Utils.LINKEDIN.equals(app)) {
+        } else if (Utils.LINKEDIN.equalsIgnoreCase(app)) {
             selected = true;
             oauthParams.setAuthzEndpoint(Utils.LINKEDIN_AUTHZ);
             oauthParams.setTokenEndpoint(Utils.LINKEDIN_TOKEN);

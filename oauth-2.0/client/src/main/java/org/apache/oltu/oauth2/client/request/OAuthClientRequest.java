@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.oltu.oauth2.common.OAuth;
+import org.apache.oltu.oauth2.common.OAuthProviderType;
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 import org.apache.oltu.oauth2.common.message.OAuthMessage;
 import org.apache.oltu.oauth2.common.message.types.GrantType;
@@ -55,10 +56,18 @@ public class OAuthClientRequest implements OAuthMessage {
         return new AuthenticationRequestBuilder(url);
     }
 
+    public static AuthenticationRequestBuilder authorizationProvider(OAuthProviderType provider) {
+        return authorizationLocation(provider.getAuthzEndpoint());
+    }
+
     public static TokenRequestBuilder tokenLocation(String url) {
         return new TokenRequestBuilder(url);
     }
 
+    public static TokenRequestBuilder tokenProvider(OAuthProviderType provider) {
+        return tokenLocation(provider.getTokenEndpoint());
+    }    
+    
     public String getBody() {
         return body;
     }

@@ -27,6 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.oltu.oauth2.client.demo.exception.ApplicationException;
 import org.apache.oltu.oauth2.client.demo.model.OAuthParams;
 import org.apache.oltu.oauth2.client.demo.model.OAuthRegParams;
+import org.apache.oltu.oauth2.common.OAuthProviderType;
 
 /**
  *
@@ -49,21 +50,21 @@ public final class Utils {
 
     public static final String GENERIC = "generic"; 
     
-    public static final String FACEBOOK = "facebook";
-    public static final String FACEBOOK_AUTHZ = "https://graph.facebook.com/oauth/authorize";
-    public static final String FACEBOOK_TOKEN = "https://graph.facebook.com/oauth/access_token";
+    public static final String FACEBOOK = OAuthProviderType.FACEBOOK.getProviderName();
+    public static final String FACEBOOK_AUTHZ = OAuthProviderType.FACEBOOK.getAuthzEndpoint();
+    public static final String FACEBOOK_TOKEN = OAuthProviderType.FACEBOOK.getTokenEndpoint();
     
-    public static final String GOOGLE = "google";
-    public static final String GOOGLE_AUTHZ = "https://accounts.google.com/o/oauth2/auth";
-    public static final String GOOGLE_TOKEN = "https://accounts.google.com/o/oauth2/token";
+    public static final String GOOGLE = OAuthProviderType.GOOGLE.getProviderName();
+    public static final String GOOGLE_AUTHZ = OAuthProviderType.GOOGLE.getAuthzEndpoint();
+    public static final String GOOGLE_TOKEN = OAuthProviderType.GOOGLE.getTokenEndpoint();
 
-    public static final String LINKEDIN = "linkedin";
-    public static final String LINKEDIN_AUTHZ = "https://www.linkedin.com/uas/oauth2/authorization";
-    public static final String LINKEDIN_TOKEN = "https://www.linkedin.com/uas/oauth2/accessToken";
+    public static final String LINKEDIN = OAuthProviderType.LINKEDIN.getProviderName();
+    public static final String LINKEDIN_AUTHZ = OAuthProviderType.LINKEDIN.getAuthzEndpoint();
+    public static final String LINKEDIN_TOKEN = OAuthProviderType.LINKEDIN.getTokenEndpoint();
 
-    public static final String GITHUB = "github";
-    public static final String GITHUB_AUTHZ = "https://github.com/login/oauth/authorize";
-    public static final String GITHUB_TOKEN = "https://github.com/login/oauth/access_token";
+    public static final String GITHUB = OAuthProviderType.GITHUB.getProviderName();
+    public static final String GITHUB_AUTHZ = OAuthProviderType.GITHUB.getAuthzEndpoint();
+    public static final String GITHUB_TOKEN = OAuthProviderType.GITHUB.getTokenEndpoint();
 
     public static final String SMART_GALLERY = "smart_gallery";
     public static final String SMART_GALLERY_AUTHZ = "http://localhost:8090/oauth/authorize";
