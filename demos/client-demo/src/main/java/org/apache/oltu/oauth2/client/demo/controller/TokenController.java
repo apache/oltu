@@ -77,11 +77,11 @@ public class TokenController {
             OAuthAccessTokenResponse oauthResponse = null;
             Class<? extends OAuthAccessTokenResponse> cl = OAuthJSONAccessTokenResponse.class;
 
-            if (Utils.FACEBOOK.equals(app)) {
+            if (Utils.FACEBOOK.equalsIgnoreCase(app)) {
                 cl = GitHubTokenResponse.class;
-            } else if (Utils.GITHUB.equals(app)) {
+            } else if (Utils.GITHUB.equalsIgnoreCase(app)) {
                 cl = GitHubTokenResponse.class;
-            }else if (Utils.GOOGLE.equals(app)){
+            }else if (Utils.GOOGLE.equalsIgnoreCase(app)){
             	cl = OpenIdConnectResponse.class;
             }
 
@@ -91,7 +91,7 @@ public class TokenController {
             oauthParams.setExpiresIn(oauthResponse.getExpiresIn());
             oauthParams.setRefreshToken(Utils.isIssued(oauthResponse.getRefreshToken()));
             
-            if (Utils.GOOGLE.equals(app)){
+            if (Utils.GOOGLE.equalsIgnoreCase(app)){
             	String idToken = ((OpenIdConnectResponse)oauthResponse).getIdToken();
             	
             	oauthParams.setIdToken(idToken);

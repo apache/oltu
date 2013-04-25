@@ -63,7 +63,7 @@ public class MainController {
         throws OAuthSystemException, IOException {
 
         boolean selected = false;
-        if (Utils.GENERIC.equals(app)) {
+        if (Utils.GENERIC.equalsIgnoreCase(app)) {
             selected = true;
         }else if (Utils.GITHUB.equalsIgnoreCase(app)) {
             selected = true;
@@ -82,7 +82,7 @@ public class MainController {
             selected = true;
             oauthParams.setAuthzEndpoint(Utils.LINKEDIN_AUTHZ);
             oauthParams.setTokenEndpoint(Utils.LINKEDIN_TOKEN);
-        } else if (Utils.SMART_GALLERY.equals(app)) {
+        } else if (Utils.SMART_GALLERY.equalsIgnoreCase(app)) {
             selected = true;
             oauthRegParams.setAuthzEndpoint(Utils.SMART_GALLERY_AUTHZ);
             oauthRegParams.setTokenEndpoint(Utils.SMART_GALLERY_TOKEN);
