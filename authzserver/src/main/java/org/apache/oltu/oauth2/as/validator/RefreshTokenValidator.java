@@ -28,7 +28,8 @@ import org.apache.oltu.oauth2.common.OAuth;
 import org.apache.oltu.oauth2.common.validators.AbstractValidator;
 
 /**
- *
+ * Validator that checks for the required fields in an OAuth Token request with the Refresh token grant type.
+ * This validator enforces client authentication either through basic authentication or body parameters.
  *
  *
  */
@@ -36,9 +37,9 @@ public class RefreshTokenValidator extends AbstractValidator<HttpServletRequest>
 
     public RefreshTokenValidator() {
         requiredParams.add(OAuth.OAUTH_GRANT_TYPE);
-        requiredParams.add(OAuth.OAUTH_CLIENT_ID);
         requiredParams.add(OAuth.OAUTH_REFRESH_TOKEN);
-        requiredParams.add(OAuth.OAUTH_CLIENT_SECRET);
+
+        enforceClientAuthentication = true;
     }
 
 }

@@ -48,17 +48,16 @@ public class OAuthAuthzRequest extends OAuthRequest {
         //end user authorization validators
         validators.put(ResponseType.CODE.toString(), CodeValidator.class);
         validators.put(ResponseType.TOKEN.toString(), TokenValidator.class);
-        
-        String requestTypeValue = getParam(OAuth.OAUTH_RESPONSE_TYPE);
+        final String requestTypeValue = getParam(OAuth.OAUTH_RESPONSE_TYPE);
         if (OAuthUtils.isEmpty(requestTypeValue)) {
             throw OAuthUtils.handleOAuthProblemException("Missing response_type parameter value");
         }
-        Class<? extends OAuthValidator<HttpServletRequest>> clazz = validators.get(requestTypeValue);
+        final Class<? extends OAuthValidator<HttpServletRequest>> clazz = validators.get(requestTypeValue);
         if (clazz == null) {
             throw OAuthUtils.handleOAuthProblemException("Invalid response_type parameter value");
         }
-        return OAuthUtils.instantiateClass(clazz);
 
+        return OAuthUtils.instantiateClass(clazz);
     }
 
     public String getState() {

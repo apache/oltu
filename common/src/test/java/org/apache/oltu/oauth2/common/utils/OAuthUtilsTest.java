@@ -28,12 +28,16 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.oltu.oauth2.common.OAuth;
 import org.apache.oltu.oauth2.common.error.OAuthError;
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.apache.oltu.oauth2.common.utils.OAuthUtils;
 import org.junit.Assert;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  *
@@ -49,7 +53,7 @@ public class OAuthUtilsTest {
 
 
         String format = OAuthUtils.format(parameters.entrySet(), "UTF-8");
-        Assert.assertEquals("movie=Kiler&director=Machulski", format);
+        assertEquals("movie=Kiler&director=Machulski", format);
     }
 
     @Test
@@ -57,15 +61,15 @@ public class OAuthUtilsTest {
         String sampleTest = "It is raining again today";
 
         InputStream is = new ByteArrayInputStream(sampleTest.getBytes("UTF-8"));
-        Assert.assertEquals(sampleTest, OAuthUtils.saveStreamAsString(is));
+        assertEquals(sampleTest, OAuthUtils.saveStreamAsString(is));
     }
 
     @Test
     public void testHandleOAuthProblemException() throws Exception {
         OAuthProblemException exception = OAuthUtils.handleOAuthProblemException("missing parameter");
 
-        Assert.assertEquals(OAuthError.TokenResponse.INVALID_REQUEST, exception.getError());
-        Assert.assertEquals("missing parameter", exception.getDescription());
+        assertEquals(OAuthError.TokenResponse.INVALID_REQUEST, exception.getError());
+        assertEquals("missing parameter", exception.getDescription());
     }
 
     @Test
@@ -124,23 +128,23 @@ public class OAuthUtilsTest {
 
     @Test
     public void testEncodeOAuthHeader() throws Exception {
-    	Map<String, Object> parameters = new HashMap<String, Object>();
-    	parameters.put("realm", "example");
-    	
-    	///rfc6750#section-3
-    	String header = OAuthUtils.encodeOAuthHeader(parameters);
-        Assert.assertEquals("Bearer realm=\"example\"", header);
+        Map<String, Object> parameters = new HashMap<String, Object>();
+        parameters.put("realm", "example");
+
+        ///rfc6750#section-3
+        String header = OAuthUtils.encodeOAuthHeader(parameters);
+        assertEquals("Bearer realm=\"example\"", header);
 
     }
-    
+
     @Test
     public void testEncodeAuthorizationBearerHeader() throws Exception {
-    	Map<String, Object> parameters = new HashMap<String, Object>();
-    	parameters.put("accessToken", "mF_9.B5f-4.1JqM");
-    	
-    	//rfc6749#section-7.1
-    	String header = OAuthUtils.encodeAuthorizationBearerHeader(parameters);
-        Assert.assertEquals("Bearer mF_9.B5f-4.1JqM", header);
+        Map<String, Object> parameters = new HashMap<String, Object>();
+        parameters.put("accessToken", "mF_9.B5f-4.1JqM");
+
+        //rfc6749#section-7.1
+        String header = OAuthUtils.encodeAuthorizationBearerHeader(parameters);
+        assertEquals("Bearer mF_9.B5f-4.1JqM", header);
 
     }
 
@@ -192,5 +196,29 @@ public class OAuthUtilsTest {
     @Test
     public void testHasContentType() throws Exception {
 
+    }
+
+    @Test
+    public void testDecodeValidClientAuthnHeader() throws Exception {
+        String header = "clientId:secret";
+        String encodedHeader = "Basic " + new String(Base64.encodeBase64(header.getBytes()));
+        String[] credentials = OAuthUtils.decodeClientAuthenticationHeader(encodedHeader);
+        assertEquals("clientId", credentials[0]);
+        assertEquals("secret", credentials[1]);
+    }
+
+    @Test
+    public void testDecodeInvalidClientAuthnHeader() throws Exception {
+        assertNull(OAuthUtils.decodeClientAuthenticationHeader(null));
+
+        String header = ":secret";
+        String encodedHeader = "Basic " + new String(Base64.encodeBase64(header.getBytes()));
+        assertNull(OAuthUtils.decodeClientAuthenticationHeader(encodedHeader));
+
+        String header2 = "clientId:";
+        String encodedHeader2 = "Basic " + new String(Base64.encodeBase64(header2.getBytes()));
+        assertNull(OAuthUtils.decodeClientAuthenticationHeader(encodedHeader2));
+
+        assertNull(OAuthUtils.decodeClientAuthenticationHeader("Authorization dXNlcm5hbWU6cGFzc3dvcmQ="));
     }
 }

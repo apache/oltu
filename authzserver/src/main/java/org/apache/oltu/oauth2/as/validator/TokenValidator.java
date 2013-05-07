@@ -44,9 +44,9 @@ public class TokenValidator extends AbstractValidator<HttpServletRequest> {
     @Override
     public void validateMethod(HttpServletRequest request) throws OAuthProblemException {
         String method = request.getMethod();
-        if (!method.equals(OAuth.HttpMethod.GET) && !method.equals(OAuth.HttpMethod.POST)) {
+        if (!OAuth.HttpMethod.GET.equals(method) && !OAuth.HttpMethod.POST.equals(method)) {
             throw OAuthProblemException.error(OAuthError.CodeResponse.INVALID_REQUEST)
-                .description("Method not correct.");
+                    .description("Method not correct.");
         }
     }
 
