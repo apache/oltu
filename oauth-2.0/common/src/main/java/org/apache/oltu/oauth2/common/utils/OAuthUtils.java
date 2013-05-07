@@ -42,6 +42,7 @@ import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.oltu.oauth2.common.OAuth;
 import org.apache.oltu.oauth2.common.error.OAuthError;
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
@@ -362,6 +363,40 @@ public final class OAuthUtils {
     }
 
     // todo: implement method to decode header form (with no challenge)
+
+    /**
+     * Decodes the Basic Authentication header into a username and password
+     *
+     * @param authenticationHeader {@link String} containing the encoded header value.
+     *                             e.g. "Basic dXNlcm5hbWU6cGFzc3dvcmQ="
+     * @return a {@link String[]} if the header could be decoded into a non null username and password or null.
+     */
+    public static String[] decodeClientAuthenticationHeader(String authenticationHeader) {
+        if (authenticationHeader == null || "".equals(authenticationHeader)) {
+            return null;
+        }
+        String[] tokens = authenticationHeader.split(" ");
+        if (tokens == null) {
+            return null;
+        }
+        if (tokens[0] != null && !"".equals(tokens[0])) {
+            String authType = tokens[0];
+            if (!authType.equalsIgnoreCase("basic")) {
+                return null;
+            }
+        }
+        if (tokens[1] != null && !"".equals(tokens[1])) {
+            String encodedCreds = tokens[1];
+            String decodedCreds = new String(Base64.decodeBase64(encodedCreds));
+            if (decodedCreds.contains(":") && decodedCreds.split(":").length == 2) {
+                String[] creds = decodedCreds.split(":");
+                if (!OAuthUtils.isEmpty(creds[0]) && !OAuthUtils.isEmpty(creds[1])) {
+                    return decodedCreds.split(":");
+                }
+            }
+        }
+        return null;
+    }
 
     /**
      * Construct a WWW-Authenticate header

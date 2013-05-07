@@ -38,13 +38,12 @@ import org.apache.oltu.oauth2.common.utils.OAuthUtils;
  *
  *
  */
-//todo add client secret in header, sect 2.1
 public abstract class AbstractValidator<T extends HttpServletRequest> implements OAuthValidator<T> {
 
     protected List<String> requiredParams = new ArrayList<String>();
     protected Map<String, String[]> optionalParams = new HashMap<String, String[]>();
     protected List<String> notAllowedParams = new ArrayList<String>();
-
+    protected boolean enforceClientAuthentication;
 
     @Override
     public void validateMethod(T request) throws OAuthProblemException {
@@ -64,7 +63,7 @@ public abstract class AbstractValidator<T extends HttpServletRequest> implements
 
     @Override
     public void validateRequiredParameters(T request) throws OAuthProblemException {
-        Set<String> missingParameters = new HashSet<String>();
+        final Set<String> missingParameters = new HashSet<String>();
         for (String requiredParam : requiredParams) {
             String val = request.getParameter(requiredParam);
             if (OAuthUtils.isEmpty(val)) {
@@ -78,11 +77,10 @@ public abstract class AbstractValidator<T extends HttpServletRequest> implements
 
     @Override
     public void validateOptionalParameters(T request) throws OAuthProblemException {
-
-        Set<String> missingParameters = new HashSet<String>();
+        final Set<String> missingParameters = new HashSet<String>();
 
         for (Map.Entry<String, String[]> requiredParam : optionalParams.entrySet()) {
-            String paramName = requiredParam.getKey();
+            final String paramName = requiredParam.getKey();
             String val = request.getParameter(paramName);
             if (!OAuthUtils.isEmpty(val)) {
                 String[] dependentParams = requiredParam.getValue();
@@ -117,11 +115,36 @@ public abstract class AbstractValidator<T extends HttpServletRequest> implements
     }
 
     @Override
+    public void validateClientAuthenticationCredentials(T request) throws OAuthProblemException {
+        if (enforceClientAuthentication) {
+            Set<String> missingParameters = new HashSet<String>();
+            String clientAuthHeader = request.getHeader(OAuth.HeaderType.AUTHORIZATION);
+            String[] clientCreds = OAuthUtils.decodeClientAuthenticationHeader(clientAuthHeader);
+
+            // Only fallback to params if the auth header is not correct. Don't allow a mix of auth header vs params
+            if (clientCreds == null || OAuthUtils.isEmpty(clientCreds[0]) || OAuthUtils.isEmpty(clientCreds[1])) {
+
+                if (OAuthUtils.isEmpty(request.getParameter(OAuth.OAUTH_CLIENT_ID))) {
+                    missingParameters.add(OAuth.OAUTH_CLIENT_ID);
+                }
+                if (OAuthUtils.isEmpty(request.getParameter(OAuth.OAUTH_CLIENT_SECRET))) {
+                    missingParameters.add(OAuth.OAUTH_CLIENT_SECRET);
+                }
+            }
+
+            if (!missingParameters.isEmpty()) {
+                throw OAuthUtils.handleMissingParameters(missingParameters);
+            }
+        }
+    }
+
+    @Override
     public void performAllValidations(T request) throws OAuthProblemException {
         this.validateContentType(request);
         this.validateMethod(request);
         this.validateRequiredParameters(request);
         this.validateOptionalParameters(request);
         this.validateNotAllowedParameters(request);
+        this.validateClientAuthenticationCredentials(request);
     }
 }

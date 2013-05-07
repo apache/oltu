@@ -36,13 +36,21 @@ import org.apache.oltu.oauth2.common.validators.OAuthValidator;
 
 
 /**
- *
- *
- *
+ * The Default OAuth Authorization Server class that validates whether a given HttpServletRequest is a valid
+ * OAuth Token request.
+ * <p/>
+ * IMPORTANT: This OAuthTokenRequest assumes that a token request requires client authentication.
+ * Please see section 3.2.1 of the OAuth Specification: http://tools.ietf.org/html/rfc6749#section-3.2.1
  */
-public class OAuthTokenRequest extends OAuthRequest {
+public class OAuthTokenRequest extends AbstractOAuthTokenRequest {
 
-
+    /**
+     * Create an OAuth Token request from a given HttpSerlvetRequest
+     *
+     * @param request the httpservletrequest that is validated and transformed into the OAuth Token Request
+     * @throws OAuthSystemException  if an unexpected exception was thrown
+     * @throws OAuthProblemException if the request was not a valid Token request this exception is thrown.
+     */
     public OAuthTokenRequest(HttpServletRequest request) throws OAuthSystemException, OAuthProblemException {
         super(request);
     }
@@ -53,35 +61,6 @@ public class OAuthTokenRequest extends OAuthRequest {
         validators.put(GrantType.CLIENT_CREDENTIALS.toString(), ClientCredentialValidator.class);
         validators.put(GrantType.AUTHORIZATION_CODE.toString(), AuthorizationCodeValidator.class);
         validators.put(GrantType.REFRESH_TOKEN.toString(), RefreshTokenValidator.class);
-        String requestTypeValue = getParam(OAuth.OAUTH_GRANT_TYPE);
-        if (OAuthUtils.isEmpty(requestTypeValue)) {
-            throw OAuthUtils.handleOAuthProblemException("Missing grant_type parameter value");
-        }
-        Class<? extends OAuthValidator<HttpServletRequest>> clazz = validators.get(requestTypeValue);
-        if (clazz == null) {
-            throw OAuthUtils.handleOAuthProblemException("Invalid grant_type parameter value");
-        }
-        return OAuthUtils.instantiateClass(clazz);
+        return super.initValidator();
     }
-
-    public String getPassword() {
-        return getParam(OAuth.OAUTH_PASSWORD);
-    }
-
-    public String getUsername() {
-        return getParam(OAuth.OAUTH_USERNAME);
-    }
-
-    public String getRefreshToken() {
-        return getParam(OAuth.OAUTH_REFRESH_TOKEN);
-    }
-    
-    public String getCode() {
-        return getParam(OAuth.OAUTH_CODE);
-    }
-
-    public String getGrantType() {
-        return getParam(OAuth.OAUTH_GRANT_TYPE);
-    }
-
 }

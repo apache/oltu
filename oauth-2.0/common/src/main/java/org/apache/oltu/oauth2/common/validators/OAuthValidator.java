@@ -42,6 +42,8 @@ public interface OAuthValidator<T extends HttpServletRequest> {
 
     public void validateNotAllowedParameters(T request) throws OAuthProblemException;
 
+    public void validateClientAuthenticationCredentials(T request) throws OAuthProblemException;
+
     public void performAllValidations(T request) throws OAuthProblemException;
 
 }

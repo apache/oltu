@@ -34,11 +34,11 @@ import org.apache.oltu.oauth2.common.validators.AbstractValidator;
 public class PasswordValidator extends AbstractValidator<HttpServletRequest> {
 
     public PasswordValidator() {
-
         requiredParams.add(OAuth.OAUTH_GRANT_TYPE);
-        requiredParams.add(OAuth.OAUTH_CLIENT_ID);
         requiredParams.add(OAuth.OAUTH_USERNAME);
         requiredParams.add(OAuth.OAUTH_PASSWORD);
+
+        enforceClientAuthentication = true;
     }
 
 }

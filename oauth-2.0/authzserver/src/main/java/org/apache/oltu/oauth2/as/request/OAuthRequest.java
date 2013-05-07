@@ -36,9 +36,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
- *
- *
+ * The Abstract OAuth request for the Authorization server.
  */
 public abstract class OAuthRequest {
 
@@ -63,6 +61,7 @@ public abstract class OAuthRequest {
             validator.validateMethod(request);
             validator.validateContentType(request);
             validator.validateRequiredParameters(request);
+            validator.validateClientAuthenticationCredentials(request);
         } catch (OAuthProblemException e) {
             try {
                 String redirectUri = request.getParameter(OAuth.OAUTH_REDIRECT_URI);
@@ -88,6 +87,10 @@ public abstract class OAuthRequest {
     }
 
     public String getClientId() {
+        String[] creds = OAuthUtils.decodeClientAuthenticationHeader(request.getHeader(OAuth.HeaderType.AUTHORIZATION));
+        if (creds != null) {
+            return creds[0];
+        }
         return getParam(OAuth.OAUTH_CLIENT_ID);
     }
 
@@ -96,7 +99,19 @@ public abstract class OAuthRequest {
     }
 
     public String getClientSecret() {
+        String[] creds = OAuthUtils.decodeClientAuthenticationHeader(request.getHeader(OAuth.HeaderType.AUTHORIZATION));
+        if (creds != null) {
+            return creds[1];
+        }
         return getParam(OAuth.OAUTH_CLIENT_SECRET);
+    }
+
+    /**
+     *
+     * @return
+     */
+    public boolean isClientAuthHeaderUsed() {
+        return OAuthUtils.decodeClientAuthenticationHeader(request.getHeader(OAuth.HeaderType.AUTHORIZATION)) != null;
     }
 
     public Set<String> getScopes() {

@@ -26,10 +26,20 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.oltu.oauth2.common.OAuth;
 import org.apache.oltu.oauth2.common.validators.AbstractValidator;
 
-public class ClientCredentialValidator extends AbstractValidator<HttpServletRequest> {
-    public ClientCredentialValidator() {
-        requiredParams.add(OAuth.OAUTH_GRANT_TYPE);
+/**
+ *
+ *
+ *
+ */
+public class UnauthenticatedPasswordValidator extends AbstractValidator<HttpServletRequest> {
 
-        enforceClientAuthentication = true;
+    public UnauthenticatedPasswordValidator() {
+        requiredParams.add(OAuth.OAUTH_GRANT_TYPE);
+        requiredParams.add(OAuth.OAUTH_CLIENT_ID);
+        requiredParams.add(OAuth.OAUTH_USERNAME);
+        requiredParams.add(OAuth.OAUTH_PASSWORD);
+
+        enforceClientAuthentication = false;
     }
+
 }
