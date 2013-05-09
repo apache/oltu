@@ -128,7 +128,7 @@ public class JWTUtils {
         JSONObject claimsSetObject = decodeJSON(matcher.group(2));
         String signature = matcher.group(3);
 
-        return new JWT.Builder()
+        return new JWT.Builder(base64jsonString)
                       .setHeaderAlgorithm(getString(headerObject, ALGORITHM))
                       .setHeaderContentType(getString(headerObject, CONTENT_TYPE))
                       .setHeaderType(getString(headerObject, CONTENT_TYPE))
