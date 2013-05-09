@@ -30,7 +30,8 @@ import org.apache.oltu.oauth2.client.demo.Utils;
 import org.apache.oltu.oauth2.client.demo.model.OAuthParams;
 import org.apache.oltu.oauth2.client.demo.model.OAuthRegParams;
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
-import org.apache.oltu.oauth2.jwt.JWTUtil;
+import org.apache.oltu.oauth2.jwt.JWT;
+import org.apache.oltu.oauth2.jwt.JWTUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -103,12 +104,11 @@ public class MainController {
     @RequestMapping("/decode")
     public ModelAndView decode(@ModelAttribute("oauthParams") OAuthParams oauthParams){
     	
-    	try{
-    	
-    		String jwt = oauthParams.getJwt();
+    	try{    	
+    		JWT jwt = JWTUtils.parseJWT(oauthParams.getJwt());
      	
-    		oauthParams.setHeader(JWTUtil.getHeader(jwt));
-    		oauthParams.setClaimsSet(JWTUtil.getClaimsSet(jwt));
+    		oauthParams.setHeader(JWTUtils.toJsonString(jwt.getHeader()));
+    		oauthParams.setClaimsSet(JWTUtils.toJsonString(jwt.getClaimsSet()));
     	} catch (Exception e){
     		oauthParams.setErrorMessage(
                     "Error while decoding the token: " + e);

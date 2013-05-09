@@ -179,7 +179,7 @@ public class JWTUtils {
      * @param header the JWT Header has to be serialized.
      * @return the JSON string that represents the JWT Header.
      */
-    public static String toJson(Header header) {
+    public static String toJsonString(Header header) {
         if (header == null) {
             throw new IllegalArgumentException("Null JWT Header cannot be serialized to JSON representation.");
         }
@@ -188,7 +188,7 @@ public class JWTUtils {
         setString(object, ALGORITHM, header.getAlgorithm());
         setString(object, CONTENT_TYPE, header.getContentType());
         setString(object, TYPE, header.getType());
-        return toJson(object);
+        return toJsonString(object);
     }
 
     /**
@@ -197,7 +197,7 @@ public class JWTUtils {
      * @param claimsSet the JWT Claims Set has to be serialized.
      * @return the JSON string that represents the JWT Claims Set.
      */
-    public static String toJson(ClaimsSet claimsSet) {
+    public static String toJsonString(ClaimsSet claimsSet) {
         if (claimsSet == null) {
             throw new IllegalArgumentException("Null JWT Claims Set cannot be serialized to JSON representation.");
         }
@@ -211,10 +211,10 @@ public class JWTUtils {
         setString(object, TYPE, claimsSet.getType());
         setLong(object, EXPIRATION_TIME, claimsSet.getExpirationTime());
         setLong(object, ISSUED_AT, claimsSet.getIssuedAt());
-        return toJson(object);
+        return toJsonString(object);
     }
 
-    private static String toJson(JSONObject object) {
+    private static String toJsonString(JSONObject object) {
         StringWriter writer = new StringWriter();
         try {
             object.write(writer);
