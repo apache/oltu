@@ -26,7 +26,7 @@
 
   <groupId>org.apache.oltu</groupId>
   <artifactId>org.apache.oltu.parent</artifactId>
-  <version>1-SNAPSHOT</version>
+  <version>1</version>
   <packaging>pom</packaging>
 
   <name>Apache Oltu - Parent</name>
@@ -244,24 +244,24 @@
   <contributors>
     <contributor>
       <name>Markus Sabadello</name>
-      <email></email>
-      <url></url>
-      <organization></organization>
-      <organizationUrl></organizationUrl>
-      <roles></roles>
+      <email />
+      <url />
+      <organization />
+      <organizationUrl />
+      <roles />
       <timezone>-</timezone>
-      <properties></properties>
+      <properties />
     </contributor>
 
     <contributor>
       <name>Ben Noordhuis</name>
-      <email></email>
-      <url></url>
-      <organization></organization>
-      <organizationUrl></organizationUrl>
-      <roles></roles>
+      <email />
+      <url />
+      <organization />
+      <organizationUrl />
+      <roles />
       <timezone>-</timezone>
-      <properties></properties>
+      <properties />
     </contributor>
   </contributors>
 
@@ -282,7 +282,7 @@
       <post>user@oltu.apache.org</post>
       <subscribe>user-subscribe@oltu.apache.org</subscribe>
       <unsubscribe>user-unsubscribe@oltu.apache.org</unsubscribe>
-      <archive></archive>
+      <archive />
       <otherArchives>
         <otherArchive>http://mail-archives.apache.org/mod_mbox/incubator-amber-user/</otherArchive>
       </otherArchives>
@@ -301,9 +301,9 @@
   </mailingLists>
 
   <scm>
-    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/oltu/trunk/parent</developerConnection>
-    <connection>scm:svn:https://svn.apache.org/repos/asf/oltu/trunk/parent</connection>
-    <url>https://svn.apache.org/repos/asf/oltu/trunk/parent</url>
+    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/oltu/tags/org.apache.oltu.parent-1</developerConnection>
+    <connection>scm:svn:https://svn.apache.org/repos/asf/oltu/tags/org.apache.oltu.parent-1</connection>
+    <url>https://svn.apache.org/repos/asf/oltu/tags/org.apache.oltu.parent-1</url>
   </scm>
   <issueManagement>
     <system>JIRA</system>
