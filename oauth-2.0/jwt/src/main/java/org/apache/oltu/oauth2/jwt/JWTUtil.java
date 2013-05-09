@@ -27,6 +27,13 @@ import org.apache.commons.codec.binary.Base64;
 public class JWTUtil {
 
     /**
+     * Hidden constructor, this class must not be instantiated.
+     */
+    private JWTUtil() {
+        // do nothing
+    }
+
+    /**
      * Get the Header as defined in the 6.1 section of the JWT
      * specification (http://tools.ietf.org/html/draft-ietf-oauth-json-web-token-06#section-6.1)
      * 
