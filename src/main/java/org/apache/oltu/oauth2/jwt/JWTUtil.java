@@ -27,6 +27,16 @@ import org.apache.commons.codec.binary.Base64;
 public class JWTUtil {
 
     /**
+     * The {@code UTF-8} charset reference.
+     */
+    private static final Charset UTF_8 = Charset.forName("UTF-8");
+
+    /**
+     * The Base64 JSON string default separator.
+     */
+    private static final String DEFAULT_SEPARATOR = "\\.";
+
+    /**
      * Hidden constructor, this class must not be instantiated.
      */
     private JWTUtil() {
@@ -41,7 +51,7 @@ public class JWTUtil {
      * @return the decoded JWT header
      */
     public static String getHeader(String base64jsonString){
-        return decodeJSON(base64jsonString.split("\\.")[0]);
+        return decodeJSON(base64jsonString.split(DEFAULT_SEPARATOR)[0]);
     }
 
     /**
@@ -52,10 +62,10 @@ public class JWTUtil {
      * @return the decoded JWT claim set
      */
     public static String getClaimsSet(String base64jsonString){
-        return decodeJSON(base64jsonString.split("\\.")[1]);
+        return decodeJSON(base64jsonString.split(DEFAULT_SEPARATOR)[1]);
     }
 
     private static String decodeJSON(String base64jsonString){
-        return new String(new Base64(true).decode(base64jsonString),Charset.forName("UTF-8"));
+        return new String(new Base64(true).decode(base64jsonString), UTF_8);
     }
 }
