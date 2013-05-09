@@ -39,7 +39,13 @@ public class JWT {
      */
     private final String signature;
 
-    JWT(Header header, ClaimsSet claimsSet, String signature) {
+    /**
+     * The JWT raw string;
+     */
+    private final String rawString;
+
+    JWT(String rawString, Header header, ClaimsSet claimsSet, String signature) {
+        this.rawString = rawString;
         this.header = header;
         this.claimsSet = claimsSet;
         this.signature = signature;
@@ -74,15 +80,30 @@ public class JWT {
         return signature;
     }
 
+    /**
+     * Get the JWT raw string.
+     *
+     * @return the JWT raw string
+     */
+    public String getRawString() {
+        return rawString;
+    }
+
     @Override
     public String toString() {
-        return format("-- JWT --%nHeader: %s%nClaims Set: %s%nSignature: %s%n---------", header, claimsSet, signature);
+        return format("-- JWT --%nRaw String: %s%nHeader: %s%nClaims Set: %s%nSignature: %s%n---------",
+                      rawString != null ? rawString : "unknown", header, claimsSet, signature);
     }
 
     /**
      * A simple {@link JWT} builder.
      */
     public static final class Builder {
+
+        /**
+         * The JWT raw string
+         */
+        private final String rawString;
 
         /**
          * The {@code typ} JWT Header parameter.
@@ -143,6 +164,14 @@ public class JWT {
          * The JWT Signature.
          */
         private String signature;
+
+        public Builder() {
+            this(null);
+        }
+
+        public Builder(String rawString ) {
+            this.rawString = rawString;
+        }
 
         /**
          * Sets the JWT Header {@code typ}.
@@ -282,7 +311,8 @@ public class JWT {
          * @return a new {@link JWT} instance.
          */
         public JWT build() {
-            return new JWT(new Header(headerType, headerAlgorithm, headerContentType),
+            return new JWT(rawString,
+                           new Header(headerType, headerAlgorithm, headerContentType),
                            new ClaimsSet(claimsSetIssuer,
                                          claimsSetSubject,
                                          claimsSetAudience,
