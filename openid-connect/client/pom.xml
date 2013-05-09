@@ -30,6 +30,11 @@
   <description>OpenId Connect library - Client</description>
 
   <dependencies>
+ 	<dependency>
+      <groupId>org.apache.oltu.oauth2</groupId>
+      <artifactId>org.apache.oltu.oauth2.client</artifactId>
+      <version>0.31-SNAPSHOT</version>
+    </dependency>
   </dependencies>
 
   <build>
