@@ -271,7 +271,10 @@
       <post>dev@oltu.apache.org</post>
       <subscribe>dev-subscribe@oltu.apache.org</subscribe>
       <unsubscribe>dev-unsubscribe@oltu.apache.org</unsubscribe>
-      <archive>http://mail-archives.apache.org/mod_mbox/incubator-oltu-dev/</archive>
+      <archive>http://mail-archives.apache.org/mod_mbox/oltu-dev/</archive>
+      <otherArchives>
+        <otherArchive>http://mail-archives.apache.org/mod_mbox/incubator-amber-dev/</otherArchive>
+      </otherArchives>
     </mailingList>
 
     <mailingList>
@@ -279,7 +282,10 @@
       <post>user@oltu.apache.org</post>
       <subscribe>user-subscribe@oltu.apache.org</subscribe>
       <unsubscribe>user-unsubscribe@oltu.apache.org</unsubscribe>
-      <archive>http://mail-archives.apache.org/mod_mbox/incubator-oltu-user/</archive>
+      <archive></archive>
+      <otherArchives>
+        <otherArchive>http://mail-archives.apache.org/mod_mbox/incubator-amber-user/</otherArchive>
+      </otherArchives>
     </mailingList>
 
     <mailingList>
@@ -287,7 +293,10 @@
       <post>commits@oltu.apache.org</post>
       <subscribe>commits-subscribe@oltu.apache.org</subscribe>
       <unsubscribe>commits-unsubscribe@oltu.apache.org</unsubscribe>
-      <archive>http://mail-archives.apache.org/mod_mbox/incubator-oltu-commits/</archive>
+      <archive>http://mail-archives.apache.org/mod_mbox/oltu-commits/</archive>
+      <otherArchives>
+        <otherArchive>http://mail-archives.apache.org/mod_mbox/incubator-amber-commits/</otherArchive>
+      </otherArchives>
     </mailingList>
   </mailingLists>
 
