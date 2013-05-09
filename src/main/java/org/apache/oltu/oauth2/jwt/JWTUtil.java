@@ -22,7 +22,6 @@ import org.apache.commons.codec.binary.Base64;
 /**
  * This class contains utility methods required for the JWT building and
  * processing.
- * 
  */
 public class JWTUtil {
 
@@ -46,7 +45,7 @@ public class JWTUtil {
     /**
      * Get the Header as defined in the 6.1 section of the JWT
      * specification (http://tools.ietf.org/html/draft-ietf-oauth-json-web-token-06#section-6.1)
-     * 
+     *
      * @param base64jsonString
      * @return the decoded JWT header
      */
@@ -57,7 +56,7 @@ public class JWTUtil {
     /**
      * Get the Claims Set as defined in the 6.1 section of the JWT
      * specification (http://tools.ietf.org/html/draft-ietf-oauth-json-web-token-06#section-6.1)
-     * 
+     *
      * @param base64jsonString
      * @return the decoded JWT claim set
      */
