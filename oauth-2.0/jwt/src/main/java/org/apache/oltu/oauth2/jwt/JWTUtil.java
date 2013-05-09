@@ -24,33 +24,31 @@ import org.apache.commons.codec.binary.Base64;
  * processing.
  * 
  */
-public class JWTUtil {     
-	
-	
-	
-	/**
-	 * Get the Header as defined in the 6.1 section of the JWT
-	 * specification (http://tools.ietf.org/html/draft-ietf-oauth-json-web-token-06#section-6.1)
-	 * 
-	 * @param base64jsonString
-	 * @return the decoded JWT header
-	 */
-	public static  String getHeader(String base64jsonString){
-		return decodeJSON(base64jsonString.split("\\.")[0]);		
-	}
-	
-	/**
-	 * Get the Claims Set as defined in the 6.1 section of the JWT
-	 * specification (http://tools.ietf.org/html/draft-ietf-oauth-json-web-token-06#section-6.1)
-	 * 
-	 * @param base64jsonString
-	 * @return the decoded JWT claim set
-	 */
-	public static  String getClaimsSet(String base64jsonString){
-		return decodeJSON(base64jsonString.split("\\.")[1]);		
-	}
-	
-	private static String decodeJSON(String base64jsonString){
-		return new String(new Base64(true).decode(base64jsonString),Charset.forName("UTF-8"));
-	}
+public class JWTUtil {
+
+    /**
+     * Get the Header as defined in the 6.1 section of the JWT
+     * specification (http://tools.ietf.org/html/draft-ietf-oauth-json-web-token-06#section-6.1)
+     * 
+     * @param base64jsonString
+     * @return the decoded JWT header
+     */
+    public static String getHeader(String base64jsonString){
+        return decodeJSON(base64jsonString.split("\\.")[0]);
+    }
+
+    /**
+     * Get the Claims Set as defined in the 6.1 section of the JWT
+     * specification (http://tools.ietf.org/html/draft-ietf-oauth-json-web-token-06#section-6.1)
+     * 
+     * @param base64jsonString
+     * @return the decoded JWT claim set
+     */
+    public static String getClaimsSet(String base64jsonString){
+        return decodeJSON(base64jsonString.split("\\.")[1]);
+    }
+
+    private static String decodeJSON(String base64jsonString){
+        return new String(new Base64(true).decode(base64jsonString),Charset.forName("UTF-8"));
+    }
 }
