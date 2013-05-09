@@ -63,16 +63,36 @@
   </ciManagement>
 
   <properties>
-    <commons-codec.version>1.7</commons-codec.version>
     <cxf.version>2.2.10</cxf.version>
     <org.springframework.version>3.0.3.RELEASE</org.springframework.version>
     <spring-mock.version>2.0.8</spring-mock.version>
     <easy-mock.version>3.0</easy-mock.version>
     <servlet-api.version>2.5</servlet-api.version>
-    <jettison.version>1.2</jettison.version>
     <jetty.version>7.1.5.v20100705</jetty.version>
     <pmd.version>2.5</pmd.version>
   </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.codehaus.jettison</groupId>
+        <artifactId>jettison</artifactId>
+        <version>1.2</version>
+        <exclusions>
+          <exclusion>
+            <groupId>stax</groupId>
+            <artifactId>stax-api</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+
+      <dependency>
+        <groupId>commons-codec</groupId>
+        <artifactId>commons-codec</artifactId>
+        <version>1.8</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <dependencies>
     <dependency>
@@ -109,4 +129,5 @@
       <scope>provided</scope>
     </dependency>
   </dependencies>
+
 </project>
