@@ -22,6 +22,7 @@
 package org.apache.oltu.oauth2.client.demo.controller;
 
 import java.io.IOException;
+import java.net.URL;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -37,7 +38,8 @@ import org.apache.oltu.oauth2.client.response.OAuthJSONAccessTokenResponse;
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 import org.apache.oltu.oauth2.common.message.types.GrantType;
-import org.apache.oltu.oauth2.jwt.JWTUtil;
+import org.apache.oltu.oauth2.jwt.JWT;
+import org.apache.oltu.oauth2.jwt.JWTUtils;
 import org.apache.oltu.openidconnect.client.response.OpenIdConnectResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -92,11 +94,14 @@ public class TokenController {
             oauthParams.setRefreshToken(Utils.isIssued(oauthResponse.getRefreshToken()));
             
             if (Utils.GOOGLE.equalsIgnoreCase(app)){
-            	String idToken = ((OpenIdConnectResponse)oauthResponse).getIdToken();
             	
+            	OpenIdConnectResponse openIdConnectResponse = ((OpenIdConnectResponse)oauthResponse);            	
+            	String idToken = openIdConnectResponse.getIdToken();  
             	oauthParams.setIdToken(idToken);
-            	oauthParams.setHeader(JWTUtil.getHeader(idToken));
-            	oauthParams.setClaimsSet(JWTUtil.getClaimsSet(idToken));
+            	
+            	JWT jwt = JWTUtils.parseJWT(idToken);
+            	oauthParams.setHeader(JWTUtils.toJsonString(jwt.getHeader()));
+            	oauthParams.setClaimsSet(JWTUtils.toJsonString(jwt.getClaimsSet()));
             	
             }
 

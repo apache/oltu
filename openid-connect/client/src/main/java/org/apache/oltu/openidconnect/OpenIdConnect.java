@@ -14,34 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.oltu.openidconnect.client.response;
- 
-import org.apache.oltu.oauth2.client.response.OAuthJSONAccessTokenResponse;
-import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
-import org.apache.oltu.openidconnect.OpenIdConnect;
- 
+package org.apache.oltu.openidconnect;
+
 /**
- * 
+ * Class containing all the basic constants of the OpenId
+ * connect specification
  *
  */
-public class OpenIdConnectResponse extends OAuthJSONAccessTokenResponse {
-
-	protected String idToken;
- 
-	@Override
-	protected void init(String body, String contentType, int responseCode)
-	throws OAuthProblemException {
-		super.init(body, contentType, responseCode);
-		setIdToken(getParam(OpenIdConnect.ID_TOKEN));
-	}
-
-	public void setIdToken(String idToken) throws OAuthProblemException {
-		this.idToken = idToken;
-	}
-	
-	public String getIdToken(){
-		return idToken;
-	}
-	
- 
+public class OpenIdConnect {
+	public static final String ID_TOKEN= "id_token";
 }
