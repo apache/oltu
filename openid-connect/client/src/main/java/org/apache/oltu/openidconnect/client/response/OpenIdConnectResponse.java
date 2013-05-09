@@ -15,33 +15,49 @@
  * limitations under the License.
  */
 package org.apache.oltu.openidconnect.client.response;
- 
+
 import org.apache.oltu.oauth2.client.response.OAuthJSONAccessTokenResponse;
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
+import org.apache.oltu.oauth2.jwt.JWT;
+import org.apache.oltu.oauth2.jwt.JWTUtils;
 import org.apache.oltu.openidconnect.OpenIdConnect;
- 
+
 /**
  * 
  *
  */
 public class OpenIdConnectResponse extends OAuthJSONAccessTokenResponse {
 
-	protected String idToken;
- 
+	private JWT idToken;
+
 	@Override
 	protected void init(String body, String contentType, int responseCode)
-	throws OAuthProblemException {
+			throws OAuthProblemException {
 		super.init(body, contentType, responseCode);
-		setIdToken(getParam(OpenIdConnect.ID_TOKEN));
+		idToken = JWTUtils.parseJWT(getParam(OpenIdConnect.ID_TOKEN));
 	}
 
-	public void setIdToken(String idToken) throws OAuthProblemException {
-		this.idToken = idToken;
-	}
-	
-	public String getIdToken(){
+	public final JWT getIdToken() {
 		return idToken;
 	}
-	
- 
+
+	/**
+	 * ID Token Validation as per OpenID Connect
+	 * Basic Client Profile 1.0 draft 22 Section 2.4
+	 * 
+	 * 
+	 * @param issuer
+	 * @param audience
+	 * @return
+	 */
+	public boolean checkId(String issuer, String audience) {
+		if (idToken.getClaimsSet().getIssuer().equals(issuer)
+				&& idToken.getClaimsSet().getAudience().equals(audience)
+				&& idToken.getClaimsSet().getExpirationTime() < System
+						.currentTimeMillis()) {
+			return true;
+		}
+		return false;
+	}
+
 }

@@ -29,11 +29,20 @@
   <name>Apache Oltu - OpenId Connect - Client</name>
   <description>OpenId Connect library - Client</description>
 
+  <properties>
+    <oltu.oauth2.version>0.31-SNAPSHOT</oltu.oauth2.version>
+  </properties>
+
   <dependencies>
  	<dependency>
       <groupId>org.apache.oltu.oauth2</groupId>
       <artifactId>org.apache.oltu.oauth2.client</artifactId>
-      <version>0.31-SNAPSHOT</version>
+      <version>${oltu.oauth2.version}</version>
+    </dependency>
+   	<dependency>
+      <groupId>org.apache.oltu.oauth2</groupId>
+      <artifactId>org.apache.oltu.oauth2.jwt</artifactId>
+      <version>${oltu.oauth2.version}</version>
     </dependency>
   </dependencies>
 

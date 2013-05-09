@@ -120,6 +120,14 @@
 		<tr>
             <td>ID Token:</td>
             <td><form:input size="70" path="idToken" readonly="true"/></td>
+            <td >
+            <c:if test="${oauthParams.idTokenValid}">
+    			<p><font color="green">ID Token is valid</font></p>
+			</c:if>
+			<c:if test="${!oauthParams.idTokenValid}">
+    			<p><font color="red">ID Token is NOT valid</font></p>
+			</c:if>   
+            </td>
         </tr>
         <tr>
             <td>Header:</td>

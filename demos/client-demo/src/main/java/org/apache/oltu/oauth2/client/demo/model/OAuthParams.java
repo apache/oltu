@@ -49,8 +49,9 @@ public class OAuthParams {
     private String header;
     private String claimsSet;
     private String jwt;
-
-    private String errorMessage;
+    private boolean idTokenValid;
+ 
+	private String errorMessage;
 
     public String getClientId() {
         return clientId;
@@ -222,5 +223,13 @@ public class OAuthParams {
 
 	public void setJwt(String jwt) {
 		this.jwt = jwt;
+	}
+	
+    public boolean isIdTokenValid() {
+		return idTokenValid;
+	}
+
+	public void setIdTokenValid(boolean idTokenValid) {
+		this.idTokenValid = idTokenValid;
 	}
 }

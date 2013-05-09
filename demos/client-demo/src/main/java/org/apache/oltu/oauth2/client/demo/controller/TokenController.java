@@ -96,12 +96,15 @@ public class TokenController {
             if (Utils.GOOGLE.equalsIgnoreCase(app)){
             	
             	OpenIdConnectResponse openIdConnectResponse = ((OpenIdConnectResponse)oauthResponse);            	
-            	String idToken = openIdConnectResponse.getIdToken();  
-            	oauthParams.setIdToken(idToken);
+            	JWT idToken = openIdConnectResponse.getIdToken();  
+            	oauthParams.setIdToken(idToken.getRawString());
             	
-            	JWT jwt = JWTUtils.parseJWT(idToken);
-            	oauthParams.setHeader(JWTUtils.toJsonString(jwt.getHeader()));
-            	oauthParams.setClaimsSet(JWTUtils.toJsonString(jwt.getClaimsSet()));
+            	oauthParams.setHeader(JWTUtils.toJsonString(idToken.getHeader()));
+            	oauthParams.setClaimsSet(JWTUtils.toJsonString(idToken.getClaimsSet()));
+            	
+            	URL url = new URL(oauthParams.getTokenEndpoint());
+            	
+            	oauthParams.setIdTokenValid(openIdConnectResponse.checkId(url.getHost(), oauthParams.getClientId()));
             	
             }
 
