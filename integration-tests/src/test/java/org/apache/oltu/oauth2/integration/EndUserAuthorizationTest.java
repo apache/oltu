@@ -58,7 +58,6 @@ public class EndUserAuthorizationTest extends ClientServerOAuthTest {
             .buildQueryMessage();
 
         Common.doRequest(request);
-
     }
 
     @Test
@@ -71,8 +70,12 @@ public class EndUserAuthorizationTest extends ClientServerOAuthTest {
             .setState(Common.STATE)
             .buildQueryMessage();
 
-        Common.doRequest(request);
+        HttpURLConnection c = Common.doRequest(request);
+        String queryString = c.getURL().toURI().getQuery();
+        Map<String, Object> map = OAuthUtils.decodeForm(queryString);
 
+        assertNotNull(map.get(OAuth.OAUTH_CODE));
+        assertEquals(Common.STATE, map.get(OAuth.OAUTH_STATE));
     }
 
     @Test
@@ -82,6 +85,7 @@ public class EndUserAuthorizationTest extends ClientServerOAuthTest {
             .setClientId(Common.CLIENT_ID)
             .setRedirectURI(Common.REDIRECT_URL + "2")
             .setResponseType(ResponseType.TOKEN.toString())
+            .setState(Common.STATE)
             .buildQueryMessage();
 
         HttpURLConnection c = Common.doRequest(request);
@@ -90,7 +94,7 @@ public class EndUserAuthorizationTest extends ClientServerOAuthTest {
 
         assertNotNull(map.get(OAuth.OAUTH_EXPIRES_IN));
         assertNotNull(map.get(OAuth.OAUTH_ACCESS_TOKEN));
-
+        assertEquals(Common.STATE, map.get(OAuth.OAUTH_STATE));
     }
 
     @GET
