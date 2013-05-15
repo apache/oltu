@@ -35,6 +35,7 @@ import org.apache.oltu.oauth2.as.issuer.MD5Generator;
 import org.apache.oltu.oauth2.as.issuer.OAuthIssuer;
 import org.apache.oltu.oauth2.as.issuer.OAuthIssuerImpl;
 import org.apache.oltu.oauth2.as.request.OAuthTokenRequest;
+import org.apache.oltu.oauth2.as.request.OAuthUnauthenticatedTokenRequest;
 import org.apache.oltu.oauth2.as.response.OAuthASResponse;
 import org.apache.oltu.oauth2.common.OAuth;
 import org.apache.oltu.oauth2.common.error.OAuthError;
@@ -49,37 +50,26 @@ import org.apache.oltu.oauth2.integration.Common;
  *
  *
  */
-@Path("/token")
-public class TokenEndpoint {
-
-    public static final String INVALID_CLIENT_DESCRIPTION = "Client authentication failed (e.g., unknown client, no client authentication included, or unsupported authentication method).";
+@Path("/unauth-token")
+public class UnauthenticatedTokenEndpoint {
 
     @POST
     @Consumes("application/x-www-form-urlencoded")
     @Produces("application/json")
-    public Response authorize(@Context HttpServletRequest request) throws OAuthSystemException {
+    public Response token(@Context HttpServletRequest request) throws OAuthSystemException {
 
-        OAuthTokenRequest oauthRequest = null;
+        OAuthUnauthenticatedTokenRequest oauthRequest = null;
 
         OAuthIssuer oauthIssuerImpl = new OAuthIssuerImpl(new MD5Generator());
 
         try {
-            oauthRequest = new OAuthTokenRequest(request);
+            oauthRequest = new OAuthUnauthenticatedTokenRequest(request);
 
             // check if clientid is valid
-            if (!Common.CLIENT_ID.equals(oauthRequest.getClientId())) {
+            if (!Common.CLIENT_ID.equals(oauthRequest.getParam(OAuth.OAUTH_CLIENT_ID))) {
                 OAuthResponse response =
                     OAuthASResponse.errorResponse(HttpServletResponse.SC_BAD_REQUEST)
-                        .setError(OAuthError.TokenResponse.INVALID_CLIENT).setErrorDescription(INVALID_CLIENT_DESCRIPTION)
-                        .buildJSONMessage();
-                return Response.status(response.getResponseStatus()).entity(response.getBody()).build();
-            }
-
-            // check if client_secret is valid
-            if (!Common.CLIENT_SECRET.equals(oauthRequest.getClientSecret())) {
-                OAuthResponse response =
-                    OAuthASResponse.errorResponse(HttpServletResponse.SC_UNAUTHORIZED)
-                        .setError(OAuthError.TokenResponse.UNAUTHORIZED_CLIENT).setErrorDescription(INVALID_CLIENT_DESCRIPTION)
+                        .setError(OAuthError.TokenResponse.INVALID_CLIENT).setErrorDescription("client_id not found")
                         .buildJSONMessage();
                 return Response.status(response.getResponseStatus()).entity(response.getBody()).build();
             }
@@ -108,7 +98,7 @@ public class TokenEndpoint {
                 }
             } else if (oauthRequest.getParam(OAuth.OAUTH_GRANT_TYPE)
                 .equals(GrantType.REFRESH_TOKEN.toString())) {
-                // refresh token is not supported in this implementation
+                // refresh token is not supported in this implementation hence the oauth error.
                 OAuthResponse response = OAuthASResponse
                     .errorResponse(HttpServletResponse.SC_BAD_REQUEST)
                     .setError(OAuthError.TokenResponse.INVALID_GRANT)
@@ -122,13 +112,12 @@ public class TokenEndpoint {
                 .setAccessToken(oauthIssuerImpl.accessToken())
                 .setExpiresIn("3600")
                 .buildJSONMessage();
-            return Response.status(response.getResponseStatus()).entity(response.getBody()).build();
 
+            return Response.status(response.getResponseStatus()).entity(response.getBody()).build();
         } catch (OAuthProblemException e) {
             OAuthResponse res = OAuthASResponse.errorResponse(HttpServletResponse.SC_BAD_REQUEST).error(e)
                 .buildJSONMessage();
             return Response.status(res.getResponseStatus()).entity(res.getBody()).build();
         }
     }
-
 }
