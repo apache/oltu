@@ -96,7 +96,7 @@ public class URLConnectionClient implements HttpClient {
 
                 InputStream inputStream;
                 responseCode = httpURLConnection.getResponseCode();
-                if (responseCode == 400) {
+                if (responseCode == 400 || responseCode == 401) {
                     inputStream = httpURLConnection.getErrorStream();
                 } else {
                     inputStream = httpURLConnection.getInputStream();
