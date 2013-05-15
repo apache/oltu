@@ -36,17 +36,16 @@ import org.junit.Test;
  *
  *
  */
-public class AccessTokenTestAuthCodeTest extends ClientServerOAuthTest {
+public class UnauthenticatedAccessTokenTestAuthCodeTest extends ClientServerOAuthTest {
 
     @Test
-    public void testSuccessfullAccesToken() throws Exception {
+    public void testSuccessfulAccessToken() throws Exception {
         OAuthClientRequest request = OAuthClientRequest
-            .tokenLocation(Common.ACCESS_TOKEN_ENDPOINT)
+            .tokenLocation(Common.UNAUTHENTICATED_ACCESS_TOKEN_ENDPOINT)
             .setGrantType(GrantType.AUTHORIZATION_CODE)
             .setCode(Common.AUTHORIZATION_CODE)
             .setRedirectURI(Common.REDIRECT_URL)
             .setClientId(Common.CLIENT_ID)
-            .setClientSecret(Common.CLIENT_SECRET)
             .buildBodyMessage();
 
         OAuthClient oAuthClient = new OAuthClient(new URLConnectionClient());
@@ -56,33 +55,11 @@ public class AccessTokenTestAuthCodeTest extends ClientServerOAuthTest {
     }
 
     @Test
-    public void testInvalidClientCredentials() throws Exception {
-        OAuthClientRequest request = OAuthClientRequest
-            .tokenLocation(Common.ACCESS_TOKEN_ENDPOINT)
-            .setGrantType(GrantType.AUTHORIZATION_CODE)
-            .setRedirectURI(Common.REDIRECT_URL)
-            .setCode(Common.AUTHORIZATION_CODE)
-            .setClientId(Common.CLIENT_ID)
-            .setClientSecret("wrongSecret")
-            .buildBodyMessage();
-
-        OAuthClient oAuthClient = new OAuthClient(new URLConnectionClient());
-
-        try {
-            oAuthClient.accessToken(request);
-            fail("exception expected");
-        } catch (OAuthProblemException e) {
-            assertEquals(OAuthError.TokenResponse.UNAUTHORIZED_CLIENT, e.getError());
-        }
-    }
-
-    @Test
     public void testNoneGrantType() throws Exception {
         OAuthClientRequest request = OAuthClientRequest
-            .tokenLocation(Common.ACCESS_TOKEN_ENDPOINT)
+            .tokenLocation(Common.UNAUTHENTICATED_ACCESS_TOKEN_ENDPOINT)
             .setGrantType(null)
             .setClientId(Common.CLIENT_ID)
-            .setClientSecret(Common.CLIENT_SECRET)
             .buildBodyMessage();
 
         OAuthClient oAuthClient = new OAuthClient(new URLConnectionClient());
@@ -98,7 +75,7 @@ public class AccessTokenTestAuthCodeTest extends ClientServerOAuthTest {
     @Test
     public void testInvalidRequest() throws Exception {
         OAuthClientRequest request = OAuthClientRequest
-            .tokenLocation(Common.ACCESS_TOKEN_ENDPOINT)
+            .tokenLocation(Common.UNAUTHENTICATED_ACCESS_TOKEN_ENDPOINT)
             .setClientId(Common.CLIENT_ID)
             .buildBodyMessage();
 
@@ -115,11 +92,10 @@ public class AccessTokenTestAuthCodeTest extends ClientServerOAuthTest {
     @Test
     public void testInvalidClient() throws Exception {
         OAuthClientRequest request = OAuthClientRequest
-            .tokenLocation(Common.ACCESS_TOKEN_ENDPOINT)
+            .tokenLocation(Common.UNAUTHENTICATED_ACCESS_TOKEN_ENDPOINT)
             .setGrantType(GrantType.AUTHORIZATION_CODE)
             .setCode(Common.AUTHORIZATION_CODE)
             .setClientId("unknownid")
-            .setClientSecret(Common.CLIENT_SECRET)
             .setRedirectURI(Common.REDIRECT_URL)
             .buildBodyMessage();
 
@@ -136,12 +112,11 @@ public class AccessTokenTestAuthCodeTest extends ClientServerOAuthTest {
     @Test
     public void testInvalidGrantType() throws Exception {
         OAuthClientRequest request = OAuthClientRequest
-            .tokenLocation(Common.ACCESS_TOKEN_ENDPOINT)
+            .tokenLocation(Common.UNAUTHENTICATED_ACCESS_TOKEN_ENDPOINT)
             .setParameter(OAuth.OAUTH_GRANT_TYPE, "unknown_grant_type")
             .setCode(Common.AUTHORIZATION_CODE)
             .setRedirectURI(Common.REDIRECT_URL)
             .setClientId(Common.CLIENT_ID)
-            .setClientSecret(Common.CLIENT_SECRET)
             .buildBodyMessage();
 
         OAuthClient oAuthclient = new OAuthClient(new URLConnectionClient());
@@ -157,12 +132,11 @@ public class AccessTokenTestAuthCodeTest extends ClientServerOAuthTest {
     @Test
     public void testInvalidCode() throws Exception {
         OAuthClientRequest request = OAuthClientRequest
-            .tokenLocation(Common.ACCESS_TOKEN_ENDPOINT)
+            .tokenLocation(Common.UNAUTHENTICATED_ACCESS_TOKEN_ENDPOINT)
             .setGrantType(GrantType.AUTHORIZATION_CODE)
             .setRedirectURI(Common.REDIRECT_URL)
             .setCode("unknown_code")
             .setClientId(Common.CLIENT_ID)
-            .setClientSecret(Common.CLIENT_SECRET)
             .buildBodyMessage();
 
         OAuthClient oAuthClient = new OAuthClient(new URLConnectionClient());

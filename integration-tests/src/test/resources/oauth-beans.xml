@@ -48,12 +48,13 @@
         <jaxrs:serviceBeans>
             <ref bean="authzEndpoint"/>
             <ref bean="tokenEndpoint"/>
+            <ref bean="unauthenticatedTokenEndpoint"/>
         </jaxrs:serviceBeans>
     </jaxrs:server>
 
-    <bean id="authzEndpoint"
-          class="org.apache.oltu.oauth2.integration.endpoints.AuthzEndpoint"/>
+    <bean id="authzEndpoint" class="org.apache.oltu.oauth2.integration.endpoints.AuthzEndpoint"/>
     <bean id="tokenEndpoint" class="org.apache.oltu.oauth2.integration.endpoints.TokenEndpoint"/>
+    <bean id="unauthenticatedTokenEndpoint" class="org.apache.oltu.oauth2.integration.endpoints.UnauthenticatedTokenEndpoint"/>
 
     <!--OAuth Client -->
     <jaxrs:server id="oauthClient" address="http://localhost:9002/auth/oauth2/">

@@ -51,8 +51,6 @@ public class EndUserAuthorizationTest extends ClientServerOAuthTest {
 
     @Test
     public void testWrongParametersEndUserAuthorization() throws Exception {
-
-
         OAuthClientRequest request = OAuthClientRequest
             .authorizationLocation(Common.AUTHORIZATION_ENPOINT)
             .setClientId(Common.CLIENT_ID)
@@ -65,12 +63,12 @@ public class EndUserAuthorizationTest extends ClientServerOAuthTest {
 
     @Test
     public void testCorrectParametersEndUserAuthorization() throws Exception {
-
         OAuthClientRequest request = OAuthClientRequest
             .authorizationLocation(Common.AUTHORIZATION_ENPOINT)
             .setClientId(Common.CLIENT_ID)
             .setRedirectURI(Common.REDIRECT_URL + "1")
             .setResponseType(ResponseType.CODE.toString())
+            .setState(Common.STATE)
             .buildQueryMessage();
 
         Common.doRequest(request);
@@ -98,7 +96,6 @@ public class EndUserAuthorizationTest extends ClientServerOAuthTest {
     @GET
     @Path("/redirect")
     public Response callback(@Context HttpServletRequest request) throws Exception {
-
         OAuthClientResponse resp = null;
         try {
             OAuthAuthzResponse.oauthCodeAuthzResponse(request);
@@ -106,7 +103,6 @@ public class EndUserAuthorizationTest extends ClientServerOAuthTest {
         } catch (OAuthProblemException e) {
             assertEquals(OAuthError.CodeResponse.INVALID_REQUEST, e.getError());
         }
-
 
         return Response.ok().build();
     }
@@ -121,7 +117,6 @@ public class EndUserAuthorizationTest extends ClientServerOAuthTest {
         } catch (OAuthProblemException e) {
             fail("exception not expected");
         }
-
 
         return Response.ok().build();
     }
