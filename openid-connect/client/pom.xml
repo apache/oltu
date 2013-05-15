@@ -43,7 +43,13 @@
       <groupId>org.apache.oltu.oauth2</groupId>
       <artifactId>org.apache.oltu.oauth2.jwt</artifactId>
       <version>${oltu.oauth2.version}</version>
-    </dependency>
+    </dependency>    
+    <dependency>
+   		<groupId>junit-addons</groupId>
+      	<artifactId>junit-addons</artifactId>
+      	<version>1.4</version>
+      	<scope>test</scope>
+   	</dependency>   
   </dependencies>
 
   <build>
