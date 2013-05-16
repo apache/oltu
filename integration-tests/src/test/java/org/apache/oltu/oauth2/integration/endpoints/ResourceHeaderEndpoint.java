@@ -105,7 +105,7 @@ public class ResourceHeaderEndpoint {
                 .setRealm(Common.RESOURCE_SERVER_NAME)
                 .setError(e.getError())
                 .setErrorDescription(e.getDescription())
-                .setErrorUri(e.getDescription())
+                .setErrorUri(e.getUri())
                 .buildHeaderMessage();
 
             return Response.status(Response.Status.BAD_REQUEST)
