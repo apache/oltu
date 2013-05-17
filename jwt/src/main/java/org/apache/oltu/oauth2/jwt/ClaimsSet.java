@@ -157,7 +157,8 @@ public final class ClaimsSet {
 
     @Override
     public String toString() {
-        return format("{\"iss\": \"%s\", \"sub\": \"%s\", \"aud\": \"%s\", \"exp\": %s, \"nbf\": \"%s\", \"iat\": %s, \"jti\": \"%s\" }",
+    	System.out.println("np");
+        return format("{\"iss\": \"%s\", \"sub\": \"%s\", \"aud\": \"%s\", \"exp\": %s, \"nbf\": \"%s\", \"iat\": %s, \"jti\": \"%s\", \"typ\": \"%s\" }",
                       issuer, subject, audience, expirationTime, notBefore, issuedAt, jwdId, type);
     }
 
