@@ -292,15 +292,11 @@ public final class OAuthUtils {
     }
 
     public static <T> T instantiateClass(Class<T> clazz) throws OAuthSystemException {
-        try {
-            return (T)clazz.newInstance();
-        } catch (Exception e) {
-            throw new OAuthSystemException(e);
-        }
+        return instantiateClassWithParameters(clazz, null, null);
     }
 
-    public static Object instantiateClassWithParameters(Class clazz, Class[] paramsTypes,
-                                                        Object[] paramValues) throws OAuthSystemException {
+    public static <T> T instantiateClassWithParameters(Class<T> clazz, Class<?>[] paramsTypes,
+                                                       Object[] paramValues) throws OAuthSystemException {
 
         try {
             if (paramsTypes != null && paramValues != null) {
@@ -311,7 +307,7 @@ public final class OAuthUtils {
                 if (paramsTypes.length == 0 && paramValues.length == 0) {
                     return clazz.newInstance();
                 }
-                Constructor clazzConstructor = clazz.getConstructor(paramsTypes);
+                Constructor<T> clazzConstructor = clazz.getConstructor(paramsTypes);
                 return clazzConstructor.newInstance(paramValues);
             }
             return clazz.newInstance();
@@ -416,7 +412,7 @@ public final class OAuthUtils {
 
         return sb.substring(0, sb.length() - 1);
     }
-    
+
     /**
      * Construct an Authorization Bearer header
      */
