@@ -44,7 +44,6 @@
     <module>dynamicreg-server</module>
     <module>test-utils</module>
     <module>integration-tests</module>
-     <module>jwt</module>
   </modules>
 
   <ciManagement>
