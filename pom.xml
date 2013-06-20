@@ -27,7 +27,7 @@
 
   <groupId>org.apache.oltu.oauth2</groupId>
   <artifactId>org.apache.oltu.oauth2.parent</artifactId>
-  <version>0.31-SNAPSHOT</version>
+  <version>0.31</version>
   <packaging>pom</packaging>
 
   <name>Apache Oltu - OAuth 2.0 - Parent</name>
@@ -130,4 +130,10 @@
     </dependency>
   </dependencies>
 
+
+  <scm>
+    <connection>scm:svn:https://svn.apache.org/repos/asf/oltu/tags/org.apache.oltu.oauth2.parent-0.31</connection>
+    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/oltu/tags/org.apache.oltu.oauth2.parent-0.31</developerConnection>
+    <url>https://svn.apache.org/repos/asf/oltu/tags/org.apache.oltu.oauth2.parent-0.31</url>
+  </scm>
 </project>
