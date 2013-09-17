@@ -24,7 +24,7 @@ import java.util.Set;
 /**
  * Abstract representation of a JWT entity which can contain custom fields.
  */
-abstract class JWTEntity {
+public abstract class JWTEntity {
 
     /**
      * The registry that keeps the custom fields.
