@@ -29,10 +29,6 @@
   <name>Apache Oltu - OAuth 2.0 - JWT</name>
   <description>OAuth 2.0 library - JWT</description>
 
-  <properties>
-  	<maven.deploy.skip>true</maven.deploy.skip>
-  </properties>	
-
   <dependencies>
     <dependency>
       <groupId>org.codehaus.jettison</groupId>
