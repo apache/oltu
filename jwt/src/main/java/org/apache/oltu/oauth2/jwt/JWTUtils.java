@@ -18,8 +18,13 @@ package org.apache.oltu.oauth2.jwt;
 
 import static java.lang.String.format;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.StringReader;
 import java.io.StringWriter;
 import java.nio.charset.Charset;
+import java.util.Iterator;
+import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -112,36 +117,86 @@ public class JWTUtils {
      * @param base64jsonString a Base64 encoded JSON Web Token.
      * @return a JWT instance.
      */
+    @SuppressWarnings("unchecked") // it is known that JSON keys are strings
     public static JWT parseJWT(String base64jsonString) {
         if (base64jsonString == null || base64jsonString.isEmpty()) {
             throw new IllegalArgumentException("Impossible to obtain a JWT from a null or empty string");
         }
 
-        Matcher matcher = BASE64_JWT_PATTERN.matcher(base64jsonString);
+        // TODO improve multi-line tokens
+        StringBuilder buffer = new StringBuilder();
+        BufferedReader reader = new BufferedReader(new StringReader(base64jsonString));
+        String line = null;
+        try {
+            while ((line = reader.readLine()) != null) {
+                buffer.append(line);
+            }
+        } catch (IOException e) {
+            // it cannot happen
+        } finally {
+            try {
+                reader.close();
+            } catch (IOException e) {
+                // swallow it
+            }
+        }
+
+        Matcher matcher = BASE64_JWT_PATTERN.matcher(buffer.toString());
         if (!matcher.matches()) {
             throw new IllegalArgumentException(base64jsonString
-                                               + "is not avalid JSON Web Token, it does not match with the pattern: "
+                                               + "is not a valid JSON Web Token, it does not match with the pattern: "
                                                + BASE64_JWT_PATTERN.pattern());
         }
 
-        JSONObject headerObject = decodeJSON(matcher.group(1));
-        JSONObject claimsSetObject = decodeJSON(matcher.group(2));
+        JWT.Builder jwtBuilder = new JWT.Builder(base64jsonString);
+
+        String header = matcher.group(1);
+        JSONObject headerObject = decodeJSON(header);
+
+        for (Iterator<String> keys = headerObject.keys(); keys.hasNext();) {
+            String key = keys.next();
+
+            if (ALGORITHM.equals(key)) {
+                jwtBuilder.setHeaderAlgorithm(getString(headerObject, ALGORITHM));
+            } else if (TYPE.equals(key)) {
+                jwtBuilder.setHeaderType(getString(headerObject, TYPE));
+            } else if (CONTENT_TYPE.equals(key)) {
+                jwtBuilder.setHeaderContentType(getString(headerObject, CONTENT_TYPE));
+            } else {
+                jwtBuilder.setHeaderCustomField(key, getString(headerObject, key));
+            }
+        }
+
+        String claimsSet = matcher.group(2);
+        JSONObject claimsSetObject = decodeJSON(claimsSet);
+
+        for (Iterator<String> keys = claimsSetObject.keys(); keys.hasNext();) {
+            String key = keys.next();
+
+            if (AUDIENCE.equals(key)) {
+                jwtBuilder.setClaimsSetAudience(getString(claimsSetObject, AUDIENCE));
+            } else if (EXPIRATION_TIME.equals(key)) {
+                jwtBuilder.setClaimsSetExpirationTime(getLong(claimsSetObject, EXPIRATION_TIME));
+            } else if (ISSUED_AT.equals(key)) {
+                jwtBuilder.setClaimsSetIssuedAt(getLong(claimsSetObject, ISSUED_AT));
+            } else if (ISSUER.equals(key)) {
+                jwtBuilder.setClaimsSetIssuer(getString(claimsSetObject, ISSUER));
+            } else if (JWT_ID.equals(key)) {
+                jwtBuilder.setClaimsSetJwdId(getString(claimsSetObject, JWT_ID));
+            } else if (NOT_BEFORE.equals(key)) {
+                jwtBuilder.setClaimsSetNotBefore(getString(claimsSetObject, NOT_BEFORE));
+            } else if (SUBJECT.equals(key)) {
+                jwtBuilder.setClaimsSetSubject(getString(claimsSetObject, SUBJECT));
+            } else if (TYPE.equals(key)) {
+                jwtBuilder.setClaimsSetType(getString(claimsSetObject, TYPE));
+            } else {
+                jwtBuilder.setClaimsSetCustomField(key, getString(claimsSetObject, key));
+            }
+        }
+
         String signature = matcher.group(3);
 
-        return new JWT.Builder(base64jsonString)
-                      .setHeaderAlgorithm(getString(headerObject, ALGORITHM))
-                      .setHeaderContentType(getString(headerObject, CONTENT_TYPE))
-                      .setHeaderType(getString(headerObject, CONTENT_TYPE))
-                      .setClaimsSetAudience(getString(claimsSetObject, AUDIENCE))
-                      .setClaimsSetExpirationTime(getLong(claimsSetObject, EXPIRATION_TIME))
-                      .setClaimsSetIssuedAt(getLong(claimsSetObject, ISSUED_AT))
-                      .setClaimsSetIssuer(getString(claimsSetObject, ISSUER))
-                      .setClaimsSetJwdId(getString(claimsSetObject, JWT_ID))
-                      .setClaimsSetNotBefore(getString(claimsSetObject, NOT_BEFORE))
-                      .setClaimsSetSubject(getString(claimsSetObject, SUBJECT))
-                      .setClaimsSetType(getString(claimsSetObject, TYPE))
-                      .setSignature(signature)
-                      .build();
+        return jwtBuilder.setSignature(signature).build();
     }
 
     private static JSONObject decodeJSON(String base64jsonString) {
@@ -173,13 +228,42 @@ public class JWTUtils {
 
     // serialization
 
+    public static String toBase64JsonString(JWT jwt) {
+        if (jwt == null) {
+            throw new IllegalArgumentException("Impossible to build a Token from a null JWT representation.");
+        }
+
+        String header = toJsonString(jwt.getHeader());
+        String encodedHeader = encodeJson(header);
+
+        String claimsSet = toJsonString(jwt.getClaimsSet());
+        String encodedClaimsSet = encodeJson(claimsSet);
+
+        String signature = jwt.getSignature();
+        if (signature == null) {
+            signature = "";
+        }
+
+        return new StringBuilder()
+               .append(encodedHeader)
+               .append('.')
+               .append('\r')
+               .append('\n')
+               .append(encodedClaimsSet)
+               .append('.')
+               .append('\r')
+               .append('\n')
+               .append(signature)
+               .toString();
+    }
+
     /**
      * Serializes the input JWT Header to its correct JSON representation.
      *
      * @param header the JWT Header has to be serialized.
      * @return the JSON string that represents the JWT Header.
      */
-    public static String toJsonString(Header header) {
+    private static String toJsonString(Header header) {
         if (header == null) {
             throw new IllegalArgumentException("Null JWT Header cannot be serialized to JSON representation.");
         }
@@ -188,7 +272,7 @@ public class JWTUtils {
         setString(object, ALGORITHM, header.getAlgorithm());
         setString(object, CONTENT_TYPE, header.getContentType());
         setString(object, TYPE, header.getType());
-        return toJsonString(object);
+        return toJsonString(header, object);
     }
 
     /**
@@ -197,7 +281,7 @@ public class JWTUtils {
      * @param claimsSet the JWT Claims Set has to be serialized.
      * @return the JSON string that represents the JWT Claims Set.
      */
-    public static String toJsonString(ClaimsSet claimsSet) {
+    private static String toJsonString(ClaimsSet claimsSet) {
         if (claimsSet == null) {
             throw new IllegalArgumentException("Null JWT Claims Set cannot be serialized to JSON representation.");
         }
@@ -211,10 +295,14 @@ public class JWTUtils {
         setString(object, TYPE, claimsSet.getType());
         setLong(object, EXPIRATION_TIME, claimsSet.getExpirationTime());
         setLong(object, ISSUED_AT, claimsSet.getIssuedAt());
-        return toJsonString(object);
+        return toJsonString(claimsSet, object);
     }
 
-    private static String toJsonString(JSONObject object) {
+    private static String toJsonString(JWTEntity entity, JSONObject object) {
+        for (Entry<String, Object> customField : entity.getCustomFields()) {
+            setObject(object, customField.getKey(), customField.getValue());
+        }
+
         StringWriter writer = new StringWriter();
         try {
             object.write(writer);
@@ -222,6 +310,10 @@ public class JWTUtils {
             // swallow it, it should be safe enough to write to a StringWriter
         }
         return writer.toString();
+    }
+
+    private static String encodeJson(String jsonString) {
+        return new String(new Base64(true).encode(jsonString.getBytes(UTF_8)), UTF_8);
     }
 
     private static void setString(JSONObject object, String key, String value) {
@@ -236,6 +328,16 @@ public class JWTUtils {
 
     private static void setLong(JSONObject object, String key, long value) {
         if (value != 0) {
+            try {
+                object.put(key, value);
+            } catch (JSONException e) {
+                // swallow it, null values are already guarded
+            }
+        }
+    }
+
+    private static void setObject(JSONObject object, String key, Object value) {
+        if (value != null) {
             try {
                 object.put(key, value);
             } catch (JSONException e) {

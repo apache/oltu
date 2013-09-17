@@ -18,12 +18,14 @@ package org.apache.oltu.oauth2.jwt;
 
 import static java.lang.String.format;
 
+import java.util.Map;
+
 /**
  * Represents the Header as defined in the 6.1 section of the JWT specification.
  *
  * @see http://tools.ietf.org/html/draft-ietf-oauth-json-web-token-06#section-6.1
  */
-public final class Header {
+public final class Header extends JWTEntity {
 
     /**
      * The {@code typ} JWT Header parameter.
@@ -40,7 +42,11 @@ public final class Header {
      */
     private final String contentType;
 
-    Header(String type, String algorithm, String contentType) {
+    Header(String type,
+           String algorithm,
+           String contentType,
+           Map<String, Object> customFields) {
+        super(customFields);
         this.type = type;
         this.algorithm = algorithm;
         this.contentType = contentType;
@@ -75,7 +81,7 @@ public final class Header {
 
     @Override
     public String toString() {
-        return format("{\"typ\": \"%s\", \"alg\": \"%s\", \"cty\": \"%s\"}", type, algorithm, contentType);
+        return format("{\"typ\": \"%s\", \"alg\": \"%s\", \"cty\": \"%s\", %s}", type, algorithm, contentType, super.toString());
     }
 
 }

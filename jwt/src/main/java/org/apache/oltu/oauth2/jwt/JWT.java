@@ -18,6 +18,9 @@ package org.apache.oltu.oauth2.jwt;
 
 import static java.lang.String.format;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 /**
  * This class contains constants used in the JWT implementation.
  *
@@ -121,6 +124,11 @@ public class JWT {
         private String headerContentType;
 
         /**
+         * The JWT Header custom fields.
+         */
+        private final Map<String, Object> headerCustomFields = new LinkedHashMap<String, Object>();
+
+        /**
          * The {@code iss} JWT Claims Set parameter.
          */
         private String claimsSetIssuer;
@@ -159,6 +167,11 @@ public class JWT {
          * The {@code typ} JWT Claims Set parameter.
          */
         private String claimsSetType;
+
+        /**
+         * The JWT Header custom fields.
+         */
+        private final Map<String, Object> claimsSetCustomFields = new LinkedHashMap<String, Object>();
 
         /**
          * The JWT Signature.
@@ -203,6 +216,23 @@ public class JWT {
          */
         public Builder setHeaderContentType(String headerContentType) {
             this.headerContentType = headerContentType;
+            return this;
+        }
+
+        /**
+         * Set the JWT Header custom field.
+         *
+         * @param key the custom field name.
+         * @param value value the custom field value.
+         * @return this builder instance.
+         */
+        public Builder setHeaderCustomField(String key, String value) {
+            if (key == null) {
+                throw new IllegalArgumentException("Null key not allowed");
+            }
+            if (value != null) {
+                headerCustomFields.put(key, value);
+            }
             return this;
         }
 
@@ -295,6 +325,23 @@ public class JWT {
         }
 
         /**
+         * Set the JWT Claims Set custom field.
+         *
+         * @param key the custom field name.
+         * @param value value the custom field value.
+         * @return this builder instance.
+         */
+        public Builder setClaimsSetCustomField(String key, String value) {
+            if (key == null) {
+                throw new IllegalArgumentException("Null key not allowed");
+            }
+            if (value != null) {
+                claimsSetCustomFields.put(key, value);
+            }
+            return this;
+        }
+
+        /**
          * Sets the JWT signature.
          *
          * @param signature
@@ -312,7 +359,7 @@ public class JWT {
          */
         public JWT build() {
             return new JWT(rawString,
-                           new Header(headerType, headerAlgorithm, headerContentType),
+                           new Header(headerType, headerAlgorithm, headerContentType, headerCustomFields),
                            new ClaimsSet(claimsSetIssuer,
                                          claimsSetSubject,
                                          claimsSetAudience,
@@ -320,7 +367,8 @@ public class JWT {
                                          claimsSetNotBefore,
                                          claimsSetIssuedAt,
                                          claimsSetJwdId,
-                                         claimsSetType),
+                                         claimsSetType,
+                                         claimsSetCustomFields),
                            signature);
         }
 
