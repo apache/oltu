@@ -18,12 +18,14 @@ package org.apache.oltu.oauth2.jwt;
 
 import static java.lang.String.format;
 
+import java.util.Map;
+
 /**
  * Represents the Claims Set as defined in the 6.1 section of the JWT specification.
  *
  * @see http://tools.ietf.org/html/draft-ietf-oauth-json-web-token-06#section-6.1
  */
-public final class ClaimsSet {
+public final class ClaimsSet extends JWTEntity {
 
     /**
      * The {@code iss} JWT Claims Set parameter.
@@ -72,7 +74,9 @@ public final class ClaimsSet {
               String notBefore,
               long issuedAt,
               String jwdId,
-              String type) {
+              String type,
+              Map<String, Object> customFields) {
+        super(customFields);
         this.issuer = issuer;
         this.subject = subject;
         this.audience = audience;
@@ -157,8 +161,8 @@ public final class ClaimsSet {
 
     @Override
     public String toString() {
-        return format("{\"iss\": \"%s\", \"sub\": \"%s\", \"aud\": \"%s\", \"exp\": %s, \"nbf\": \"%s\", \"iat\": %s, \"jti\": \"%s\", \"typ\": \"%s\" }",
-                      issuer, subject, audience, expirationTime, notBefore, issuedAt, jwdId, type);
+        return format("{\"iss\": \"%s\", \"sub\": \"%s\", \"aud\": \"%s\", \"exp\": %s, \"nbf\": \"%s\", \"iat\": %s, \"jti\": \"%s\", \"typ\": \"%s\", %s }",
+                      issuer, subject, audience, expirationTime, notBefore, issuedAt, jwdId, type, super.toString());
     }
 
 }
