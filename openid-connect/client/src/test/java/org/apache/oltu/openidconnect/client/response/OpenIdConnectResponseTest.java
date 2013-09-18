@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 package org.apache.oltu.openidconnect.client.response;
+
 import junitx.util.PrivateAccessor;
 
 import org.apache.oltu.oauth2.jwt.JWT;
@@ -23,16 +24,18 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class OpenIdConnectResponseTest extends Assert{
-	private final String JWT = "eyJhbGciOiJSUzI1NiIsImtpZCI6ImJlMWRhMGIzNTY3YmQyNjVhMjUwOThmYmNjMmIwOWYyMTM0NWIzYTIifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiaWQiOiIxMDY0MjI0NTMwODI0Nzk5OTg0MjkiLCJzdWIiOiIxMDY0MjI0NTMwODI0Nzk5OTg0MjkiLCJ2ZXJpZmllZF9lbWFpbCI6InRydWUiLCJlbWFpbF92ZXJpZmllZCI6InRydWUiLCJhdWQiOiI3ODg3MzIzNzIwNzguYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJjaWQiOiI3ODg3MzIzNzIwNzguYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhenAiOiI3ODg3MzIzNzIwNzguYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJlbWFpbCI6ImFudG9uaW8uc2Fuc29AZ21haWwuY29tIiwidG9rZW5faGFzaCI6IkwySTc3Z2lCTGswUlNzMHpRMVN2Q0EiLCJhdF9oYXNoIjoiTDJJNzdnaUJMazBSU3MwelExU3ZDQSIsImlhdCI6MTM2NjcyNjMxNywiZXhwIjoxMzY2NzMwMjE3fQ.XWYi5Zj1YWAMGIml_ftoAwmvW1Y7oeybLCpzQrJVuWJpS8L8Vd2TL-RTIOEVG03VA7e0_-_frNuw7MxUgVEgh8G-Nnbk_baJ6k_3w5c1SKFamFiHHDoKLFhrt1Y8JKSuGwE02V-px4Cn0dRAQAc1IN5CU6wqCrYK0p-fv_fvy28";
 
-	@Test
-	public void testCheckId() throws NoSuchFieldException{
-		JWT idToken = new JWTReader().read(JWT);
-		OpenIdConnectResponse openIdConnectResponse= new OpenIdConnectResponse();
-		PrivateAccessor.setField(openIdConnectResponse, "idToken", idToken);
+    private final String JWT = "eyJhbGciOiJSUzI1NiIsImtpZCI6ImJlMWRhMGIzNTY3YmQyNjVhMjUwOThmYmNjMmIwOWYyMTM0NWIzYTIifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiaWQiOiIxMDY0MjI0NTMwODI0Nzk5OTg0MjkiLCJzdWIiOiIxMDY0MjI0NTMwODI0Nzk5OTg0MjkiLCJ2ZXJpZmllZF9lbWFpbCI6InRydWUiLCJlbWFpbF92ZXJpZmllZCI6InRydWUiLCJhdWQiOiI3ODg3MzIzNzIwNzguYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJjaWQiOiI3ODg3MzIzNzIwNzguYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhenAiOiI3ODg3MzIzNzIwNzguYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJlbWFpbCI6ImFudG9uaW8uc2Fuc29AZ21haWwuY29tIiwidG9rZW5faGFzaCI6IkwySTc3Z2lCTGswUlNzMHpRMVN2Q0EiLCJhdF9oYXNoIjoiTDJJNzdnaUJMazBSU3MwelExU3ZDQSIsImlhdCI6MTM2NjcyNjMxNywiZXhwIjoxMzY2NzMwMjE3fQ.XWYi5Zj1YWAMGIml_ftoAwmvW1Y7oeybLCpzQrJVuWJpS8L8Vd2TL-RTIOEVG03VA7e0_-_frNuw7MxUgVEgh8G-Nnbk_baJ6k_3w5c1SKFamFiHHDoKLFhrt1Y8JKSuGwE02V-px4Cn0dRAQAc1IN5CU6wqCrYK0p-fv_fvy28";
 
-		assertTrue(openIdConnectResponse.checkId("accounts.google.com", "788732372078.apps.googleusercontent.com"));
-		assertFalse(openIdConnectResponse.checkId("wrongaccounts.google.com", "788732372078.apps.googleusercontent.com"));
-		assertFalse(openIdConnectResponse.checkId("wrongaccounts.google.com", "notexists788732372078.apps.googleusercontent.com"));
-	}
+    @Test
+    public void testCheckId() throws NoSuchFieldException{
+        JWT idToken = new JWTReader().read(JWT);
+        OpenIdConnectResponse openIdConnectResponse= new OpenIdConnectResponse();
+        PrivateAccessor.setField(openIdConnectResponse, "idToken", idToken);
+
+        assertTrue(openIdConnectResponse.checkId("accounts.google.com", "788732372078.apps.googleusercontent.com"));
+        assertFalse(openIdConnectResponse.checkId("wrongaccounts.google.com", "788732372078.apps.googleusercontent.com"));
+        assertFalse(openIdConnectResponse.checkId("wrongaccounts.google.com", "notexists788732372078.apps.googleusercontent.com"));
+    }
+
 }
