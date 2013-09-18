@@ -16,7 +16,6 @@
  */
 package org.apache.oltu.jose.jws;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
