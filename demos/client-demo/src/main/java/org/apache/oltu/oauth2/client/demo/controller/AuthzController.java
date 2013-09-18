@@ -18,9 +18,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.apache.oltu.oauth2.client.demo.controller;
-
 
 import java.io.IOException;
 import javax.servlet.http.Cookie;
@@ -44,12 +42,10 @@ import org.apache.oltu.oauth2.common.message.types.ResponseType;
 
 /**
  * Handles requests for the application welcome page.
- *
  */
 @Controller
 @RequestMapping("/")
 public class AuthzController {
-
 
     private Logger logger = LoggerFactory.getLogger(AuthzController.class);
 
@@ -60,7 +56,6 @@ public class AuthzController {
         throws OAuthSystemException, IOException {
 
         try {
-
             Utils.validateAuthorizationParams(oauthParams);
 
             res.addCookie(new Cookie("clientId", oauthParams.getClientId()));
@@ -82,12 +77,10 @@ public class AuthzController {
                 .buildQueryMessage();
 
             return new ModelAndView(new RedirectView(request.getLocationUri()));
-
         } catch (ApplicationException e) {
             oauthParams.setErrorMessage(e.getMessage());
             return new ModelAndView("get_authz");
         }
     }
-
 
 }

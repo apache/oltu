@@ -18,7 +18,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.apache.oltu.oauth2.client.demo.controller;
 
 import java.io.IOException;
@@ -40,11 +39,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-
 /**
- *
- *
- *
  */
 @Controller
 @RequestMapping("/")
@@ -72,7 +67,7 @@ public class MainController {
         boolean selected = false;
         if (Utils.GENERIC.equalsIgnoreCase(app)) {
             selected = true;
-        }else if (Utils.GITHUB.equalsIgnoreCase(app)) {
+        } else if (Utils.GITHUB.equalsIgnoreCase(app)) {
             selected = true;
             oauthParams.setAuthzEndpoint(Utils.GITHUB_AUTHZ);
             oauthParams.setTokenEndpoint(Utils.GITHUB_TOKEN);
@@ -81,7 +76,7 @@ public class MainController {
             selected = true;
             oauthParams.setAuthzEndpoint(Utils.FACEBOOK_AUTHZ);
             oauthParams.setTokenEndpoint(Utils.FACEBOOK_TOKEN);
-        }else if (Utils.GOOGLE.equalsIgnoreCase(app)) {
+        } else if (Utils.GOOGLE.equalsIgnoreCase(app)) {
                 selected = true;
                 oauthParams.setAuthzEndpoint(Utils.GOOGLE_AUTHZ);
                 oauthParams.setTokenEndpoint(Utils.GOOGLE_TOKEN);
@@ -109,19 +104,17 @@ public class MainController {
 
     @RequestMapping("/decode")
     public ModelAndView decode(@ModelAttribute("oauthParams") OAuthParams oauthParams){
+        try {
+            JWT jwt = jwtReader.read(oauthParams.getJwt());
 
-    	try{
-    		JWT jwt = jwtReader.read(oauthParams.getJwt());
-
-    		oauthParams.setHeader(jwtWriter.write(jwt.getHeader()));
-    		oauthParams.setClaimsSet(jwtWriter.write(jwt.getClaimsSet()));
-    	} catch (Exception e){
-    		oauthParams.setErrorMessage(
+            oauthParams.setHeader(jwtWriter.write(jwt.getHeader()));
+            oauthParams.setClaimsSet(jwtWriter.write(jwt.getClaimsSet()));
+        } catch (Exception e){
+            oauthParams.setErrorMessage(
                     "Error while decoding the token: " + e);
-    	}
+        }
 
-    	return new ModelAndView("index");
-	}
-
+        return new ModelAndView("index");
+    }
 
 }
