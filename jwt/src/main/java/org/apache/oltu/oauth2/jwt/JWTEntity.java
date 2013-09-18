@@ -47,6 +47,9 @@ public abstract class JWTEntity {
         if (name == null) {
             throw new IllegalArgumentException("Null custom field name not present in the registry.");
         }
+        if (type == null) {
+            throw new IllegalArgumentException("Custom field value can not be casted to a null type.");
+        }
 
         Object value = customFields.get(name);
 
