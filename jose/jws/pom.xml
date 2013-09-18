@@ -25,6 +25,7 @@
   </parent>
 
   <artifactId>org.apache.oltu.jose.jws</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
 
   <name>Apache Oltu - JOSE - JWS</name>
 
