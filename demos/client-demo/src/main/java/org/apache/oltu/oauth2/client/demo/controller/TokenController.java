@@ -39,7 +39,7 @@ import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 import org.apache.oltu.oauth2.common.message.types.GrantType;
 import org.apache.oltu.oauth2.jwt.JWT;
-import org.apache.oltu.oauth2.jwt.JWTUtils;
+import org.apache.oltu.oauth2.jwt.io.JWTWriter;
 import org.apache.oltu.openidconnect.client.response.OpenIdConnectResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -56,12 +56,14 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/get_token")
 public class TokenController {
 
+    private final JWTWriter jwtWriter = new JWTWriter();
+
     @RequestMapping
     public ModelAndView authorize(@ModelAttribute("oauthParams") OAuthParams oauthParams,
                                   HttpServletRequest req) throws OAuthSystemException, IOException {
 
         try {
- 
+
             Utils.validateTokenParams(oauthParams);
 
             OAuthClientRequest request = OAuthClientRequest
@@ -75,7 +77,7 @@ public class TokenController {
 
             OAuthClient client = new OAuthClient(new URLConnectionClient());
             String app = Utils.findCookieValue(req, "app");
-  
+
             OAuthAccessTokenResponse oauthResponse = null;
             Class<? extends OAuthAccessTokenResponse> cl = OAuthJSONAccessTokenResponse.class;
 
@@ -92,20 +94,20 @@ public class TokenController {
             oauthParams.setAccessToken(oauthResponse.getAccessToken());
             oauthParams.setExpiresIn(oauthResponse.getExpiresIn());
             oauthParams.setRefreshToken(Utils.isIssued(oauthResponse.getRefreshToken()));
-            
+
             if (Utils.GOOGLE.equalsIgnoreCase(app)){
-            	
-            	OpenIdConnectResponse openIdConnectResponse = ((OpenIdConnectResponse)oauthResponse);            	
-            	JWT idToken = openIdConnectResponse.getIdToken();  
+
+            	OpenIdConnectResponse openIdConnectResponse = ((OpenIdConnectResponse)oauthResponse);
+            	JWT idToken = openIdConnectResponse.getIdToken();
             	oauthParams.setIdToken(idToken.getRawString());
-            	
-            	oauthParams.setHeader(JWTUtils.toJsonString(idToken.getHeader()));
-            	oauthParams.setClaimsSet(JWTUtils.toJsonString(idToken.getClaimsSet()));
-            	
+
+            	oauthParams.setHeader(jwtWriter.write(idToken.getHeader()));
+            	oauthParams.setClaimsSet(jwtWriter.write(idToken.getClaimsSet()));
+
             	URL url = new URL(oauthParams.getTokenEndpoint());
-            	
+
             	oauthParams.setIdTokenValid(openIdConnectResponse.checkId(url.getHost(), oauthParams.getClientId()));
-            	
+
             }
 
             return new ModelAndView("get_resource");

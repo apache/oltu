@@ -22,16 +22,18 @@
 package org.apache.oltu.oauth2.client.demo.controller;
 
 import java.io.IOException;
+
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.apache.oltu.oauth2.client.demo.Utils;
 import org.apache.oltu.oauth2.client.demo.model.OAuthParams;
 import org.apache.oltu.oauth2.client.demo.model.OAuthRegParams;
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 import org.apache.oltu.oauth2.jwt.JWT;
-import org.apache.oltu.oauth2.jwt.JWTUtils;
+import org.apache.oltu.oauth2.jwt.io.JWTReader;
+import org.apache.oltu.oauth2.jwt.io.JWTWriter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -49,6 +51,10 @@ import org.springframework.web.servlet.ModelAndView;
 public class MainController {
 
     private Logger logger = LoggerFactory.getLogger(MainController.class);
+
+    private final JWTReader jwtReader = new JWTReader();
+
+    private final JWTWriter jwtWriter = new JWTWriter();
 
     @RequestMapping("/index")
     public ModelAndView authorize(@ModelAttribute("oauthParams") OAuthParams oauthParams)
@@ -100,22 +106,22 @@ public class MainController {
 
         return new ModelAndView("index");
     }
-    
+
     @RequestMapping("/decode")
     public ModelAndView decode(@ModelAttribute("oauthParams") OAuthParams oauthParams){
-    	
-    	try{    	
-    		JWT jwt = JWTUtils.parseJWT(oauthParams.getJwt());
-     	
-    		oauthParams.setHeader(JWTUtils.toJsonString(jwt.getHeader()));
-    		oauthParams.setClaimsSet(JWTUtils.toJsonString(jwt.getClaimsSet()));
+
+    	try{
+    		JWT jwt = jwtReader.read(oauthParams.getJwt());
+
+    		oauthParams.setHeader(jwtWriter.write(jwt.getHeader()));
+    		oauthParams.setClaimsSet(jwtWriter.write(jwt.getClaimsSet()));
     	} catch (Exception e){
     		oauthParams.setErrorMessage(
                     "Error while decoding the token: " + e);
     	}
-    	
+
     	return new ModelAndView("index");
 	}
-    
-    
+
+
 }
