@@ -36,10 +36,10 @@ public final class JWTWriter extends AbstractJWTIO {
             throw new IllegalArgumentException("Impossible to build a Token from a null JWT representation.");
         }
 
-        String header = toJsonString(jwt.getHeader());
+        String header = write(jwt.getHeader());
         String encodedHeader = encodeJson(header);
 
-        String claimsSet = toJsonString(jwt.getClaimsSet());
+        String claimsSet = write(jwt.getClaimsSet());
         String encodedClaimsSet = encodeJson(claimsSet);
 
         String signature = jwt.getSignature();
@@ -66,7 +66,7 @@ public final class JWTWriter extends AbstractJWTIO {
      * @param header the JWT Header has to be serialized.
      * @return the JSON string that represents the JWT Header.
      */
-    private static String toJsonString(Header header) {
+    public String write(Header header) {
         if (header == null) {
             throw new IllegalArgumentException("Null JWT Header cannot be serialized to JSON representation.");
         }
@@ -84,7 +84,7 @@ public final class JWTWriter extends AbstractJWTIO {
      * @param claimsSet the JWT Claims Set has to be serialized.
      * @return the JSON string that represents the JWT Claims Set.
      */
-    private static String toJsonString(ClaimsSet claimsSet) {
+    public String write(ClaimsSet claimsSet) {
         if (claimsSet == null) {
             throw new IllegalArgumentException("Null JWT Claims Set cannot be serialized to JSON representation.");
         }
