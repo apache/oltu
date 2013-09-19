@@ -161,7 +161,7 @@ public final class ClaimsSet extends JWTEntity {
 
     @Override
     public String toString() {
-        return format("{\"iss\": \"%s\", \"sub\": \"%s\", \"aud\": \"%s\", \"exp\": %s, \"nbf\": \"%s\", \"iat\": %s, \"jti\": \"%s\", \"typ\": \"%s\", %s }",
+        return format("{\"iss\": \"%s\", \"sub\": \"%s\", \"aud\": \"%s\", \"exp\": %s, \"nbf\": \"%s\", \"iat\": %s, \"jti\": \"%s\", \"typ\": \"%s\" }",
                       issuer, subject, audience, expirationTime, notBefore, issuedAt, jwdId, type, super.toString());
     }
 
