@@ -21,7 +21,6 @@ import java.util.Map;
 
 import org.apache.oltu.jose.jws.signature.SignatureMethod;
 import org.apache.oltu.jose.jws.signature.SigningKey;
-import org.apache.oltu.jose.jws.signature.SymetricKey;
 import org.apache.oltu.jose.jws.signature.VerifyingKey;
 
 public class JWS {
@@ -206,11 +205,6 @@ public class JWS {
             }
             setAlgorithm(method.getAlgorithm());
             return setSignature(method.calculate(signingKey));
-        }
-
-        public <SK extends SymetricKey> Builder sign(SignatureMethod<SK, SK> method,
-                                                     SK signingKey) {
-            return sign(method, signingKey);
         }
 
         public JWS build() {
