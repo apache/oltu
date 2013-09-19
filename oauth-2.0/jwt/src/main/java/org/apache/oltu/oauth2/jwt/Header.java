@@ -81,7 +81,7 @@ public final class Header extends JWTEntity {
 
     @Override
     public String toString() {
-        return format("{\"typ\": \"%s\", \"alg\": \"%s\", \"cty\": \"%s\", %s}", type, algorithm, contentType, super.toString());
+        return format("{\"typ\": \"%s\", \"alg\": \"%s\", \"cty\": \"%s\" %s}", type, algorithm, contentType, super.toString());
     }
 
 }
