@@ -203,8 +203,11 @@ public class JWS {
             if (signingKey == null) {
                 throw new IllegalArgumentException("A signing key is required in order to calculate the signature.");
             }
+            if (payload == null) {
+                throw new IllegalStateException("Payload needs to be set in order to sign the current JWT");
+            }
             setAlgorithm(method.getAlgorithm());
-            return setSignature(method.calculate(signingKey));
+            return setSignature(method.calculate(payload, signingKey));
         }
 
         public JWS build() {
