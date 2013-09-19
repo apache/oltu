@@ -28,9 +28,4 @@ final class TestSymetricKey implements SymetricKey {
         return value;
     }
 
-    @Override
-    public String[] getAlgorithmMethods() {
-        return new String[]{ "TEST" };
-    }
-
 }

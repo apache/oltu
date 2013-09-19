@@ -19,6 +19,6 @@ package org.apache.oltu.jose.jws.signature;
 /**
  * A key that marks has to be used for <i>sign</i> operations.
  */
-public interface SigningKey extends Key {
+public interface SigningKey {
 
 }
