@@ -25,38 +25,42 @@ import org.junit.Test;
 
 public final class SignatureMethodTestCase {
 
-    private String signature;
+    private String payload;
 
     private TestSymetricKey key;
+
+    private String signature;
 
     private TestSignatureMethod method;
 
     @Before
     public void setUp() {
-        signature = "supercalifragilistichespiralidoso123456789";
-        key = new TestSymetricKey(signature);
+        payload = "{\"iss\":\"joe\",\r\n \"exp\":1300819380,\r\n \"http://example.com/is_root\":true}";
+        key = new TestSymetricKey("supercalifragilistichespiralidoso1234567890");
+        signature = payload + key.getValue();
         method = new TestSignatureMethod();
     }
 
     @After
     public void tearDown() {
-        signature = null;
+        payload = null;
         key = null;
+        signature = null;
         method = null;
     }
 
     @Test
     public void simpleSignatureVerification() {
-        assertEquals(signature, method.calculate(key));
-        assertTrue(method.verify(signature, key));
+        assertEquals(signature, method.calculate(payload, key));
+        assertTrue(method.verify(signature, payload, key));
     }
 
     @Test
     public void signJWS() {
         JWS jws = new JWS.Builder()
                          .setType("JWT")
-                         .setPayload("{\"iss\":\"joe\",\r\n \"exp\":1300819380,\r\n \"http://example.com/is_root\":true}")
-                         .sign( method, key )
+                         .setPayload(payload)
+                         .sign(method, key)
                          .build();
 
         assertEquals("TEST", jws.getHeader().getAlgorithm());

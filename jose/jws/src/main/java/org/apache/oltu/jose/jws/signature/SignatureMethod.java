@@ -24,9 +24,9 @@ package org.apache.oltu.jose.jws.signature;
  */
 public interface SignatureMethod<S extends SigningKey, V extends VerifyingKey> {
 
-    String calculate(S signingKey);
+    String calculate(String payload, S signingKey);
 
-    boolean verify(String signature, V verifyingKey);
+    boolean verify(String signature, String payload, V verifyingKey);
 
     String getAlgorithm();
 

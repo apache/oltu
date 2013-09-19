@@ -19,13 +19,13 @@ package org.apache.oltu.jose.jws.signature;
 final class TestSignatureMethod implements SignatureMethod<TestSymetricKey, TestSymetricKey> {
 
     @Override
-    public String calculate(TestSymetricKey signingKey) {
-        return signingKey.getValue();
+    public String calculate(String payload, TestSymetricKey signingKey) {
+        return payload + signingKey.getValue();
     }
 
     @Override
-    public boolean verify(String signature, TestSymetricKey verifyingKey) {
-        return signature.equals(verifyingKey.getValue());
+    public boolean verify(String signature, String payload, TestSymetricKey verifyingKey) {
+        return signature.equals(payload + verifyingKey.getValue());
     }
 
     @Override
