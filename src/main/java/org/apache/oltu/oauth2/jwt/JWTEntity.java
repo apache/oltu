@@ -81,14 +81,21 @@ public abstract class JWTEntity {
 
         int counter = 0;
         for (Entry<String, Object> customField : customFields.entrySet()) {
-            if (counter++ > 0) {
-                formatter.format(", ");
-            }
+            Object value = customField.getValue();
 
-            if (customField.getValue() instanceof Number) {
-                formatter.format("\"%s\": %s", customField.getKey(), customField.getValue());
-            } else {
-                formatter.format("\"%s\": \"%s\"", customField.getKey(), customField.getValue());
+            if (value != null) {
+                if (counter++ > 0) {
+                    formatter.format(", ");
+                }
+
+                String pattern;
+                if (customField.getValue() instanceof Number) {
+                    pattern = "\"%s\": %s";
+                } else {
+                    pattern = "\"%s\": \"%s\"";
+                }
+
+                formatter.format(pattern, customField.getKey(), value);
             }
         }
 
