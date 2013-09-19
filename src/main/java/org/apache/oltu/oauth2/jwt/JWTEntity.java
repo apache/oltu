@@ -71,7 +71,13 @@ public abstract class JWTEntity {
 
     @Override
     public String toString() {
+        if (customFields.isEmpty()) {
+            return "";
+        }
+
         Formatter formatter = new Formatter();
+
+        formatter.format( ", " );
 
         int counter = 0;
         for (Entry<String, Object> customField : customFields.entrySet()) {
@@ -79,12 +85,18 @@ public abstract class JWTEntity {
                 formatter.format(", ");
             }
 
-            formatter.format("\"%s\": \"%s\"", customField.getKey(), customField.getValue());
+            if (customField.getValue() instanceof Number) {
+                formatter.format("\"%s\": %s", customField.getKey(), customField.getValue());
+            } else {
+                formatter.format("\"%s\": \"%s\"", customField.getKey(), customField.getValue());
+            }
         }
 
-        formatter.close();
-
-        return formatter.toString();
+        try {
+            return formatter.toString();
+        } finally {
+            formatter.close();
+        }
     }
 
 }
