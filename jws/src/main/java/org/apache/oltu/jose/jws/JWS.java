@@ -58,6 +58,30 @@ public class JWS {
         return signature;
     }
 
+    public <SK extends SigningKey, VK extends VerifyingKey> boolean validate(SignatureMethod<SK, VK> method,
+                                                                             VK verifyingKey) {
+        if (method == null) {
+            throw new IllegalArgumentException("A signature method is required in order to verify the signature.");
+        }
+        if (verifyingKey == null) {
+            throw new IllegalArgumentException("A verifying key is required in order to verify the signature.");
+        }
+
+        if (header == null || header.getAlgorithm() == null) {
+            throw new IllegalStateException("JWS token must have a valid JSON header with specified algorithm.");
+        }
+
+        if (!header.getAlgorithm().equalsIgnoreCase(method.getAlgorithm())) {
+            throw new IllegalArgumentException("Impossible to verify current JWS signature with algorithm '"
+                                               + method.getAlgorithm()
+                                               + "', JWS header specifies message has been signed with '"
+                                               + header.getAlgorithm()
+                                               + "' algorithm.");
+        }
+
+        return method.verify(signature, payload, verifyingKey);
+    }
+
     public static final class Builder {
 
         /**
