@@ -16,7 +16,7 @@
  */
 package org.apache.oltu.jose.jws.signature;
 
-final class TestSymetricKey implements SymetricKey {
+final class TestSymetricKey implements SymmetricKey {
 
     private final String value;
 
