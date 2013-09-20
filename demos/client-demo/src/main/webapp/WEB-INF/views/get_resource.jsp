@@ -54,8 +54,8 @@
         <tr>
             <td>Authenticated Request Type:</td>
             <td><form:select path="requestType">
-                <form:option value="queryParameter"/>
                 <form:option value="headerField"/>
+                <form:option value="queryParameter"/>
                 <form:option value="bodyParameter"/>
             </form:select></td>
         </tr>
