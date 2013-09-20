@@ -70,6 +70,12 @@ public class JWS {
         if (header == null || header.getAlgorithm() == null) {
             throw new IllegalStateException("JWS token must have a valid JSON header with specified algorithm.");
         }
+        if (payload == null) {
+            throw new IllegalStateException("JWS token must have a payload.");
+        }
+        if (signature == null) {
+            throw new IllegalStateException("JWS token must have a signature to be verified.");
+        }
 
         if (!header.getAlgorithm().equalsIgnoreCase(method.getAlgorithm())) {
             throw new IllegalArgumentException("Impossible to verify current JWS signature with algorithm '"
