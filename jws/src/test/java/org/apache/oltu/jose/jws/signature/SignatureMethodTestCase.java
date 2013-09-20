@@ -67,4 +67,14 @@ public final class SignatureMethodTestCase {
         assertEquals(signature, jws.getSignature());
     }
 
+    @Test
+    public void validateJWS() {
+        JWS jws = new JWS.Builder()
+                         .setType("JWT")
+                         .setPayload(payload)
+                         .sign(method, key)
+                         .build();
+        assertTrue(jws.validate(method, key));
+    }
+
 }
