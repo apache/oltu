@@ -25,7 +25,7 @@
 
   <body>
     <section name="Apache Oltu">
-      <p><span style="font-weight: bold">Apache Oltu</span> is an OAuth family () protocol implementation in Java. It also covers others "OAuth family" related implementations such as JWT, JWS and OpenID Connect</p>
+      <p><span style="font-weight: bold">Apache Oltu</span> is an OAuth protocol implementation in Java. It also covers others "OAuth family" related implementations such as JWT, JWS and OpenID Connect</p>
     </section>
 
     <section name="Documentation">
