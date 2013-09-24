@@ -32,7 +32,7 @@
   <properties>
     <oltu.oauth2.version>1.0.0-SNAPSHOT</oltu.oauth2.version>
     <oltu.oidc.version>0.1-SNAPSHOT</oltu.oidc.version>
-    <org.springframework.version>3.0.3.RELEASE</org.springframework.version>
+    <org.springframework.version>3.2.4.RELEASE</org.springframework.version>
     <servlet-api.version>2.5</servlet-api.version>
   </properties>
 
