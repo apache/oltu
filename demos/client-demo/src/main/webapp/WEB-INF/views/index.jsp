@@ -60,7 +60,7 @@
         <table class="table table-striped">
           <tr>
             <td>JWT</td>
-            <td><form:input size="170" path="jwt" /></td>
+            <td><form:textarea rows="15" cols="80" path="jwt" /></td>
           </tr>
           <tr>
             <td colspan="2">
