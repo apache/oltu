@@ -27,61 +27,66 @@
 <%--@elvariable id="oauthParams" type="org.apache.oltu.oauth2.client.demo.model.OAuthParams"--%>
 
 <html>
-<head>
-    <title>OAuth V2.0 Client Application</title>
-</head>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <title>Apache Oltu - OAuth V2.0 Client Application</title>
+  </head>
 
-<body>
-<h1>Sample OAuth V2.0 Client Application</h1>
+  <body>
+    <div class="container">
+      <h1>Apache Oltu - Sample OAuth V2.0 Client Application</h1>
 
-<h2>Web Server Flow</h2>
+      <h2>Web Server Flow</h2>
 
-<h3>Step 2. Get Access Token</h3></p>
+      <h3>Step 2. Get Access Token</h3></p>
 
-<c:if test="${!empty oauthParams.errorMessage}">
-    <p><font color="red">${oauthParams.errorMessage}</font></p>
-</c:if>
+      <c:if test="${!empty oauthParams.errorMessage}">
+        <div class="alert alert-danger">${oauthParams.errorMessage}</div>
+      </c:if>
 
-<form:form commandName="oauthParams" action="/get_token">
-    <table>
-        <tr>
+      <form:form commandName="oauthParams" action="/get_token">
+        <table class="table table-striped">
+          <tr>
             <td>Required OAuth parameters:</td>
-        </tr>
-        <tr>
+          </tr>
+          <tr>
             <td>Authorization Code:</td>
-            <td><form:input size="70" path="authzCode" readonly="true"/></td>
-        </tr>
-        <tr>
+            <td><form:input size="70" path="authzCode" readonly="true" /></td>
+          </tr>
+          <tr>
             <td>End-User Authorization URL:</td>
-            <td><form:input size="70" path="authzEndpoint" readonly="true"/></td>
-        </tr>
-        <tr>
+            <td><form:input size="70" path="authzEndpoint" readonly="true" /></td>
+          </tr>
+          <tr>
             <td>Token Endpoint:</td>
-            <td><form:input size="70" path="tokenEndpoint" readonly="true"/></td>
-        </tr>
-        <tr>
+            <td><form:input size="70" path="tokenEndpoint" readonly="true" /></td>
+          </tr>
+          <tr>
             <td>Client ID:</td>
-            <td><form:input size="70" path="clientId" readonly="true"/></td>
-        </tr>
-        <tr>
+            <td><form:input size="70" path="clientId" readonly="true" /></td>
+          </tr>
+          <tr>
             <td>Client Secret:</td>
-            <td><form:input size="70" path="clientSecret" readonly="true"/></td>
-        </tr>
-        <tr>
+            <td><form:input size="70" path="clientSecret" readonly="true" /></td>
+          </tr>
+          <tr>
             <td>Redirect URI:</td>
-            <td><form:input size="70" path="redirectUri" readonly="true"/></td>
-        </tr>
-        <tr>
+            <td><form:input size="70" path="redirectUri" readonly="true" /></td>
+          </tr>
+          <tr>
             <td>Client State:</td>
-            <td><form:input size="70" path="state" readonly="true"/></td>
-        </tr>
-        <tr>
+            <td><form:input size="70" path="state" readonly="true" /></td>
+          </tr>
+          <tr>
             <td colspan="2">
-                <form:hidden path="application"/>
-                <input type="submit" value="Get Token"/>
+              <form:hidden path="application" />
+              <input type="submit" class="btn btn-primary" value="Get Token" />
             </td>
-        </tr>
-    </table>
-</form:form>
-</body>
+          </tr>
+        </table>
+      </form:form>
+
+    </div>
+  </body>
 </html>

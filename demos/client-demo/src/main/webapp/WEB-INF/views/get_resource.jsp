@@ -27,118 +27,129 @@
 <%--@elvariable id="oauthParams" type="org.apache.oltu.oauth2.client.demo.model.OAuthParams"--%>
 
 <html>
-<head>
-    <title>OAuth V2.0 Client Application</title>
-</head>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <title>Apache Oltu - OAuth V2.0 Client Application</title>
+  </head>
 
-<body>
-<h1>Sample OAuth V2.0 Client Application</h1>
+  <body>
+    <div class="container">
+      <h1>Apache Oltu - Sample OAuth V2.0 Client Application</h1>
 
-<h2>Web Server Flow</h2>
+      <h2>Web Server Flow</h2>
 
-<h3>Step 3. Get Resource</h3></p>
+      <h3>Step 3. Get Resource</h3></p>
 
-<c:if test="${!empty oauthParams.errorMessage}">
-    <p><font color="red">${oauthParams.errorMessage}</font></p>
-</c:if>
+      <c:if test="${!empty oauthParams.errorMessage}">
+        <div class="alert alert-danger">${oauthParams.errorMessage}</div>
+      </c:if>
 
-<form:form commandName="oauthParams" action="/get_resource">
-    <table>
-        <tr>
+      <form:form commandName="oauthParams" action="/get_resource">
+        <table class="table table-striped">
+          <tr>
             <td>Required OAuth parameters:</td>
-        </tr>
-        <tr>
+          </tr>
+          <tr>
             <td>Resource URL:</td>
-            <td><form:input size="70" path="resourceUrl"/></td>
-        </tr>
-        <tr>
+            <td><form:input size="70" path="resourceUrl" /></td>
+          </tr>
+          <tr>
             <td>Authenticated Request Type:</td>
-            <td><form:select path="requestType">
-                <form:option value="headerField"/>
-                <form:option value="queryParameter"/>
-                <form:option value="bodyParameter"/>
-            </form:select></td>
-        </tr>
-        <tr>
+            <td>
+              <form:select path="requestType">
+                <form:option value="headerField" />
+                <form:option value="queryParameter" />
+                <form:option value="bodyParameter" />
+              </form:select>
+            </td>
+          </tr>
+          <tr>
             <td>Request Method:</td>
-            <td><form:select path="requestMethod">
-                <form:option value="GET"/>
-                <form:option value="POST"/>
-            </form:select></td>
-        </tr>
-        <tr>
+            <td>
+              <form:select path="requestMethod">
+                <form:option value="GET" />
+                <form:option value="POST" />
+              </form:select>
+            </td>
+          </tr>
+          <tr>
             <td>Access Token:</td>
-            <td><form:input size="70" path="accessToken" readonly="true"/></td>
-        </tr>
-        <tr>
+            <td><form:input size="70" path="accessToken" readonly="true" /></td>
+          </tr>
+          <tr>
             <td>Expires In:</td>
-            <td><form:input size="70" path="expiresIn" readonly="true"/></td>
-        </tr>
-        <tr>
+            <td><form:input size="70" path="expiresIn" readonly="true" /></td>
+          </tr>
+          <tr>
             <td>Refresh Token:</td>
-            <td><form:input size="70" path="refreshToken" readonly="true"/></td>
-        </tr>
-        <tr>
+            <td><form:input size="70" path="refreshToken" readonly="true" /></td>
+          </tr>
+          <tr>
             <td>Requested Access Scope</td>
-            <td><form:input size="70" path="scope" readonly="true"/></td>
-        </tr>
-        <tr>
+            <td><form:input size="70" path="scope" readonly="true" /></td>
+          </tr>
+          <tr>
             <td>End-User Authorization URL:</td>
-            <td><form:input size="70" path="authzEndpoint" readonly="true"/></td>
-        </tr>
-        <tr>
+            <td><form:input size="70" path="authzEndpoint" readonly="true" /></td>
+          </tr>
+          <tr>
             <td>Token Endpoint:</td>
-            <td><form:input size="70" path="tokenEndpoint" readonly="true"/></td>
-        </tr>
-        <tr>
+            <td><form:input size="70" path="tokenEndpoint" readonly="true" /></td>
+          </tr>
+          <tr>
             <td>Client ID:</td>
-            <td><form:input size="70" path="clientId" readonly="true"/></td>
-        </tr>
-        <tr>
+            <td><form:input size="70" path="clientId" readonly="true" /></td>
+          </tr>
+          <tr>
             <td>Client Secret:</td>
-            <td><form:input size="70" path="clientSecret" readonly="true"/></td>
-        </tr>
-        <tr>
+            <td><form:input size="70" path="clientSecret" readonly="true" /></td>
+          </tr>
+          <tr>
             <td>Redirect URI:</td>
-            <td><form:input size="70" path="redirectUri" readonly="true"/></td>
-        </tr>
-        <tr>
+            <td><form:input size="70" path="redirectUri" readonly="true" /></td>
+          </tr>
+          <tr>
             <td>Client State:</td>
-            <td><form:input size="70" path="state" readonly="true"/></td>
-        </tr>
-        <tr>
+            <td><form:input size="70" path="state" readonly="true" /></td>
+          </tr>
+          <tr>
             <td colspan="2">
-                <form:hidden path="application"/>
-                <input type="submit" value="Get Resource"/>
+              <form:hidden path="application" />
+              <input type="submit" class="btn btn-primary" value="Get Resource" />
             </td>
-        </tr>
-    </table>
-</form:form>
-<form:form commandName="oauthParams" action="/get_resource">
- 	<table>
-		<h4>OpenId Connect</h4></p>
-		<tr>
+          </tr>
+        </table>
+      </form:form>
+
+      <form:form commandName="oauthParams" action="/get_resource">
+        <h4>OpenId Connect</h4>
+
+        <table class="table table-striped">
+          <tr>
             <td>ID Token:</td>
-            <td><form:input size="70" path="idToken" readonly="true"/></td>
-            <td >
-            <c:if test="${oauthParams.idTokenValid}">
-    			<p><font color="green">ID Token is valid</font></p>
-			</c:if>
-			<c:if test="${!oauthParams.idTokenValid}">
-    			<p><font color="red">ID Token is NOT valid</font></p>
-			</c:if>   
+            <td><form:input size="70" path="idToken" readonly="true" /></td>
+            <td>
+              <c:if test="${oauthParams.idTokenValid}">
+                <font color="green">ID Token is valid</font>
+              </c:if>
+              <c:if test="${!oauthParams.idTokenValid}">
+                <font color="red">ID Token is NOT valid</font>
+              </c:if>
             </td>
-        </tr>
-        <tr>
+          </tr>
+          <tr>
             <td>Header:</td>
             <td><textarea rows="15" cols="80" disabled="true">${oauthParams.header}</textarea></td>
-        </tr>
-        <tr>
+          </tr>
+          <tr>
             <td>Claims Set:</td>
             <td><textarea rows="15" cols="80" disabled="true">${oauthParams.claimsSet}</textarea></td>
-        </tr>
-	</table>
-</form:form>
-	
-</body>
+          </tr>
+        </table>
+      </form:form>
+
+    </div>
+  </body>
+
 </html>

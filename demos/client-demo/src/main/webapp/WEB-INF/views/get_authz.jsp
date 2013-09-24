@@ -27,62 +27,64 @@
 <%--@elvariable id="oauthParams" type="org.apache.oltu.oauth2.client.demo.model.OAuthParams"--%>
 
 <html>
-<head>
-    <title>OAuth V2.0 Client Application</title>
-</head>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <title>Apache Oltu - OAuth V2.0 Client Application</title>
+  </head>
 
-<body>
-<h1>Sample OAuth V2.0 Client Application</h1>
+  <body>
+    <div class="container">
+      <h1>Apache Oltu - Sample OAuth V2.0 Client Application</h1>
 
-<h2>Web Server Flow</h2>
+      <h2>Web Server Flow</h2>
 
-<h3>Step 1. Get User's Authorization</h3></p>
+      <h3>Step 1. Get User's Authorization, specify required OAuth parameters</h3>
 
-<c:if test="${!empty oauthParams.errorMessage}">
-    <font color="red"><p>Error: ${oauthParams.errorMessage}</p></font>
-</c:if>
+      <c:if test="${!empty oauthParams.errorMessage}">
+        <div class="alert alert-danger">Error: ${oauthParams.errorMessage}</div>
+      </c:if>
 
-<form:form commandName="oauthParams" action="/authorize">
-    <table>
-        <tr>
-            <td>Required OAuth parameters:</td>
-        </tr>
-        <tr>
+      <form:form commandName="oauthParams" action="/authorize">
+        <table class="table table-striped">
+          <tr>
             <td>Requested Access Scope</td>
-            <td><form:input size="70" path="scope"/></td>
-        </tr>
-        <tr>
+            <td><form:input size="70" path="scope" /></td>
+          </tr>
+          <tr>
             <td>End-User Authorization URL:</td>
-            <td><form:input size="70" path="authzEndpoint"/></td>
-        </tr>
-        <tr>
+            <td><form:input size="70" path="authzEndpoint" /></td>
+          </tr>
+          <tr>
             <td>Token Endpoint:</td>
-            <td><form:input size="70" path="tokenEndpoint"/></td>
-        </tr>
-        <tr>
+            <td><form:input size="70" path="tokenEndpoint" /></td>
+          </tr>
+          <tr>
             <td>Client ID:</td>
-            <td><form:input size="70" path="clientId"/></td>
-        </tr>
-        <tr>
+            <td><form:input size="70" path="clientId" /></td>
+          </tr>
+          <tr>
             <td>Client Secret:</td>
-            <td><form:input size="70" path="clientSecret"/></td>
-        </tr>
-        <tr>
+            <td><form:input size="70" path="clientSecret" /></td>
+          </tr>
+          <tr>
             <td>Redirect URI:</td>
-            <td><form:input size="70" path="redirectUri"/></td>
-        </tr>
-        <tr>
+            <td><form:input size="70" path="redirectUri" /></td>
+          </tr>
+          <tr>
             <td>Client State:</td>
-            <td><form:input size="70" path="state"/></td>
-        </tr>
-        <tr>
+            <td><form:input size="70" path="state" /></td>
+          </tr>
+         <tr>
             <td colspan="2">
-                <form:hidden path="application"/>
-                <input type="submit" value="Get Authorization"/>
+              <form:hidden path="application" />
+              <input type="submit" class="btn btn-primary" value="Get Authorization" />
             </td>
-        </tr>
-    </table>
-</form:form>
+          </tr>
+        </table>
+      </form:form>
 
-</body>
+    </div>
+  </body>
+
 </html>

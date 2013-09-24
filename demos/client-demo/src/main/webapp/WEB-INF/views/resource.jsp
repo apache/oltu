@@ -27,22 +27,25 @@
 <%--@elvariable id="oauthParams" type="org.apache.oltu.oauth2.client.demo.model.OAuthParams"--%>
 
 <html>
-<head>
-    <title>OAuth V2.0 Client Application</title>
-</head>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <title>Apache Oltu - OAuth V2.0 Client Application</title>
+  </head>
 
-<body>
-<h1>Sample OAuth V2.0 Client Application</h1>
+  <body>
+    <div class="container">
+      <h1>Apache Oltu - Sample OAuth V2.0 Client Application</h1>
 
-<h2>Web Server Flow</h2>
+      <h2>Web Server Flow</h2>
 
-<h3>Your Resource:</h3>
+      <h3>Your Resource:</h3>
 
-<c:if test="${!empty oauthParams.errorMessage}">
-    <p><font color="red">${oauthParams.errorMessage}</font></p>
-</c:if>
+      <c:if test="${!empty oauthParams.errorMessage}">
+      <div class="alert alert-danger">${oauthParams.errorMessage}</div>
+      </c:if>
 
-<textarea rows="15" cols="80" disabled="true">${oauthParams.resource}</textarea>
-
-</body>
+      <textarea rows="15" cols="80" disabled="true">${oauthParams.resource}</textarea>
+    </div>
+  </body>
 </html>

@@ -27,55 +27,58 @@
 <%--@elvariable id="oauthParams" type="org.apache.oltu.oauth2.client.demo.model.OAuthParams"--%>
 
 <html>
-<head>
-    <title>OAuth V2.0 Client Application</title>
-</head>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <title>Apache Oltu - OAuth V2.0 Client Application</title>
+  </head>
 
-<body>
-<h1>Sample OAuth V2.0 Client Application</h1>
+  <body>
+    <div class="container">
+      <h1>Apache Oltu - Sample OAuth V2.0 Client Application</h1>
 
-<h2>Web Server Flow</h2>
+      <h2>Web Server Flow</h2>
 
-<h3>Choose Application</h3>
+      <h3>Choose Application</h3>
 
-<a href="/main/generic">Generic OAuth2 Application</a> 
-<a href="/main/smart_gallery">Smart Gallery</a>
-<a href="/main/facebook">Facebook</a>
-<a href="/main/google">Google</a>
-<a href="/main/github">Github</a>
-<a href="/main/linkedin">LinkedIn</a>
+      <ol class="breadcrumb">
+        <li><a href="/main/generic">Generic OAuth2 Application</a></li>
+        <li><a href="/main/smart_gallery">Smart Gallery</a></li>
+        <li><a href="/main/facebook">Facebook</a></li>
+        <li><a href="/main/google">Google</a></li>
+        <li><a href="/main/github">Github</a></li>
+        <li><a href="/main/linkedin">LinkedIn</a></li>
+      </ol>
 
+      <h2>JWT decoder</h2>
 
-<h2>JWT decoder</h2>
+      <c:if test="${!empty oauthParams.errorMessage}">
+        <div class="alert alert-danger">${oauthParams.errorMessage}</div>
+      </c:if>
 
-<c:if test="${!empty oauthParams.errorMessage}">
-    <p><font color="red">${oauthParams.errorMessage}</font></p>
-</c:if>
-
-<form:form commandName="oauthParams" action="/decode">
-	<table>
-		
-		<tr>
+      <form:form commandName="oauthParams" action="/decode">
+        <table class="table table-striped">
+          <tr>
             <td>JWT</td>
             <td><form:input size="170" path="jwt" /></td>
-        </tr>
-        <tr>
+          </tr>
+          <tr>
             <td colspan="2">
-                <form:hidden path="application"/>
-                <input type="submit" value="Decode"/>
+              <form:hidden path="application" />
+              <input type="submit" class="btn btn-primary" value="Decode" />
             </td>
-        </tr>
-        <tr>
+          </tr>
+          <tr>
             <td>Header:</td>
             <td><textarea rows="15" cols="80" disabled="true">${oauthParams.header}</textarea></td>
-        </tr>
-        <tr>
+          </tr>
+          <tr>
             <td>Claims Set:</td>
             <td><textarea rows="15" cols="80" disabled="true">${oauthParams.claimsSet}</textarea></td>
-        </tr>
-  	</table>
-</form:form>
+          </tr>
+        </table>
+      </form:form>
 
-
-</body>
+    </div>
+  </body>
 </html>
