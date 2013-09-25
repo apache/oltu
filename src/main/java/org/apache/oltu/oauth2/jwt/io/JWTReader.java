@@ -57,7 +57,7 @@ public final class JWTReader extends AbstractJWTIO {
         String line = null;
         try {
             while ((line = reader.readLine()) != null) {
-                buffer.append(line);
+                buffer.append(line.trim());
             }
         } catch (IOException e) {
             // it cannot happen
