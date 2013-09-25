@@ -41,14 +41,18 @@
 
       <h3>Choose Application</h3>
 
-      <ol class="breadcrumb">
-        <li><a href="/main/generic">Generic OAuth2 Application</a></li>
-        <li><a href="/main/smart_gallery">Smart Gallery</a></li>
-        <li><a href="/main/facebook">Facebook</a></li>
-        <li><a href="/main/google">Google</a></li>
-        <li><a href="/main/github">Github</a></li>
-        <li><a href="/main/linkedin">LinkedIn</a></li>
-      </ol>
+      <nav class="navbar navbar-default" role="navigation">
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/main/generic">Generic OAuth2 Application</a></li>
+            <li><a href="/main/smart_gallery">Smart Gallery</a></li>
+            <li><a href="/main/facebook">Facebook</a></li>
+            <li><a href="/main/google">Google</a></li>
+            <li><a href="/main/github">Github</a></li>
+            <li><a href="/main/linkedin">LinkedIn</a></li>
+          </ul>
+        </div>
+      </nav>
 
       <h2>JWT decoder</h2>
 
