@@ -55,7 +55,7 @@ public enum OAuthProviderType {
 	MICROSOFT(
 			"Microsoft", 
 			"https://login.live.com/oauth20_authorize.srf", 
-			"POST https://login.live.com/oauth20_token.srf"),
+			"https://login.live.com/oauth20_token.srf"),
 	
 	PAYPAL(
 			"PayPal", 
