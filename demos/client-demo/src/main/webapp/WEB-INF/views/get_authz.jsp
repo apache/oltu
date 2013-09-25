@@ -37,51 +37,47 @@
     <div class="container">
       <h1>Apache Oltu - Sample OAuth V2.0 Client Application</h1>
 
-      <h2>Web Server Flow</h2>
-
-      <h3>Step 1. Get User's Authorization, specify required OAuth parameters</h3>
+      <div class="page-header">
+        <h2>Web Server Flow
+        <small>Step 1. Get User's Authorization, specify required OAuth parameters</small></h2>
+      </div>
 
       <c:if test="${!empty oauthParams.errorMessage}">
         <div class="alert alert-danger">Error: ${oauthParams.errorMessage}</div>
       </c:if>
 
-      <form:form commandName="oauthParams" action="/authorize">
-        <table class="table table-striped">
-          <tr>
-            <td>Requested Access Scope</td>
-            <td><form:input size="70" path="scope" /></td>
-          </tr>
-          <tr>
-            <td>End-User Authorization URL:</td>
-            <td><form:input size="70" path="authzEndpoint" /></td>
-          </tr>
-          <tr>
-            <td>Token Endpoint:</td>
-            <td><form:input size="70" path="tokenEndpoint" /></td>
-          </tr>
-          <tr>
-            <td>Client ID:</td>
-            <td><form:input size="70" path="clientId" /></td>
-          </tr>
-          <tr>
-            <td>Client Secret:</td>
-            <td><form:input size="70" path="clientSecret" /></td>
-          </tr>
-          <tr>
-            <td>Redirect URI:</td>
-            <td><form:input size="70" path="redirectUri" /></td>
-          </tr>
-          <tr>
-            <td>Client State:</td>
-            <td><form:input size="70" path="state" /></td>
-          </tr>
-         <tr>
-            <td colspan="2">
-              <form:hidden path="application" />
-              <input type="submit" class="btn btn-primary" value="Get Authorization" />
-            </td>
-          </tr>
-        </table>
+      <form:form class="form-horizontal" role="form" commandName="oauthParams" action="/authorize">
+        <div class="form-group">
+          <label for="scope" class="col-lg-3 control-label">Requested Access Scope</label>
+          <div class="col-lg-9"><form:input class="form-control" id="scope" path="scope" /></div>
+        </div>
+        <div class="form-group">
+          <label for="authzEndpoint" class="col-lg-3 control-label">End-User Authorization URL</label>
+          <div class="col-lg-9"><form:input class="form-control" id="authzEndpoint" path="authzEndpoint" /></div>
+        </div>
+        <div class="form-group">
+          <label for="tokenEndpoint" class="col-lg-3 control-label">Token Endpoint</label>
+          <div class="col-lg-9"><form:input class="form-control" id="tokenEndpoint" path="tokenEndpoint" /></div>
+        </div>
+        <div class="form-group">
+          <label for="clientId" class="col-lg-3 control-label">Client ID</label>
+          <div class="col-lg-9"><form:input class="form-control" id="clientId" path="clientId" /></div>
+        </div>
+        <div class="form-group">
+          <label for="clientSecret" class="col-lg-3 control-label">Client Secret</label>
+          <div class="col-lg-9"><form:input class="form-control" id="clientSecret" path="clientSecret" /></div>
+        </div>
+        <div class="form-group">
+          <label for="redirectUri" class="col-lg-3 control-label">Redirect URI</label>
+          <div class="col-lg-9"><form:input class="form-control" id="redirectUri" path="redirectUri" /></div>
+        </div>
+        <div class="form-group">
+          <label for="state" class="col-lg-3 control-label">Client State</label>
+          <div class="col-lg-9"><form:input class="form-control" id="state" path="state" /></div>
+        </div>
+
+        <form:hidden path="application" />
+        <input type="submit" class="btn btn-primary pull-right" value="Get Authorization" />
       </form:form>
 
     </div>

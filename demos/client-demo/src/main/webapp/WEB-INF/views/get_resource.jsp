@@ -37,116 +37,124 @@
     <div class="container">
       <h1>Apache Oltu - Sample OAuth V2.0 Client Application</h1>
 
-      <h2>Web Server Flow</h2>
-
-      <h3>Step 3. Get Resource</h3></p>
+      <div class="page-header">
+        <h2>Web Server Flow
+        <small>Step 3. Get Resource</small></h2>
+      </div>
 
       <c:if test="${!empty oauthParams.errorMessage}">
         <div class="alert alert-danger">${oauthParams.errorMessage}</div>
       </c:if>
 
-      <form:form commandName="oauthParams" action="/get_resource">
-        <table class="table table-striped">
-          <tr>
-            <td>Required OAuth parameters:</td>
-          </tr>
-          <tr>
-            <td>Resource URL:</td>
-            <td><form:input size="70" path="resourceUrl" /></td>
-          </tr>
-          <tr>
-            <td>Authenticated Request Type:</td>
-            <td>
-              <form:select path="requestType">
-                <form:option value="headerField" />
-                <form:option value="queryParameter" />
-                <form:option value="bodyParameter" />
-              </form:select>
-            </td>
-          </tr>
-          <tr>
-            <td>Request Method:</td>
-            <td>
-              <form:select path="requestMethod">
+      <form:form class="form-horizontal" role="form" commandName="oauthParams" action="/get_resource">
+        <div class="form-group">
+          <label for="resourceUrl" class="col-lg-3 control-label">Resource URL</label>
+          <div class="col-lg-9"><form:input class="form-control" id="resourceUrl" path="resourceUrl" /></div>
+        </div>
+        <div class="form-group">
+          <label for="requestType" class="col-lg-3 control-label">Authenticated Request Type</label>
+          <div class="col-lg-9">
+            <form:select class="form-control" id="requestType" path="requestType">
+              <form:option value="headerField" />
+              <form:option value="queryParameter" />
+              <form:option value="bodyParameter" />
+            </form:select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="requestMethod" class="col-lg-3 control-label">Request Method</label>
+          <div class="col-lg-9">
+            <form:select class="form-control" id="requestMethod" path="requestMethod">
                 <form:option value="GET" />
                 <form:option value="POST" />
-              </form:select>
-            </td>
-          </tr>
-          <tr>
-            <td>Access Token:</td>
-            <td><form:input size="70" path="accessToken" readonly="true" /></td>
-          </tr>
-          <tr>
-            <td>Expires In:</td>
-            <td><form:input size="70" path="expiresIn" readonly="true" /></td>
-          </tr>
-          <tr>
-            <td>Refresh Token:</td>
-            <td><form:input size="70" path="refreshToken" readonly="true" /></td>
-          </tr>
-          <tr>
-            <td>Requested Access Scope</td>
-            <td><form:input size="70" path="scope" readonly="true" /></td>
-          </tr>
-          <tr>
-            <td>End-User Authorization URL:</td>
-            <td><form:input size="70" path="authzEndpoint" readonly="true" /></td>
-          </tr>
-          <tr>
-            <td>Token Endpoint:</td>
-            <td><form:input size="70" path="tokenEndpoint" readonly="true" /></td>
-          </tr>
-          <tr>
-            <td>Client ID:</td>
-            <td><form:input size="70" path="clientId" readonly="true" /></td>
-          </tr>
-          <tr>
-            <td>Client Secret:</td>
-            <td><form:input size="70" path="clientSecret" readonly="true" /></td>
-          </tr>
-          <tr>
-            <td>Redirect URI:</td>
-            <td><form:input size="70" path="redirectUri" readonly="true" /></td>
-          </tr>
-          <tr>
-            <td>Client State:</td>
-            <td><form:input size="70" path="state" readonly="true" /></td>
-          </tr>
-          <tr>
-            <td colspan="2">
-              <form:hidden path="application" />
-              <input type="submit" class="btn btn-primary" value="Get Resource" />
-            </td>
-          </tr>
-        </table>
+            </form:select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="accessToken" class="col-lg-3 control-label">Access Token</label>
+          <div class="col-lg-9"><form:input class="form-control" id="accessToken" path="accessToken" readonly="readonly" /></div>
+        </div>
+        <div class="form-group">
+          <label for="expiresIn" class="col-lg-3 control-label">Expires In</label>
+          <div class="col-lg-9"><form:input class="form-control" id="expiresIn" path="expiresIn" readonly="readonly" /></div>
+        </div>
+        <div class="form-group">
+          <label for="refreshToken" class="col-lg-3 control-label">Refresh Token</label>
+          <div class="col-lg-9"><form:input class="form-control" id="refreshToken" path="refreshToken" readonly="readonly" /></div>
+        </div>
+        <div class="form-group">
+          <label for="scope" class="col-lg-3 control-label">Requested Access Scope</label>
+          <div class="col-lg-9"><form:input class="form-control" id="scope" path="scope" readonly="readonly" /></div>
+        </div>
+        <div class="form-group">
+          <label for="authzEndpoint" class="col-lg-3 control-label">End-User Authorization URL</label>
+          <div class="col-lg-9"><form:input class="form-control" id="authzEndpoint" path="authzEndpoint" readonly="readonly" /></div>
+        </div>
+        <div class="form-group">
+          <label for="tokenEndpoint" class="col-lg-3 control-label">Token Endpoint</label>
+          <div class="col-lg-9"><form:input class="form-control" id="tokenEndpoint" path="tokenEndpoint" readonly="readonly" /></div>
+        </div>
+        <div class="form-group">
+          <label for="clientId" class="col-lg-3 control-label">Client ID</label>
+          <div class="col-lg-9"><form:input class="form-control" id="clientId" path="clientId" readonly="readonly" /></div>
+        </div>
+        <div class="form-group">
+          <label for="clientSecret" class="col-lg-3 control-label">Client Secret</label>
+          <div class="col-lg-9"><form:input class="form-control" id="clientSecret" path="clientSecret" readonly="readonly" /></div>
+        </div>
+        <div class="form-group">
+          <label for="redirectUri" class="col-lg-3 control-label">Redirect URI</label>
+          <div class="col-lg-9"><form:input class="form-control" id="redirectUri" path="redirectUri" readonly="readonly" /></div>
+        </div>
+        <div class="form-group">
+          <label for="state" class="col-lg-3 control-label">Client State</label>
+          <div class="col-lg-9"><form:input class="form-control" id="state" path="state" readonly="readonly" /></div>
+        </div>
+
+        <form:hidden path="application" />
+        <input type="submit" class="btn btn-primary pull-right" value="Get Resource" />
       </form:form>
 
       <form:form commandName="oauthParams" action="/get_resource">
         <h4>OpenId Connect</h4>
 
-        <table class="table table-striped">
-          <tr>
-            <td>ID Token:</td>
-            <td><form:input size="70" path="idToken" readonly="true" /></td>
-            <td>
-              <c:if test="${oauthParams.idTokenValid}">
-                <font color="green">ID Token is valid</font>
-              </c:if>
-              <c:if test="${!oauthParams.idTokenValid}">
-                <font color="red">ID Token is NOT valid</font>
-              </c:if>
-            </td>
-          </tr>
-          <tr>
-            <td>Header:</td>
-            <td><textarea rows="15" cols="80" disabled="true">${oauthParams.header}</textarea></td>
-          </tr>
-          <tr>
-            <td>Claims Set:</td>
-            <td><textarea rows="15" cols="80" disabled="true">${oauthParams.claimsSet}</textarea></td>
-          </tr>
-        </table>
+        <c:if test="${oauthParams.idTokenValid}">
+          <div class="panel panel-success">
+            <div class="panel-heading">
+              <h3 class="panel-title">OpenId Connect</h3>
+            </div>
+            <div class="panel-body">ID Token is valid</div>
+          </div>
+        </c:if>
+
+        <c:if test="${!oauthParams.idTokenValid}">
+          <div class="panel panel-success">
+            <div class="panel-heading">
+              <h3 class="panel-title">OpenId Connect</h3>
+            </div>
+            <div class="panel-body">ID Token is NOT valid</div>
+          </div>
+        </c:if>
+
+        <c:if test="${!empty oauthParams.header}">
+          <div class="clearfix">&nbsp;<br/>&nbsp;</div>
+
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Header</h3>
+            </div>
+            <div class="panel-body">${oauthParams.header}</div>
+          </div>
+        </c:if>
+
+        <c:if test="${!empty oauthParams.claimsSet}">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Claims Set</h3>
+            </div>
+            <div class="panel-body">${oauthParams.claimsSet}</div>
+          </div>
+        </c:if>
       </form:form>
 
     </div>

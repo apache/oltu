@@ -37,61 +37,54 @@
     <div class="container">
       <h1>Apache Oltu - Sample OAuth V2.0 Client Application</h1>
 
-      <h2>Dynamic Registration</h2>
-
-      <h3>Step 0. Dynamically Register Application</h3>
+      <div class="page-header">
+        <h2>Dynamic Registration
+        <small>Step 0. Dynamically Register Application</small></h2>
+      </div>
 
       <c:if test="${!empty oauthRegParams.errorMessage}">
       <div class="alert alert-danger">${oauthRegParams.errorMessage}</div>
       </c:if>
 
-      <form:form commandName="oauthRegParams" action="/register">
-        <table class="table table-striped">
-          <tr>
-            <td>Required OAuth Dynamic Registration parameters:</td>
-          </tr>
-          <tr>
-            <td>Registration Type:</td>
-            <td>
-              <form:select path="registrationType">
-                <form:option value="push"/>
-                <form:option value="pull"/>
-              </form:select>
-            </td>
-          </tr>
-          <tr>
-            <td>Application Name:</td>
-            <td><form:input size="70" path="name" /></td>
-          </tr>
-          <tr>
-            <td>Application URL:</td>
-            <td><form:input size="70" path="url" /></td>
-          </tr>
-          <tr>
-            <td>Application Description:</td>
-            <td><form:input size="70" path="description" /></td>
-          </tr>
-          <tr>
-            <td>Application Redirect URI:</td>
-            <td><form:input size="70" path="redirectUri" /></td>
-          </tr>
-          <tr>
-            <td>Application Icon URL:</td>
-            <td><form:input size="70" path="icon" /></td>
-          </tr>
-          <tr>
-            <td>OAuth Registration Endpoint:</td>
-            <td><form:input size="70" path="registrationEndpoint" /></td>
-          </tr>
-          <tr>
-            <td colspan="2">
-              <form:hidden path="authzEndpoint" />
-              <form:hidden path="tokenEndpoint" />
-              <form:hidden path="application" />
-              <input type="submit" class="btn btn-primary" value="Register Application" />
-            </td>
-          </tr>
-        </table>
+      <form:form class="form-horizontal" role="form" commandName="oauthRegParams" action="/register">
+        <div class="form-group">
+          <label for="registrationType" class="col-lg-3 control-label">Registration Type</label>
+          <div class="col-lg-9">
+            <form:select class="form-control" id="registrationType" path="registrationType">
+              <form:option value="push"/>
+              <form:option value="pull"/>
+            </form:select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="name" class="col-lg-3 control-label">Application Name</label>
+          <div class="col-lg-9"><form:input class="form-control" id="name" path="name" /></div>
+        </div>
+        <div class="form-group">
+          <label for="url" class="col-lg-3 control-label">Application URL</label>
+          <div class="col-lg-9"><form:input class="form-control" id="url" path="url" /></div>
+        </div>
+        <div class="form-group">
+          <label for="description" class="col-lg-3 control-label">Application Description</label>
+          <div class="col-lg-9"><form:input class="form-control" id="description" path="description" /></div>
+        </div>
+        <div class="form-group">
+          <label for="redirectUri" class="col-lg-3 control-label">Application Redirect URI</label>
+          <div class="col-lg-9"><form:input class="form-control" id="redirectUri" path="redirectUri" /></div>
+        </div>
+        <div class="form-group">
+          <label for="icon" class="col-lg-3 control-label">Application Icon URL</label>
+          <div class="col-lg-9"><form:input class="form-control" id="icon" path="icon" /></div>
+        </div>
+        <div class="form-group">
+          <label for="registrationEndpoint" class="col-lg-3 control-label">OAuth Registration Endpoint</label>
+          <div class="col-lg-9"><form:input class="form-control" id="registrationEndpoint" path="registrationEndpoint" /></div>
+        </div>
+
+        <form:hidden path="authzEndpoint" />
+        <form:hidden path="tokenEndpoint" />
+        <form:hidden path="application" />
+        <input type="submit" class="btn btn-primary pull-right" value="Register Application" />
       </form:form>
 
     </div>

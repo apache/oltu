@@ -37,9 +37,7 @@
     <div class="container">
       <h1>Apache Oltu - Sample OAuth V2.0 Client Application</h1>
 
-      <h2>Web Server Flow</h2>
-
-      <h3>Choose Application</h3>
+      <div class="page-header"><h2>Web Server Flow <small>Choose Application</small></h2></div>
 
       <nav class="navbar navbar-default" role="navigation">
         <div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -60,28 +58,32 @@
         <div class="alert alert-danger">${oauthParams.errorMessage}</div>
       </c:if>
 
-      <form:form commandName="oauthParams" action="/decode">
-        <table class="table table-striped">
-          <tr>
-            <td>JWT</td>
-            <td><form:textarea rows="15" cols="80" path="jwt" /></td>
-          </tr>
-          <tr>
-            <td colspan="2">
-              <form:hidden path="application" />
-              <input type="submit" class="btn btn-primary" value="Decode" />
-            </td>
-          </tr>
-          <tr>
-            <td>Header:</td>
-            <td><textarea rows="15" cols="80" disabled="true">${oauthParams.header}</textarea></td>
-          </tr>
-          <tr>
-            <td>Claims Set:</td>
-            <td><textarea rows="15" cols="80" disabled="true">${oauthParams.claimsSet}</textarea></td>
-          </tr>
-        </table>
+      <form:form role="form" commandName="oauthParams" action="/decode">
+        <form:textarea path="jwt" id="jwt" rows="15" class="form-control" />
+        <form:hidden path="application" />
+        <div class="clearfix">&nbsp;<br/></div>
+        <input type="submit" class="btn btn-primary pull-right" value="Decode" />
       </form:form>
+
+      <c:if test="${!empty oauthParams.header}">
+        <div class="clearfix">&nbsp;<br/>&nbsp;</div>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Header</h3>
+          </div>
+          <div class="panel-body">${oauthParams.header}</div>
+        </div>
+      </c:if>
+
+      <c:if test="${!empty oauthParams.claimsSet}">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Claims Set</h3>
+          </div>
+          <div class="panel-body">${oauthParams.claimsSet}</div>
+        </div>
+      </c:if>
 
     </div>
   </body>

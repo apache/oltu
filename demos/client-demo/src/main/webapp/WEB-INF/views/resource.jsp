@@ -37,15 +37,18 @@
     <div class="container">
       <h1>Apache Oltu - Sample OAuth V2.0 Client Application</h1>
 
-      <h2>Web Server Flow</h2>
-
-      <h3>Your Resource:</h3>
+      <div class="page-header">
+        <h2>Web Server Flow
+        <small>Your Resource</small></h2>
+      </div>
 
       <c:if test="${!empty oauthParams.errorMessage}">
       <div class="alert alert-danger">${oauthParams.errorMessage}</div>
       </c:if>
 
-      <textarea rows="15" cols="80" disabled="true">${oauthParams.resource}</textarea>
+      <div class="panel panel-default">
+        <div class="panel-body">${oauthParams.resource}</div>
+      </div>
     </div>
   </body>
 </html>
