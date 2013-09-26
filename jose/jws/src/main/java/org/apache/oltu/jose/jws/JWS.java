@@ -58,31 +58,36 @@ public class JWS {
         return signature;
     }
 
-    public <SK extends SigningKey, VK extends VerifyingKey> boolean validate(SignatureMethod<SK, VK> method,
-                                                                             VK verifyingKey) {
+    public <SK extends SigningKey, VK extends VerifyingKey> boolean acceptAlgorithm(SignatureMethod<SK, VK> method) {
         if (method == null) {
             throw new IllegalArgumentException("A signature method is required in order to verify the signature.");
         }
-        if (verifyingKey == null) {
-            throw new IllegalArgumentException("A verifying key is required in order to verify the signature.");
-        }
-
         if (header == null || header.getAlgorithm() == null) {
             throw new IllegalStateException("JWS token must have a valid JSON header with specified algorithm.");
         }
-        if (payload == null) {
-            throw new IllegalStateException("JWS token must have a payload.");
-        }
-        if (signature == null) {
-            throw new IllegalStateException("JWS token must have a signature to be verified.");
-        }
 
-        if (!header.getAlgorithm().equalsIgnoreCase(method.getAlgorithm())) {
+        return header.getAlgorithm().equalsIgnoreCase(method.getAlgorithm());
+    }
+
+    public <SK extends SigningKey, VK extends VerifyingKey> boolean validate(SignatureMethod<SK, VK> method,
+                                                                             VK verifyingKey) {
+        if (!acceptAlgorithm(method)) {
             throw new IllegalArgumentException("Impossible to verify current JWS signature with algorithm '"
                                                + method.getAlgorithm()
                                                + "', JWS header specifies message has been signed with '"
                                                + header.getAlgorithm()
                                                + "' algorithm.");
+        }
+
+        if (verifyingKey == null) {
+            throw new IllegalArgumentException("A verifying key is required in order to verify the signature.");
+        }
+
+        if (payload == null) {
+            throw new IllegalStateException("JWS token must have a payload.");
+        }
+        if (signature == null) {
+            throw new IllegalStateException("JWS token must have a signature to be verified.");
         }
 
         return method.verify(signature, payload, verifyingKey);
