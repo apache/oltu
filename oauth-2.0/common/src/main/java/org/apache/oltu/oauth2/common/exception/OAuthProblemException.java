@@ -31,7 +31,7 @@ import org.apache.oltu.oauth2.common.utils.OAuthUtils;
  *
  *
  */
-public final class OAuthProblemException extends Exception {
+public class OAuthProblemException extends Exception {
 
     private String error;
     private String description;
@@ -44,11 +44,11 @@ public final class OAuthProblemException extends Exception {
 
     private Map<String, String> parameters = new HashMap<String, String>();
 
-    private OAuthProblemException(String error) {
+    protected OAuthProblemException(String error) {
         this(error, "");
     }
 
-    private OAuthProblemException(String error, String description) {
+    protected OAuthProblemException(String error, String description) {
         super(error + " " + description);
         this.description = description;
         this.error = error;
