@@ -51,15 +51,7 @@ public class RedirectController {
 
 
         try {
-
-            // Create the response wrapper
-            OAuthAuthzResponse oar = null;
-            oar = OAuthAuthzResponse.oauthCodeAuthzResponse(request);
-
-
-            // Get Authorization Code
-            String code = oar.getCode();
-
+        	
             // Get OAuth Info
             String clientId = Utils.findCookieValue(request, "clientId");
             String clientSecret = Utils.findCookieValue(request, "clientSecret");
@@ -69,10 +61,6 @@ public class RedirectController {
             String scope = Utils.findCookieValue(request, "scope");
             String state = Utils.findCookieValue(request, "state");
 
-            String app = Utils.findCookieValue(request, "app");
-            response.addCookie(new Cookie("app", app));
-
-            oauthParams.setAuthzCode(code);
             oauthParams.setClientId(clientId);
             oauthParams.setClientSecret(clientSecret);
             oauthParams.setAuthzEndpoint(authzEndpoint);
@@ -80,8 +68,19 @@ public class RedirectController {
             oauthParams.setRedirectUri(redirectUri);
             oauthParams.setScope(Utils.isIssued(scope));
             oauthParams.setState(Utils.isIssued(state));
-            oauthParams.setApplication(app);
+            
+            // Create the response wrapper
+            OAuthAuthzResponse oar = null;
+            oar = OAuthAuthzResponse.oauthCodeAuthzResponse(request);
 
+            // Get Authorization Code
+            String code = oar.getCode();
+            oauthParams.setAuthzCode(code);
+
+            String app = Utils.findCookieValue(request, "app");
+            response.addCookie(new Cookie("app", app));
+
+            oauthParams.setApplication(app);
 
         } catch (OAuthProblemException e) {
             StringBuffer sb = new StringBuffer();
@@ -91,7 +90,7 @@ public class RedirectController {
             sb.append("Error uri: ").append(e.getUri()).append("</br>");
             sb.append("State: ").append(e.getState()).append("</br>");
             oauthParams.setErrorMessage(sb.toString());
-            return new ModelAndView("main");
+            return new ModelAndView("get_authz");
         }
 
         return new ModelAndView("request_token");
