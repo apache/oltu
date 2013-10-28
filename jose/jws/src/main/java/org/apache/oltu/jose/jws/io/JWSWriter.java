@@ -16,15 +16,11 @@
  */
 package org.apache.oltu.jose.jws.io;
 
-import java.io.StringWriter;
-import java.util.Arrays;
 import java.util.Map.Entry;
 
 import org.apache.oltu.jose.jws.Header;
 import org.apache.oltu.jose.jws.JWS;
-import org.codehaus.jettison.json.JSONArray;
-import org.codehaus.jettison.json.JSONException;
-import org.codehaus.jettison.json.JSONObject;
+import org.json.JSONStringer;
 
 public final class JWSWriter extends AbstractJWSIO {
 
@@ -62,59 +58,50 @@ public final class JWSWriter extends AbstractJWSIO {
             throw new IllegalArgumentException("Null JWT Header cannot be serialized to JSON representation.");
         }
 
-        JSONObject object = new JSONObject();
-        setString(object, ALGORITHM, header.getAlgorithm());
-        setString(object, JWK_SET_URL, header.getJwkSetUrl());
-        setString(object, JSON_WEB_KEY, header.getJsonWebKey());
-        setString(object, X509_URL, header.getX509url());
-        setString(object, X509_CERTIFICATE_THUMBPRINT, header.getX509CertificateThumbprint());
-        setString(object, X509_CERTIFICATE_CHAIN, header.getX509CertificateChain());
-        setString(object, KEY_ID, header.getKeyId());
-        setString(object, TYPE, header.getType());
-        setString(object, CONTENT_TYPE, header.getContentType());
-        setStringArray(object, CRITICAL, header.getCritical());
+        JSONStringer jsonWriter = new JSONStringer();
+        jsonWriter.object();
+
+        setString(jsonWriter, ALGORITHM, header.getAlgorithm());
+        setString(jsonWriter, JWK_SET_URL, header.getJwkSetUrl());
+        setString(jsonWriter, JSON_WEB_KEY, header.getJsonWebKey());
+        setString(jsonWriter, X509_URL, header.getX509url());
+        setString(jsonWriter, X509_CERTIFICATE_THUMBPRINT, header.getX509CertificateThumbprint());
+        setString(jsonWriter, X509_CERTIFICATE_CHAIN, header.getX509CertificateChain());
+        setString(jsonWriter, KEY_ID, header.getKeyId());
+        setString(jsonWriter, TYPE, header.getType());
+        setString(jsonWriter, CONTENT_TYPE, header.getContentType());
+        setStringArray(jsonWriter, CRITICAL, header.getCritical());
 
         for (Entry<String, Object> customField : header.getCustomFields()) {
-            setObject(object, customField.getKey(), customField.getValue());
+            setObject(jsonWriter, customField.getKey(), customField.getValue());
         }
 
-        StringWriter writer = new StringWriter();
-        try {
-            object.write(writer);
-        } catch (JSONException e) {
-            // swallow it, it should be safe enough to write to a StringWriter
-        }
-        return writer.toString();
+        return jsonWriter.endObject().toString();
     }
 
-    private static void setString(JSONObject object, String key, String value) {
+    private static void setString(JSONStringer jsonWriter, String key, String value) {
         if (value != null) {
-            try {
-                object.put(key, value);
-            } catch (JSONException e) {
-                // swallow it, null values are already guarded
-            }
+            jsonWriter.key(key).value(value);
         }
     }
 
-    private static void setStringArray(JSONObject object, String key, String[] value) {
+    private static void setStringArray(JSONStringer jsonWriter, String key, String[] value) {
         if (value != null) {
-            JSONArray array = new JSONArray(Arrays.asList(value));
-            try {
-                object.put(key, array);
-            } catch (JSONException e) {
-                // swallow it, null values are already guarded
+            jsonWriter.key(key).array();
+
+            for (Object item : value) {
+                if (item != null) {
+                    jsonWriter.value(item);
+                }
             }
+
+            jsonWriter.endArray();
         }
     }
 
-    private static void setObject(JSONObject object, String key, Object value) {
+    private static void setObject(JSONStringer jsonWriter, String key, Object value) {
         if (value != null) {
-            try {
-                object.put(key, value);
-            } catch (JSONException e) {
-                // swallow it, null values are already guarded
-            }
+            jsonWriter.key(key).value(value);
         }
     }
 

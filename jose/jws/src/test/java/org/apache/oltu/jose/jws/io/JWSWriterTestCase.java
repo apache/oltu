@@ -19,7 +19,6 @@ package org.apache.oltu.jose.jws.io;
 import static org.junit.Assert.assertEquals;
 
 import org.apache.oltu.jose.jws.JWS;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public final class JWSWriterTestCase {
@@ -27,16 +26,17 @@ public final class JWSWriterTestCase {
     private final JWSWriter jwsWriter = new JWSWriter();
 
     @Test
-    @Ignore // FIXME JSON field order makes the function not invertible!!!
     public void serialize() {
         JWS jws = new JWS.Builder()
                          .setAlgorithm("HS256")
                          .setType("JWT")
+                         .setCritical(new String[]{ "exp" })
                          .setPayload("{\"iss\":\"joe\",\r\n \"exp\":1300819380,\r\n \"http://example.com/is_root\":true}")
                          .setSignature("tߴ���%O�`}ح���%Miֿ�[XXS��y")
                          .build();
         String actual = jwsWriter.write(jws).replaceAll("\r?\n", "");
-        assertEquals("eyJ0eXAiOiJKV1QiLA0KICJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJqb2UiLA0KICJleHAiOjEzMDA4MTkzODAsDQogImh0dHA6Ly9leGFtcGxlLmNvbS9pc19yb290Ijp0cnVlfQ.dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk", actual);
+        assertEquals("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImNyaXQiOlsiZXhwIl19.eyJpc3MiOiJqb2UiLA0KICJleHAiOjEzMDA4MTkzODAsDQogImh0dHA6Ly9leGFtcGxlLmNvbS9pc19yb290Ijp0cnVlfQ.dBjftO-_ve-_ve-_vSVP77-9YH3Yre-_ve-_vRbvv70lTWnWv--_vVtYBVhT77-977-9eQ",
+                     actual);
     }
 
 }

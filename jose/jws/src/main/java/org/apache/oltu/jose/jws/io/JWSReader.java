@@ -21,14 +21,13 @@ import static java.lang.String.format;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
-import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.oltu.jose.jws.JWS;
-import org.codehaus.jettison.json.JSONArray;
-import org.codehaus.jettison.json.JSONException;
-import org.codehaus.jettison.json.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 /**
  * A {@link JWS} reader.
@@ -78,43 +77,7 @@ public final class JWSReader extends AbstractJWSIO {
 
         String header = matcher.group(1);
         String decodedHeader = base64Decode(header);
-        JSONObject headerObject;
-
-        try {
-            headerObject = new JSONObject(decodedHeader);
-        } catch (JSONException e) {
-            throw new IllegalArgumentException(format("BASE64 string '%s' (decoded to '%s') is not a valid JSON object representation",
-                                                      header, decodedHeader));
-        }
-
-        for (@SuppressWarnings("unchecked") // it is known that JSON keys are strings
-        Iterator<String> keys = headerObject.keys(); keys.hasNext();) {
-            String key = keys.next();
-
-            if (ALGORITHM.equals(key)) {
-                jwsBuilder.setAlgorithm(getString(headerObject, ALGORITHM));
-            } else if (JWK_SET_URL.equals(key)) {
-                jwsBuilder.setJwkSetUrl(getString(headerObject, ALGORITHM));
-            } else if (JSON_WEB_KEY.equals(key)) {
-                jwsBuilder.setJsonWebKey(getString(headerObject, JSON_WEB_KEY));
-            }  else if (X509_URL.equals(key)) {
-                jwsBuilder.setX509url(getString(headerObject, X509_URL));
-            } else if (X509_CERTIFICATE_THUMBPRINT.equals(key)) {
-                jwsBuilder.setX509CertificateThumbprint(getString(headerObject, X509_CERTIFICATE_THUMBPRINT));
-            } else if (X509_CERTIFICATE_CHAIN.equals(key)) {
-                jwsBuilder.setX509CertificateChain(getString(headerObject, X509_CERTIFICATE_CHAIN));
-            } else if (KEY_ID.equals(key)) {
-                jwsBuilder.setKeyId(getString(headerObject, KEY_ID));
-            } else if (TYPE.equals(key)) {
-                jwsBuilder.setType(getString(headerObject, TYPE));
-            } else if (CONTENT_TYPE.equals(key)) {
-                jwsBuilder.setContentType(getString(headerObject, CONTENT_TYPE));
-            } else if (CRITICAL.equals(key)) {
-                jwsBuilder.setCritical(getStringArray(headerObject, CRITICAL));
-            } else {
-                jwsBuilder.setCustomField(key, getString(headerObject, key));
-            }
-        }
+        parseHeader(jwsBuilder, decodedHeader);
 
         // PAYLOAD
         String payload = matcher.group(2);
@@ -129,24 +92,95 @@ public final class JWSReader extends AbstractJWSIO {
                          .build();
     }
 
-    private static String getString(JSONObject object, String key) {
-        try {
-            return object.getString(key);
-        } catch (JSONException e) {
-            return null;
-        }
-    }
+    /**
+     * This method has been extracted from {@link JSONObject#JSONObject(JSONTokener)}
+     *
+     * @param jswBuilder the JWS builder reference
+     * @param decodedHeader the BASE64 decoded JSON string
+     */
+    private static void parseHeader(JWS.Builder jwsBuilder, String decodedHeader) {
+        final JSONTokener x = new JSONTokener(decodedHeader);
+        char c;
+        String key;
 
-    private static String[] getStringArray(JSONObject object, String key) {
-        try {
-            JSONArray array = object.getJSONArray(key);
-            String[] result = new String[array.length()];
-            for (int i = 0; i < result.length; i++) {
-                result[i] = array.getString(i);
+        if (x.nextClean() != '{') {
+            throw new IllegalArgumentException(format("String '%s' is not a valid JSON object representation, a JSON object text must begin with '{'",
+                                                      decodedHeader));
+        }
+        for (;;) {
+            c = x.nextClean();
+            switch (c) {
+            case 0:
+                throw new IllegalArgumentException(format("String '%s' is not a valid JSON object representation, a JSON object text must end with '}'",
+                                                          decodedHeader));
+            case '}':
+                return;
+            default:
+                x.back();
+                key = x.nextValue().toString();
             }
-            return result;
-        } catch (JSONException e) {
-            return new String[0];
+
+            /*
+             * The key is followed by ':'. We will also tolerate '=' or '=>'.
+             */
+            c = x.nextClean();
+            if (c == '=') {
+                if (x.next() != '>') {
+                    x.back();
+                }
+            } else if (c != ':') {
+                throw new IllegalArgumentException(format("String '%s' is not a valid JSON object representation, expected a ':' after the key '%s'",
+                                                          decodedHeader, key));
+            }
+            Object value = x.nextValue();
+
+            if (value != null) {
+                if (ALGORITHM.equals(key)) {
+                    jwsBuilder.setAlgorithm(String.valueOf(value));
+                } else if (JWK_SET_URL.equals(key)) {
+                    jwsBuilder.setJwkSetUrl(String.valueOf(value));
+                } else if (JSON_WEB_KEY.equals(key)) {
+                    jwsBuilder.setJsonWebKey(String.valueOf(value));
+                }  else if (X509_URL.equals(key)) {
+                    jwsBuilder.setX509url(String.valueOf(value));
+                } else if (X509_CERTIFICATE_THUMBPRINT.equals(key)) {
+                    jwsBuilder.setX509CertificateThumbprint(String.valueOf(value));
+                } else if (X509_CERTIFICATE_CHAIN.equals(key)) {
+                    jwsBuilder.setX509CertificateChain(String.valueOf(value));
+                } else if (KEY_ID.equals(key)) {
+                    jwsBuilder.setKeyId(String.valueOf(value));
+                } else if (TYPE.equals(key)) {
+                    jwsBuilder.setType(String.valueOf(value));
+                } else if (CONTENT_TYPE.equals(key)) {
+                    jwsBuilder.setContentType(String.valueOf(value));
+                } else if (CRITICAL.equals(key)) {
+                    JSONArray array = (JSONArray) value;
+                    String[] critical = new String[array.length()];
+                    for (int i = 0; i < array.length(); i++) {
+                        critical[i] = array.getString(i);
+                    }
+                    jwsBuilder.setCritical(critical);
+                } else {
+                    jwsBuilder.setCustomField(key, String.valueOf(value));
+                }
+            }
+
+            /*
+             * Pairs are separated by ','. We will also tolerate ';'.
+             */
+            switch (x.nextClean()) {
+            case ';':
+            case ',':
+                if (x.nextClean() == '}') {
+                    return;
+                }
+                x.back();
+                break;
+            case '}':
+                return;
+            default:
+                throw new IllegalArgumentException("Expected a ',' or '}'");
+            }
         }
     }
 

@@ -16,15 +16,13 @@
  */
 package org.apache.oltu.oauth2.jwt.io;
 
-import java.io.StringWriter;
 import java.util.Map.Entry;
 
 import org.apache.oltu.oauth2.jwt.ClaimsSet;
 import org.apache.oltu.oauth2.jwt.Header;
 import org.apache.oltu.oauth2.jwt.JWT;
 import org.apache.oltu.oauth2.jwt.JWTEntity;
-import org.codehaus.jettison.json.JSONException;
-import org.codehaus.jettison.json.JSONObject;
+import org.json.JSONStringer;
 
 /**
  * A {@link JWT} writer.
@@ -71,11 +69,14 @@ public final class JWTWriter extends AbstractJWTIO {
             throw new IllegalArgumentException("Null JWT Header cannot be serialized to JSON representation.");
         }
 
-        JSONObject object = new JSONObject();
-        setString(object, ALGORITHM, header.getAlgorithm());
-        setString(object, CONTENT_TYPE, header.getContentType());
-        setString(object, TYPE, header.getType());
-        return toJsonString(header, object);
+        JSONStringer jsonWriter = new JSONStringer();
+        jsonWriter.object();
+
+        setObject(jsonWriter, ALGORITHM, header.getAlgorithm());
+        setObject(jsonWriter, CONTENT_TYPE, header.getContentType());
+        setObject(jsonWriter, TYPE, header.getType());
+
+        return toJsonString(header, jsonWriter);
     }
 
     /**
@@ -89,63 +90,42 @@ public final class JWTWriter extends AbstractJWTIO {
             throw new IllegalArgumentException("Null JWT Claims Set cannot be serialized to JSON representation.");
         }
 
-        JSONObject object = new JSONObject();
-        setString(object, AUDIENCE, claimsSet.getAudience());
-        setString(object, ISSUER, claimsSet.getIssuer());
-        setString(object, JWT_ID, claimsSet.getJwdId());
-        setString(object, NOT_BEFORE, claimsSet.getNotBefore());
-        setString(object, SUBJECT, claimsSet.getSubject());
-        setString(object, TYPE, claimsSet.getType());
-        setLong(object, EXPIRATION_TIME, claimsSet.getExpirationTime());
-        setLong(object, ISSUED_AT, claimsSet.getIssuedAt());
-        return toJsonString(claimsSet, object);
+        JSONStringer jsonWriter = new JSONStringer();
+        jsonWriter.object();
+
+        setObject(jsonWriter, AUDIENCE, claimsSet.getAudience());
+        setObject(jsonWriter, ISSUER, claimsSet.getIssuer());
+        setObject(jsonWriter, JWT_ID, claimsSet.getJwdId());
+        setObject(jsonWriter, NOT_BEFORE, claimsSet.getNotBefore());
+        setObject(jsonWriter, SUBJECT, claimsSet.getSubject());
+        setObject(jsonWriter, TYPE, claimsSet.getType());
+        setLong(jsonWriter, EXPIRATION_TIME, claimsSet.getExpirationTime());
+        setLong(jsonWriter, ISSUED_AT, claimsSet.getIssuedAt());
+
+        return toJsonString(claimsSet, jsonWriter);
     }
 
-    private static String toJsonString(JWTEntity entity, JSONObject object) {
+    private static String toJsonString(JWTEntity entity, JSONStringer jsonWriter) {
         for (Entry<String, Object> customField : entity.getCustomFields()) {
-            setObject(object, customField.getKey(), customField.getValue());
+            setObject(jsonWriter, customField.getKey(), customField.getValue());
         }
 
-        StringWriter writer = new StringWriter();
-        try {
-            object.write(writer);
-        } catch (JSONException e) {
-            // swallow it, it should be safe enough to write to a StringWriter
-        }
-        return writer.toString();
+        return jsonWriter.endObject().toString();
     }
 
     private String encodeJson(String jsonString) {
         return new String(base64.encode(jsonString.getBytes(UTF_8)), UTF_8);
     }
 
-    private static void setString(JSONObject object, String key, String value) {
-        if (value != null) {
-            try {
-                object.put(key, value);
-            } catch (JSONException e) {
-                // swallow it, null values are already guarded
-            }
-        }
-    }
-
-    private static void setLong(JSONObject object, String key, long value) {
+    private static void setLong(JSONStringer jsonWriter, String key, long value) {
         if (value != 0) {
-            try {
-                object.put(key, value);
-            } catch (JSONException e) {
-                // swallow it, null values are already guarded
-            }
+            jsonWriter.key(key).value(value);
         }
     }
 
-    private static void setObject(JSONObject object, String key, Object value) {
+    private static void setObject(JSONStringer jsonWriter, String key, Object value) {
         if (value != null) {
-            try {
-                object.put(key, value);
-            } catch (JSONException e) {
-                // swallow it, null values are already guarded
-            }
+            jsonWriter.key(key).value(value);
         }
     }
 

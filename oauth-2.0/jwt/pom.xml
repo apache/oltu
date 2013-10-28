@@ -31,8 +31,9 @@
 
   <dependencies>
     <dependency>
-      <groupId>org.codehaus.jettison</groupId>
-      <artifactId>jettison</artifactId>
+      <groupId>org.json</groupId>
+      <artifactId>json</artifactId>
+      <version>20131018</version>
     </dependency>
 
     <dependency>
