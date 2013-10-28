@@ -16,7 +16,8 @@
  */
 package org.apache.oltu.jose.jws.io;
 
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 import org.apache.oltu.jose.jws.JWS;
 import org.junit.Test;
@@ -27,10 +28,11 @@ public final class JWSReaderTestCase {
 
     @Test
     public void parse() {
-        JWS jws = reader.read("eyJ0eXAiOiJKV1QiLA0KICJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJqb2UiLA0KICJleHAiOjEzMDA4MTkzODAsDQogImh0dHA6Ly9leGFtcGxlLmNvbS9pc19yb290Ijp0cnVlfQ.dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk");
+        JWS jws = reader.read("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImNyaXQiOlsiZXhwIl19.eyJpc3MiOiJqb2UiLA0KICJleHAiOjEzMDA4MTkzODAsDQogImh0dHA6Ly9leGFtcGxlLmNvbS9pc19yb290Ijp0cnVlfQ.dBjftO-_ve-_ve-_vSVP77-9YH3Yre-_ve-_vRbvv70lTWnWv--_vVtYBVhT77-977-9eQ");
 
         assertEquals("JWT", jws.getHeader().getType());
         assertEquals("HS256", jws.getHeader().getAlgorithm());
+        assertArrayEquals(new String[]{ "exp" }, jws.getHeader().getCritical());
         assertEquals("{\"iss\":\"joe\",\r\n \"exp\":1300819380,\r\n \"http://example.com/is_root\":true}", jws.getPayload());
         assertEquals("tߴ���%O�`}ح���%Miֿ�[XXS��y", jws.getSignature());
     }
