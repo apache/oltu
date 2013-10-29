@@ -18,18 +18,20 @@ package org.apache.oltu.oauth2.jwt.io;
 
 interface IOTestCaseConstants {
 
-    public final String JWT = "eyJhbGciOiJSUzI1NiIsImtpZCI6ImJlMWRhMGIzNTY3YmQyNjVhMjUwOThmYmNjMmIwOWYyMTM0\r\n"
-                            + "NWIzYTIifQ\r\n"
-                            + ".\r\n"
-                            + "eyJhdWQiOiI3ODg3MzIzNzIwNzguYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJpc3MiOiJh\r\n"
-                            + "Y2NvdW50cy5nb29nbGUuY29tIiwic3ViIjoiMTA2NDIyNDUzMDgyNDc5OTk4NDI5IiwiZXhwIjox\r\n"
-                            + "MzY2NzMwMjE3LCJpYXQiOjEzNjY3MjYzMTcsImlkIjoiMTA2NDIyNDUzMDgyNDc5OTk4NDI5Iiwi\r\n"
-                            + "dmVyaWZpZWRfZW1haWwiOiJ0cnVlIiwiZW1haWxfdmVyaWZpZWQiOiJ0cnVlIiwiY2lkIjoiNzg4\r\n"
-                            + "NzMyMzcyMDc4LmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiYXpwIjoiNzg4NzMyMzcyMDc4\r\n"
-                            + "LmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiZW1haWwiOiJhbnRvbmlvLnNhbnNvQGdtYWls\r\n"
-                            + "LmNvbSIsInRva2VuX2hhc2giOiJMMkk3N2dpQkxrMFJTczB6UTFTdkNBIiwiYXRfaGFzaCI6Ikwy\r\n"
-                            + "STc3Z2lCTGswUlNzMHpRMVN2Q0EifQ\r\n"
-                            + ".\r\n"
-                            + "XWYi5Zj1YWAMGIml_ftoAwmvW1Y7oeybLCpzQrJVuWJpS8L8Vd2TL-RTIOEVG03VA7e0_-_frNuw7MxUgVEgh8G-Nnbk_baJ6k_3w5c1SKFamFiHHDoKLFhrt1Y8JKSuGwE02V-px4Cn0dRAQAc1IN5CU6wqCrYK0p-fv_fvy28";
+    public final String JWT = "eyJhbGciOiJSUzI1NiIsImtpZCI6ImJlMWRhMGIzNTY3YmQyNjVhMjUwOThmYmNjMmIwOWYyMTM0"
+                            + "NWIzYTIifQ"
+                            + "."
+                            + "eyJhdWQiOiI3ODg3MzIzNzIwNzguYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJpc3MiOiJh"
+                            + "Y2NvdW50cy5nb29nbGUuY29tIiwic3ViIjoiMTA2NDIyNDUzMDgyNDc5OTk4NDI5IiwiZXhwIjox"
+                            + "MzY2NzMwMjE3LCJpYXQiOjEzNjY3MjYzMTcsImlkIjoiMTA2NDIyNDUzMDgyNDc5OTk4NDI5Iiwi"
+                            + "dmVyaWZpZWRfZW1haWwiOiJ0cnVlIiwiZW1haWxfdmVyaWZpZWQiOiJ0cnVlIiwiY2lkIjoiNzg4"
+                            + "NzMyMzcyMDc4LmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiYXpwIjoiNzg4NzMyMzcyMDc4"
+                            + "LmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiZW1haWwiOiJhbnRvbmlvLnNhbnNvQGdtYWls"
+                            + "LmNvbSIsInRva2VuX2hhc2giOiJMMkk3N2dpQkxrMFJTczB6UTFTdkNBIiwiYXRfaGFzaCI6Ikwy"
+                            + "STc3Z2lCTGswUlNzMHpRMVN2Q0EifQ"
+                            + "."
+                            + "WFdZaTVaajFZV0FNR0ltbF9mdG9Bd212VzFZN29leWJMQ3B6UXJKVnVXSnBTOEw4VmQyVEwtUlRJ"
+                            + "T0VWRzAzVkE3ZTBfLV9mck51dzdNeFVnVkVnaDhHLU5uYmtfYmFKNmtfM3c1YzFTS0ZhbUZpSEhE"
+                            + "b0tMRmhydDFZOEpLU3VHd0UwMlYtcHg0Q24wZFJBUUFjMUlONUNVNndxQ3JZSzBwLWZ2X2Z2eTI4";
 
 }

@@ -20,12 +20,14 @@ import static java.lang.String.format;
 
 import java.util.Map;
 
+import org.apache.oltu.commons.json.CustomizableEntity;
+
 /**
  * Represents the Claims Set as defined in the 6.1 section of the JWT specification.
  *
  * @see http://tools.ietf.org/html/draft-ietf-oauth-json-web-token-06#section-6.1
  */
-public final class ClaimsSet extends JWTEntity {
+public final class ClaimsSet extends CustomizableEntity {
 
     /**
      * The {@code iss} JWT Claims Set parameter.

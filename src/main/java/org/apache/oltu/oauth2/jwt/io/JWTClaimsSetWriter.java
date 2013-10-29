@@ -16,27 +16,21 @@
  */
 package org.apache.oltu.oauth2.jwt.io;
 
-import org.apache.oltu.commons.encodedtoken.TokenWriter;
-import org.apache.oltu.oauth2.jwt.JWT;
+import org.apache.oltu.commons.json.CustomizableEntityWriter;
+import org.apache.oltu.oauth2.jwt.ClaimsSet;
 
-/**
- * A {@link JWT} writer.
- */
-public final class JWTWriter extends TokenWriter<JWT> {
+public final class JWTClaimsSetWriter extends CustomizableEntityWriter<ClaimsSet> implements JWTConstants {
 
     @Override
-    protected String writeHeader(JWT token) {
-        return new JWTHeaderWriter().write(token.getHeader());
-    }
-
-    @Override
-    protected String writeBody(JWT token) {
-        return new JWTClaimsSetWriter().write(token.getClaimsSet());
-    }
-
-    @Override
-    protected String writeSignature(JWT token) {
-        return token.getSignature();
+    protected void handleProperties(ClaimsSet claimsSet) {
+        set(AUDIENCE, claimsSet.getAudience());
+        set(ISSUER, claimsSet.getIssuer());
+        set(JWT_ID, claimsSet.getJwdId());
+        set(NOT_BEFORE, claimsSet.getNotBefore());
+        set(SUBJECT, claimsSet.getSubject());
+        set(TYPE, claimsSet.getType());
+        set(EXPIRATION_TIME, claimsSet.getExpirationTime());
+        set(ISSUED_AT, claimsSet.getIssuedAt());
     }
 
 }
