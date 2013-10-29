@@ -16,24 +16,23 @@
  */
 package org.apache.oltu.jose.jws.io;
 
-import org.apache.oltu.commons.encodedtoken.TokenWriter;
-import org.apache.oltu.jose.jws.JWS;
+import org.apache.oltu.commons.json.CustomizableEntityWriter;
+import org.apache.oltu.jose.jws.Header;
 
-public final class JWSWriter extends TokenWriter<JWS> {
-
-    @Override
-    protected String writeHeader(JWS token) {
-        return new JWSHeaderWriter().write(token.getHeader());
-    }
+final class JWSHeaderWriter extends CustomizableEntityWriter<Header> implements JWSConstants {
 
     @Override
-    protected String writeBody(JWS token) {
-        return token.getPayload();
-    }
-
-    @Override
-    protected String writeSignature(JWS token) {
-        return token.getSignature();
+    protected void handleProperties(Header header) {
+        set(ALGORITHM, header.getAlgorithm());
+        set(JWK_SET_URL, header.getJwkSetUrl());
+        set(JSON_WEB_KEY, header.getJsonWebKey());
+        set(X509_URL, header.getX509url());
+        set(X509_CERTIFICATE_THUMBPRINT, header.getX509CertificateThumbprint());
+        set(X509_CERTIFICATE_CHAIN, header.getX509CertificateChain());
+        set(KEY_ID, header.getKeyId());
+        set(TYPE, header.getType());
+        set(CONTENT_TYPE, header.getContentType());
+        set(CRITICAL, header.getCritical());
     }
 
 }

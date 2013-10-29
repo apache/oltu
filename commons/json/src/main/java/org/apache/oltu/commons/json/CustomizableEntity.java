@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.oltu.oauth2.jwt;
+package org.apache.oltu.commons.json;
 
 import java.util.Formatter;
 import java.util.Map;
@@ -22,16 +22,24 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 /**
- * Abstract representation of a JWT entity which can contain custom fields.
+ * TODO
  */
-public abstract class JWTEntity {
+public abstract class CustomizableEntity {
 
     /**
      * The registry that keeps the custom fields.
      */
     private final Map<String, Object> customFields;
 
-    public JWTEntity(Map<String, Object> customFields) {
+    /**
+     * TODO
+     *
+     * @param customFields
+     */
+    public CustomizableEntity(Map<String, Object> customFields) {
+        if (customFields == null) {
+            throw new IllegalArgumentException("Null custom field registry not allowed.");
+        }
         this.customFields = customFields;
     }
 
@@ -43,12 +51,9 @@ public abstract class JWTEntity {
      * @return the specified custom field value,
      *         {@code null} if the custom field is not present.
      */
-    public <T> T getCustomField(String name, Class<T> type) {
+    public final <T> T getCustomField(String name, Class<T> type) {
         if (name == null) {
             throw new IllegalArgumentException("Null custom field name not present in the registry.");
-        }
-        if (type == null) {
-            throw new IllegalArgumentException("Custom field value can not be casted to a null type.");
         }
 
         Object value = customFields.get(name);
@@ -65,7 +70,7 @@ public abstract class JWTEntity {
      *
      * @return the custom fields stored in the entity.
      */
-    public Set<Entry<String, Object>> getCustomFields() {
+    public final Set<Entry<String, Object>> getCustomFields() {
         return customFields.entrySet();
     }
 

@@ -16,16 +16,7 @@
  */
 package org.apache.oltu.jose.jws.io;
 
-import java.nio.charset.Charset;
-
-import org.apache.commons.codec.binary.Base64;
-
-abstract class AbstractJWSIO {
-
-    /**
-     * The {@code UTF-8} charset reference.
-     */
-    private static final Charset UTF_8 = Charset.forName("UTF-8");
+interface JWSConstants {
 
     // header defined in the JWT specification
 
@@ -67,7 +58,7 @@ abstract class AbstractJWSIO {
     /**
      * The {@code typ} JWT Header key.
      */
-    protected static final String TYPE = "typ";
+    public static final String TYPE = "typ";
 
     /**
      * The {@code cty} JWT Header key.
@@ -78,18 +69,5 @@ abstract class AbstractJWSIO {
      * The {@code crit} JWT Header key.
      */
     public static final String CRITICAL = "crit";
-
-    /**
-     * The BASE64 encoder/decoder.
-     */
-    private final Base64 base64 = new Base64(true);
-
-    protected final String base64Decode(String base64encoded) {
-        return new String(base64.decode(base64encoded), UTF_8);
-    }
-
-    protected final String base64Encode(String input) {
-        return new String(base64.encode(input.getBytes(UTF_8)), UTF_8);
-    }
 
 }

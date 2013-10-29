@@ -14,26 +14,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.oltu.jose.jws.io;
+package org.apache.oltu.commons.encodedtoken;
 
-import org.apache.oltu.commons.encodedtoken.TokenWriter;
-import org.apache.oltu.jose.jws.JWS;
+import java.nio.charset.Charset;
 
-public final class JWSWriter extends TokenWriter<JWS> {
+import org.apache.commons.codec.binary.Base64;
 
-    @Override
-    protected String writeHeader(JWS token) {
-        return new JWSHeaderWriter().write(token.getHeader());
+abstract class TokenDecoder {
+
+    /**
+     * The {@code UTF-8} charset reference.
+     */
+    private static final Charset UTF_8 = Charset.forName("UTF-8");
+
+    /**
+     * The BASE64 encoder/decoder.
+     */
+    private final Base64 base64 = new Base64(true);
+
+    protected final String base64Decode(String base64encoded) {
+        return new String(base64.decode(base64encoded), UTF_8);
     }
 
-    @Override
-    protected String writeBody(JWS token) {
-        return token.getPayload();
-    }
-
-    @Override
-    protected String writeSignature(JWS token) {
-        return token.getSignature();
+    protected final String base64Encode(String input) {
+        return new String(base64.encode(input.getBytes(UTF_8)), UTF_8);
     }
 
 }

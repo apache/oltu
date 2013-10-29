@@ -7,7 +7,7 @@
   (the "License"); you may not use this file except in compliance with
   the License.  You may obtain a copy of the License at
 
-   http://www.apache.org/licenses/LICENSE-2.0
+     http://www.apache.org/licenses/LICENSE-2.0
 
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,41 +19,22 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.apache.oltu.oauth2</groupId>
-    <artifactId>org.apache.oltu.oauth2.parent</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <groupId>org.apache.oltu</groupId>
+    <artifactId>org.apache.oltu.parent</artifactId>
+    <version>1</version>
+    <relativePath>../parent</relativePath>
   </parent>
 
-  <artifactId>org.apache.oltu.oauth2.jwt</artifactId>
+  <groupId>org.apache.oltu.commons</groupId>
+  <artifactId>org.apache.oltu.commons.parent</artifactId>
+  <version>1-SNAPSHOT</version>
+  <packaging>pom</packaging>
 
-  <name>Apache Oltu - OAuth 2.0 - JWT</name>
-  <description>OAuth 2.0 library - JWT</description>
+  <name>Apache Oltu - Commons - Parent</name>
 
-  <dependencies>
-    <dependency>
-      <groupId>org.apache.oltu.commons</groupId>
-      <artifactId>org.apache.oltu.commons.encodedtoken</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.apache.oltu.commons</groupId>
-      <artifactId>org.apache.oltu.commons.json</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
-    </dependency>
-  </dependencies>
-
-  <build>
-    <resources>
-      <resource>
-        <directory>${basedir}../../</directory>
-        <targetPath>META-INF</targetPath>
-        <includes>
-          <include>LICENSE</include>
-          <include>NOTICE</include>
-        </includes>
-      </resource>
-    </resources>
-  </build>
+  <modules>
+    <module>encodedtoken</module>
+    <module>json</module>
+  </modules>
 
 </project>

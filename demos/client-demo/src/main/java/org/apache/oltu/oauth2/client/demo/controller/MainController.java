@@ -29,6 +29,8 @@ import org.apache.oltu.oauth2.client.demo.model.OAuthParams;
 import org.apache.oltu.oauth2.client.demo.model.OAuthRegParams;
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 import org.apache.oltu.oauth2.jwt.JWT;
+import org.apache.oltu.oauth2.jwt.io.JWTClaimsSetWriter;
+import org.apache.oltu.oauth2.jwt.io.JWTHeaderWriter;
 import org.apache.oltu.oauth2.jwt.io.JWTReader;
 import org.apache.oltu.oauth2.jwt.io.JWTWriter;
 import org.slf4j.Logger;
@@ -107,8 +109,8 @@ public class MainController {
         try {
             JWT jwt = jwtReader.read(oauthParams.getJwt());
 
-            oauthParams.setHeader(jwtWriter.write(jwt.getHeader()));
-            oauthParams.setClaimsSet(jwtWriter.write(jwt.getClaimsSet()));
+            oauthParams.setHeader(new JWTHeaderWriter().write(jwt.getHeader()));
+            oauthParams.setClaimsSet(new JWTClaimsSetWriter().write(jwt.getClaimsSet()));
         } catch (Exception e){
             oauthParams.setErrorMessage(
                     "Error while decoding the token: " + e);

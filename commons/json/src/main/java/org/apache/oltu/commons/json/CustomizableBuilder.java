@@ -14,26 +14,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.oltu.jose.jws.io;
+package org.apache.oltu.commons.json;
 
-import org.apache.oltu.commons.encodedtoken.TokenWriter;
-import org.apache.oltu.jose.jws.JWS;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
-public final class JWSWriter extends TokenWriter<JWS> {
+public abstract class CustomizableBuilder<E> {
 
-    @Override
-    protected String writeHeader(JWS token) {
-        return new JWSHeaderWriter().write(token.getHeader());
+    /**
+     * The registry that keeps the custom fields.
+     */
+    private final Map<String, Object> customFields = new LinkedHashMap<String, Object>();
+
+    protected final Map<String, Object> getCustomFields() {
+        return customFields;
     }
 
-    @Override
-    protected String writeBody(JWS token) {
-        return token.getPayload();
+    /**
+     * TODO
+     *
+     * @param key
+     * @param value
+     * @return
+     */
+    public final CustomizableBuilder<E> setCustomField(String key, Object value) {
+        if (key == null) {
+            throw new IllegalArgumentException("Null key not allowed.");
+        }
+        if (value != null) {
+            customFields.put(key, value);
+        }
+        return this;
     }
 
-    @Override
-    protected String writeSignature(JWS token) {
-        return token.getSignature();
-    }
+    public abstract E build();
 
 }

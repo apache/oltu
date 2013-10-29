@@ -39,6 +39,8 @@ import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 import org.apache.oltu.oauth2.common.message.types.GrantType;
 import org.apache.oltu.oauth2.jwt.JWT;
+import org.apache.oltu.oauth2.jwt.io.JWTClaimsSetWriter;
+import org.apache.oltu.oauth2.jwt.io.JWTHeaderWriter;
 import org.apache.oltu.oauth2.jwt.io.JWTWriter;
 import org.apache.oltu.openidconnect.client.response.OpenIdConnectResponse;
 import org.springframework.stereotype.Controller;
@@ -101,8 +103,8 @@ public class TokenController {
             	JWT idToken = openIdConnectResponse.getIdToken();
             	oauthParams.setIdToken(idToken.getRawString());
 
-            	oauthParams.setHeader(jwtWriter.write(idToken.getHeader()));
-            	oauthParams.setClaimsSet(jwtWriter.write(idToken.getClaimsSet()));
+            	oauthParams.setHeader(new JWTHeaderWriter().write(idToken.getHeader()));
+                oauthParams.setClaimsSet(new JWTClaimsSetWriter().write(idToken.getClaimsSet()));
 
             	URL url = new URL(oauthParams.getTokenEndpoint());
 

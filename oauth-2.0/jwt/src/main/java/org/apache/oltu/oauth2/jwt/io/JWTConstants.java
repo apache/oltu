@@ -16,23 +16,15 @@
  */
 package org.apache.oltu.oauth2.jwt.io;
 
-import java.nio.charset.Charset;
 
-import org.apache.commons.codec.binary.Base64;
-
-abstract class AbstractJWTIO {
-
-    /**
-     * The {@code UTF-8} charset reference.
-     */
-    protected static final Charset UTF_8 = Charset.forName("UTF-8");
+interface JWTConstants {
 
     // header defined in the JWT specification
 
     /**
      * The {@code typ} JWT Header key.
      */
-    protected static final String TYPE = "typ";
+    public static final String TYPE = "typ";
 
     /**
      * The {@code alg} JWT Header key.
@@ -49,41 +41,36 @@ abstract class AbstractJWTIO {
     /**
      * The {@code iss} JWT Claims Set key.
      */
-    protected static final String ISSUER = "iss";
+    public static final String ISSUER = "iss";
 
     /**
      * The {@code sub} JWT Claims Set key.
      */
-    protected static final String SUBJECT = "sub";
+    public static final String SUBJECT = "sub";
 
     /**
      * The {@code aud} JWT Claims Set key.
      */
-    protected static final String AUDIENCE = "aud";
+    public static final String AUDIENCE = "aud";
 
     /**
      * The {@code exp} JWT Claims Set key.
      */
-    protected static final String EXPIRATION_TIME = "exp";
+    public static final String EXPIRATION_TIME = "exp";
 
     /**
      * The {@code nbf} JWT Claims Set key.
      */
-    protected static final String NOT_BEFORE = "nbf";
+    public static final String NOT_BEFORE = "nbf";
 
     /**
      * The {@code iat} JWT Claims Set key.
      */
-    protected static final String ISSUED_AT = "iat";
+    public static final String ISSUED_AT = "iat";
 
     /**
      * The {@code jti} JWT Claims Set key.
      */
-    protected static final String JWT_ID = "jti";
-
-    /**
-     * The BASE64 encoder/decoder.
-     */
-    protected final Base64 base64 = new Base64(true);
+    public static final String JWT_ID = "jti";
 
 }

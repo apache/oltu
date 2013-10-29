@@ -14,26 +14,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.oltu.jose.jws.io;
+package org.apache.oltu.oauth2.jwt.io;
 
-import org.apache.oltu.commons.encodedtoken.TokenWriter;
-import org.apache.oltu.jose.jws.JWS;
+import org.apache.oltu.commons.json.CustomizableEntityWriter;
+import org.apache.oltu.oauth2.jwt.Header;
 
-public final class JWSWriter extends TokenWriter<JWS> {
-
-    @Override
-    protected String writeHeader(JWS token) {
-        return new JWSHeaderWriter().write(token.getHeader());
-    }
+public final class JWTHeaderWriter extends CustomizableEntityWriter<Header> implements JWTConstants {
 
     @Override
-    protected String writeBody(JWS token) {
-        return token.getPayload();
-    }
-
-    @Override
-    protected String writeSignature(JWS token) {
-        return token.getSignature();
+    protected void handleProperties(Header header) {
+        set(ALGORITHM, header.getAlgorithm());
+        set(CONTENT_TYPE, header.getContentType());
+        set(TYPE, header.getType());
     }
 
 }

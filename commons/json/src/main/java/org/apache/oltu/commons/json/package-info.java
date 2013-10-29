@@ -14,26 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.oltu.jose.jws.io;
 
-import org.apache.oltu.commons.encodedtoken.TokenWriter;
-import org.apache.oltu.jose.jws.JWS;
-
-public final class JWSWriter extends TokenWriter<JWS> {
-
-    @Override
-    protected String writeHeader(JWS token) {
-        return new JWSHeaderWriter().write(token.getHeader());
-    }
-
-    @Override
-    protected String writeBody(JWS token) {
-        return token.getPayload();
-    }
-
-    @Override
-    protected String writeSignature(JWS token) {
-        return token.getSignature();
-    }
-
-}
+/**
+ * Common reusable JSON utilities.
+ */
+package org.apache.oltu.commons.json;

@@ -14,26 +14,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.oltu.jose.jws.io;
+package org.apache.oltu.oauth2.jwt.io;
 
-import org.apache.oltu.commons.encodedtoken.TokenWriter;
-import org.apache.oltu.jose.jws.JWS;
+import org.apache.oltu.commons.json.CustomizableEntityWriter;
+import org.apache.oltu.oauth2.jwt.ClaimsSet;
 
-public final class JWSWriter extends TokenWriter<JWS> {
-
-    @Override
-    protected String writeHeader(JWS token) {
-        return new JWSHeaderWriter().write(token.getHeader());
-    }
+public final class JWTClaimsSetWriter extends CustomizableEntityWriter<ClaimsSet> implements JWTConstants {
 
     @Override
-    protected String writeBody(JWS token) {
-        return token.getPayload();
-    }
-
-    @Override
-    protected String writeSignature(JWS token) {
-        return token.getSignature();
+    protected void handleProperties(ClaimsSet claimsSet) {
+        set(AUDIENCE, claimsSet.getAudience());
+        set(ISSUER, claimsSet.getIssuer());
+        set(JWT_ID, claimsSet.getJwdId());
+        set(NOT_BEFORE, claimsSet.getNotBefore());
+        set(SUBJECT, claimsSet.getSubject());
+        set(TYPE, claimsSet.getType());
+        set(EXPIRATION_TIME, claimsSet.getExpirationTime());
+        set(ISSUED_AT, claimsSet.getIssuedAt());
     }
 
 }

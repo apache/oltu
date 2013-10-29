@@ -14,26 +14,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.oltu.jose.jws.io;
+package org.apache.oltu.oauth2.jwt.io;
 
-import org.apache.oltu.commons.encodedtoken.TokenWriter;
-import org.apache.oltu.jose.jws.JWS;
+import org.apache.oltu.commons.json.CustomizableEntityReader;
+import org.apache.oltu.oauth2.jwt.JWT;
 
-public final class JWSWriter extends TokenWriter<JWS> {
+final class JWTHeaderParser extends CustomizableEntityReader<JWT, JWT.Builder> implements JWTConstants {
 
-    @Override
-    protected String writeHeader(JWS token) {
-        return new JWSHeaderWriter().write(token.getHeader());
+    public JWTHeaderParser(JWT.Builder builder) {
+        super( builder );
     }
 
     @Override
-    protected String writeBody(JWS token) {
-        return token.getPayload();
-    }
+    protected <T> boolean handleProperty( String key, T value ) {
+        if (ALGORITHM.equals(key)) {
+            getBuilder().setHeaderAlgorithm(String.valueOf(value));
+        } else if (TYPE.equals(key)) {
+            getBuilder().setHeaderType(String.valueOf(value));
+        } else if (CONTENT_TYPE.equals(key)) {
+            getBuilder().setHeaderContentType(String.valueOf(value));
+        } else {
+            getBuilder().setHeaderCustomField(key, value);
+        }
 
-    @Override
-    protected String writeSignature(JWS token) {
-        return token.getSignature();
+        return true;
     }
 
 }
