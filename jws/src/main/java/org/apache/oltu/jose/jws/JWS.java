@@ -16,9 +16,7 @@
  */
 package org.apache.oltu.jose.jws;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
+import org.apache.oltu.commons.json.CustomizableBuilder;
 import org.apache.oltu.jose.jws.signature.SignatureMethod;
 import org.apache.oltu.jose.jws.signature.SigningKey;
 import org.apache.oltu.jose.jws.signature.VerifyingKey;
@@ -93,7 +91,7 @@ public class JWS {
         return method.verify(signature, payload, verifyingKey);
     }
 
-    public static final class Builder {
+    public static final class Builder extends CustomizableBuilder<JWS> {
 
         /**
          * The {@code alg} JWS Header parameter.
@@ -155,11 +153,6 @@ public class JWS {
          */
         private String signature;
 
-        /**
-         * The registry that keeps the custom fields.
-         */
-        private final Map<String, Object> customFields = new LinkedHashMap<String, Object>();
-
         public Builder setAlgorithm(String algorithm) {
             this.algorithm = algorithm;
             return this;
@@ -210,16 +203,6 @@ public class JWS {
             return this;
         }
 
-        public Builder setCustomField(String key, String value) {
-            if (key == null) {
-                throw new IllegalArgumentException("Null key not allowed.");
-            }
-            if (value != null) {
-                customFields.put(key, value);
-            }
-            return this;
-        }
-
         public Builder setPayload(String payload) {
             this.payload = payload;
             return this;
@@ -255,7 +238,7 @@ public class JWS {
                                       keyId, type,
                                       contentType,
                                       critical,
-                                      customFields),
+                                      getCustomFields()),
                            payload,
                            signature);
         }

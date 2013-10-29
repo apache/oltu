@@ -17,15 +17,15 @@
 package org.apache.oltu.jose.jws;
 
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
+
+import org.apache.oltu.commons.json.CustomizableEntity;
 
 /**
  * Represents the Header as defined in the section 4 of the JWS specification.
  *
  * @see http://tools.ietf.org/html/draft-ietf-jose-json-web-signature-15#section-4
  */
-public final class Header {
+public final class Header extends CustomizableEntity {
 
     /**
      * The {@code alg} JWS Header parameter.
@@ -77,11 +77,6 @@ public final class Header {
      */
     private final String[] critical;
 
-    /**
-     * The registry that keeps the custom fields.
-     */
-    private final Map<String, Object> customFields;
-
     Header(String algorithm,
            String jwkSetUrl,
            String jsonWebKey,
@@ -93,6 +88,7 @@ public final class Header {
            String contentType,
            String[] critical,
            Map<String, Object> customFields) {
+        super(customFields);
         this.algorithm = algorithm;
         this.jwkSetUrl = jwkSetUrl;
         this.jsonWebKey = jsonWebKey;
@@ -103,7 +99,6 @@ public final class Header {
         this.type = type;
         this.contentType = contentType;
         this.critical = critical;
-        this.customFields = customFields;
     }
 
     public String getAlgorithm() {
@@ -144,37 +139,6 @@ public final class Header {
 
     public String[] getCritical() {
         return critical;
-    }
-
-    /**
-     * Return the specified custom field value,
-     * {@code null} if the custom field is not present.
-     *
-     * @param name the custom field name, it cannot be null.
-     * @return the specified custom field value,
-     *         {@code null} if the custom field is not present.
-     */
-    public <T> T getCustomField(String name, Class<T> type) {
-        if (name == null) {
-            throw new IllegalArgumentException("Null custom field name not present in the registry.");
-        }
-
-        Object value = customFields.get(name);
-
-        if (value != null) {
-            return type.cast(value);
-        }
-
-        return null;
-    }
-
-    /**
-     * Returns the custom fields stored in the entity.
-     *
-     * @return the custom fields stored in the entity.
-     */
-    public Set<Entry<String, Object>> getCustomFields() {
-        return customFields.entrySet();
     }
 
 }
