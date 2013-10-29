@@ -34,9 +34,15 @@
   </head>
 
   <body>
-    <div class="container">
-      <h1>Apache Oltu - Sample OAuth V2.0 Client Application</h1>
+    <div class="jumbotron">
+      <div class="container">
+        <img alt="Apache Oltu - Sample OAuth V2.0 Client Application" src="/images/logo_oltu.png" />
+        <h1>Apache Oltu</h1>
+        <p>Sample OAuth V2.0 Client Application</p>
+      </div>
+    </div>
 
+    <div class="container">
       <div class="page-header">
         <h2>Web Server Flow
         <small>Your Resource</small></h2>

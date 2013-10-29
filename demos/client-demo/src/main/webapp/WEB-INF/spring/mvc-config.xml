@@ -32,8 +32,9 @@
     <!-- Configures support for @Controllers -->
     <mvc:annotation-driven/>
 
-    <!-- include static CSS resources -->
+    <!-- include static resources -->
     <mvc:resources mapping="/css/**" location="/css/" />
+    <mvc:resources mapping="/images/**" location="/images/" />
 
     <!-- Resolves view names to protected .jsp resources within the /WEB-INF/views directory -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
