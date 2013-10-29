@@ -16,27 +16,28 @@
  */
 package org.apache.oltu.oauth2.jwt.io;
 
-import org.apache.oltu.commons.encodedtoken.TokenWriter;
+import org.apache.oltu.commons.json.CustomizableEntityReader;
 import org.apache.oltu.oauth2.jwt.JWT;
 
-/**
- * A {@link JWT} writer.
- */
-public final class JWTWriter extends TokenWriter<JWT> {
+final class JWTHeaderParser extends CustomizableEntityReader<JWT, JWT.Builder> implements JWTConstants {
 
-    @Override
-    protected String writeHeader(JWT token) {
-        return new JWTHeaderWriter().write(token.getHeader());
+    public JWTHeaderParser(JWT.Builder builder) {
+        super( builder );
     }
 
     @Override
-    protected String writeBody(JWT token) {
-        return new JWTClaimsSetWriter().write(token.getClaimsSet());
-    }
+    protected <T> boolean handleProperty( String key, T value ) {
+        if (ALGORITHM.equals(key)) {
+            getBuilder().setHeaderAlgorithm(String.valueOf(value));
+        } else if (TYPE.equals(key)) {
+            getBuilder().setHeaderType(String.valueOf(value));
+        } else if (CONTENT_TYPE.equals(key)) {
+            getBuilder().setHeaderContentType(String.valueOf(value));
+        } else {
+            getBuilder().setHeaderCustomField(key, value);
+        }
 
-    @Override
-    protected String writeSignature(JWT token) {
-        return token.getSignature();
+        return true;
     }
 
 }

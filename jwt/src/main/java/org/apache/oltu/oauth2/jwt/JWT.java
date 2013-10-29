@@ -21,6 +21,8 @@ import static java.lang.String.format;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.apache.oltu.commons.json.CustomizableBuilder;
+
 /**
  * This class contains constants used in the JWT implementation.
  *
@@ -101,7 +103,7 @@ public class JWT {
     /**
      * A simple {@link JWT} builder.
      */
-    public static final class Builder {
+    public static final class Builder extends CustomizableBuilder<JWT> {
 
         /**
          * The JWT raw string
@@ -182,7 +184,7 @@ public class JWT {
             this(null);
         }
 
-        public Builder(String rawString ) {
+        public Builder(String rawString) {
             this.rawString = rawString;
         }
 
@@ -226,7 +228,7 @@ public class JWT {
          * @param value value the custom field value.
          * @return this builder instance.
          */
-        public Builder setHeaderCustomField(String key, String value) {
+        public Builder setHeaderCustomField(String key, Object value) {
             if (key == null) {
                 throw new IllegalArgumentException("Null key not allowed");
             }
@@ -331,7 +333,7 @@ public class JWT {
          * @param value value the custom field value.
          * @return this builder instance.
          */
-        public Builder setClaimsSetCustomField(String key, String value) {
+        public Builder setClaimsSetCustomField(String key, Object value) {
             if (key == null) {
                 throw new IllegalArgumentException("Null key not allowed");
             }
