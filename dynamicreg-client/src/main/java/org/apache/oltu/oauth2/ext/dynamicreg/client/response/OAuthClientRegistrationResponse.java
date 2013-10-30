@@ -27,7 +27,6 @@ import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.apache.oltu.oauth2.common.utils.JSONUtils;
 import org.apache.oltu.oauth2.ext.dynamicreg.client.validators.RegistrationValidator;
 import org.apache.oltu.oauth2.ext.dynamicreg.common.OAuthRegistration;
-import org.codehaus.jettison.json.JSONException;
 
 
 /**
@@ -51,7 +50,7 @@ public class OAuthClientRegistrationResponse extends OAuthClientResponse {
         try {
             this.body = body;
             parameters = JSONUtils.parseJSON(body);
-        } catch (JSONException e) {
+        } catch (Throwable e) {
             throw OAuthProblemException.error(OAuthError.CodeResponse.UNSUPPORTED_RESPONSE_TYPE,
                 "Invalid response! Response body is not application/json encoded");
         }

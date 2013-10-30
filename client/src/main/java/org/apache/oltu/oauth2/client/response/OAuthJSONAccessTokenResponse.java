@@ -27,7 +27,6 @@ import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.apache.oltu.oauth2.common.token.BasicOAuthToken;
 import org.apache.oltu.oauth2.common.token.OAuthToken;
 import org.apache.oltu.oauth2.common.utils.JSONUtils;
-import org.codehaus.jettison.json.JSONException;
 
 /**
  *
@@ -67,7 +66,7 @@ public class OAuthJSONAccessTokenResponse extends OAuthAccessTokenResponse {
         try {
             this.body = body;
             parameters = JSONUtils.parseJSON(body);
-        } catch (JSONException e) {
+        } catch (Throwable e) {
             throw OAuthProblemException.error(OAuthError.CodeResponse.UNSUPPORTED_RESPONSE_TYPE,
                 "Invalid response! Response body is not " + OAuth.ContentType.JSON + " encoded");
         }
