@@ -263,6 +263,15 @@
       <timezone>-</timezone>
       <properties />
     </contributor>
+
+    <contributor>
+      <name>Alexis Tessier</name>
+      <url>http://banzoner.com/</url>
+      <roles>
+        <role>Apache Oltu logos designer</role>
+      </roles>
+      <timezone>+1</timezone>
+    </contributor>
   </contributors>
 
   <mailingLists>
