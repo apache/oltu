@@ -76,9 +76,9 @@ public class OAuthClient {
         throws OAuthSystemException, OAuthProblemException {
         return accessToken(request, requestMethod, OAuthJSONAccessTokenResponse.class);
     }
-    
+
     public  <T extends OAuthClientResponse> T resource(OAuthClientRequest request, String requestMethod,Class<T> responseClass) throws OAuthSystemException, OAuthProblemException{
-    	return httpClient.execute(request, null, requestMethod, responseClass);     
+        return httpClient.execute(request, null, requestMethod, responseClass);
     }
 
     public void shutdown() {

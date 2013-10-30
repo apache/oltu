@@ -34,11 +34,6 @@
       <artifactId>org.apache.oltu.oauth2.common</artifactId>
       <version>${project.version}</version>
     </dependency>
-
-    <dependency>
-      <groupId>org.codehaus.jettison</groupId>
-      <artifactId>jettison</artifactId>
-    </dependency>
   </dependencies>
 
   <build>

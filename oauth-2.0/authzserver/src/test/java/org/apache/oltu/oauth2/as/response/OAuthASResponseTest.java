@@ -44,7 +44,7 @@ public class OAuthASResponseTest {
 
     @Test
     public void testAuthzResponse() throws Exception {
-    	HttpServletRequest request = createMock(HttpServletRequest.class);
+        HttpServletRequest request = createMock(HttpServletRequest.class);
         OAuthResponse oAuthResponse = OAuthASResponse.authorizationResponse(request,200)
             .location("http://www.example.com")
             .setCode("code")
@@ -53,17 +53,17 @@ public class OAuthASResponseTest {
             .buildQueryMessage();
 
         String url = oAuthResponse.getLocationUri();
-         
+
         Assert.assertEquals("http://www.example.com?testValue=value2&state=ok&code=code", url);
         Assert.assertEquals(200, oAuthResponse.getResponseStatus());
 
     }
-    
+
     @Test
     public void testAuthzResponseWithState() throws Exception {
-    	HttpServletRequest request = createMock(HttpServletRequest.class);
-    	expect(request.getParameter(OAuth.OAUTH_STATE)).andStubReturn("ok");
-    	replay(request);
+        HttpServletRequest request = createMock(HttpServletRequest.class);
+        expect(request.getParameter(OAuth.OAUTH_STATE)).andStubReturn("ok");
+        replay(request);
         OAuthResponse oAuthResponse = OAuthASResponse.authorizationResponse(request,200)
             .location("http://www.example.com")
             .setCode("code")
@@ -71,27 +71,27 @@ public class OAuthASResponseTest {
             .buildQueryMessage();
 
         String url = oAuthResponse.getLocationUri();
- 
+
         Assert.assertEquals("http://www.example.com?testValue=value2&state=ok&code=code", url);
         Assert.assertEquals(200, oAuthResponse.getResponseStatus());
 
     }
-    
+
     @Test
     public void testAuthzImplicitResponseWithState() throws Exception {
-    	HttpServletRequest request = createMock(HttpServletRequest.class);
-    	expect(request.getParameter(OAuth.OAUTH_STATE)).andStubReturn("ok");
-    	replay(request);
-    	OAuthResponse oAuthResponse = OAuthASResponse.authorizationResponse(request,200)
-    	.location("http://www.example.com")
-    	.setAccessToken("access_111")
-    	.setExpiresIn("400")
-    	.setParam("testValue", "value2")
-    	.buildQueryMessage();
+        HttpServletRequest request = createMock(HttpServletRequest.class);
+        expect(request.getParameter(OAuth.OAUTH_STATE)).andStubReturn("ok");
+        replay(request);
+        OAuthResponse oAuthResponse = OAuthASResponse.authorizationResponse(request,200)
+        .location("http://www.example.com")
+        .setAccessToken("access_111")
+        .setExpiresIn("400")
+        .setParam("testValue", "value2")
+        .buildQueryMessage();
 
-    	String url = oAuthResponse.getLocationUri();
-    	Assert.assertEquals("http://www.example.com#testValue=value2&state=ok&expires_in=400&access_token=access_111", url);
-    	Assert.assertEquals(200, oAuthResponse.getResponseStatus());
+        String url = oAuthResponse.getLocationUri();
+        Assert.assertEquals("http://www.example.com#testValue=value2&state=ok&expires_in=400&access_token=access_111", url);
+        Assert.assertEquals(200, oAuthResponse.getResponseStatus());
     }
 
 
@@ -135,8 +135,7 @@ public class OAuthASResponseTest {
         OAuthResponse oAuthResponse = OAuthResponse.errorResponse(400).error(ex).buildJSONMessage();
 
         Assert.assertEquals(
-            "{\"error_uri\":\"http:\\/\\/www.example.com\\/error\",\"error\":\"access_denied\",\""
-                + "error_description\":\"Access denied\"}",
+            "{\"error_uri\":\"http://www.example.com/error\",\"error\":\"access_denied\",\"error_description\":\"Access denied\"}",
             oAuthResponse.getBody());
 
 
@@ -166,7 +165,7 @@ public class OAuthASResponseTest {
 
     @Test
     public void testHeaderResponse() throws Exception {
-    	HttpServletRequest request = createMock(HttpServletRequest.class);
+        HttpServletRequest request = createMock(HttpServletRequest.class);
         OAuthResponse oAuthResponse = OAuthASResponse.authorizationResponse(request,400).setCode("oauth_code")
             .setState("state_ok")
             .buildHeaderMessage();

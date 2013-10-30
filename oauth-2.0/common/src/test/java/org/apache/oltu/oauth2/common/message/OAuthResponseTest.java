@@ -32,7 +32,6 @@ import org.junit.Test;
  */
 public class OAuthResponseTest {
 
-
     @Test
     public void testErrorResponse() throws Exception {
         OAuthResponse oAuthResponse = OAuthResponse.errorResponse(400)
@@ -46,10 +45,8 @@ public class OAuthResponseTest {
 
         String body = oAuthResponse.getBody();
         Assert.assertEquals(
-            "{\"error_uri\":\"http:\\/\\/example-uri\",\"error\":\"error\",\"param\":\"value\","
-                + "\"realm\":\"album\",\"state\":\"ok\",\"error_description\":\"error_description\"}",
+            "{\"error_uri\":\"http://example-uri\",\"error\":\"error\",\"param\":\"value\",\"realm\":\"album\",\"state\":\"ok\",\"error_description\":\"error_description\"}",
             body);
     }
-
 
 }

@@ -26,7 +26,6 @@ import java.util.Map;
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 import org.apache.oltu.oauth2.common.message.OAuthMessage;
 import org.apache.oltu.oauth2.common.utils.JSONUtils;
-import org.codehaus.jettison.json.JSONException;
 
 /**
  *
@@ -34,6 +33,7 @@ import org.codehaus.jettison.json.JSONException;
  *
  */
 public class JSONBodyParametersApplier implements OAuthParametersApplier {
+
     public OAuthMessage applyOAuthParameters(OAuthMessage message, Map<String, Object> params)
         throws OAuthSystemException {
         String json = null;
@@ -41,8 +41,9 @@ public class JSONBodyParametersApplier implements OAuthParametersApplier {
             json = JSONUtils.buildJSON(params);
             message.setBody(json);
             return message;
-        } catch (JSONException e) {
+        } catch (Throwable e) {
             throw new OAuthSystemException(e);
         }
     }
+
 }
