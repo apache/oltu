@@ -34,7 +34,7 @@ public final class JWSReaderTestCase {
         assertEquals("HS256", jws.getHeader().getAlgorithm());
         assertArrayEquals(new String[]{ "exp" }, jws.getHeader().getCritical());
         assertEquals("{\"iss\":\"joe\",\r\n \"exp\":1300819380,\r\n \"http://example.com/is_root\":true}", jws.getPayload());
-        assertEquals("tߴ���%O�`}ح���%Miֿ�[XXS��y", jws.getSignature());
+        assertEquals("dBjftO-_ve-_ve-_vSVP77-9YH3Yre-_ve-_vRbvv70lTWnWv--_vVtYBVhT77-977-9eQ", jws.getSignature());
     }
 
 }
