@@ -25,13 +25,13 @@ import org.apache.oltu.oauth2.jwt.JWT;
 public final class JWTReader extends TokenReader<JWT> {
 
     @Override
-    protected JWT build(String rawString, String decodedHeader, String decodedBody, String decodedSignature) {
+    protected JWT build(String rawString, String decodedHeader, String decodedBody, String encodedSignature) {
         JWT.Builder jwtBuilder = new JWT.Builder(rawString);
 
         new JWTHeaderParser(jwtBuilder).read(decodedHeader);
         new JWTClaimsSetParser(jwtBuilder).read(decodedBody);
 
-        return jwtBuilder.setSignature(decodedSignature).build();
+        return jwtBuilder.setSignature(encodedSignature).build();
     }
 
 }
