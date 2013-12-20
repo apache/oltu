@@ -27,8 +27,13 @@ public abstract class TokenReader<T> extends TokenDecoder {
     /**
      * The Base64 JSON string default separator.
      */
-    private final Pattern base64TokenPattern = Pattern.compile("([a-zA-Z0-9/+=]+)\\.([a-zA-Z0-9/+=]+)\\.(.+)");
+    private final Pattern base64urlTokenPattern = Pattern.compile("([a-zA-Z0-9/+=]+)\\.([a-zA-Z0-9/+=]+)\\.(.+)");
 
+    /**
+     * Read the base64url token string
+     * @param base64String
+     * @return
+     */
     public T read(String base64String) {
         if (base64String == null || base64String.isEmpty()) {
             throw new IllegalArgumentException("Impossible to obtain a Token from a null or empty string");
@@ -52,11 +57,11 @@ public abstract class TokenReader<T> extends TokenDecoder {
             }
         }
 
-        Matcher matcher = base64TokenPattern.matcher(buffer.toString());
+        Matcher matcher = base64urlTokenPattern.matcher(buffer.toString());
         if (!matcher.matches()) {
             throw new IllegalArgumentException(base64String
                                                + "is not a valid Token, it does not match with the pattern: "
-                                               + base64TokenPattern.pattern());
+                                               + base64urlTokenPattern.pattern());
         }
 
         // HEADER
@@ -68,12 +73,20 @@ public abstract class TokenReader<T> extends TokenDecoder {
         String decodedBody = base64Decode(body);
 
         // SIGNATURE
+        // Keep signature encoded in base64url
         String signature = matcher.group(3);
-        String decodedSignature = base64Decode(signature);
 
-        return build(base64String, decodedHeader, decodedBody, decodedSignature);
+        return build(base64String, decodedHeader, decodedBody, signature);
     }
 
-    protected abstract T build(String rawString, String decodedHeader, String decodedBody, String decodedSignature);
-
+    /**
+     * Build the token reader
+     *
+     * @param rawString
+     * @param decodedHeader
+     * @param decodedBody
+     * @param encodedSignature
+     * @return
+     */
+    protected abstract T build(String rawString, String decodedHeader, String decodedBody, String encodedSignature);
 }
