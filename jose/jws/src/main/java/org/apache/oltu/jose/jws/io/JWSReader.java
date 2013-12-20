@@ -27,14 +27,14 @@ import org.apache.oltu.jose.jws.JWS;
 public final class JWSReader extends TokenReader<JWS> {
 
     @Override
-    protected JWS build(String rawString, String decodedHeader, String decodedBody, String decodedSignature) {
+    protected JWS build(String rawString, String decodedHeader, String decodedBody, String encodedSignature) {
         final JWS.Builder jwsBuilder = new JWS.Builder();
 
         new JWSHeaderParser(jwsBuilder).read(decodedHeader);
 
         return jwsBuilder
                .setPayload(decodedBody)
-               .setSignature(decodedSignature)
+               .setSignature(encodedSignature)
                .build();
     }
 
