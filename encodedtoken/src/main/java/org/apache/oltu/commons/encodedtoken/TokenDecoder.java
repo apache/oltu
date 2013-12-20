@@ -20,7 +20,7 @@ import java.nio.charset.Charset;
 
 import org.apache.commons.codec.binary.Base64;
 
-abstract class TokenDecoder {
+public abstract class TokenDecoder {
 
     /**
      * The {@code UTF-8} charset reference.
@@ -28,16 +28,26 @@ abstract class TokenDecoder {
     private static final Charset UTF_8 = Charset.forName("UTF-8");
 
     /**
-     * The BASE64 encoder/decoder.
+     * Empty Line separator for rfc 2045 section 6.8
+     * {@see org.apache.commons.codec.binary.Base64}
      */
-    private final Base64 base64 = new Base64(true);
+    private static final byte[] LINE_SEPARATOR = {};
 
-    protected final String base64Decode(String base64encoded) {
+    /**
+     * The BASE64 encoder/decoder.
+     * Encode base64url rfc4648
+     */
+    private static final Base64 base64 = new Base64(-1, LINE_SEPARATOR, true);
+
+    public static final String base64Decode(String base64encoded) {
         return new String(base64.decode(base64encoded), UTF_8);
     }
 
-    protected final String base64Encode(String input) {
+    public static final String base64Encode(String input) {
         return new String(base64.encode(input.getBytes(UTF_8)), UTF_8);
     }
-
+    
+    public static final String base64Encode(byte [] input) {
+        return new String(base64.encode(input));
+    }
 }
