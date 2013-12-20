@@ -16,7 +16,9 @@
  */
 package org.apache.oltu.jose.jws;
 
+import org.apache.oltu.commons.encodedtoken.TokenDecoder;
 import org.apache.oltu.commons.json.CustomizableBuilder;
+import org.apache.oltu.jose.jws.io.JWSHeaderWriter;
 import org.apache.oltu.jose.jws.signature.SignatureMethod;
 import org.apache.oltu.jose.jws.signature.SigningKey;
 import org.apache.oltu.jose.jws.signature.VerifyingKey;
@@ -88,7 +90,7 @@ public class JWS {
             throw new IllegalStateException("JWS token must have a signature to be verified.");
         }
 
-        return method.verify(signature, payload, verifyingKey);
+        return method.verify(signature, TokenDecoder.base64Encode(new JWSHeaderWriter().write(header)), TokenDecoder.base64Encode(payload), verifyingKey);
     }
 
     public static final class Builder extends CustomizableBuilder<JWS> {
@@ -225,7 +227,19 @@ public class JWS {
                 throw new IllegalStateException("Payload needs to be set in order to sign the current JWT");
             }
             setAlgorithm(method.getAlgorithm());
-            return setSignature(method.calculate(payload, signingKey));
+            
+            String header = new JWSHeaderWriter().write(new Header(algorithm,
+                                      jwkSetUrl,
+                                      jsonWebKey,
+                                      x509url,
+                                      x509CertificateThumbprint,
+                                      x509CertificateChain,
+                                      keyId, type,
+                                      contentType,
+                                      critical,
+                                      getCustomFields())); 
+            
+            return setSignature(method.calculate(TokenDecoder.base64Encode(header), TokenDecoder.base64Encode(payload), signingKey));
         }
 
         public JWS build() {

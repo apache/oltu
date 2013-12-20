@@ -18,6 +18,7 @@ package org.apache.oltu.jose.jws.signature;
 
 import static org.junit.Assert.*;
 
+import org.apache.oltu.commons.encodedtoken.TokenDecoder;
 import org.apache.oltu.jose.jws.JWS;
 import org.junit.After;
 import org.junit.Before;
@@ -25,20 +26,25 @@ import org.junit.Test;
 
 public final class SignatureMethodTestCase {
 
+    private String  hs256;
+    
     private String payload;
 
     private TestSymetricKey key;
 
     private String signature;
 
-    private TestSignatureMethod method;
+    private TestDummySignatureMethod method;
 
     @Before
     public void setUp() {
         payload = "{\"iss\":\"joe\",\r\n \"exp\":1300819380,\r\n \"http://example.com/is_root\":true}";
+        hs256 = "{\"alg\":\"TEST\",\"typ\":\"JWT\"}";
+        
         key = new TestSymetricKey("supercalifragilistichespiralidoso1234567890");
-        signature = payload + key.getValue();
-        method = new TestSignatureMethod();
+        signature = TokenDecoder.base64Encode(hs256) + TokenDecoder.base64Encode(payload) + key.getValue();
+        
+        method = new TestDummySignatureMethod();
     }
 
     @After
@@ -51,14 +57,15 @@ public final class SignatureMethodTestCase {
 
     @Test
     public void simpleSignatureVerification() {
-        assertEquals(signature, method.calculate(payload, key));
-        assertTrue(method.verify(signature, payload, key));
+        assertEquals(hs256 + payload + key.getValue(), method.calculate(hs256, payload, key));
+        assertTrue(method.verify(hs256 + payload + key.getValue(), hs256, payload, key));
     }
 
     @Test
     public void signJWS() {
         JWS jws = new JWS.Builder()
-                         .setType("JWT")
+                         .setType("JWT"). 
+                         setAlgorithm("TEST")
                          .setPayload(payload)
                          .sign(method, key)
                          .build();
@@ -71,6 +78,7 @@ public final class SignatureMethodTestCase {
     public void validateJWS() {
         JWS jws = new JWS.Builder()
                          .setType("JWT")
+                         .setAlgorithm("TEST")
                          .setPayload(payload)
                          .sign(method, key)
                          .build();

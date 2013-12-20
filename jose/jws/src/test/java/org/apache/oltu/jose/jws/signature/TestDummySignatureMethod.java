@@ -16,18 +16,21 @@
  */
 package org.apache.oltu.jose.jws.signature;
 
-/**
- * Common definition of OAuth signature method algorithm.
- *
- * @param <S> the {@link SigningKey} type.
- * @param <V> the {@link VerifyingKey} type.
- */
-public interface SignatureMethod<S extends SigningKey, V extends VerifyingKey> {
+final class TestDummySignatureMethod implements SignatureMethod<TestSymetricKey, TestSymetricKey> {
 
-    String calculate(String header, String payload, S signingKey);
+    @Override
+    public String calculate(String header, String payload, TestSymetricKey signingKey) {
+        return header + payload + signingKey.getValue();
+    }
 
-    boolean verify(String signature, String header, String payload, V verifyingKey);
+    @Override
+    public boolean verify(String signature, String header, String payload, TestSymetricKey verifyingKey) {
+        return signature.equals(calculate(header, payload, verifyingKey));
+    }
 
-    String getAlgorithm();
+    @Override
+    public String getAlgorithm() {
+        return "TEST";
+    }
 
 }
