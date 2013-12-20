@@ -19,7 +19,7 @@ package org.apache.oltu.jose.jws.io;
 import org.apache.oltu.commons.json.CustomizableEntityWriter;
 import org.apache.oltu.jose.jws.Header;
 
-final class JWSHeaderWriter extends CustomizableEntityWriter<Header> implements JWSConstants {
+public final class JWSHeaderWriter extends CustomizableEntityWriter<Header> implements JWSConstants {
 
     @Override
     protected void handleProperties(Header header) {
