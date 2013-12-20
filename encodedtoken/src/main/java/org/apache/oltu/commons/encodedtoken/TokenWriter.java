@@ -30,14 +30,13 @@ public abstract class TokenWriter<T> extends TokenDecoder {
         String encodedBody = base64Encode(body);
 
         String signature = writeSignature(token);
-        String encodedSignature = base64Encode(signature);
 
         return new StringBuilder()
                    .append(encodedHeader)
                    .append('.')
                    .append(encodedBody)
                    .append('.')
-                   .append(encodedSignature)
+                   .append(signature)
                    .toString();
     }
 
