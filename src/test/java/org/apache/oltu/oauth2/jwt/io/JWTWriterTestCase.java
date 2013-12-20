@@ -46,7 +46,7 @@ public final class JWTWriterTestCase implements IOTestCaseConstants {
                           // signature
                           .setSignature("XWYi5Zj1YWAMGIml_ftoAwmvW1Y7oeybLCpzQrJVuWJpS8L8Vd2TL-RTIOEVG03VA7e0_-_frNuw7MxUgVEgh8G-Nnbk_baJ6k_3w5c1SKFamFiHHDoKLFhrt1Y8JKSuGwE02V-px4Cn0dRAQAc1IN5CU6wqCrYK0p-fv_fvy28")
                           .build();
-        String encodedJWT = new JWTWriter().write(jwt).replaceAll("\r?\n", "");;
+        String encodedJWT = new JWTWriter().write(jwt);
         assertEquals(JWT, encodedJWT);
     }
 
