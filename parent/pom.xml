@@ -498,7 +498,7 @@
             <mavenExecutorId>forked-path</mavenExecutorId>
             <useReleaseProfile>false</useReleaseProfile>
             <preparationGoals>clean install</preparationGoals>
-            <autoVersionSubmodules>true</autoVersionSubmodules>
+            <autoVersionSubmodules>false</autoVersionSubmodules>
             <arguments>-Prelease,apache</arguments>
             <tagBase>https://svn.apache.org/repos/asf/oltu/tags</tagBase>
           </configuration>
