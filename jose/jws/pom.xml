@@ -28,6 +28,11 @@
   <version>1.0.0-SNAPSHOT</version>
 
   <name>Apache Oltu - JOSE - JWS</name>
+  <description>JWS specification implemented in Apache Oltu</description>
+
+  <properties>
+    <osgi.export>${project.artifactId}*;version=${project.version}</osgi.export>
+  </properties>
 
   <dependencies>
     <dependency>
