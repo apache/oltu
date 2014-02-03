@@ -25,9 +25,10 @@
   </parent>
 
   <artifactId>org.apache.oltu.commons.encodedtoken</artifactId>
-  <version>1</version>
+  <version>1.0.0</version>
 
   <name>Apache Oltu - Commons - Encoded Token</name>
+  <description>Apache Oltu Encoded Token shared utility</description>
 
   <dependencies>
     <dependency>
