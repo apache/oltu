@@ -32,6 +32,12 @@
 
   <name>Apache Oltu - Commons - Parent</name>
 
+  <scm>
+    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/oltu/trunk/commons</developerConnection>
+    <connection>scm:svn:https://svn.apache.org/repos/asf/oltu/trunk/commons</connection>
+    <url>https://svn.apache.org/repos/asf/oltu/trunk/commons</url>
+  </scm>
+
   <modules>
     <module>encodedtoken</module>
     <module>json</module>
