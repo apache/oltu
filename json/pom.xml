@@ -28,6 +28,7 @@
   <version>1.0.0-SNAPSHOT</version>
 
   <name>Apache Oltu - Commons - JSON</name>
+  <description>Apache Oltu JSON shared utility</description>
 
   <dependencies>
     <dependency>
