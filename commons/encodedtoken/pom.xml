@@ -28,6 +28,7 @@
   <version>1.0.0-SNAPSHOT</version>
 
   <name>Apache Oltu - Commons - Encoded Token</name>
+  <description>Apache Oltu Encoded Token shared utility</description>
 
   <dependencies>
     <dependency>
