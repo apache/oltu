@@ -32,6 +32,12 @@
 
   <name>Apache Oltu - OAuth 2.0 - Parent</name>
 
+  <scm>
+    <connection>scm:svn:https://svn.apache.org/repos/asf/oltu/trunk/oauth-2.0</connection>
+    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/oltu/trunk/oauth-2.0</developerConnection>
+    <url>https://svn.apache.org/repos/asf/oltu/trunk/oauth-2.0</url>
+  </scm>
+
   <modules>
     <module>common</module>
     <module>client</module>
@@ -125,10 +131,4 @@
     </dependency>
   </dependencies>
 
-
-  <scm>
-    <connection>scm:svn:https://svn.apache.org/repos/asf/oltu/tags/org.apache.oltu.oauth2.parent-0.31</connection>
-    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/oltu/tags/org.apache.oltu.oauth2.parent-0.31</developerConnection>
-    <url>https://svn.apache.org/repos/asf/oltu/tags/org.apache.oltu.oauth2.parent-0.31</url>
-  </scm>
 </project>
