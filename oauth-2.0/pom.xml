@@ -69,7 +69,7 @@
   </ciManagement>
 
   <properties>
-    <osgi.export>${project.artifactId}*;version=${project.version}</osgi.export>
+    <osgi.export>org.apache.oltu.oauth2*;version=${project.version}</osgi.export>
     <cxf.version>2.2.10</cxf.version>
     <org.springframework.version>3.0.3.RELEASE</org.springframework.version>
     <spring-mock.version>2.0.8</spring-mock.version>
