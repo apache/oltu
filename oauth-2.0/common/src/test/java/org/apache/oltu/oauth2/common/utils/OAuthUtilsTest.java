@@ -21,20 +21,19 @@
 
 package org.apache.oltu.oauth2.common.utils;
 
+import org.apache.commons.codec.binary.Base64;
+import org.apache.oltu.oauth2.common.OAuth;
+import org.apache.oltu.oauth2.common.error.OAuthError;
+import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
+import org.junit.Ignore;
+import org.junit.Test;
+
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
-import org.apache.commons.codec.binary.Base64;
-import org.apache.oltu.oauth2.common.OAuth;
-import org.apache.oltu.oauth2.common.error.OAuthError;
-import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
-import org.apache.oltu.oauth2.common.utils.OAuthUtils;
-import org.junit.Assert;
-import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
@@ -45,6 +44,29 @@ import static org.junit.Assert.assertNull;
  *
  */
 public class OAuthUtilsTest {
+
+    @Test
+    @Ignore
+    // TODO what are testing here?
+    public void testBuildJSON() throws Exception {
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put(OAuthError.OAUTH_ERROR, OAuthError.TokenResponse.INVALID_REQUEST);
+
+        String json = JSONUtils.buildJSON(params);
+
+        /* JSONObject obj = new JSONObject(json);
+
+        AbstractXMLStreamReader reader = new MappedXMLStreamReader(obj);
+
+        assertEquals(XMLStreamReader.START_ELEMENT, reader.next());
+        assertEquals(OAuthError.OAUTH_ERROR, reader.getName().getLocalPart());
+
+        assertEquals(OAuthError.TokenResponse.INVALID_REQUEST, reader.getText());
+        assertEquals(XMLStreamReader.CHARACTERS, reader.next());
+        assertEquals(XMLStreamReader.END_ELEMENT, reader.next());
+        assertEquals(XMLStreamReader.END_DOCUMENT, reader.next()); */
+    }
+
     @Test
     public void testFormat() throws Exception {
         Map<String, Object> parameters = new HashMap<String, Object>();
@@ -138,6 +160,17 @@ public class OAuthUtilsTest {
     }
 
     @Test
+    public void testEncodeOAuthHeaderWithError() throws Exception {
+
+        Map<String, Object> entries = new HashMap<String, Object>();
+        entries.put("realm", "Some Example Realm");
+        entries.put("error", "invalid_token");
+
+        String header = OAuthUtils.encodeOAuthHeader(entries);
+        assertEquals("Bearer error=\"invalid_token\",realm=\"Some Example Realm\"", header);
+    }
+
+    @Test
     public void testEncodeAuthorizationBearerHeader() throws Exception {
         Map<String, Object> parameters = new HashMap<String, Object>();
         parameters.put("accessToken", "mF_9.B5f-4.1JqM");
@@ -218,6 +251,9 @@ public class OAuthUtilsTest {
         String header2 = "clientId:";
         String encodedHeader2 = "Basic " + new String(Base64.encodeBase64(header2.getBytes()));
         assertNull(OAuthUtils.decodeClientAuthenticationHeader(encodedHeader2));
+
+        String encodedHeader3 = "invalid_header";
+        assertNull(OAuthUtils.decodeClientAuthenticationHeader(encodedHeader3));
 
         assertNull(OAuthUtils.decodeClientAuthenticationHeader("Authorization dXNlcm5hbWU6cGFzc3dvcmQ="));
     }
