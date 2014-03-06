@@ -372,7 +372,7 @@ public final class OAuthUtils {
             return null;
         }
         String[] tokens = authenticationHeader.split(" ");
-        if (tokens == null) {
+        if (tokens.length != 2) {
             return null;
         }
         if (tokens[0] != null && !"".equals(tokens[0])) {
