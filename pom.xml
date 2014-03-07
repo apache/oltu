@@ -349,18 +349,6 @@
     -->
     <javadoc.version>2.9.1</javadoc.version>
     <!--
-     | Oltu website has to be stored in SVN
-     |
-     | mvn -P site clean site-deploy scm-publish:publish-scm -Dusername=${uid} -Dpassword=${pwd}
-     |
-     | or
-     |
-     | sh -P site deploySite.sh -Dusername=${uid} -Dpassword=${pwd}
-    -->
-    <site.siteFilePath>${user.home}/oltu-site/</site.siteFilePath>
-    <site.deploymentBaseUrl>file://${site.siteFilePath}</site.deploymentBaseUrl>
-    <site.scmPubCheckoutDirectory>${user.home}/oltu-site-content/</site.scmPubCheckoutDirectory>
-    <!--
      | OSGi settings
     -->
     <osgi.export>${project.artifactId};version=${project.version}</osgi.export>
@@ -507,13 +495,9 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-scm-publish-plugin</artifactId>
-          <version>1.0-beta-2</version>
+          <version>1.0</version>
           <configuration>
             <tryUpdate>true</tryUpdate>
-            <checkoutDirectory>${site.scmPubCheckoutDirectory}</checkoutDirectory>
-            <pubScmUrl>scm:svn:https://svn.apache.org/repos/asf/oltu/site</pubScmUrl>
-            <checkinComment>Apache Oltu site deployment</checkinComment>
-            <content>${site.siteFilePath}</content>
           </configuration>
         </plugin>
       </plugins>
@@ -895,7 +879,7 @@
                 -quiet
                 -federate JDK http://download.oracle.com/javase/6/docs/api/index.html?
                 -federationxml JDK http://doclava.googlecode.com/svn/static/api/openjdk-6.xml
-                -hdf project.name "Apache Oltu"
+                -hdf project.name "${project.name}"
                 -apiversion "${project.version}"
                 -d ${project.reporting.outputDirectory}/apidocs
               </additionalparam>
