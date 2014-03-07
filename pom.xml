@@ -21,7 +21,7 @@
   <parent>
     <groupId>org.apache.oltu</groupId>
     <artifactId>org.apache.oltu.parent</artifactId>
-    <version>2</version>
+    <version>3-SNAPSHOT</version>
     <relativePath>../parent</relativePath>
   </parent>
 
@@ -30,7 +30,7 @@
   <version>1.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
 
-  <name>Apache Oltu - OAuth 2.0 - Parent</name>
+  <name>Apache Oltu - OAuth 2.0</name>
 
   <scm>
     <connection>scm:svn:https://svn.apache.org/repos/asf/oltu/trunk/oauth-2.0</connection>
@@ -53,6 +53,12 @@
     <module>jwt</module>
   </modules>
 
+  <distributionManagement>
+    <site>
+      <id>apache.website</id>
+      <url>${siteUrlDeployment}</url>
+    </site>
+  </distributionManagement>
   <ciManagement>
     <system>Jenkins</system>
     <url>https://builds.apache.org/job/Oltu-OAuth-2.0/</url>
@@ -130,5 +136,34 @@
       <scope>provided</scope>
     </dependency>
   </dependencies>
+
+  <profiles>
+    <profile>
+      <id>site</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-site-plugin</artifactId>
+            <configuration>
+              <inputDirectory>${project.reporting.outputDirectory}/apidocs</inputDirectory>
+            </configuration>
+          </plugin>
+
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-scm-publish-plugin</artifactId>
+            <configuration>
+              <checkoutDirectory>${scmPubCheckoutDirectory}</checkoutDirectory>
+              <pubScmUrl>scm:svn:https://svn.apache.org/repos/asf/oltu/site/apidocs/oauth2</pubScmUrl>
+              <checkinComment>Oltu OAuth2 apidocs deployment</checkinComment>
+              <content>${project.build.directory}/staging</content>
+              <tryUpdate>true</tryUpdate>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 
 </project>

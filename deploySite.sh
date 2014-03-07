@@ -19,4 +19,5 @@
 # under the License.
 #
 
-mvn -P site clean site-deploy scm-publish:publish-scm $@
+mvn clean site site:stage -P site
+mvn scm-publish:publish-scm -Dusername=$1 -Dpassword=$2 -P site
