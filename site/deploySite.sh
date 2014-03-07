@@ -19,4 +19,4 @@
 # under the License.
 #
 
-mvn clean site-deploy -Dusername=$1 -Dpassword=$2
+mvn clean site-deploy -P site -Dusername=$1 -Dpassword=$2
