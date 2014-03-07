@@ -47,7 +47,12 @@
     <menu name="${project.name}">
       <item href="./index.html" name="Overview" />
       <item href="https://cwiki.apache.org/confluence/display/OLTU/Documentation" name="Documentation" />
-      <item href="./apidocs/index.html" name="APIs Documentation" />
+      <item href="#" name="APIs Documentation">
+        <item href="./apidocs/commons/index.html" name="Commons" />
+        <item href="./apidocs/jose/index.html" name="JOSE" />
+        <item href="./apidocs/oauth2/index.html" name="OAuth2" />
+        <item href="./apidocs/openid-connect/index.html" name="OpenID Connect" />
+      </item>
       <item href="./download.html" name="Download" />
     </menu>
 

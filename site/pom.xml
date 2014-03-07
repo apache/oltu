@@ -24,7 +24,7 @@
   <parent>
     <groupId>org.apache.oltu</groupId>
     <artifactId>org.apache.oltu.parent</artifactId>
-    <version>1</version>
+    <version>2</version>
   </parent>
 
   <artifactId>org.apache.oltu.site</artifactId>
@@ -32,6 +32,7 @@
   <packaging>pom</packaging>
 
   <name>Apache Oltu</name>
+  <url>https://oltu.apache.org/</url>
 
   <properties>
     <svnUrl>https://svn.apache.org/repos/asf/oltu/site/</svnUrl>
@@ -93,7 +94,7 @@
         <configuration>
           <checkinComment>Oltu main site deployment</checkinComment>
           <ignorePathsToDelete>
-            <ignorePathToDelete>oauth2**</ignorePathToDelete>
+            <ignorePathToDelete>apidocs**</ignorePathToDelete>
           </ignorePathsToDelete>
           <checkoutDirectory>${checkoutDirectory}</checkoutDirectory>
         </configuration>
@@ -149,7 +150,7 @@
                     </exec>
 
                     <exec executable="svn">
-                      <arg line="update --set-depth exclude ${checkoutDirectory}/oauth2" />
+                      <arg line="update --set-depth exclude ${checkoutDirectory}/apidocs" />
                     </exec>
 
                     <pathconvert pathsep=" " property="dirs">
