@@ -27,7 +27,7 @@
 
   <groupId>org.apache.oltu.openidconnect</groupId>
   <artifactId>org.apache.oltu.openidconnect.parent</artifactId>
-  <version>0.1-SNAPSHOT</version>
+  <version>1-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Apache Oltu - OpenId Connect - Parent</name>

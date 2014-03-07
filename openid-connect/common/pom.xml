@@ -21,10 +21,11 @@
   <parent>
     <groupId>org.apache.oltu.openidconnect</groupId>
     <artifactId>org.apache.oltu.openidconnect.parent</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>1-SNAPSHOT</version>
   </parent>
 
   <artifactId>org.apache.oltu.openidconnect.common</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
 
   <name>Apache Oltu - OpenId Connect - Common</name>
   <description>OpenId Connect library - Common</description>
