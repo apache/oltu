@@ -42,6 +42,10 @@ public abstract class TokenDecoder {
     public static final String base64Decode(String base64encoded) {
         return new String(base64.decode(base64encoded), UTF_8);
     }
+    
+    public static final byte[] base64DecodeToByte(String base64encoded) {
+        return base64.decode(base64encoded);
+    }
 
     public static final String base64Encode(String input) {
         return new String(base64.encode(input.getBytes(UTF_8)), UTF_8);
