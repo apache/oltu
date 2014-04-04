@@ -31,7 +31,7 @@
   <description>OpenId Connect library - Client</description>
 
   <properties>
-    <oltu.oauth2.version>1.0.0-SNAPSHOT</oltu.oauth2.version>
+    <oltu.oauth2.version>1.0.1-SNAPSHOT</oltu.oauth2.version>
   </properties>
 
   <dependencies>
