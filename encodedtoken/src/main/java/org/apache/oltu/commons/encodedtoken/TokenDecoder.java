@@ -33,25 +33,19 @@ public abstract class TokenDecoder {
      */
     private static final byte[] LINE_SEPARATOR = {};
 
-    /**
-     * The BASE64 encoder/decoder.
-     * Encode base64url rfc4648
-     */
-    private static final Base64 base64 = new Base64(-1, LINE_SEPARATOR, true);
-
     public static final String base64Decode(String base64encoded) {
-        return new String(base64.decode(base64encoded), UTF_8);
+        return new String(new Base64(-1, LINE_SEPARATOR, true).decode(base64encoded), UTF_8);
     }
     
     public static final byte[] base64DecodeToByte(String base64encoded) {
-        return base64.decode(base64encoded);
+        return new Base64(-1, LINE_SEPARATOR, true).decode(base64encoded);
     }
 
     public static final String base64Encode(String input) {
-        return new String(base64.encode(input.getBytes(UTF_8)), UTF_8);
+        return new String(new Base64(-1, LINE_SEPARATOR, true).encode(input.getBytes(UTF_8)), UTF_8);
     }
     
     public static final String base64Encode(byte [] input) {
-        return new String(base64.encode(input));
+        return new String(new Base64(-1, LINE_SEPARATOR, true).encode(input));
     }
 }
