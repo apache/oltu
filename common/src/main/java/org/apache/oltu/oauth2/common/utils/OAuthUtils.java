@@ -400,6 +400,23 @@ public final class OAuthUtils {
     public static String encodeOAuthHeader(Map<String, Object> entries) {
         StringBuffer sb = new StringBuffer();
         sb.append(OAuth.OAUTH_HEADER_NAME).append(" ");
+        /*
+         * Android 4.1 requires realm as first parameter!
+         * If not set, it will throw an IOException
+         * see parseChallenges in
+         * https://android.googlesource.com/platform/libcore/+/android-4.1.2_r2/luni/src/main/java/libcore/net/http/HeaderParser.java 
+         * more information:
+         * http://stackoverflow.com/questions/11810447/httpurlconnection-worked-fine-in-android-2-x-but-not-in-4-1-no-authentication-c
+         */
+        if (entries.get("realm") != null) {
+            String value = String.valueOf(entries.get("realm"));
+            if (!OAuthUtils.isEmpty(value)) {
+                sb.append("realm=\"");
+                sb.append(value);
+                sb.append("\",");
+            }
+            entries.remove("realm");
+        }
         for (Map.Entry<String, Object> entry : entries.entrySet()) {
             String value = entry.getValue() == null? null: String.valueOf(entry.getValue());
             if (!OAuthUtils.isEmpty(entry.getKey()) && !OAuthUtils.isEmpty(value)) {
