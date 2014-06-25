@@ -15,68 +15,60 @@
  * limitations under the License.
  */
 package org.apache.oltu.jose.jws.signature.impl;
- 
+
 import java.security.Signature;
 import org.apache.oltu.commons.encodedtoken.TokenDecoder;
 import org.apache.oltu.jose.jws.JwsConstants;
 import org.apache.oltu.jose.jws.signature.SignatureMethod;
 
 /**
- * Class that asymmetrically sign and verify the
- * issued token 
- * 
+ * Class that asymmetrically sign and verify the issued token.
  */
-public class SignatureMethodRSAImpl implements
-SignatureMethod<PrivateKey, PublicKey>{
-    
+public class SignatureMethodRSAImpl implements SignatureMethod<PrivateKey, PublicKey>{
+
     private String algorithm;
 
     public SignatureMethodRSAImpl(String algorithm) {
-        super();
         this.algorithm = algorithm;
     }
 
-
-    /*
-     * Calculate the signature of given header.payload as for 
-     * http://tools.ietf.org/html/draft-ietf-jose-json-web-signature-21#appendix-A.2.1
-     *  
+    /**
+     * Calculate the signature of given header.payload as for
+     * <a href="http://tools.ietf.org/html/draft-ietf-jose-json-web-signature-21#appendix-A.2.1">appendix-A.2.1</a>
+     *
+     * {@inheritDoc}
      */
     @Override
     public String calculate(String header, String payload, PrivateKey signingKey) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(header).append(".").append(payload);
-        final String stringToSign = sb.toString();
-        byte[] bytes = stringToSign.getBytes();
+        byte[] token = toToken(header, payload);
         try {
             Signature signature = Signature.getInstance(getAlgorithmInternal());
-            
+
             signature.initSign(signingKey.getPrivateKey());
-            signature.update(bytes);
-            bytes = signature.sign();
-            
-            return TokenDecoder.base64Encode(bytes);
+            signature.update(token);
+            token = signature.sign();
+
+            return TokenDecoder.base64Encode(token);
         } catch (Exception e) {
             throw new RuntimeException(e);
-        }  
+        }
     }
 
-    /*
-     * Verify the signature of given header.payload as for 
-     * http://tools.ietf.org/html/draft-ietf-jose-json-web-signature-21#appendix-A.2.2
-     *  
+    /**
+     * Verify the signature of given header.payload as for
+     * <a href="http://tools.ietf.org/html/draft-ietf-jose-json-web-signature-21#appendix-A.2.2">appendix-A.2.2</a>
+     *
+     * {@inheritDoc}
      */
     @Override
-    public boolean verify(String signature, String header, String payload,
-            PublicKey verifyingKey) {
-        final String text = header + "." + payload;
+    public boolean verify(String signature, String header, String payload, PublicKey verifyingKey) {
+        byte[] token = toToken(header, payload);
         try {
             Signature sign = Signature.getInstance(getAlgorithmInternal());
             sign.initVerify(verifyingKey.getPublicKey());
-            sign.update(text.getBytes());
- 
+            sign.update(token);
+
             return sign.verify(decode(signature));
-             
         } catch (Exception e) {
             return false;
         }
@@ -86,33 +78,53 @@ SignatureMethod<PrivateKey, PublicKey>{
     public String getAlgorithm() {
         return algorithm;
     }
-    
+
     // ---------- Private methods ---------------------------------------------
-    private String getAlgorithmInternal(){
+
+    private static byte[] toToken(String header, String payload) {
+        return new StringBuilder()
+               .append(header)
+               .append(".")
+               .append(payload)
+               .toString()
+               .getBytes();
+    }
+
+    private String getAlgorithmInternal() {
         String alg = null;
-        if (JwsConstants.RS256.equals(algorithm)) { 
-            alg = "SHA256withRSA"; 
-        } else if (JwsConstants.RS384.equals(algorithm)) { 
-            alg = "SHA384withRSA"; 
-        } else if (JwsConstants.RS512.equals(algorithm)) { 
-            alg = "SHA512withRSA"; 
+        if (JwsConstants.RS256.equals(algorithm)) {
+            alg = "SHA256withRSA";
+        } else if (JwsConstants.RS384.equals(algorithm)) {
+            alg = "SHA384withRSA";
+        } else if (JwsConstants.RS512.equals(algorithm)) {
+            alg = "SHA512withRSA";
         }
         return alg;
     }
-    
+
     private static byte[] decode(String arg) throws Exception {
         String s = arg;
         s = s.replace('-', '+'); // 62nd char of encoding
         s = s.replace('_', '/'); // 63rd char of encoding
+
         switch (s.length() % 4) // Pad with trailing '='s
         {
-          case 0: break; // No pad chars in this case
-          case 2: s += "=="; break; // Two pad chars
-          case 3: s += "="; break; // One pad char
-          default: throw new java.lang.Exception(
-            "Illegal base64url string!");
+          case 0: // No pad chars in this case
+              break;
+
+          case 2: // Two pad chars
+              s += "==";
+              break;
+
+          case 3: // One pad char
+              s += "=";
+              break;
+
+          default:
+              throw new Exception("Illegal base64url string!");
         }
+
         return TokenDecoder.base64DecodeToByte(s);
-      }
+    }
 
 }

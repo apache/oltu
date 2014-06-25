@@ -47,6 +47,7 @@ public class SignatureMethodsHMAC256ImplTest {
     private String payload;
 
     private SymmetricKeyImpl key;
+
     private SignatureMethodsHMAC256Impl sHmacImpl;
 
     @Before

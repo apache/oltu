@@ -23,21 +23,18 @@ import javax.crypto.spec.SecretKeySpec;
 import org.apache.oltu.commons.encodedtoken.TokenDecoder;
 import org.apache.oltu.jose.jws.signature.SignatureMethod;
 
-public class SignatureMethodsHMAC256Impl implements
-        SignatureMethod<SymmetricKeyImpl, SymmetricKeyImpl> {
+public class SignatureMethodsHMAC256Impl implements SignatureMethod<SymmetricKeyImpl, SymmetricKeyImpl> {
 
     private static final String ALG = "HS256";
 
     @Override
-    public String calculate(String header, String payload,
-            SymmetricKeyImpl signingKey) {
-
+    public String calculate(String header, String payload, SymmetricKeyImpl signingKey) {
         StringBuilder sb = new StringBuilder();
         sb.append(header).append(".").append(payload);
         String stringToSign = sb.toString();
         byte[] bytes = stringToSign.getBytes();
-        try {
 
+        try {
             Mac mac = Mac.getInstance("HMACSHA256");
             mac.init(new SecretKeySpec(signingKey.getKey(), mac.getAlgorithm()));
             mac.update(bytes);
@@ -53,8 +50,7 @@ public class SignatureMethodsHMAC256Impl implements
     }
 
     @Override
-    public boolean verify(String signature, String header, String payload,
-            SymmetricKeyImpl verifyingKey) {
+    public boolean verify(String signature, String header, String payload, SymmetricKeyImpl verifyingKey) {
         String signed = calculate(header, payload, verifyingKey);
         return signed.equals(signature);
     }
