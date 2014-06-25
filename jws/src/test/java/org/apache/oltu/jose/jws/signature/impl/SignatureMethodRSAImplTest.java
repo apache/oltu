@@ -31,10 +31,10 @@ import org.junit.Test;
 
 
 /**
- * Unit test based on the example contained in 
+ * Unit test based on the example contained in
  * http://tools.ietf.org/html/draft-ietf-jose-json-web-signature-25#appendix-A.2 and
  * http://tools.ietf.org/html/draft-ietf-jose-cookbook-01#section-3.1
- * 
+ *
  */
 public class SignatureMethodRSAImplTest {
 
@@ -45,6 +45,7 @@ public class SignatureMethodRSAImplTest {
     private String payload;
 
     private RSAPrivateKey rsaPrivKey;
+
     private RSAPublicKey rsaPublicKey;
 
     @Before
@@ -64,7 +65,6 @@ public class SignatureMethodRSAImplTest {
     //validates the example in  http://tools.ietf.org/html/draft-ietf-jose-json-web-signature-25#appendix-A.2
     @Test
     public void testCalculate() throws Exception{
-        
         final byte[] n = { (byte) 161, (byte) 248, (byte) 22, (byte) 10, (byte) 226, (byte) 227, (byte) 201, (byte) 180,
                 (byte) 101, (byte) 206, (byte) 141, (byte) 45, (byte) 101, (byte) 98, (byte) 99, (byte) 54, (byte) 43,
                 (byte) 146, (byte) 125, (byte) 190, (byte) 41, (byte) 225, (byte) 240, (byte) 36, (byte) 119, (byte) 252,
@@ -137,7 +137,7 @@ public class SignatureMethodRSAImplTest {
 
         rsa256 = "{\"alg\":\"RS256\"}";
         payload = "{\"iss\":\"joe\",\r\n \"exp\":1300819380,\r\n \"http://example.com/is_root\":true}";
-        
+
         assertEquals("cC4hiUPoj9Eetdgtv3hF80EGrhuB__dzERat0XF9g2VtQgr9PJbu3XOiZj5RZmh7"+
                 "AAuHIm4Bh-0Qc_lF5YKt_O8W2Fp5jujGbds9uJdbF9CUAr7t1dnZcAcQjbKBYNX4"+
                 "BAynRFdiuB--f_nZLgrnbyTyWzO75vRK5h6xBArLIARNPvkSjtQBMHlb1L07Qe7K"+
@@ -151,7 +151,6 @@ public class SignatureMethodRSAImplTest {
     //validates the example in  http://tools.ietf.org/html/draft-ietf-jose-json-web-signature-25#appendix-A.2
     @Test
     public void testVerify() throws Exception{
-        
         final byte[] n = { (byte) 161, (byte) 248, (byte) 22, (byte) 10, (byte) 226, (byte) 227, (byte) 201, (byte) 180,
                 (byte) 101, (byte) 206, (byte) 141, (byte) 45, (byte) 101, (byte) 98, (byte) 99, (byte) 54, (byte) 43,
                 (byte) 146, (byte) 125, (byte) 190, (byte) 41, (byte) 225, (byte) 240, (byte) 36, (byte) 119, (byte) 252,
@@ -221,12 +220,12 @@ public class SignatureMethodRSAImplTest {
         RSAPrivateKeySpec privKeySpec = new RSAPrivateKeySpec(N, D);
         rsaPublicKey = (RSAPublicKey) keyFactory.generatePublic(pubKeySpec);
         rsaPrivKey = (RSAPrivateKey) keyFactory.generatePrivate(privKeySpec);
-        
+
         String accessToken = "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJqb2UiLA0KICJleHAiOjEzMDA4MTkzODAsDQogImh0dHA6Ly9leGFtcGxlLmNvbS9pc19yb290Ijp0cnVlfQ.cC4hiUPoj9Eetdgtv3hF80EGrhuB__dzERat0XF9g2VtQgr9PJbu3XOiZj5RZmh7AAuHIm4Bh-0Qc_lF5YKt_O8W2Fp5jujGbds9uJdbF9CUAr7t1dnZcAcQjbKBYNX4BAynRFdiuB--f_nZLgrnbyTyWzO75vRK5h6xBArLIARNPvkSjtQBMHlb1L07Qe7K0GarZRmB_eSN9383LcOLn6_dO--xi12jzDwusC-eOkHWEsqtFZESc6BfI7noOPqvhJ1phCnvWh6IeYI2w9QOYEUipUTI8np6LbgGY9Fs98rqVt5AXLIhWkWywlVmtVrBp0igcN_IoypGlUPQGe77Rw";
         String jwt[] = accessToken.split("\\.");
         assertTrue(sRsaImpl.verify(jwt[2], jwt[0], jwt[1], new PublicKey(rsaPublicKey)));
     }
-    
+
     //validates the example in http://tools.ietf.org/html/draft-ietf-jose-cookbook-01#section-3.1
     @Test
     public void testCalculateCookbook() throws Exception{
@@ -259,7 +258,7 @@ public class SignatureMethodRSAImplTest {
                 "b24ndCBrZWVwIHlvdXIgZmVldCwgdGhlcmXigJlzIG5vIGtub3dpbmcgd2hlcm"+
                 "UgeW91IG1pZ2h0IGJlIHN3ZXB0IG9mZiB0by4", new PrivateKey(rsaPrivKey)));
     }
-    
+
     //validates the example in http://tools.ietf.org/html/draft-ietf-jose-cookbook-01#section-3.1
     @Test
     public void testVerifyCookbook() throws Exception{
@@ -275,18 +274,18 @@ public class SignatureMethodRSAImplTest {
         RSAPublicKeySpec pubKeySpec = new RSAPublicKeySpec(N, E);
         RSAPrivateKeySpec privKeySpec = new RSAPrivateKeySpec(N, D);
         rsaPublicKey = (RSAPublicKey) keyFactory.generatePublic(pubKeySpec);
-        rsaPrivKey = (RSAPrivateKey) keyFactory.generatePrivate(privKeySpec);       
-        
-        String accessToken = "eyJhbGciOiJSUzI1NiIsImtpZCI6ImJpbGJvLmJhZ2dpbnNAaG9iYml0b24uZXhhbXBsZSJ9." + 
-                "SXTigJlzIGEgZGFuZ2Vyb3VzIGJ1c2luZXNzLCBGcm9kbywgZ29pbmcgb3V0IH" + 
-                "lvdXIgZG9vci4gWW91IHN0ZXAgb250byB0aGUgcm9hZCwgYW5kIGlmIHlvdSBk" + 
-                "b24ndCBrZWVwIHlvdXIgZmVldCwgdGhlcmXigJlzIG5vIGtub3dpbmcgd2hlcm" + 
-                "UgeW91IG1pZ2h0IGJlIHN3ZXB0IG9mZiB0by4." + 
-                "MRjdkly7_-oTPTS3AXP41iQIGKa80A0ZmTuV5MEaHoxnW2e5CZ5NlKtainoFmK" + 
-                "ZopdHM1O2U4mwzJdQx996ivp83xuglII7PNDi84wnB-BDkoBwA78185hX-Es4J" + 
-                "IwmDLJK3lfWRa-XtL0RnltuYv746iYTh_qHRD68BNt1uSNCrUCTJDt5aAE6x8w" + 
-                "W1Kt9eRo4QPocSadnHXFxnt8Is9UzpERV0ePPQdLuW3IS_de3xyIrDaLGdjluP" + 
-                "xUAhb6L2aXic1U12podGU0KLUQSE_oI-ZnmKJ3F4uOZDnd6QZWJushZ41Axf_f" + 
+        rsaPrivKey = (RSAPrivateKey) keyFactory.generatePrivate(privKeySpec);
+
+        String accessToken = "eyJhbGciOiJSUzI1NiIsImtpZCI6ImJpbGJvLmJhZ2dpbnNAaG9iYml0b24uZXhhbXBsZSJ9." +
+                "SXTigJlzIGEgZGFuZ2Vyb3VzIGJ1c2luZXNzLCBGcm9kbywgZ29pbmcgb3V0IH" +
+                "lvdXIgZG9vci4gWW91IHN0ZXAgb250byB0aGUgcm9hZCwgYW5kIGlmIHlvdSBk" +
+                "b24ndCBrZWVwIHlvdXIgZmVldCwgdGhlcmXigJlzIG5vIGtub3dpbmcgd2hlcm" +
+                "UgeW91IG1pZ2h0IGJlIHN3ZXB0IG9mZiB0by4." +
+                "MRjdkly7_-oTPTS3AXP41iQIGKa80A0ZmTuV5MEaHoxnW2e5CZ5NlKtainoFmK" +
+                "ZopdHM1O2U4mwzJdQx996ivp83xuglII7PNDi84wnB-BDkoBwA78185hX-Es4J" +
+                "IwmDLJK3lfWRa-XtL0RnltuYv746iYTh_qHRD68BNt1uSNCrUCTJDt5aAE6x8w" +
+                "W1Kt9eRo4QPocSadnHXFxnt8Is9UzpERV0ePPQdLuW3IS_de3xyIrDaLGdjluP" +
+                "xUAhb6L2aXic1U12podGU0KLUQSE_oI-ZnmKJ3F4uOZDnd6QZWJushZ41Axf_f" +
                 "cIe8u9ipH84ogoree7vjbU5y18kDquDg";
         String jwt[] = accessToken.split("\\.");
         assertTrue(sRsaImpl.verify(jwt[2], jwt[0], jwt[1], new PublicKey(rsaPublicKey)));
