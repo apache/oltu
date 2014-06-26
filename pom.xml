@@ -291,7 +291,7 @@
       <post>user@oltu.apache.org</post>
       <subscribe>user-subscribe@oltu.apache.org</subscribe>
       <unsubscribe>user-unsubscribe@oltu.apache.org</unsubscribe>
-      <archive />
+      <archive>http://mail-archives.apache.org/mod_mbox/oltu-user/</archive>
       <otherArchives>
         <otherArchive>http://mail-archives.apache.org/mod_mbox/incubator-amber-user/</otherArchive>
       </otherArchives>
