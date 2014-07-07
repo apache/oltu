@@ -26,6 +26,7 @@
 
   <artifactId>org.apache.oltu.openidconnect.common</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <packaging>bundle</packaging>
 
   <name>Apache Oltu - OpenId Connect - Common</name>
   <description>OpenId Connect library - Common</description>

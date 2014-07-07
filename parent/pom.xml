@@ -500,6 +500,12 @@
             <tryUpdate>true</tryUpdate>
           </configuration>
         </plugin>
+
+        <plugin>
+          <groupId>org.apache.felix</groupId>
+          <artifactId>maven-bundle-plugin</artifactId>
+          <version>2.3.7</version>
+        </plugin>
       </plugins>
     </pluginManagement>
 
@@ -576,24 +582,13 @@
       <plugin>
         <groupId>org.apache.felix</groupId>
         <artifactId>maven-bundle-plugin</artifactId>
-        <version>2.3.7</version>
         <configuration>
-          <!--
-           | dummy entry to stop bundle plugin from picking up jar config and reporting
-           | WARNING: Duplicate name in Manifest
-           | See http://markmail.org/message/mpkl24wk3jrjhhjg
-          -->
-          <archive>
-            <forced>true</forced>
-          </archive>
-          <excludeDependencies>true</excludeDependencies>
-          <manifestLocation>${project.build.directory}/osgi</manifestLocation>
           <instructions>
             <!--
              | Stop the JAVA_1_n_HOME variables from being treated as headers by Bnd
             -->
-            <_removeheaders>JAVA_1_3_HOME,JAVA_1_4_HOME,JAVA_1_5_HOME,JAVA_1_6_HOME,JAVA_1_7_HOME</_removeheaders>
-            <Bundle-Name>${project.artifactId}</Bundle-Name>
+            <_removeheaders>Include-Resource,JAVA_1_3_HOME,JAVA_1_4_HOME,JAVA_1_5_HOME,JAVA_1_6_HOME,JAVA_1_7_HOME</_removeheaders>
+            <Bundle-Name>${project.name}</Bundle-Name>
             <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
             <Bundle-Description>${project.description}</Bundle-Description>
             <Export-Package>${osgi.export}</Export-Package>
@@ -603,37 +598,11 @@
             <Bundle-DocURL>${project.url}</Bundle-DocURL>
             <!-- Bundle-RequiredExecutionEnvironment>J2SE-${javac.target.version}</Bundle-RequiredExecutionEnvironment-->
             <Bundle-Activator>${osgi.activator}</Bundle-Activator>
+            <Implementation-Build>${implementation.build}</Implementation-Build>
+            <Implementation-Build-Date>${maven.build.timestamp}</Implementation-Build-Date>
+            <X-Compile-Source-JDK>${javac.src.version}</X-Compile-Source-JDK>
+            <X-Compile-Target-JDK>${javac.target.version}</X-Compile-Target-JDK>
           </instructions>
-        </configuration>
-        <executions>
-          <execution>
-            <id>bundle-manifest</id>
-            <phase>process-classes</phase>
-            <goals>
-              <goal>manifest</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>2.4</version>
-        <configuration>
-          <archive>
-            <manifestFile>${project.build.directory}/osgi/MANIFEST.MF</manifestFile>
-            <manifest>
-              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-              <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-            </manifest>
-            <manifestEntries>
-              <Implementation-Build>${implementation.build}</Implementation-Build>
-              <Implementation-Build-Date>${maven.build.timestamp}</Implementation-Build-Date>
-              <X-Compile-Source-JDK>${javac.src.version}</X-Compile-Source-JDK>
-              <X-Compile-Target-JDK>${javac.target.version}</X-Compile-Target-JDK>
-            </manifestEntries>
-          </archive>
         </configuration>
       </plugin>
 

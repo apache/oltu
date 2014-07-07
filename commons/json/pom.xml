@@ -26,6 +26,7 @@
 
   <artifactId>org.apache.oltu.commons.json</artifactId>
   <version>1.0.1-SNAPSHOT</version>
+  <packaging>bundle</packaging>
 
   <name>Apache Oltu - Commons - JSON</name>
   <description>Apache Oltu JSON shared utility</description>

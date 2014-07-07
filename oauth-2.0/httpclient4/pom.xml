@@ -24,6 +24,7 @@
   </parent>
 
   <artifactId>org.apache.oltu.oauth2.httpclient4</artifactId>
+  <packaging>bundle</packaging>
 
   <name>Apache Oltu - OAuth 2.0 - HttpClient</name>
 
