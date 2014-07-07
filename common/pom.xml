@@ -25,6 +25,7 @@
   </parent>
 
   <artifactId>org.apache.oltu.oauth2.common</artifactId>
+  <packaging>bundle</packaging>
 
   <name>Apache Oltu - OAuth 2.0 - Common</name>
   <description>OAuth 2.0 library - Common</description>

@@ -25,6 +25,7 @@
   </parent>
 
   <artifactId>org.apache.oltu.oauth2.dynamicreg.client</artifactId>
+  <packaging>bundle</packaging>
 
   <name>Apache Oltu - OAuth 2.0 - Dynamic Registration Client</name>
 
