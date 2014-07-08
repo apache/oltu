@@ -22,6 +22,7 @@
     <groupId>org.apache</groupId>
     <artifactId>apache</artifactId>
     <version>10</version>
+    <relativePath />
   </parent>
 
   <groupId>org.apache.oltu</groupId>
@@ -582,6 +583,7 @@
       <plugin>
         <groupId>org.apache.felix</groupId>
         <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
         <configuration>
           <instructions>
             <!--
