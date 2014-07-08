@@ -22,6 +22,7 @@
     <groupId>org.apache</groupId>
     <artifactId>apache</artifactId>
     <version>10</version>
+    <relativePath />
   </parent>
 
   <groupId>org.apache.oltu</groupId>
@@ -604,6 +605,7 @@
             <X-Compile-Target-JDK>${javac.target.version}</X-Compile-Target-JDK>
           </instructions>
         </configuration>
+        <extensions>true</extensions>
       </plugin>
 
       <plugin>
