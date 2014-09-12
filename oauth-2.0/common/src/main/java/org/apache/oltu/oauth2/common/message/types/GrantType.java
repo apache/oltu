@@ -29,6 +29,7 @@ package org.apache.oltu.oauth2.common.message.types;
 public enum GrantType {
     // NONE("none"),
     AUTHORIZATION_CODE("authorization_code"),
+    IMPLICIT("implicit"),
     PASSWORD("password"),
     REFRESH_TOKEN("refresh_token"),
     CLIENT_CREDENTIALS("client_credentials");
