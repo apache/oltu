@@ -16,6 +16,7 @@
  */
 package org.apache.oltu.oauth2.jwt.io;
 
+import java.util.List;
 import org.apache.oltu.commons.json.CustomizableEntityWriter;
 import org.apache.oltu.oauth2.jwt.ClaimsSet;
 
@@ -23,7 +24,8 @@ public final class JWTClaimsSetWriter extends CustomizableEntityWriter<ClaimsSet
 
     @Override
     protected void handleProperties(ClaimsSet claimsSet) {
-        set(AUDIENCE, claimsSet.getAudience());
+        List<String> audiences = claimsSet.getAudiences();
+        set(AUDIENCE, audiences.size() > 1 ? audiences : claimsSet.getAudience());
         set(ISSUER, claimsSet.getIssuer());
         set(JWT_ID, claimsSet.getJwdId());
         set(NOT_BEFORE, claimsSet.getNotBefore());

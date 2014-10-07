@@ -34,4 +34,20 @@ interface IOTestCaseConstants {
                             + "7MxUgVEgh8G-Nnbk_baJ6k_3w5c1SKFamFiHHDoKLFhrt1Y8JKSuGwE02V-px4Cn0dRAQAc1IN5C"
                             + "U6wqCrYK0p-fv_fvy28";
 
+    public final String JWT_MULTIPLE_AUDIENCES = "eyJhbGciOiJSUzI1NiIsImtpZCI6ImJlMWRhMGIzNTY3YmQyNjVhMjUwO"
+                            + "ThmYmNjMmIwOWYyMTM0NWIzYTIifQ"
+                            + "."
+                            + "eyJhdWQiOlsiNzg4NzMyMzcyMDc4LmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiZm9vIl0s"
+                            + "ImlzcyI6ImFjY291bnRzLmdvb2dsZS5jb20iLCJzdWIiOiIxMDY0MjI0NTMwODI0Nzk5OTg0Mjki"
+                            + "LCJleHAiOjEzNjY3MzAyMTcsImlhdCI6MTM2NjcyNjMxNywiaWQiOiIxMDY0MjI0NTMwODI0Nzk5"
+                            + "OTg0MjkiLCJ2ZXJpZmllZF9lbWFpbCI6InRydWUiLCJlbWFpbF92ZXJpZmllZCI6InRydWUiLCJj"
+                            + "aWQiOiI3ODg3MzIzNzIwNzguYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhenAiOiI3ODg3"
+                            + "MzIzNzIwNzguYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJlbWFpbCI6ImFudG9uaW8uc2Fu"
+                            + "c29AZ21haWwuY29tIiwidG9rZW5faGFzaCI6IkwySTc3Z2lCTGswUlNzMHpRMVN2Q0EiLCJhdF9o"
+                            + "YXNoIjoiTDJJNzdnaUJMazBSU3MwelExU3ZDQSJ9"
+                            + "."
+                            + "XWYi5Zj1YWAMGIml_ftoAwmvW1Y7oeybLCpzQrJVuWJpS8L8Vd2TL-RTIOEVG03VA7e0_-_frNuw"
+                            + "7MxUgVEgh8G-Nnbk_baJ6k_3w5c1SKFamFiHHDoKLFhrt1Y8JKSuGwE02V-px4Cn0dRAQAc1IN5C"
+                            + "U6wqCrYK0p-fv_fvy28";
+
 }
