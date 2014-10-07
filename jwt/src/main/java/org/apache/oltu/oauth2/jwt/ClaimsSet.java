@@ -18,6 +18,9 @@ package org.apache.oltu.oauth2.jwt;
 
 import static java.lang.String.format;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.oltu.commons.json.CustomizableEntity;
@@ -42,7 +45,7 @@ public final class ClaimsSet extends CustomizableEntity {
     /**
      * The {@code aud} JWT Claims Set parameter.
      */
-    private final String audience;
+    private final List<String> audiences;
 
     /**
      * The {@code exp} JWT Claims Set parameter.
@@ -71,7 +74,7 @@ public final class ClaimsSet extends CustomizableEntity {
 
     ClaimsSet(String issuer,
               String subject,
-              String audience,
+              List<String> audiences,
               long expirationTime,
               String notBefore,
               long issuedAt,
@@ -81,7 +84,7 @@ public final class ClaimsSet extends CustomizableEntity {
         super(customFields);
         this.issuer = issuer;
         this.subject = subject;
-        this.audience = audience;
+        this.audiences = audiences == null ? null : new ArrayList(audiences);
         this.expirationTime = expirationTime;
         this.notBefore = notBefore;
         this.issuedAt = issuedAt;
@@ -108,12 +111,26 @@ public final class ClaimsSet extends CustomizableEntity {
     }
 
     /**
+     * Returns the first audience of the {@code aud} JWT Claims Set
+     * parameter.
+     *
+     * <p>There may be more than one audience listed.</p>
+     *
+     * @return the {@code aud} JWT Claims Set parameter.
+     * @see #getAudiences
+     */
+    public String getAudience() {
+        return getAudiences().isEmpty() ? null : audiences.get(0);
+    }
+
+    /**
      * Returns the {@code aud} JWT Claims Set parameter.
      *
      * @return the {@code aud} JWT Claims Set parameter.
      */
-    public String getAudience() {
-        return audience;
+    public List<String> getAudiences() {
+        return audiences == null ? Collections.emptyList()
+            : new ArrayList(audiences);
     }
 
     /**
@@ -163,8 +180,25 @@ public final class ClaimsSet extends CustomizableEntity {
 
     @Override
     public String toString() {
-        return format("{\"iss\": \"%s\", \"sub\": \"%s\", \"aud\": \"%s\", \"exp\": %s, \"nbf\": \"%s\", \"iat\": %s, \"jti\": \"%s\", \"typ\": \"%s\" }",
-                      issuer, subject, audience, expirationTime, notBefore, issuedAt, jwdId, type, super.toString());
+        return format("{\"iss\": \"%s\", \"sub\": \"%s\", \"aud\": %s, \"exp\": %s, \"nbf\": \"%s\", \"iat\": %s, \"jti\": \"%s\", \"typ\": \"%s\" }",
+                      issuer, subject, formatAudiences(), expirationTime, notBefore, issuedAt, jwdId, type, super.toString());
+    }
+
+    private String formatAudiences() {
+        if (audiences == null || audiences.size() < 1) {
+            // "null" for no audience at all, "single-audience" otherwise
+            return "\"" + getAudience() + "\"";
+        }
+        StringBuilder sb = new StringBuilder("[");
+        boolean first = true;
+        for (String aud : audiences) {
+            if (!first) {
+                sb.append(", ");
+            }
+            sb.append("\"").append(aud).append("\"");
+            first = false;
+        }
+        return sb.append("]").toString();
     }
 
 }

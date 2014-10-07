@@ -18,6 +18,7 @@ package org.apache.oltu.oauth2.jwt.io;
 
 import static junit.framework.Assert.assertEquals;
 
+import java.util.Arrays;
 import org.apache.oltu.oauth2.jwt.ClaimsSet;
 import org.apache.oltu.oauth2.jwt.Header;
 import org.apache.oltu.oauth2.jwt.JWT;
@@ -47,6 +48,12 @@ public final class JWTReaderTestCase implements IOTestCaseConstants {
     }
 
     @Test
+    public void testJWTWithMultipleAudiences() throws Exception {
+        jwt = jwtReader.read(JWT_MULTIPLE_AUDIENCES);
+        assertEquals(JWT_MULTIPLE_AUDIENCES, jwt.getRawString());
+    }
+
+    @Test
     public void testHeader() throws Exception {
         Header header = jwt.getHeader();
         assertEquals("RS256", header.getAlgorithm());
@@ -55,6 +62,19 @@ public final class JWTReaderTestCase implements IOTestCaseConstants {
     @Test
     public void testClaimsSet() throws Exception {
         ClaimsSet claimsSet = jwt.getClaimsSet();
+        assertEquals(Arrays.asList("788732372078.apps.googleusercontent.com"), claimsSet.getAudiences());
+        assertEquals("788732372078.apps.googleusercontent.com", claimsSet.getAudience());
+        assertEquals("accounts.google.com", claimsSet.getIssuer());
+        assertEquals("106422453082479998429", claimsSet.getSubject());
+        assertEquals(1366730217, claimsSet.getExpirationTime());
+        assertEquals(1366726317, claimsSet.getIssuedAt());
+    }
+
+    @Test
+    public void testClaimsSetWithMultipleAudiences() throws Exception {
+        jwt = jwtReader.read(JWT_MULTIPLE_AUDIENCES);
+        ClaimsSet claimsSet = jwt.getClaimsSet();
+        assertEquals(Arrays.asList("788732372078.apps.googleusercontent.com", "foo"), claimsSet.getAudiences());
         assertEquals("788732372078.apps.googleusercontent.com", claimsSet.getAudience());
         assertEquals("accounts.google.com", claimsSet.getIssuer());
         assertEquals("106422453082479998429", claimsSet.getSubject());
