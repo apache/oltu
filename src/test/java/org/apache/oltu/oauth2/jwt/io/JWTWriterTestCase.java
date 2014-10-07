@@ -18,6 +18,7 @@ package org.apache.oltu.oauth2.jwt.io;
 
 import static junit.framework.Assert.assertEquals;
 
+import java.util.Arrays;
 import org.apache.oltu.oauth2.jwt.JWT;
 import org.junit.Test;
 
@@ -48,6 +49,61 @@ public final class JWTWriterTestCase implements IOTestCaseConstants {
                           .build();
         String encodedJWT = new JWTWriter().write(jwt);
         assertEquals(JWT, encodedJWT);
+    }
+
+    @Test
+    public void writeSingleAudienceAsList() {
+        JWT jwt = new JWT.Builder()
+                          // header
+                          .setHeaderAlgorithm("RS256")
+                          .setHeaderCustomField("kid", "be1da0b3567bd265a25098fbcc2b09f21345b3a2")
+                          // claimset
+                          .setClaimsSetAudiences(Arrays.asList("788732372078.apps.googleusercontent.com"))
+                          .setClaimsSetIssuer("accounts.google.com")
+                          .setClaimsSetSubject("106422453082479998429")
+                          .setClaimsSetExpirationTime(1366730217)
+                          .setClaimsSetIssuedAt(1366726317)
+                          .setClaimsSetCustomField("id", "106422453082479998429")
+                          .setClaimsSetCustomField("verified_email", "true")
+                          .setClaimsSetCustomField("email_verified", "true")
+                          .setClaimsSetCustomField("cid", "788732372078.apps.googleusercontent.com")
+                          .setClaimsSetCustomField("azp", "788732372078.apps.googleusercontent.com")
+                          .setClaimsSetCustomField("email", "antonio.sanso@gmail.com")
+                          .setClaimsSetCustomField("token_hash", "L2I77giBLk0RSs0zQ1SvCA")
+                          .setClaimsSetCustomField("at_hash", "L2I77giBLk0RSs0zQ1SvCA")
+                          // signature
+                          .setSignature("XWYi5Zj1YWAMGIml_ftoAwmvW1Y7oeybLCpzQrJVuWJpS8L8Vd2TL-RTIOEVG03VA7e0_-_frNuw7MxUgVEgh8G-Nnbk_baJ6k_3w5c1SKFamFiHHDoKLFhrt1Y8JKSuGwE02V-px4Cn0dRAQAc1IN5CU6wqCrYK0p-fv_fvy28")
+                          .build();
+        String encodedJWT = new JWTWriter().write(jwt);
+        assertEquals(JWT, encodedJWT);
+    }
+
+    @Test
+    public void writeWithMultipleAudiences() {
+        JWT jwt = new JWT.Builder()
+                          // header
+                          .setHeaderAlgorithm("RS256")
+                          .setHeaderCustomField("kid", "be1da0b3567bd265a25098fbcc2b09f21345b3a2")
+                          // claimset
+                          .setClaimsSetAudiences(Arrays.asList("788732372078.apps.googleusercontent.com", "foo"))
+                          .setClaimsSetIssuer("accounts.google.com")
+                          .setClaimsSetSubject("106422453082479998429")
+                          .setClaimsSetExpirationTime(1366730217)
+                          .setClaimsSetIssuedAt(1366726317)
+                          .setClaimsSetCustomField("id", "106422453082479998429")
+                          .setClaimsSetCustomField("verified_email", "true")
+                          .setClaimsSetCustomField("email_verified", "true")
+                          .setClaimsSetCustomField("cid", "788732372078.apps.googleusercontent.com")
+                          .setClaimsSetCustomField("azp", "788732372078.apps.googleusercontent.com")
+                          .setClaimsSetCustomField("email", "antonio.sanso@gmail.com")
+                          .setClaimsSetCustomField("token_hash", "L2I77giBLk0RSs0zQ1SvCA")
+                          .setClaimsSetCustomField("at_hash", "L2I77giBLk0RSs0zQ1SvCA")
+                          // signature
+                          .setSignature("XWYi5Zj1YWAMGIml_ftoAwmvW1Y7oeybLCpzQrJVuWJpS8L8Vd2TL-RTIOEVG03VA7e0_-_frNuw7MxUgVEgh8G-Nnbk_baJ6k_3w5c1SKFamFiHHDoKLFhrt1Y8JKSuGwE02V-px4Cn0dRAQAc1IN5CU6wqCrYK0p-fv_fvy28")
+                          .build();
+        String encodedJWT = new JWTWriter().write(jwt);
+        System.err.println(encodedJWT);
+        assertEquals(JWT_MULTIPLE_AUDIENCES, encodedJWT);
     }
 
 }

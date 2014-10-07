@@ -18,7 +18,10 @@ package org.apache.oltu.oauth2.jwt;
 
 import static java.lang.String.format;
 
+import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.oltu.commons.json.CustomizableBuilder;
@@ -143,7 +146,7 @@ public class JWT {
         /**
          * The {@code aud} JWT Claims Set parameter.
          */
-        private String claimsSetAudience;
+        private List<String> claimsSetAudiences;
 
         /**
          * The {@code exp} JWT Claims Set parameter.
@@ -261,13 +264,26 @@ public class JWT {
         }
 
         /**
-         * Sets the JWT Claims Set {@code aud}.
+         * Sets the JWT Claims Set {@code aud} for a single audience.
          *
          * @param claimsSetAudience the JWT Claims Set {@code aud}.
          * @return this builder instance.
          */
         public Builder setClaimsSetAudience(String claimsSetAudience) {
-            this.claimsSetAudience = claimsSetAudience;
+            this.claimsSetAudiences = claimsSetAudience == null ? null
+                : Arrays.asList(claimsSetAudience);
+            return this;
+        }
+
+        /**
+         * Sets the JWT Claims Set {@code aud}.
+         *
+         * @param claimsSetAudiences the JWT Claims Set {@code aud}.
+         * @return this builder instance.
+         */
+        public Builder setClaimsSetAudiences(List<String> claimsSetAudiences) {
+            this.claimsSetAudiences = claimsSetAudiences == null ? null
+                : new ArrayList<String>(claimsSetAudiences);
             return this;
         }
 
@@ -364,7 +380,7 @@ public class JWT {
                            new Header(headerType, headerAlgorithm, headerContentType, headerCustomFields),
                            new ClaimsSet(claimsSetIssuer,
                                          claimsSetSubject,
-                                         claimsSetAudience,
+                                         claimsSetAudiences,
                                          claimsSetExpirationTime,
                                          claimsSetNotBefore,
                                          claimsSetIssuedAt,
