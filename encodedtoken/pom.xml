@@ -30,12 +30,19 @@
 
   <name>Apache Oltu - Commons - Encoded Token</name>
   <description>Apache Oltu Encoded Token shared utility</description>
+  
+  <properties>
+    <!--
+   	OSGi settings
+    -->
+    <osgi.import>org.apache.commons.codec.binary;version="[1.4,2)"</osgi.import>
+  </properties>
 
   <dependencies>
     <dependency>
       <groupId>commons-codec</groupId>
       <artifactId>commons-codec</artifactId>
-      <version>1.8</version>
+      <version>1.9</version>
     </dependency>
   </dependencies>
 
