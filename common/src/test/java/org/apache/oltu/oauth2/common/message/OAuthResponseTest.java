@@ -18,11 +18,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.apache.oltu.oauth2.common.message;
 
+import static org.junit.Assert.assertEquals;
+
 import org.apache.oltu.oauth2.common.message.OAuthResponse;
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -44,7 +44,7 @@ public class OAuthResponseTest {
             .buildJSONMessage();
 
         String body = oAuthResponse.getBody();
-        Assert.assertEquals(
+        assertEquals(
             "{\"error_uri\":\"http://example-uri\",\"error\":\"error\",\"param\":\"value\",\"realm\":\"album\",\"state\":\"ok\",\"error_description\":\"error_description\"}",
             body);
     }
