@@ -84,7 +84,7 @@ public final class ClaimsSet extends CustomizableEntity {
         super(customFields);
         this.issuer = issuer;
         this.subject = subject;
-        this.audiences = audiences == null ? null : new ArrayList(audiences);
+        this.audiences = audiences == null ? null : new ArrayList<String>(audiences);
         this.expirationTime = expirationTime;
         this.notBefore = notBefore;
         this.issuedAt = issuedAt;
@@ -129,8 +129,7 @@ public final class ClaimsSet extends CustomizableEntity {
      * @return the {@code aud} JWT Claims Set parameter.
      */
     public List<String> getAudiences() {
-        return audiences == null ? Collections.emptyList()
-            : new ArrayList(audiences);
+        return audiences == null ? new ArrayList<String>() : Collections.unmodifiableList(audiences);
     }
 
     /**
