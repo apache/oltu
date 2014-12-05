@@ -16,7 +16,7 @@
  */
 package org.apache.oltu.oauth2.jwt.io;
 
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
 import org.apache.oltu.oauth2.jwt.ClaimsSet;
