@@ -19,27 +19,28 @@
  * limitations under the License.
  */
 
-package org.apache.oltu.oauth2.common.message.types;
+package org.apache.oltu.openidconnect.as.issuer;
+
+import java.util.UUID;
+
+import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 
 /**
+ * Exemplar OAuth Token Generator
+ *
  *
  *
  *
  */
-public enum ResponseType {
+public class UUIDValueGenerator implements ValueGenerator {
 
-    CODE("code"),
-    TOKEN("token"),
-    ID_TOKEN("id_token");
-
-    private String code;
-
-    ResponseType(String code) {
-        this.code = code;
+    @Override
+    public String generateValue() throws OAuthSystemException {
+        return generateValue(UUID.randomUUID().toString());
     }
 
     @Override
-    public String toString() {
-        return code;
+    public String generateValue(String param) throws OAuthSystemException {
+        return UUID.fromString(UUID.nameUUIDFromBytes(param.getBytes()).toString()).toString();
     }
 }

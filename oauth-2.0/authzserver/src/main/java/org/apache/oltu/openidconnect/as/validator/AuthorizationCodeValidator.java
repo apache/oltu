@@ -19,27 +19,25 @@
  * limitations under the License.
  */
 
-package org.apache.oltu.oauth2.common.message.types;
+package org.apache.oltu.openidconnect.as.validator;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.oltu.oauth2.common.OAuth;
+import org.apache.oltu.oauth2.common.validators.AbstractValidator;
 
 /**
- *
- *
- *
+ * Validator that checks for the required fields in an OAuth Token request with the Authorization Code grant type.
+ * This validator enforces client authentication either through basic authentication or body parameters.
  */
-public enum ResponseType {
+public class AuthorizationCodeValidator extends AbstractValidator<HttpServletRequest> {
 
-    CODE("code"),
-    TOKEN("token"),
-    ID_TOKEN("id_token");
+    public AuthorizationCodeValidator() {
+        requiredParams.add(OAuth.OAUTH_GRANT_TYPE);
+        requiredParams.add(OAuth.OAUTH_CODE);
+        requiredParams.add(OAuth.OAUTH_REDIRECT_URI);
 
-    private String code;
-
-    ResponseType(String code) {
-        this.code = code;
+        enforceClientAuthentication = true;
     }
 
-    @Override
-    public String toString() {
-        return code;
-    }
 }

@@ -19,27 +19,35 @@
  * limitations under the License.
  */
 
-package org.apache.oltu.oauth2.common.message.types;
+package org.apache.oltu.openidconnect.as;
+
+import junit.framework.Assert;
+
+import org.apache.oltu.openidconnect.as.issuer.OAuthIssuerImpl;
+import org.junit.Test;
+import org.apache.oltu.openidconnect.as.issuer.MD5Generator;
+import org.apache.oltu.openidconnect.as.issuer.OAuthIssuer;
 
 /**
  *
  *
  *
  */
-public enum ResponseType {
+public class OAuthIssuerImplTest {
+    private OAuthIssuer issuer = new OAuthIssuerImpl(new MD5Generator());
 
-    CODE("code"),
-    TOKEN("token"),
-    ID_TOKEN("id_token");
-
-    private String code;
-
-    ResponseType(String code) {
-        this.code = code;
+    @Test
+    public void testAccessToken() throws Exception {
+        Assert.assertNotNull(issuer.accessToken());
     }
 
-    @Override
-    public String toString() {
-        return code;
+    @Test
+    public void testRefreshToken() throws Exception {
+        Assert.assertNotNull(issuer.refreshToken());
+    }
+
+    @Test
+    public void testAuthorizationCode() throws Exception {
+        Assert.assertNotNull(issuer.authorizationCode());
     }
 }

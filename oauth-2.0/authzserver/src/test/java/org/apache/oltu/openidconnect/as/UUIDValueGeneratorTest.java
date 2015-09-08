@@ -19,27 +19,23 @@
  * limitations under the License.
  */
 
-package org.apache.oltu.oauth2.common.message.types;
+package org.apache.oltu.openidconnect.as;
+
+import org.apache.oltu.openidconnect.as.issuer.UUIDValueGenerator;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  *
  *
  *
  */
-public enum ResponseType {
+public class UUIDValueGeneratorTest extends Assert {
+    @Test
+    public void testGenerateValue() throws Exception {
+        UUIDValueGenerator uvg = new UUIDValueGenerator();
+        Assert.assertNotNull(uvg.generateValue());
 
-    CODE("code"),
-    TOKEN("token"),
-    ID_TOKEN("id_token");
-
-    private String code;
-
-    ResponseType(String code) {
-        this.code = code;
-    }
-
-    @Override
-    public String toString() {
-        return code;
+        Assert.assertNotNull(uvg.generateValue("test"));
     }
 }

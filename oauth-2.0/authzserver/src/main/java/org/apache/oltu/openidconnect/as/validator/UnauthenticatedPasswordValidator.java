@@ -19,27 +19,27 @@
  * limitations under the License.
  */
 
-package org.apache.oltu.oauth2.common.message.types;
+package org.apache.oltu.openidconnect.as.validator;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.oltu.oauth2.common.OAuth;
+import org.apache.oltu.oauth2.common.validators.AbstractValidator;
 
 /**
  *
  *
  *
  */
-public enum ResponseType {
+public class UnauthenticatedPasswordValidator extends AbstractValidator<HttpServletRequest> {
 
-    CODE("code"),
-    TOKEN("token"),
-    ID_TOKEN("id_token");
+    public UnauthenticatedPasswordValidator() {
+        requiredParams.add(OAuth.OAUTH_GRANT_TYPE);
+        requiredParams.add(OAuth.OAUTH_CLIENT_ID);
+        requiredParams.add(OAuth.OAUTH_USERNAME);
+        requiredParams.add(OAuth.OAUTH_PASSWORD);
 
-    private String code;
-
-    ResponseType(String code) {
-        this.code = code;
+        enforceClientAuthentication = false;
     }
 
-    @Override
-    public String toString() {
-        return code;
-    }
 }

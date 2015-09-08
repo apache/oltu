@@ -1,8 +1,4 @@
 /**
- *       Copyright 2010 Newcastle University
- *
- *          http://research.ncl.ac.uk/smart/
- *
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -19,27 +15,25 @@
  * limitations under the License.
  */
 
-package org.apache.oltu.oauth2.common.message.types;
+package org.apache.oltu.openidconnect.as.validator;
+
+import org.apache.oltu.oauth2.common.OAuth;
+import org.apache.oltu.oauth2.common.validators.AbstractValidator;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
- *
- *
+ * Validator that checks for the required fields in an OAuth Token request with the Refresh token grant type.
+ * This validator does NOT enforce client authentication.
  *
  */
-public enum ResponseType {
+public class UnauthenticatedRefreshTokenValidator extends AbstractValidator<HttpServletRequest> {
+    public UnauthenticatedRefreshTokenValidator() {
+        requiredParams.add(OAuth.OAUTH_GRANT_TYPE);
+        requiredParams.add(OAuth.OAUTH_CLIENT_ID);
+        requiredParams.add(OAuth.OAUTH_REFRESH_TOKEN);
 
-    CODE("code"),
-    TOKEN("token"),
-    ID_TOKEN("id_token");
+        enforceClientAuthentication = false;
 
-    private String code;
-
-    ResponseType(String code) {
-        this.code = code;
-    }
-
-    @Override
-    public String toString() {
-        return code;
     }
 }

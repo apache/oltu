@@ -19,27 +19,34 @@
  * limitations under the License.
  */
 
-package org.apache.oltu.oauth2.common.message.types;
+package org.apache.oltu.openidconnect.as;
+
+import junit.framework.Assert;
+
+import org.apache.oltu.openidconnect.as.issuer.MD5Generator;
+import org.apache.oltu.openidconnect.as.issuer.ValueGenerator;
+import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
+import org.junit.Test;
+
 
 /**
  *
  *
  *
  */
-public enum ResponseType {
+public class MD5GeneratorTest extends Assert {
+    @Test
+    public void testGenerateValue() throws Exception {
+        ValueGenerator g = new MD5Generator();
+        Assert.assertNotNull(g.generateValue());
 
-    CODE("code"),
-    TOKEN("token"),
-    ID_TOKEN("id_token");
+        Assert.assertNotNull(g.generateValue("test"));
 
-    private String code;
-
-    ResponseType(String code) {
-        this.code = code;
-    }
-
-    @Override
-    public String toString() {
-        return code;
+        try {
+            g.generateValue(null);
+            fail("Exception not thrown");
+        } catch (OAuthSystemException e) {
+            //ok
+        }
     }
 }

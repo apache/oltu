@@ -19,27 +19,17 @@
  * limitations under the License.
  */
 
-package org.apache.oltu.oauth2.common.message.types;
+package org.apache.oltu.openidconnect.as.validator;
 
-/**
- *
- *
- *
- */
-public enum ResponseType {
+import javax.servlet.http.HttpServletRequest;
 
-    CODE("code"),
-    TOKEN("token"),
-    ID_TOKEN("id_token");
+import org.apache.oltu.oauth2.common.OAuth;
+import org.apache.oltu.oauth2.common.validators.AbstractValidator;
 
-    private String code;
+public class ClientCredentialValidator extends AbstractValidator<HttpServletRequest> {
+    public ClientCredentialValidator() {
+        requiredParams.add(OAuth.OAUTH_GRANT_TYPE);
 
-    ResponseType(String code) {
-        this.code = code;
-    }
-
-    @Override
-    public String toString() {
-        return code;
+        enforceClientAuthentication = true;
     }
 }

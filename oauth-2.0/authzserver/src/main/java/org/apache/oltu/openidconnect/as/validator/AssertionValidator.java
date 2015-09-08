@@ -19,27 +19,24 @@
  * limitations under the License.
  */
 
-package org.apache.oltu.oauth2.common.message.types;
+package org.apache.oltu.openidconnect.as.validator;
+
+
+import org.apache.oltu.oauth2.common.OAuth;
+import org.apache.oltu.oauth2.common.validators.AbstractValidator;
 
 /**
  *
  *
  *
  */
-public enum ResponseType {
+public class AssertionValidator extends AbstractValidator {
 
-    CODE("code"),
-    TOKEN("token"),
-    ID_TOKEN("id_token");
-
-    private String code;
-
-    ResponseType(String code) {
-        this.code = code;
+    public AssertionValidator() {
+        requiredParams.add(OAuth.OAUTH_GRANT_TYPE);
+        requiredParams.add(OAuth.OAUTH_ASSERTION_TYPE);
+        requiredParams.add(OAuth.OAUTH_ASSERTION);
     }
 
-    @Override
-    public String toString() {
-        return code;
-    }
+
 }

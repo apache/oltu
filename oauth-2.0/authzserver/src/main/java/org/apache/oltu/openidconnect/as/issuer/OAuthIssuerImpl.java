@@ -19,27 +19,33 @@
  * limitations under the License.
  */
 
-package org.apache.oltu.oauth2.common.message.types;
+package org.apache.oltu.openidconnect.as.issuer;
+
+
+import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 
 /**
  *
  *
  *
  */
-public enum ResponseType {
+public class OAuthIssuerImpl implements OAuthIssuer {
 
-    CODE("code"),
-    TOKEN("token"),
-    ID_TOKEN("id_token");
+    private ValueGenerator vg;
 
-    private String code;
-
-    ResponseType(String code) {
-        this.code = code;
+    public OAuthIssuerImpl(ValueGenerator vg) {
+        this.vg = vg;
     }
 
-    @Override
-    public String toString() {
-        return code;
+    public String accessToken() throws OAuthSystemException {
+        return vg.generateValue();
+    }
+
+    public String refreshToken() throws OAuthSystemException {
+        return vg.generateValue();
+    }
+
+    public String authorizationCode() throws OAuthSystemException {
+        return vg.generateValue();
     }
 }
