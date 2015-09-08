@@ -23,8 +23,8 @@ package org.apache.oltu.oauth2.as;
 
 import junit.framework.Assert;
 
-import org.apache.oltu.oauth2.issuer.MD5Generator;
-import org.apache.oltu.oauth2.issuer.ValueGenerator;
+import org.apache.oltu.oauth2.as.issuer.MD5Generator;
+import org.apache.oltu.oauth2.as.issuer.ValueGenerator;
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 import org.junit.Test;
 

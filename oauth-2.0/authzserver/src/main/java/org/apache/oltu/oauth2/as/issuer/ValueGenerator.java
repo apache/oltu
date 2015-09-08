@@ -19,7 +19,7 @@
  * limitations under the License.
  */
 
-package org.apache.oltu.oauth2.issuer;
+package org.apache.oltu.oauth2.as.issuer;
 
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 

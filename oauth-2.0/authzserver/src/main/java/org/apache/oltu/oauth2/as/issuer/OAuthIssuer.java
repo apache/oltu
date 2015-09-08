@@ -19,28 +19,19 @@
  * limitations under the License.
  */
 
-package org.apache.oltu.oauth2.issuer;
-
-import java.util.UUID;
+package org.apache.oltu.oauth2.as.issuer;
 
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 
 /**
- * Exemplar OAuth Token Generator
- *
  *
  *
  *
  */
-public class UUIDValueGenerator implements ValueGenerator {
+public interface OAuthIssuer {
+    public String accessToken() throws OAuthSystemException;
 
-    @Override
-    public String generateValue() throws OAuthSystemException {
-        return generateValue(UUID.randomUUID().toString());
-    }
+    public String authorizationCode() throws OAuthSystemException;
 
-    @Override
-    public String generateValue(String param) throws OAuthSystemException {
-        return UUID.fromString(UUID.nameUUIDFromBytes(param.getBytes()).toString()).toString();
-    }
+    public String refreshToken() throws OAuthSystemException;
 }
