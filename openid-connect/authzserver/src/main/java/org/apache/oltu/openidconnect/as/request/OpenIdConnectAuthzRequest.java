@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.oltu.oauth2.as.request.OAuthRequest;
 import org.apache.oltu.oauth2.common.OAuth;
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
@@ -32,8 +33,8 @@ import org.apache.oltu.oauth2.common.message.types.ResponseType;
 import org.apache.oltu.oauth2.common.utils.OAuthUtils;
 import org.apache.oltu.oauth2.common.validators.OAuthValidator;
 import org.apache.oltu.oauth2.common.validators.OAuthValidatorMixer;
-import org.apache.oltu.openidconnect.as.validator.CodeValidator;
-import org.apache.oltu.openidconnect.as.validator.TokenValidator;
+import org.apache.oltu.oauth2.as.validator.CodeValidator;
+import org.apache.oltu.oauth2.as.validator.TokenValidator;
 import org.apache.oltu.openidconnect.common.OpenIdConnect;
 
 /**
