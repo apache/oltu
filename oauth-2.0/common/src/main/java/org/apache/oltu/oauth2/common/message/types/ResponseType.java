@@ -29,7 +29,8 @@ package org.apache.oltu.oauth2.common.message.types;
 public enum ResponseType {
 
     CODE("code"),
-    TOKEN("token");
+    TOKEN("token"),
+    ID_TOKEN("id_token");
 
     private String code;
 

@@ -23,7 +23,6 @@ package org.apache.oltu.oauth2.as.validator;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.oltu.oauth2.as.validator.TokenValidator;
 import org.apache.oltu.oauth2.common.OAuth;
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.junit.Assert;

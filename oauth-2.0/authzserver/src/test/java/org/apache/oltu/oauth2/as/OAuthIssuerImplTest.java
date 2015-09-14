@@ -23,10 +23,10 @@ package org.apache.oltu.oauth2.as;
 
 import junit.framework.Assert;
 
+import org.apache.oltu.oauth2.as.issuer.OAuthIssuerImpl;
 import org.junit.Test;
 import org.apache.oltu.oauth2.as.issuer.MD5Generator;
 import org.apache.oltu.oauth2.as.issuer.OAuthIssuer;
-import org.apache.oltu.oauth2.as.issuer.OAuthIssuerImpl;
 
 /**
  *

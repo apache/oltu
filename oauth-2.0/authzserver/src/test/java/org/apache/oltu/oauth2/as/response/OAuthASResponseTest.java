@@ -27,7 +27,6 @@ import static org.easymock.EasyMock.replay;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.oltu.oauth2.as.response.OAuthASResponse;
 import org.apache.oltu.oauth2.common.OAuth;
 import org.apache.oltu.oauth2.common.error.OAuthError;
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;

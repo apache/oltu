@@ -22,6 +22,7 @@
     <groupId>org.apache.oltu.openidconnect</groupId>
     <artifactId>org.apache.oltu.openidconnect.parent</artifactId>
     <version>1-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
 
   <artifactId>org.apache.oltu.openidconnect.common</artifactId>

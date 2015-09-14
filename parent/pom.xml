@@ -27,7 +27,7 @@
 
   <groupId>org.apache.oltu</groupId>
   <artifactId>org.apache.oltu.parent</artifactId>
-  <version>4-SNAPSHOT</version>
+  <version>3-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Apache Oltu - Parent</name>
