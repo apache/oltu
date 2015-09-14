@@ -61,6 +61,7 @@
     </menu>
 
     <menu name="Miscellaneous">
+      <item name="Commercial support" href="./commercial-support.html" />
       <item name="Project stats" href="./stats.html" />
     </menu>
 
