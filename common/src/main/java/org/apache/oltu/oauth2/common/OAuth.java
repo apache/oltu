@@ -84,4 +84,6 @@ public final class OAuth {
     public static final TokenType DEFAULT_TOKEN_TYPE = TokenType.BEARER;
     
     public static final String OAUTH_VERSION_DIFFER = "oauth_signature_method";
+    
+    public static final String ASSERTION ="assertion";
 }
