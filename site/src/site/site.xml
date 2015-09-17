@@ -46,7 +46,8 @@
 
     <menu name="${project.name}">
       <item href="./index.html" name="Overview" />
-      <item href="https://cwiki.apache.org/confluence/display/OLTU/Documentation" name="Documentation" >
+      <item href="#" name="Documentation" >
+       	<item href="https://cwiki.apache.org/confluence/display/OLTU/Documentation" name="Wiki" />
       	 <item href="./books.html" name="Books" />
       </item>
       <item href="#" name="APIs Documentation">
