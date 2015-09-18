@@ -30,7 +30,7 @@
 
  	 <subsection name="OAuth 2 in Action">
  		<p>OAuth 2 in Action by <a href="https://twitter.com/zer0n1ne">Justin Richer</a> and <a href="http://intothesymmetry.blogspot.com/">Antonio Sanso </a>  published by <a href="https://www.manning.com/books/oauth-2-in-action">Manning </a></p>
- 		<p><img alt="OAuth 2 in Action" src="https://images.manning.com/255/340/resize/book/b/16faa4f-72db-4fdc-be33-c9c3400aae7f/Richer-OAuth2-HI-MEAP.png" border="2"></img></p>
+ 		<p><img alt="OAuth 2 in Action" src="https://images.manning.com/255/340/resize/book/b/16faa4f-72db-4fdc-be33-c9c3400aae7f/Richer-OAuth2-HI-MEAP.png" style="border:1px solid black;"></img></p>
  	 	<p>OAuth 2 in Action teaches you practical use and deployment of this protocol from the perspective of a client, authorization server, and resource server</p>
  	 </subsection>
 
