@@ -23,4 +23,6 @@ public class JwsConstants {
     public static final String RS384 = "RS384";
 
     public static final String RS512 = "RS512";
+    
+    public static final String HS256 = "HS256";
 }
