@@ -18,14 +18,15 @@ package org.apache.oltu.jose.jws.signature.impl;
 
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
+
 import org.apache.oltu.commons.encodedtoken.TokenDecoder;
+import org.apache.oltu.jose.jws.JwsConstants;
 import org.apache.oltu.jose.jws.signature.SignatureMethod;
 
 public class SignatureMethodsHMAC256Impl implements SignatureMethod<SymmetricKeyImpl, SymmetricKeyImpl> {
-
-    private static final String ALG = "HS256";
 
     @Override
     public String calculate(String header, String payload, SymmetricKeyImpl signingKey) {
@@ -57,7 +58,7 @@ public class SignatureMethodsHMAC256Impl implements SignatureMethod<SymmetricKey
 
     @Override
     public String getAlgorithm() {
-        return ALG;
+        return JwsConstants.HS256;
     }
 
 }
