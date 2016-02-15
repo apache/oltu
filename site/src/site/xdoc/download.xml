@@ -20,7 +20,7 @@
 
   <properties>
     <title>Apache Oltu - Download</title>
-    <author email="oltu-dev@incubator.apache.org">Apache Oltu Team</author>
+    <author email="dev@oltu.apache.org">Apache Oltu Team</author>
   </properties>
 
   <body>
@@ -29,20 +29,20 @@
    Apache Oltu yourself. Otherwise, simply pick a ready-made binary distribution and follow the installation
    instructions given inside the archives.</p>
 
-      <source><a href="http://www.apache.org/dyn/closer.cgi/oltu/">http://www.apache.org/dyn/closer.cgi/oltu/</a></source>
+      <source><a href="https://www.apache.org/dyn/closer.cgi/oltu/">https://www.apache.org/dyn/closer.cgi/oltu/</a></source>
 
       <p>You will be prompted for a mirror - if the file is not found on yours, please be patient, as it may take 24
    hours to reach all mirrors.</p>
 
       <p>In order to guard against corrupted downloads/installations, it is highly recommended to
-   <a href="http://www.apache.org/dev/release-signing#verifying-signature">verify the signature</a>
-   of the release bundles against the public <a href="http://www.apache.org/dyn/closer.cgi/oltu/KEYS">KEYS</a> used by the Apache Oltu
+   <a href="https://www.apache.org/dev/release-signing#verifying-signature">verify the signature</a>
+   of the release bundles against the public <a href="https://www.apache.org/dist/oltu/KEYS">KEYS</a> used by the Apache Oltu
    developers.</p>
 
-      <p>As there are many artifacts for Oltu, <b>users are encouraged to include Oltu as a Maven dependency</b>. 
-   A list of Oltu Maven artifacts can be found <a href="http://search.maven.org/#search|ga|1|org.apache.oltu">here</a></p>
+      <p>As there are many artifacts for Oltu, <b>users are encouraged to include Oltu as a Maven dependency</b>.
+   A <a href="https://search.maven.org/#search|ga|1|org.apache.oltu">list of Oltu Maven artifacts</a> can be found in The Central Repository.</p>
 
-      <p>Apache Oltu is distributed under the <a href="http://oltu.apache.org/license.html"> Apache License, version 2.0</a>.</p>
+      <p>Apache Oltu is distributed under the <a href="https://oltu.apache.org/license.html"> Apache License, version 2.0</a>.</p>
 
     </section>
   </body>
