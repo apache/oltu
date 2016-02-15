@@ -32,7 +32,7 @@
       <ul>
         <li>Install/Configure <code>GPG</code> - The artifacts that are deployed to the ASF central repository need to
         be signed. To do this you will need to have a public and private keypair. There is a very good
-        <a href="http://www.sonatype.com/people/2010/01/how-to-generate-pgp-signatures-with-maven/">guide</a> that will
+        <a href="http://blog.sonatype.com/2010/01/how-to-generate-pgp-signatures-with-maven/">guide</a> that will
         walk you though this.</li>
 
         <li>Install Apache Maven 2.2.1 or higher. 2.2.0 has a bug that will produce invalid checksums; we strongly
@@ -43,7 +43,7 @@
     <section name="Configuration">
       <subsection name="Apache Maven">
         <p>As of Maven 2.1.0 you can now encrypt your servers passwords. We highly recommend that you follow this
-        <a href="http://maven.apache.org/guides/mini/guide-encryption.html">guide</a> to set your master password and
+        <a href="https://maven.apache.org/guides/mini/guide-encryption.html">guide</a> to set your master password and
         use it to encrypt your ASF password in the next section.</p>
       </subsection>
 
@@ -201,7 +201,7 @@ gpg: Signature made ...</source>
                     <code>pom</code>s, ... have
                     <code>.asc</code> (GPG signature) and checksum files (see
                     <a href="http://people.apache.org/~henkp/repo/faq.html">Repository FAQ</a> and
-                    <a href="http://www.apache.org/dev/release-signing.html#openpgp-ascii-detach-sig">Detached Signatures</a>).
+                    <a href="https://www.apache.org/dev/release-signing.html#openpgp-ascii-detach-sig">Detached Signatures</a>).
                     The <code>oltu-sources-dist-X.Y.tar.gz</code> and
                     <code>oltu-sources-dist-X.Y.zip</code> files shall likewise have signature and checksum files.
                   </li>
@@ -250,10 +250,10 @@ Subject: [VOTE] Release Apache Oltu X.Y
 Hi,
 
 We solved N issues:
-http://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12311100&styleName=Html&version=X.Y
+https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12311100&styleName=Html&version=X.Y
 
 There are still a couple of issues left in JIRA:
-http://issues.apache.org/jira/secure/IssueNavigator.jspa?reset=true&pid=12311100&status=1
+https://issues.apache.org/jira/secure/IssueNavigator.jspa?reset=true&pid=12311100&status=1
 
 SVN source tag (r9999999):
 https://svn.apache.org/repos/asf/oltu/tags/X.Y/
@@ -295,7 +295,7 @@ Some of the things to check before voting are:
           </li>
 
           <li>Perform a review of the release and cast your vote. For more details on Apache releases see
-          <a href="http://www.apache.org/dev/release.html">http://www.apache.org/dev/release.html</a>.</li>
+          <a href="https://www.apache.org/dev/release.html">https://www.apache.org/dev/release.html</a>.</li>
 
           <li>A <code>-1</code> vote does not necessarily mean that the vote must be redone, however it is usually a
           good idea to rollback the release if a <code>-1</code> vote is received
@@ -360,7 +360,7 @@ mv /x1/builds/oltu/binaries/* binaries/</source>
         <a href="mailto:user@oltu.apache.org">user@oltu</a>,
         <a href="mailto:dev@oltu.apache.org">dev@oltu</a>, and
         <a href="mailto:announce@apache.org">announce@apache.org</a> lists as per
-        <a href="http://www.apache.org/foundation/mailinglists.html#foundation-announce]">the Apache Announcement Mailing Lists page</a>
+        <a href="https://www.apache.org/foundation/mailinglists.html#foundation-announce]">the Apache Announcement Mailing Lists page</a>
         </p>
 
         <pre><![CDATA[From: YOUR_APACHE_USERNAME@apache.org

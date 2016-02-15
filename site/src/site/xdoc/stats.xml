@@ -27,19 +27,19 @@
     <body>
         <section name="Project Stats">
             <subsection name="Basic stats">
-                <script type="text/javascript" src="http://www.ohloh.net/p/apache-amber/widgets/project_basic_stats.js"></script>
+                <script src="https://www.openhub.net/p/apache-amber/widgets/project_basic_stats.js"></script>
             </subsection>
 
             <subsection name="Cocomo">
-                <script type="text/javascript" src="http://www.ohloh.net/p/apache-amber/widgets/project_cocomo.js"></script>
+                <script src="https://www.openhub.net/p/apache-amber/widgets/project_cocomo.js"></script>
             </subsection>
 
             <subsection name="Factoids">
-                <script type="text/javascript" src="http://www.ohloh.net/p/apache-amber/widgets/project_factoids.js"></script>
+                <script src="https://www.openhub.net/p/apache-amber/widgets/project_factoids.js"></script>
             </subsection>
 
             <subsection name="Languages">
-                <script type="text/javascript" src="http://www.ohloh.net/p/apache-amber/widgets/project_languages.js"></script>
+                <script src="https://www.openhub.net/p/apache-amber/widgets/project_languages.js"></script>
             </subsection>
         </section>
     </body>
