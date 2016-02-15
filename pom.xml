@@ -51,6 +51,18 @@
     </developer>
 
     <developer>
+      <id>jasha</id>
+      <name>Jasha Joachimsthal</name>
+      <email>jasha@apache.org</email>
+      <organization>Onegini</organization>
+      <organizationUrl>https://www.onegini.com</organizationUrl>
+      <roles>
+        <role>Committer</role>
+      </roles>
+      <timezone>+1</timezone>
+    </developer>
+
+    <developer>
       <id>lmoren</id>
       <name>Lukasz Moren</name>
       <email>lmoren@apache.org</email>
@@ -250,7 +262,7 @@
       <organization />
       <organizationUrl />
       <roles />
-      <timezone>-</timezone>
+      <timezone/>
       <properties />
     </contributor>
 
@@ -261,7 +273,7 @@
       <organization />
       <organizationUrl />
       <roles />
-      <timezone>-</timezone>
+      <timezone/>
       <properties />
     </contributor>
 
@@ -502,16 +514,15 @@
           </configuration>
         </plugin>
 
-       
+        <plugin>
+          <groupId>org.apache.felix</groupId>
+          <artifactId>maven-bundle-plugin</artifactId>
+          <version>2.3.7</version>
+        </plugin>
       </plugins>
     </pluginManagement>
 
     <plugins>
-     	<plugin>
-          <groupId>org.apache.felix</groupId>
-          <artifactId>maven-bundle-plugin</artifactId>
-          <version>2.3.7</version>
-       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-enforcer-plugin</artifactId>
