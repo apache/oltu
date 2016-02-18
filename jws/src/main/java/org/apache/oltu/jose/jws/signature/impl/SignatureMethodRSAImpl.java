@@ -18,7 +18,7 @@ package org.apache.oltu.jose.jws.signature.impl;
 
 import java.security.Signature;
 import org.apache.oltu.commons.encodedtoken.TokenDecoder;
-import org.apache.oltu.jose.jws.JwsConstants;
+import org.apache.oltu.jose.jws.JWSConstants;
 import org.apache.oltu.jose.jws.signature.SignatureMethod;
 
 /**
@@ -92,11 +92,11 @@ public class SignatureMethodRSAImpl implements SignatureMethod<PrivateKey, Publi
 
     private String getAlgorithmInternal() {
         String alg = null;
-        if (JwsConstants.RS256.equals(algorithm)) {
+        if (JWSConstants.RS256.equals(algorithm)) {
             alg = "SHA256withRSA";
-        } else if (JwsConstants.RS384.equals(algorithm)) {
+        } else if (JWSConstants.RS384.equals(algorithm)) {
             alg = "SHA384withRSA";
-        } else if (JwsConstants.RS512.equals(algorithm)) {
+        } else if (JWSConstants.RS512.equals(algorithm)) {
             alg = "SHA512withRSA";
         }
         return alg;

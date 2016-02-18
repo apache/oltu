@@ -23,7 +23,7 @@ import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.oltu.commons.encodedtoken.TokenDecoder;
-import org.apache.oltu.jose.jws.JwsConstants;
+import org.apache.oltu.jose.jws.JWSConstants;
 import org.apache.oltu.jose.jws.signature.SignatureMethod;
 
 public class SignatureMethodsHMAC256Impl implements SignatureMethod<SymmetricKeyImpl, SymmetricKeyImpl> {
@@ -58,7 +58,7 @@ public class SignatureMethodsHMAC256Impl implements SignatureMethod<SymmetricKey
 
     @Override
     public String getAlgorithm() {
-        return JwsConstants.HS256;
+        return JWSConstants.HS256;
     }
 
 }
