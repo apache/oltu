@@ -16,7 +16,7 @@
  */
 package org.apache.oltu.jose.jws;
 
-public class JwsConstants {
+public class JWSConstants {
 
     public static final String RS256 = "RS256";
 
