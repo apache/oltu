@@ -16,7 +16,7 @@
  */
 package org.apache.oltu.jose.jwe.io;
 
-public class JWEConstant {
+interface JWEConstants {
 
     // header defined in the JWE specification
 	// https://tools.ietf.org/html/rfc7516
