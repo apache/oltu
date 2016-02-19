@@ -16,6 +16,53 @@
  */
 package org.apache.oltu.jose.jwe.io;
 
-final class JWEHeaderParser {
+import org.apache.oltu.commons.json.CustomizableEntityReader;
+import org.apache.oltu.jose.jwe.JWE;
+import org.apache.oltu.jose.jwe.JWE.Builder;
+
+final class JWEHeaderParser extends CustomizableEntityReader<JWE, JWE.Builder> implements JWEConstants {
+
+    public JWEHeaderParser(Builder builder) {
+        super(builder);
+    }
+
+    @Override
+    protected <T> boolean handleProperty(String key, T value) {
+        boolean handled = true;
+
+        if (ALGORITHM.equals(key)) {
+            getBuilder().setAlgorithm(String.valueOf(value));
+        }else if (ENCRYPTION_ALGORITHM.equals(key)) {
+            getBuilder().setEncryptionAlgorithm(String.valueOf(value));
+        } else if (COMPRESSION.equals(key)) {
+            getBuilder().setCompressionAlgorithm(String.valueOf(value));
+        } else if (JWK_SET_URL.equals(key)) {
+            getBuilder().setJwkSetUrl(String.valueOf(value));
+        } else if (JSON_WEB_KEY.equals(key)) {
+            getBuilder().setJsonWebKey(String.valueOf(value));
+        }  else if (X509_URL.equals(key)) {
+            getBuilder().setX509url(String.valueOf(value));
+        } else if (X509_CERTIFICATE_THUMBPRINT.equals(key)) {
+            getBuilder().setX509CertificateThumbprint(String.valueOf(value));
+        } else if (X509_CERTIFICATE_CHAIN.equals(key)) {
+            getBuilder().setX509CertificateChain(String.valueOf(value));
+        } else if (KEY_ID.equals(key)) {
+            getBuilder().setKeyId(String.valueOf(value));
+        } else if (TYPE.equals(key)) {
+            getBuilder().setType(String.valueOf(value));
+        } else if (CONTENT_TYPE.equals(key)) {
+            getBuilder().setContentType(String.valueOf(value));
+        } else if (CRITICAL.equals(key)) {
+            Object[] criticalValues = (Object[]) value;
+            String[] critical = new String[criticalValues.length];
+            for (int i = 0; i < critical.length; i++) {
+                critical[i] = String.valueOf(criticalValues[i]);
+            }
+            getBuilder().setCritical(critical);
+        } else {
+            handled = false;
+        }
+        return handled;
+    }
 
 }
