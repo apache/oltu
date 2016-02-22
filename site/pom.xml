@@ -25,6 +25,7 @@
     <groupId>org.apache.oltu</groupId>
     <artifactId>org.apache.oltu.parent</artifactId>
     <version>4-SNAPSHOT</version>
+    <relativePath>../parent</relativePath>
   </parent>
 
   <artifactId>org.apache.oltu.site</artifactId>
