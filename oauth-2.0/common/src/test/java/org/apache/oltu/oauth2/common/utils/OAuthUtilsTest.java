@@ -21,12 +21,9 @@
 
 package org.apache.oltu.oauth2.common.utils;
 
-import org.apache.commons.codec.binary.Base64;
-import org.apache.oltu.oauth2.common.OAuth;
-import org.apache.oltu.oauth2.common.error.OAuthError;
-import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
-import org.junit.Ignore;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -35,8 +32,12 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import org.apache.commons.codec.binary.Base64;
+import org.apache.oltu.oauth2.common.OAuth;
+import org.apache.oltu.oauth2.common.error.OAuthError;
+import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
+import org.junit.Ignore;
+import org.junit.Test;
 
 /**
  *
@@ -44,6 +45,8 @@ import static org.junit.Assert.assertNull;
  *
  */
 public class OAuthUtilsTest {
+
+    private static final String BASIC_PREFIX = "Basic ";
 
     @Test
     @Ignore
@@ -234,27 +237,69 @@ public class OAuthUtilsTest {
     @Test
     public void testDecodeValidClientAuthnHeader() throws Exception {
         String header = "clientId:secret";
-        String encodedHeader = "Basic " + new String(Base64.encodeBase64(header.getBytes()));
+        String encodedHeader = BASIC_PREFIX + encodeHeader(header);
+
         String[] credentials = OAuthUtils.decodeClientAuthenticationHeader(encodedHeader);
+
+        assertNotNull(credentials);
         assertEquals("clientId", credentials[0]);
         assertEquals("secret", credentials[1]);
     }
 
     @Test
-    public void testDecodeInvalidClientAuthnHeader() throws Exception {
+    public void testDecodeValidClientAuthnHeaderWithColonInPassword() throws Exception {
+        String header = "clientId:sec:re:t";
+        String encodedHeader = BASIC_PREFIX + encodeHeader(header);
+
+        String[] credentials = OAuthUtils.decodeClientAuthenticationHeader(encodedHeader);
+
+        assertNotNull(credentials);
+        assertEquals("clientId", credentials[0]);
+        assertEquals("sec:re:t", credentials[1]);
+    }
+
+    @Test
+    public void testDecodeEmptyClientAuthnHeader() throws Exception {
         assertNull(OAuthUtils.decodeClientAuthenticationHeader(null));
+        assertNull(OAuthUtils.decodeClientAuthenticationHeader(""));
+    }
 
-        String header = ":secret";
-        String encodedHeader = "Basic " + new String(Base64.encodeBase64(header.getBytes()));
-        assertNull(OAuthUtils.decodeClientAuthenticationHeader(encodedHeader));
-
-        String header2 = "clientId:";
-        String encodedHeader2 = "Basic " + new String(Base64.encodeBase64(header2.getBytes()));
-        assertNull(OAuthUtils.decodeClientAuthenticationHeader(encodedHeader2));
-
-        String encodedHeader3 = "invalid_header";
-        assertNull(OAuthUtils.decodeClientAuthenticationHeader(encodedHeader3));
-
+    @Test
+    public void testDecodeInvalidClientAuthnHeader() throws Exception {
+        assertNull(OAuthUtils.decodeClientAuthenticationHeader(BASIC_PREFIX));
+        assertNull(OAuthUtils.decodeClientAuthenticationHeader("invalid_header"));
         assertNull(OAuthUtils.decodeClientAuthenticationHeader("Authorization dXNlcm5hbWU6cGFzc3dvcmQ="));
+    }
+
+    @Test
+    public void testDecodeClientAuthnHeaderNoClientIdOrSecret() throws Exception {
+        String header = ":";
+        String encodedHeader = BASIC_PREFIX + encodeHeader(header);
+        assertNull(OAuthUtils.decodeClientAuthenticationHeader(encodedHeader));
+    }
+
+    @Test
+    public void testDecodeClientAuthnHeaderNoClientId() throws Exception {
+        String header = ":secret";
+        String encodedHeader = BASIC_PREFIX + encodeHeader(header);
+        assertNull(OAuthUtils.decodeClientAuthenticationHeader(encodedHeader));
+    }
+
+    @Test
+    public void testDecodeClientAuthnHeaderNoSecret() throws Exception {
+        String header = "clientId:";
+        String encodedHeader = BASIC_PREFIX + encodeHeader(header);
+        assertNull(OAuthUtils.decodeClientAuthenticationHeader(encodedHeader));
+    }
+
+    @Test
+    public void testDecodeClientAuthnHeaderNoSeparator() throws Exception {
+        String header = "clientId";
+        String encodedHeader = BASIC_PREFIX + encodeHeader(header);
+        assertNull(OAuthUtils.decodeClientAuthenticationHeader(encodedHeader));
+    }
+
+    private String encodeHeader(String header) {
+        return new String(Base64.encodeBase64(header.getBytes()));
     }
 }

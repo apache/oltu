@@ -368,28 +368,29 @@ public final class OAuthUtils {
      * @return a {@link String[]} if the header could be decoded into a non null username and password or null.
      */
     public static String[] decodeClientAuthenticationHeader(String authenticationHeader) {
-        if (authenticationHeader == null || "".equals(authenticationHeader)) {
+        if (isEmpty(authenticationHeader)) {
             return null;
         }
         String[] tokens = authenticationHeader.split(" ");
         if (tokens.length != 2) {
             return null;
         }
-        if (tokens[0] != null && !"".equals(tokens[0])) {
-            String authType = tokens[0];
-            if (!authType.equalsIgnoreCase("basic")) {
-                return null;
-            }
+        String authType = tokens[0];
+        if (!"basic".equalsIgnoreCase(authType)) {
+            return null;
         }
-        if (tokens[1] != null && !"".equals(tokens[1])) {
-            String encodedCreds = tokens[1];
-            String decodedCreds = new String(Base64.decodeBase64(encodedCreds));
-            if (decodedCreds.contains(":") && decodedCreds.split(":").length == 2) {
-                String[] creds = decodedCreds.split(":");
-                if (!OAuthUtils.isEmpty(creds[0]) && !OAuthUtils.isEmpty(creds[1])) {
-                    return decodedCreds.split(":");
-                }
-            }
+        String encodedCreds = tokens[1];
+        return decodeBase64EncodedCredentials(encodedCreds);
+    }
+
+    private static String[] decodeBase64EncodedCredentials(String encodedCreds) {
+        String decodedCreds = new String(Base64.decodeBase64(encodedCreds));
+        String[] creds = decodedCreds.split(":", 2);
+        if (creds.length != 2) {
+          return null;
+        }
+        if (!OAuthUtils.isEmpty(creds[0]) && !OAuthUtils.isEmpty(creds[1])) {
+          return creds;
         }
         return null;
     }
