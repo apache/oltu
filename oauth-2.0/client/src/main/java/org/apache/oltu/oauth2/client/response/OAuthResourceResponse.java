@@ -18,40 +18,47 @@ package org.apache.oltu.oauth2.client.response;
 
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 
-public class OAuthResourceResponse  extends OAuthClientResponse {
-	
+import java.util.List;
+import java.util.Map;
+
+public class OAuthResourceResponse extends OAuthClientResponse {
+
     public String getBody() {
         return body;
-    }	
- 
-	public int getResponseCode() {
-		return responseCode;
-	}
-	
-	public String getContentType(){
-		return contentType;
-	}
-    
-	@Override
-	protected void setBody(String body) throws OAuthProblemException {
-		 this.body = body;
-	}
+    }
 
-	@Override
-	protected void setContentType(String contentType) {
-		this.contentType = contentType;	
-	}
+    public int getResponseCode() {
+        return responseCode;
+    }
 
-	@Override
-	protected void setResponseCode(int responseCode) {
-		this.responseCode = responseCode;
-	}
-	
-	@Override
-	protected void init(String body, String contentType, int responseCode) throws OAuthProblemException {
+    public String getContentType() {
+        return contentType;
+    }
+
+    public Map<String, List<String>> getHeaders() {
+        return headers;
+    }
+
+    @Override
+    protected void setBody(String body) throws OAuthProblemException {
+        this.body = body;
+    }
+
+    @Override
+    protected void setContentType(String contentType) {
+        this.contentType = contentType;
+    }
+
+    @Override
+    protected void setResponseCode(int responseCode) {
+        this.responseCode = responseCode;
+    }
+
+    @Override
+    protected void init(String body, String contentType, int responseCode) throws OAuthProblemException {
         this.setBody(body);
         this.setContentType(contentType);
         this.setResponseCode(responseCode);
-	}
+    }
 
 }

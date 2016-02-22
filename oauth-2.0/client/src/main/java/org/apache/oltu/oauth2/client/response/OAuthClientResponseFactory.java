@@ -26,6 +26,9 @@ import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 import org.apache.oltu.oauth2.common.utils.OAuthUtils;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  *
  *
@@ -51,13 +54,13 @@ public class OAuthClientResponseFactory {
 
     public static <T extends OAuthClientResponse> T createCustomResponse(String body, String contentType,
                                                                          int responseCode,
-                                                                         Class<T> clazz)
+                                                                         Map<String, List<String>> headers, Class<T> clazz)
         throws OAuthSystemException, OAuthProblemException {
 
         OAuthClientResponse resp = (OAuthClientResponse)OAuthUtils
             .instantiateClassWithParameters(clazz, null, null);
 
-        resp.init(body, contentType, responseCode);
+        resp.init(body, contentType, responseCode, headers);
 
         return (T)resp;
     }

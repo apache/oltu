@@ -21,11 +21,12 @@
 
 package org.apache.oltu.oauth2.client.response;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.apache.oltu.oauth2.client.validator.OAuthClientValidator;
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -37,6 +38,7 @@ public abstract class OAuthClientResponse {
     protected String body;
     protected String contentType;
     protected int responseCode;
+    protected Map<String, List<String>> headers;
 
     protected OAuthClientValidator validator;
     protected Map<String, Object> parameters = new HashMap<String, Object>();
@@ -46,18 +48,28 @@ public abstract class OAuthClientResponse {
         return value == null ? null : String.valueOf(value);
     }
 
+    public void setHeaders(Map<String, List<String>> headers) {
+        this.headers = headers;
+    }
+
     protected abstract void setBody(String body) throws OAuthProblemException;
 
     protected abstract void setContentType(String contentType);
 
     protected abstract void setResponseCode(int responseCode);
 
-    protected void init(String body, String contentType, int responseCode) throws OAuthProblemException {
+    protected void init(String body, String contentType, int responseCode, Map<String, List<String>> headers)
+            throws OAuthProblemException {
         this.setBody(body);
         this.setContentType(contentType);
         this.setResponseCode(responseCode);
+        this.setHeaders(headers);
         this.validate();
+    }
 
+    protected void init(String body, String contentType, int responseCode)
+            throws OAuthProblemException {
+        init(body, contentType, responseCode, new HashMap<String, List<String>>());
     }
 
     protected void validate() throws OAuthProblemException {

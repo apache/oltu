@@ -22,8 +22,11 @@
 package org.apache.oltu.oauth2.httpclient4;
 
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections4.map.CaseInsensitiveMap;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -45,7 +48,7 @@ import org.apache.oltu.oauth2.common.utils.OAuthUtils;
 
 
 /**
- * Exemplar HttpClient4
+ * Example Oltu HttpClient based on the Apache HttpComponents HttpClient
  *
  *
  *
@@ -62,7 +65,7 @@ public class HttpClient4 implements HttpClient {
     public HttpClient4(org.apache.http.client.HttpClient client) {
         this.client = client;
     }
-    
+
     public void shutdown() {
         if (client != null) {
             ClientConnectionManager connectionManager = client.getConnectionManager();
@@ -102,6 +105,7 @@ public class HttpClient4 implements HttpClient {
             }
             HttpResponse response = client.execute(req);
             Header contentTypeHeader = null;
+
             HttpEntity entity = response.getEntity();
             if (entity != null) {
                 responseBody = EntityUtils.toString(entity);
@@ -113,11 +117,28 @@ public class HttpClient4 implements HttpClient {
             }
 
             return OAuthClientResponseFactory
-                .createCustomResponse(responseBody, contentType, response.getStatusLine().getStatusCode(),
-                    responseClass);
+                .createCustomResponse(responseBody, contentType, response.getStatusLine().getStatusCode(), getHeaders(response.getAllHeaders()),
+                        responseClass);
         } catch (Exception e) {
             throw new OAuthSystemException(e);
         }
+    }
 
+    protected Map<String, List<String>> getHeaders(Header[] headers) {
+        Map<String, List<String>> headersMap = new CaseInsensitiveMap<String, List<String>>();
+
+        for (Header header : headers) {
+            String headerKey = header.getName();
+            String headerValue = header.getValue();
+            if (headersMap.containsKey(headerKey)) {
+                final List<String> headerValues = headersMap.get(headerKey);
+                headerValues.add(headerValue);
+            } else {
+                List<String> headerValues = new ArrayList<String>();
+                headerValues.add(headerValue);
+                headersMap.put(headerKey, headerValues);
+            }
+        }
+        return headersMap;
     }
 }

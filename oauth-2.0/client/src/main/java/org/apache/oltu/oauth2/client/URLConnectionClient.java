@@ -28,6 +28,8 @@ import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.oltu.oauth2.client.request.OAuthClientRequest;
@@ -40,7 +42,7 @@ import org.apache.oltu.oauth2.common.utils.OAuthUtils;
 
 
 /**
- * Implementation of the OAuth HttpClient using URL Connection
+ * Implementation of the Oltu OAuth HttpClient using URL Connection
  *
  *
  *
@@ -53,10 +55,11 @@ public class URLConnectionClient implements HttpClient {
 
     public <T extends OAuthClientResponse> T execute(OAuthClientRequest request, Map<String, String> headers,
                                                      String requestMethod, Class<T> responseClass)
-        throws OAuthSystemException, OAuthProblemException {
+            throws OAuthSystemException, OAuthProblemException {
 
         String responseBody = null;
         URLConnection c = null;
+        Map<String, List<String>> responseHeaders = new HashMap<String, List<String>>();
         int responseCode = 0;
         try {
             URL url = new URL(request.getLocationUri());
@@ -64,17 +67,17 @@ public class URLConnectionClient implements HttpClient {
             c = url.openConnection();
             responseCode = -1;
             if (c instanceof HttpURLConnection) {
-                HttpURLConnection httpURLConnection = (HttpURLConnection)c;
+                HttpURLConnection httpURLConnection = (HttpURLConnection) c;
 
                 if (headers != null && !headers.isEmpty()) {
                     for (Map.Entry<String, String> header : headers.entrySet()) {
                         httpURLConnection.addRequestProperty(header.getKey(), header.getValue());
                     }
                 }
-                
+
                 if (request.getHeaders() != null) {
                     for (Map.Entry<String, String> header : request.getHeaders().entrySet()) {
-                    	httpURLConnection.addRequestProperty(header.getKey(), header.getValue());
+                        httpURLConnection.addRequestProperty(header.getKey(), header.getValue());
                     }
                 }
 
@@ -102,6 +105,7 @@ public class URLConnectionClient implements HttpClient {
                     inputStream = httpURLConnection.getInputStream();
                 }
 
+                responseHeaders = httpURLConnection.getHeaderFields();
                 responseBody = OAuthUtils.saveStreamAsString(inputStream);
             }
         } catch (IOException e) {
@@ -109,7 +113,7 @@ public class URLConnectionClient implements HttpClient {
         }
 
         return OAuthClientResponseFactory
-            .createCustomResponse(responseBody, c.getContentType(), responseCode, responseClass);
+                .createCustomResponse(responseBody, c.getContentType(), responseCode, responseHeaders, responseClass);
     }
 
     @Override
