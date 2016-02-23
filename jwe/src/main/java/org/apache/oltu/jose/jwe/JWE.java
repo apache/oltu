@@ -17,6 +17,11 @@
 package org.apache.oltu.jose.jwe;
 
 import org.apache.oltu.commons.json.CustomizableBuilder;
+import org.apache.oltu.jose.jwe.encryption.ContentEncryptMethod;
+import org.apache.oltu.jose.jwe.encryption.DecryptingKey;
+import org.apache.oltu.jose.jwe.encryption.EncryptingKey;
+import org.apache.oltu.jose.jwe.encryption.KeyEncryptMethod;
+import org.apache.oltu.jose.jwe.io.JWEHeaderWriter;
 
 public class JWE {
     
@@ -26,21 +31,77 @@ public class JWE {
     private final Header header;
     
     /**
+     * The JWE encryptedKey.
+     */
+    private final String encryptedKey;
+    
+    /**
      * The JWE Payload.
      */
     private final String payload;
     
-    JWE(Header header, String payload) {
+    /**
+     * The JWE Content Encryption.
+     */
+    private final String contentEncryption;
+    
+    JWE(Header header, String encryptedKey, String payload ,String contentEncryption) {
         this.header = header;
+        this.encryptedKey = encryptedKey;
         this.payload = payload;
+        this.contentEncryption = contentEncryption;
     }
     
     public Header getHeader() {
         return header;
     }
+    
+    public String getEncryptedKey() {
+        return encryptedKey;
+    }
 
     public String getPayload() {
         return payload;
+    }
+    
+    public String getContentEncryption() {
+        return contentEncryption;
+    }
+    
+    public <EK extends EncryptingKey, DK extends DecryptingKey> boolean acceptAlgorithm(KeyEncryptMethod<EK, DK> keyEncryptMethod, ContentEncryptMethod<EK, DK> contentEncryptMethod) {
+        if (keyEncryptMethod == null) {
+            throw new IllegalArgumentException("An encrypt method is required in order to decrypt the content encryption key.");
+        }
+        if (contentEncryptMethod == null) {
+            throw new IllegalArgumentException("An encrypt method is required in order to decrypt the payload.");
+        }
+        if (header == null || header.getAlgorithm() == null || header.getEncryptionAlgorithm() == null) {
+            throw new IllegalStateException("JWE token must have a valid JSON header with specified algorithm.");
+        }
+
+        return header.getAlgorithm().equalsIgnoreCase(keyEncryptMethod.getAlgorithm()) && header.getEncryptionAlgorithm().equalsIgnoreCase(contentEncryptMethod.getAlgorithm());
+    }
+    
+    public <EK extends EncryptingKey, DK extends DecryptingKey> String decrypt(KeyEncryptMethod<EK, DK> keyEncryptMethod,
+            DK decryptingKey, ContentEncryptMethod<EK, DK> contentEncryptMethod) {        
+        if (!acceptAlgorithm(keyEncryptMethod, contentEncryptMethod)) {
+            throw new IllegalArgumentException("Impossible to decrypt current JWE");
+        }
+        if (decryptingKey == null) {
+            throw new IllegalArgumentException("A decrypting key is required in order to decrypt the JWE");
+        }
+        
+        if (encryptedKey == null) {
+            throw new IllegalStateException("JWE token must have an encrypted key.");
+        }
+
+        if (contentEncryption == null) {
+            throw new IllegalStateException("JWE token must have a content encryption");
+        }
+        
+        DecryptingKey cek = keyEncryptMethod.decrypt(encryptedKey, decryptingKey);
+        
+        return contentEncryptMethod.decrypt(new JWEHeaderWriter().write(header), contentEncryption, cek);
     }
     
     public static final class Builder extends CustomizableBuilder<JWE> {
@@ -106,9 +167,19 @@ public class JWE {
         private String[] critical;
         
         /**
+         * The JWE encryptedKey.
+         */
+        private String encryptedKey;
+        
+        /**
          * The JWE Payload.
          */
         private String payload;
+        
+        /**
+         * The JWE Content Encryption.
+         */
+        private String contentEncryption;
         
         public Builder setAlgorithm(String algorithm) {
             this.algorithm = algorithm;
@@ -165,6 +236,11 @@ public class JWE {
             return this;
         }
 
+        public Builder setEncryptedKey(String encryptedKey) {
+            this.encryptedKey = encryptedKey;
+            return this;
+        }
+        
         public Builder setCritical(String[] critical) {
             this.critical = critical;
             return this;
@@ -173,6 +249,46 @@ public class JWE {
         public Builder setPayload(String payload) {
             this.payload = payload;
             return this;
+        }
+        
+        public Builder setContentEncryption(String contentEncryption) {
+            this.contentEncryption = contentEncryption;
+            return this;
+        }
+        
+        public <EK extends EncryptingKey, DK extends DecryptingKey> Builder encrypt(KeyEncryptMethod<EK, DK> keyEncryptMethod,
+                EK encryptingKey, ContentEncryptMethod<EK, DK> contentEncryptMethod) {
+            if (keyEncryptMethod == null) {
+                throw new IllegalArgumentException("A key encryption method is required in order to encrypt the content encryption key.");
+            }
+            if (encryptingKey == null) {
+                throw new IllegalArgumentException("An encryption key is required in order to encrypt the content encryption key.");
+            }
+            if (payload == null) {
+                throw new IllegalStateException("Payload needs to be set in order to encrypt it.");
+            }
+            if (contentEncryptMethod == null) {
+                throw new IllegalArgumentException("A key encryption method is required in order to encrypt the payload.");
+            }
+            
+            setAlgorithm(keyEncryptMethod.getAlgorithm());
+            setEncryptionAlgorithm(contentEncryptMethod.getAlgorithm());
+            
+            String header = new JWEHeaderWriter().write(new Header(algorithm,
+                    encryptionAlgorithm,
+                    compressionAlgorithm,
+                    jwkSetUrl,
+                    jsonWebKey,
+                    x509url,
+                    x509CertificateThumbprint,
+                    x509CertificateChain,
+                    keyId, type,
+                    contentType,
+                    critical,
+                    getCustomFields())); 
+            setEncryptedKey(keyEncryptMethod.encrypt(encryptingKey));
+            //TODO
+            return setContentEncryption(contentEncryptMethod.encrypt(header, payload, null));
         }
 
         @Override
@@ -189,7 +305,9 @@ public class JWE {
                     contentType,
                     critical,
                     getCustomFields()),
-         payload);
+         encryptedKey,
+         payload,
+         contentEncryption);
         }
         
     }
