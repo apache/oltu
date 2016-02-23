@@ -21,8 +21,6 @@
 
 package org.apache.oltu.oauth2.client.validator;
 
-import org.apache.oltu.oauth2.client.validator.CodeTokenValidator;
-import org.apache.oltu.oauth2.client.validator.OAuthClientValidator;
 import org.apache.oltu.oauth2.common.OAuth;
 import org.junit.Assert;
 import org.junit.Test;

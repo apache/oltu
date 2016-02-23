@@ -48,6 +48,10 @@ public abstract class OAuthClientResponse {
         return value == null ? null : String.valueOf(value);
     }
 
+    public int getResponseCode() {
+        return responseCode;
+    }
+
     public void setHeaders(Map<String, List<String>> headers) {
         this.headers = headers;
     }
