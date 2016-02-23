@@ -23,9 +23,11 @@ package org.apache.oltu.jose.jwe.encryption;
  * @param <E> the {@link EncryptingKey} type.
  * @param <D> the {@link DecryptingKey} type.
  */
-public interface ContentEncryptMethod <E extends EncryptingKey, D extends DecryptingKey>  extends EncryptMethod<EncryptingKey, DecryptingKey>{
+public interface ContentEncryptMethod <EK extends EncryptingKey, DK extends DecryptingKey>  extends EncryptMethod<EncryptingKey, DecryptingKey>{
     
-    String encrypt(String header, String payload, E enryptingKey);
+    String encrypt(String header, String payload, EncryptingKey encryptingKey);
+    
+    String decrypt(String header, String contentEncryption, DecryptingKey decryptingKey);
     
     //TODO add validation??
 }
