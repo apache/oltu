@@ -28,6 +28,9 @@ import org.apache.oltu.oauth2.common.utils.JSONUtils;
 import org.apache.oltu.oauth2.ext.dynamicreg.client.validators.RegistrationValidator;
 import org.apache.oltu.oauth2.ext.dynamicreg.common.OAuthRegistration;
 
+import java.util.List;
+import java.util.Map;
+
 
 /**
  *
@@ -37,14 +40,18 @@ import org.apache.oltu.oauth2.ext.dynamicreg.common.OAuthRegistration;
 public class OAuthClientRegistrationResponse extends OAuthClientResponse {
 
     public OAuthClientRegistrationResponse() {
+        validator = new RegistrationValidator();
     }
 
     @Override
     protected void init(String body, String contentType, int responseCode) throws OAuthProblemException {
-        validator = new RegistrationValidator();
         super.init(body, contentType, responseCode);
     }
 
+    @Override
+    protected void init(String body, String contentType, int responseCode, Map<String, List<String>> headers) throws OAuthProblemException {
+        super.init(body, contentType, responseCode, headers);
+    }
 
     protected void setBody(String body) throws OAuthProblemException {
         try {

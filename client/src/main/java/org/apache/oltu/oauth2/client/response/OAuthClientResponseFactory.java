@@ -57,7 +57,7 @@ public class OAuthClientResponseFactory {
                                                                          Map<String, List<String>> headers, Class<T> clazz)
         throws OAuthSystemException, OAuthProblemException {
 
-        OAuthClientResponse resp = (OAuthClientResponse)OAuthUtils
+        OAuthClientResponse resp = OAuthUtils
             .instantiateClassWithParameters(clazz, null, null);
 
         resp.init(body, contentType, responseCode, headers);
