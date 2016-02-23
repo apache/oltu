@@ -23,8 +23,6 @@ package org.apache.oltu.oauth2.client.response;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.apache.oltu.oauth2.client.response.OAuthClientResponse;
-import org.apache.oltu.oauth2.client.response.OAuthClientResponseFactory;
 import org.apache.oltu.oauth2.common.OAuth;
 
 

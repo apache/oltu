@@ -25,12 +25,19 @@ import org.apache.oltu.oauth2.client.validator.TokenValidator;
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.apache.oltu.oauth2.common.token.OAuthToken;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  *
  *
  *
  */
 public abstract class OAuthAccessTokenResponse extends OAuthClientResponse {
+
+    public OAuthAccessTokenResponse() {
+        validator = new TokenValidator();
+    }
 
     public abstract String getAccessToken();
 
@@ -48,7 +55,11 @@ public abstract class OAuthAccessTokenResponse extends OAuthClientResponse {
 
     @Override
     protected void init(String body, String contentType, int responseCode) throws OAuthProblemException {
-        validator = new TokenValidator();
         super.init(body, contentType, responseCode);
+    }
+
+    @Override
+    protected void init(String body, String contentType, int responseCode, Map<String, List<String>> headers) throws OAuthProblemException {
+        super.init(body, contentType, responseCode, headers);
     }
 }
