@@ -25,9 +25,9 @@ package org.apache.oltu.jose.jwe.encryption;
  */
 public interface ContentEncryptMethod <EK extends EncryptingKey, DK extends DecryptingKey>  extends EncryptMethod<EncryptingKey, DecryptingKey>{
     
-    String encrypt(String header, String payload, EncryptingKey encryptingKey);
+    String encrypt(String header, String payload, EK encryptingKey);
     
-    String decrypt(String header, String contentEncryption, DecryptingKey decryptingKey);
+    String decrypt(String header, String contentEncryption, DK decryptingKey);
     
     //TODO add validation??
 }
