@@ -29,9 +29,9 @@ public interface KeyEncryptMethod  <EK extends EncryptingKey, DK extends Decrypt
 
     String encrypt(EK encryptingKey);
 
-    DecryptingKey decrypt(String encryptedKey, DK decryptingKey);
+    DK decrypt(String encryptedKey, DK decryptingKey);
 
-    DecryptingKey decrypt(String encryptedKey);
+    DK decrypt(String encryptedKey);
 
     //TODO add validation??
 

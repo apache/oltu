@@ -99,9 +99,7 @@ public class JWE {
             throw new IllegalStateException("JWE token must have a content encryption");
         }
         
-        DecryptingKey cek = keyEncryptMethod.decrypt(encryptedKey, decryptingKey);
-        
-        return contentEncryptMethod.decrypt(new JWEHeaderWriter().write(header), contentEncryption, cek);
+        return contentEncryptMethod.decrypt(new JWEHeaderWriter().write(header), contentEncryption, keyEncryptMethod.decrypt(encryptedKey, decryptingKey));
     }
     
     public static final class Builder extends CustomizableBuilder<JWE> {
