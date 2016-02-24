@@ -22,7 +22,7 @@ package org.apache.oltu.jose.jwe.encryption;
  * @param <E> the {@link EncryptingKey} type.
  * @param <D> the {@link DecryptingKey} type.
  */
-public interface EncryptMethod<E extends EncryptingKey, D extends DecryptingKey> {
+public interface EncryptMethod<EK extends EncryptingKey, DK extends DecryptingKey> {
 
     String getAlgorithm();
 
