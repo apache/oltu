@@ -27,8 +27,8 @@
 
   <bannerRight>
     <name>The Apache Software Foundation</name>
-    <src>http://www.apache.org/images/asf_logo.gif</src>
-    <href>http://www.apache.org/</href>
+    <src>https://www.apache.org/img/asf_logo.png</src>
+    <href>https://www.apache.org/</href>
   </bannerRight>
 
   <skin>
@@ -41,15 +41,15 @@
 
   <body>
     <menu name="ASF" inherit="bottom">
-      <item name="How Apache Works" href="http://www.apache.org/foundation/how-it-works.html" />
-      <item name="Foundation" href="http://www.apache.org/foundation/" />
-      <item name="Sponsoring Apache" href="http://www.apache.org/foundation/sponsorship.html" />
-      <item name="Thanks" href="http://www.apache.org/foundation/thanks.html" />
-      <item name="Apache Incubator" href="http://incubator.apache.org/" />
+      <item name="How Apache Works" href="https://www.apache.org/foundation/how-it-works.html" />
+      <item name="Foundation" href="https://www.apache.org/foundation/" />
+      <item name="Sponsoring Apache" href="https://www.apache.org/foundation/sponsorship.html" />
+      <item name="Thanks" href="https://www.apache.org/foundation/thanks.html" />
+      <item name="Apache Incubator" href="https://incubator.apache.org/" />
     </menu>
 
     <footer>
-      <div class="row span16">Apache Oltu, Apache, the Apache feather logo, and the Apache Oltu project logos are trademarks of The Apache Software Foundation.
+      <div class="row span12">Apache Oltu, Apache, the Apache feather logo, and the Apache Oltu project logos are trademarks of The Apache Software Foundation.
       All other marks mentioned may be trademarks or registered trademarks of their respective owners.</div>
     </footer>
   </body>
