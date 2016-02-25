@@ -293,9 +293,9 @@
       <post>dev@oltu.apache.org</post>
       <subscribe>dev-subscribe@oltu.apache.org</subscribe>
       <unsubscribe>dev-unsubscribe@oltu.apache.org</unsubscribe>
-      <archive>http://mail-archives.apache.org/mod_mbox/oltu-dev/</archive>
+      <archive>https://mail-archives.apache.org/mod_mbox/oltu-dev/</archive>
       <otherArchives>
-        <otherArchive>http://mail-archives.apache.org/mod_mbox/incubator-amber-dev/</otherArchive>
+        <otherArchive>https://mail-archives.apache.org/mod_mbox/incubator-amber-dev/</otherArchive>
       </otherArchives>
     </mailingList>
 
@@ -304,9 +304,9 @@
       <post>user@oltu.apache.org</post>
       <subscribe>user-subscribe@oltu.apache.org</subscribe>
       <unsubscribe>user-unsubscribe@oltu.apache.org</unsubscribe>
-      <archive>http://mail-archives.apache.org/mod_mbox/oltu-user/</archive>
+      <archive>https://mail-archives.apache.org/mod_mbox/oltu-user/</archive>
       <otherArchives>
-        <otherArchive>http://mail-archives.apache.org/mod_mbox/incubator-amber-user/</otherArchive>
+        <otherArchive>https://mail-archives.apache.org/mod_mbox/incubator-amber-user/</otherArchive>
       </otherArchives>
     </mailingList>
 
@@ -315,9 +315,9 @@
       <post>commits@oltu.apache.org</post>
       <subscribe>commits-subscribe@oltu.apache.org</subscribe>
       <unsubscribe>commits-unsubscribe@oltu.apache.org</unsubscribe>
-      <archive>http://mail-archives.apache.org/mod_mbox/oltu-commits/</archive>
+      <archive>https://mail-archives.apache.org/mod_mbox/oltu-commits/</archive>
       <otherArchives>
-        <otherArchive>http://mail-archives.apache.org/mod_mbox/incubator-amber-commits/</otherArchive>
+        <otherArchive>https://mail-archives.apache.org/mod_mbox/incubator-amber-commits/</otherArchive>
       </otherArchives>
     </mailingList>
   </mailingLists>
@@ -346,7 +346,7 @@
    </notifiers>
   </ciManagement>
   <distributionManagement>
-    <downloadUrl>http://oltu.apache.org/download.html</downloadUrl>
+    <downloadUrl>https://oltu.apache.org/download.html</downloadUrl>
   </distributionManagement>
 
   <properties>
