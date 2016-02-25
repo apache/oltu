@@ -141,6 +141,10 @@
                 </ul>
               </td>
               <td>
+                <a href="https://www.apache.org/dist/oltu/org.apache.oltu.oauth2/org.apache.oltu.oauth2.parent-1.0.1-source-release.zip.asc"
+                   title="org.apache.oltu.oauth2.parent-1.0.1-source-release.zip.asc  ">
+                  PGP
+                </a>
               </td>
             </tr>
             <tr>
@@ -167,6 +171,8 @@
                 </ul>
               </td>
               <td>
+                <a href="https://www.apache.org/dist/oltu/org.apache.oltu.parent/org.apache.oltu.parent-3-source-release.zip.asc"
+                   title="org.apache.oltu.parent-3-source-release.zip.asc">PGP</a>
               </td>
             </tr>
           </tbody>
