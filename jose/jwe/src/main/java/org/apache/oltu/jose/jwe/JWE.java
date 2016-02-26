@@ -16,6 +16,7 @@
  */
 package org.apache.oltu.jose.jwe;
 
+import org.apache.oltu.commons.encodedtoken.TokenDecoder;
 import org.apache.oltu.commons.json.CustomizableBuilder;
 import org.apache.oltu.jose.jwe.encryption.ContentEncryptMethod;
 import org.apache.oltu.jose.jwe.encryption.DecryptingKey;
@@ -291,7 +292,7 @@ public class JWE {
 
             setEncryptedKey(cek.getEncryptedKey());
 
-            return setContentEncryption(contentEncryptMethod.encrypt(header, payload,cek.getContentEncryptionKey()));
+            return setContentEncryption(contentEncryptMethod.encrypt(TokenDecoder.base64Encode(header), payload,cek.getContentEncryptionKey()));
         }
 
         @Override
