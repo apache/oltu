@@ -14,20 +14,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.oltu.jose.jwe.encryption;
+package org.apache.oltu.jose.jwe;
 
+public class ContentEncryptionKey {
+    
+    private final byte[] contentEncryptionKey;
+    private final String encryptedKey;
+    
+    public ContentEncryptionKey(byte[] contentEncryptionKey, String encryptedKey) {
+        super();
+        this.contentEncryptionKey = contentEncryptionKey;
+        this.encryptedKey = encryptedKey;
+    }
 
-/**
- * Common definition of OAuth content encryption method algorithm.
- *
- * @param <E> the {@link EncryptingKey} type.
- * @param <D> the {@link DecryptingKey} type.
- */
-public interface ContentEncryptMethod <EK extends EncryptingKey, DK extends DecryptingKey>  extends EncryptMethod<EncryptingKey, DecryptingKey>{
-    
-    String encrypt(String header, String payload, byte[] encryptingKey);
-    
-    String decrypt(String header, String contentEncryption, byte[] decryptingKey);
-    
-    //TODO add validation??
+    public byte[] getContentEncryptionKey() {
+        return contentEncryptionKey;
+    }
+
+    public String getEncryptedKey() {
+        return encryptedKey;
+    }
 }
