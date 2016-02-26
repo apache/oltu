@@ -16,6 +16,8 @@
  */
 package org.apache.oltu.jose.jwe.encryption;
 
+import org.apache.oltu.jose.jwe.ContentEncryptionKey;
+
 /**
  * Common definition of OAuth key encryption method algorithm.
  *
@@ -25,13 +27,13 @@ package org.apache.oltu.jose.jwe.encryption;
 public interface KeyEncryptMethod  <EK extends EncryptingKey, DK extends DecryptingKey>  extends EncryptMethod<EncryptingKey, DecryptingKey> {
 
     //TODO change to wrap?
-    String encrypt(byte [] cek, EK encryptingKey);
+    ContentEncryptionKey encrypt(byte [] cek, EK encryptingKey);
 
-    String encrypt(EK encryptingKey);
+    ContentEncryptionKey encrypt(EK encryptingKey);
 
-    DK decrypt(String encryptedKey, DK decryptingKey);
+    byte[] decrypt(String encryptedKey, DK decryptingKey);
 
-    DK decrypt(String encryptedKey);
+    byte[] decrypt(String encryptedKey);
 
     //TODO add validation??
 
