@@ -21,11 +21,6 @@
 
 package org.apache.oltu.oauth2.client.demo.controller;
 
-import java.io.IOException;
-import java.net.URL;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.oltu.oauth2.client.OAuthClient;
 import org.apache.oltu.oauth2.client.URLConnectionClient;
 import org.apache.oltu.oauth2.client.demo.Utils;
@@ -41,31 +36,28 @@ import org.apache.oltu.oauth2.common.message.types.GrantType;
 import org.apache.oltu.oauth2.jwt.JWT;
 import org.apache.oltu.oauth2.jwt.io.JWTClaimsSetWriter;
 import org.apache.oltu.oauth2.jwt.io.JWTHeaderWriter;
-import org.apache.oltu.oauth2.jwt.io.JWTWriter;
 import org.apache.oltu.openidconnect.client.response.OpenIdConnectResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.net.URI;
 
-/**
- *
- *
- *
- */
 @Controller
-@RequestMapping("/get_token")
 public class TokenController {
+    private Logger logger = LoggerFactory.getLogger(TokenController.class);
 
-    private final JWTWriter jwtWriter = new JWTWriter();
-
-    @RequestMapping
+    @RequestMapping("/get_token")
     public ModelAndView authorize(@ModelAttribute("oauthParams") OAuthParams oauthParams,
                                   HttpServletRequest req) throws OAuthSystemException, IOException {
+        logger.debug("authorizing");
 
         try {
-
             Utils.validateTokenParams(oauthParams);
 
             OAuthClientRequest request = OAuthClientRequest
@@ -80,50 +72,48 @@ public class TokenController {
             OAuthClient client = new OAuthClient(new URLConnectionClient());
             String app = Utils.findCookieValue(req, "app");
 
-            OAuthAccessTokenResponse oauthResponse = null;
             Class<? extends OAuthAccessTokenResponse> cl = OAuthJSONAccessTokenResponse.class;
 
             if (Utils.FACEBOOK.equalsIgnoreCase(app)) {
                 cl = GitHubTokenResponse.class;
             } else if (Utils.GITHUB.equalsIgnoreCase(app)) {
                 cl = GitHubTokenResponse.class;
-            }else if (Utils.GOOGLE.equalsIgnoreCase(app)){
-            	cl = OpenIdConnectResponse.class;
+            } else if (Utils.GOOGLE.equalsIgnoreCase(app)){
+                cl = OpenIdConnectResponse.class;
             }
 
-            oauthResponse = client.accessToken(request, cl);
+            OAuthAccessTokenResponse oauthResponse = client.accessToken(request, cl);
 
             oauthParams.setAccessToken(oauthResponse.getAccessToken());
             oauthParams.setExpiresIn(oauthResponse.getExpiresIn());
             oauthParams.setRefreshToken(Utils.isIssued(oauthResponse.getRefreshToken()));
 
             if (Utils.GOOGLE.equalsIgnoreCase(app)){
+                OpenIdConnectResponse openIdConnectResponse = ((OpenIdConnectResponse)oauthResponse);
+                JWT idToken = openIdConnectResponse.getIdToken();
+                oauthParams.setIdToken(idToken.getRawString());
 
-            	OpenIdConnectResponse openIdConnectResponse = ((OpenIdConnectResponse)oauthResponse);
-            	JWT idToken = openIdConnectResponse.getIdToken();
-            	oauthParams.setIdToken(idToken.getRawString());
-
-            	oauthParams.setHeader(new JWTHeaderWriter().write(idToken.getHeader()));
+                oauthParams.setHeader(new JWTHeaderWriter().write(idToken.getHeader()));
                 oauthParams.setClaimsSet(new JWTClaimsSetWriter().write(idToken.getClaimsSet()));
 
-            	URL url = new URL(oauthParams.getTokenEndpoint());
-
-            	oauthParams.setIdTokenValid(openIdConnectResponse.checkId(url.getHost(), oauthParams.getClientId()));
-
+                URI uri = URI.create(oauthParams.getTokenEndpoint());
+                oauthParams.setIdTokenValid(openIdConnectResponse.checkId(uri.getHost(), oauthParams.getClientId()));
             }
 
             return new ModelAndView("get_resource");
 
         } catch (ApplicationException e) {
+            logger.error("failed to validate OAuth token request parameters", e);
             oauthParams.setErrorMessage(e.getMessage());
             return new ModelAndView("request_token");
         } catch (OAuthProblemException e) {
+            logger.error("failed to acquire OAuth access token", e);
             StringBuffer sb = new StringBuffer();
-            sb.append("</br>");
-            sb.append("Error code: ").append(e.getError()).append("</br>");
-            sb.append("Error description: ").append(e.getDescription()).append("</br>");
-            sb.append("Error uri: ").append(e.getUri()).append("</br>");
-            sb.append("State: ").append(e.getState()).append("</br>");
+            sb.append("<br />");
+            sb.append("Error code: ").append(e.getError()).append("<br />");
+            sb.append("Error description: ").append(e.getDescription()).append("<br />");
+            sb.append("Error uri: ").append(e.getUri()).append("<br />");
+            sb.append("State: ").append(e.getState()).append("<br />");
             oauthParams.setErrorMessage(sb.toString());
             return new ModelAndView("get_authz");
         }

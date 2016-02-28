@@ -20,10 +20,6 @@
  */
 package org.apache.oltu.oauth2.client.demo.controller;
 
-import java.io.IOException;
-
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.oltu.oauth2.client.demo.Utils;
 import org.apache.oltu.oauth2.client.demo.model.OAuthParams;
 import org.apache.oltu.oauth2.client.demo.model.OAuthRegParams;
@@ -32,7 +28,6 @@ import org.apache.oltu.oauth2.jwt.JWT;
 import org.apache.oltu.oauth2.jwt.io.JWTClaimsSetWriter;
 import org.apache.oltu.oauth2.jwt.io.JWTHeaderWriter;
 import org.apache.oltu.oauth2.jwt.io.JWTReader;
-import org.apache.oltu.oauth2.jwt.io.JWTWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -41,17 +36,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
 /**
  */
 @Controller
-@RequestMapping("/")
 public class MainController {
 
     private Logger logger = LoggerFactory.getLogger(MainController.class);
 
     private final JWTReader jwtReader = new JWTReader();
-
-    private final JWTWriter jwtWriter = new JWTWriter();
 
     @RequestMapping("/index")
     public ModelAndView authorize(@ModelAttribute("oauthParams") OAuthParams oauthParams)
@@ -73,15 +68,14 @@ public class MainController {
             selected = true;
             oauthParams.setAuthzEndpoint(Utils.GITHUB_AUTHZ);
             oauthParams.setTokenEndpoint(Utils.GITHUB_TOKEN);
-
         } else if (Utils.FACEBOOK.equalsIgnoreCase(app)) {
             selected = true;
             oauthParams.setAuthzEndpoint(Utils.FACEBOOK_AUTHZ);
             oauthParams.setTokenEndpoint(Utils.FACEBOOK_TOKEN);
         } else if (Utils.GOOGLE.equalsIgnoreCase(app)) {
-                selected = true;
-                oauthParams.setAuthzEndpoint(Utils.GOOGLE_AUTHZ);
-                oauthParams.setTokenEndpoint(Utils.GOOGLE_TOKEN);
+            selected = true;
+            oauthParams.setAuthzEndpoint(Utils.GOOGLE_AUTHZ);
+            oauthParams.setTokenEndpoint(Utils.GOOGLE_TOKEN);
         } else if (Utils.LINKEDIN.equalsIgnoreCase(app)) {
             selected = true;
             oauthParams.setAuthzEndpoint(Utils.LINKEDIN_AUTHZ);
@@ -112,8 +106,8 @@ public class MainController {
             oauthParams.setHeader(new JWTHeaderWriter().write(jwt.getHeader()));
             oauthParams.setClaimsSet(new JWTClaimsSetWriter().write(jwt.getClaimsSet()));
         } catch (Exception e){
-            oauthParams.setErrorMessage(
-                    "Error while decoding the token: " + e);
+            logger.error("Error while decoding the token", e);
+            oauthParams.setErrorMessage("Error while decoding the token: " + e);
         }
 
         return new ModelAndView("index");

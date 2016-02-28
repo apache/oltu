@@ -21,37 +21,34 @@
 
 package org.apache.oltu.oauth2.client.demo.controller;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.oltu.oauth2.client.demo.Utils;
 import org.apache.oltu.oauth2.client.demo.model.OAuthParams;
 import org.apache.oltu.oauth2.client.response.OAuthAuthzResponse;
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-/**
- *
- *
- *
- */
-@Controller
-@RequestMapping("/redirect")
-public class RedirectController {
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-    @RequestMapping(method = RequestMethod.GET)
+@Controller
+public class RedirectController {
+    private Logger logger = LoggerFactory.getLogger(RedirectController.class);
+
+    @RequestMapping(value = "/redirect", method = RequestMethod.GET)
     public ModelAndView handleRedirect(@ModelAttribute("oauthParams") OAuthParams oauthParams,
                                        HttpServletRequest request,
                                        HttpServletResponse response) {
 
+        logger.debug("creating OAuth authorization response wrapper (/redirect)");
 
         try {
-        	
             // Get OAuth Info
             String clientId = Utils.findCookieValue(request, "clientId");
             String clientSecret = Utils.findCookieValue(request, "clientSecret");
@@ -83,12 +80,13 @@ public class RedirectController {
             oauthParams.setApplication(app);
 
         } catch (OAuthProblemException e) {
+            logger.error("failed to create OAuth authorization response wrapper", e);
             StringBuffer sb = new StringBuffer();
-            sb.append("</br>");
-            sb.append("Error code: ").append(e.getError()).append("</br>");
-            sb.append("Error description: ").append(e.getDescription()).append("</br>");
-            sb.append("Error uri: ").append(e.getUri()).append("</br>");
-            sb.append("State: ").append(e.getState()).append("</br>");
+            sb.append("<br />");
+            sb.append("Error code: ").append(e.getError()).append("<br />");
+            sb.append("Error description: ").append(e.getDescription()).append("<br />");
+            sb.append("Error uri: ").append(e.getUri()).append("<br />");
+            sb.append("State: ").append(e.getState()).append("<br />");
             oauthParams.setErrorMessage(sb.toString());
             return new ModelAndView("get_authz");
         }

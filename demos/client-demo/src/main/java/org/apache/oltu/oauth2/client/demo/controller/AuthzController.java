@@ -20,11 +20,12 @@
  */
 package org.apache.oltu.oauth2.client.demo.controller;
 
-import java.io.IOException;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import org.apache.oltu.oauth2.client.demo.Utils;
+import org.apache.oltu.oauth2.client.demo.exception.ApplicationException;
+import org.apache.oltu.oauth2.client.demo.model.OAuthParams;
+import org.apache.oltu.oauth2.client.request.OAuthClientRequest;
+import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
+import org.apache.oltu.oauth2.common.message.types.ResponseType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -33,18 +34,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import org.apache.oltu.oauth2.client.demo.Utils;
-import org.apache.oltu.oauth2.client.demo.exception.ApplicationException;
-import org.apache.oltu.oauth2.client.demo.model.OAuthParams;
-import org.apache.oltu.oauth2.client.request.OAuthClientRequest;
-import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
-import org.apache.oltu.oauth2.common.message.types.ResponseType;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * Handles requests for the application welcome page.
  */
 @Controller
-@RequestMapping("/")
 public class AuthzController {
 
     private Logger logger = LoggerFactory.getLogger(AuthzController.class);
@@ -54,6 +52,8 @@ public class AuthzController {
                                   HttpServletRequest req,
                                   HttpServletResponse res)
         throws OAuthSystemException, IOException {
+
+        logger.debug("start processing /authorize request");
 
         try {
             Utils.validateAuthorizationParams(oauthParams);
@@ -78,6 +78,7 @@ public class AuthzController {
 
             return new ModelAndView(new RedirectView(request.getLocationUri()));
         } catch (ApplicationException e) {
+            logger.error("failed to validate OAuth authorization request parameters", e);
             oauthParams.setErrorMessage(e.getMessage());
             return new ModelAndView("get_authz");
         }

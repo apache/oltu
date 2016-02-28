@@ -34,13 +34,20 @@
     <oltu.oidc.version>0.1-SNAPSHOT</oltu.oidc.version>
     <org.springframework.version>3.2.4.RELEASE</org.springframework.version>
     <servlet-api.version>2.5</servlet-api.version>
+    <slf4j.version>1.7.18</slf4j.version>
   </properties>
 
   <dependencies>
     <dependency>
       <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-jcl</artifactId>
-      <version>1.7.7</version>
+      <artifactId>jcl-over-slf4j</artifactId>
+      <version>${slf4j.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>${slf4j.version}</version>
     </dependency>
 
     <!-- OAuth Dependency -->
@@ -143,7 +150,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
-        <version>2.2</version>
         <configuration>
           <webResources>
             <resource>

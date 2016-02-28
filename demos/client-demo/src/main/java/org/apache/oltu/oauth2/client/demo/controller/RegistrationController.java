@@ -21,14 +21,6 @@
 
 package org.apache.oltu.oauth2.client.demo.controller;
 
-import java.io.IOException;
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
-
 import org.apache.oltu.oauth2.client.URLConnectionClient;
 import org.apache.oltu.oauth2.client.demo.Utils;
 import org.apache.oltu.oauth2.client.demo.exception.ApplicationException;
@@ -41,24 +33,29 @@ import org.apache.oltu.oauth2.ext.dynamicreg.client.OAuthRegistrationClient;
 import org.apache.oltu.oauth2.ext.dynamicreg.client.request.OAuthClientRegistrationRequest;
 import org.apache.oltu.oauth2.ext.dynamicreg.client.response.OAuthClientRegistrationResponse;
 import org.apache.oltu.oauth2.ext.dynamicreg.common.OAuthRegistration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
-/**
- *
- *
- *
- */
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+
 @Controller
-@RequestMapping("/")
 public class RegistrationController {
+
+    private Logger logger = LoggerFactory.getLogger(RegistrationController.class);
 
     @RequestMapping(value = "/register")
     public ModelAndView authorize(@ModelAttribute("oauthRegParams") OAuthRegParams oauthRegParams,
                                   @ModelAttribute("oauthParams") OAuthParams oauthParams,
                                   HttpServletRequest req) throws OAuthSystemException, IOException {
 
+        logger.debug("start processing /register request");
 
         try {
-
             Utils.validateRegistrationParams(oauthRegParams);
 
             OAuthClientRequest request = null;
@@ -91,11 +88,12 @@ public class RegistrationController {
 
             return new ModelAndView("get_authz");
 
-
         } catch (ApplicationException e) {
+            logger.error("failed to validate OAuth authorization request parameters", e);
             oauthRegParams.setErrorMessage(e.getMessage());
             return new ModelAndView("register");
         } catch (OAuthProblemException e) {
+            logger.error("failed to acquire OAuth client registration info", e);
             oauthRegParams.setErrorMessage(e.getMessage());
             return new ModelAndView("register");
         }
