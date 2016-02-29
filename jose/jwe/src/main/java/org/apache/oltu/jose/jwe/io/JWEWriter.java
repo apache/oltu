@@ -34,7 +34,7 @@ public final class JWEWriter extends TokenWriter<JWE> {
     @Override
     protected String writeSignature(JWE token) {
         StringBuilder sb = new StringBuilder();
-        sb.append(token.getEncryptedKey()).append(token.getContentEncryption());
+        sb.append(token.getEncryptedKey()).append(".").append(token.getContentEncryption());
         return sb.toString();
     }
 
