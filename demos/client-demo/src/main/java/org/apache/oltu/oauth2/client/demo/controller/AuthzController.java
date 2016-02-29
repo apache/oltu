@@ -28,6 +28,7 @@ import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 import org.apache.oltu.oauth2.common.message.types.ResponseType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,6 +48,9 @@ public class AuthzController {
 
     private Logger logger = LoggerFactory.getLogger(AuthzController.class);
 
+    @Autowired
+    private Utils utils;
+
     @RequestMapping("/authorize")
     public ModelAndView authorize(@ModelAttribute("oauthParams") OAuthParams oauthParams,
                                   HttpServletRequest req,
@@ -56,7 +60,7 @@ public class AuthzController {
         logger.debug("start processing /authorize request");
 
         try {
-            Utils.validateAuthorizationParams(oauthParams);
+            utils.validateAuthorizationParams(oauthParams);
 
             res.addCookie(new Cookie("clientId", oauthParams.getClientId()));
             res.addCookie(new Cookie("clientSecret", oauthParams.getClientSecret()));

@@ -39,6 +39,7 @@ import org.apache.oltu.oauth2.jwt.io.JWTHeaderWriter;
 import org.apache.oltu.openidconnect.client.response.OpenIdConnectResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,13 +53,16 @@ import java.net.URI;
 public class TokenController {
     private Logger logger = LoggerFactory.getLogger(TokenController.class);
 
+    @Autowired
+    private Utils utils;
+
     @RequestMapping("/get_token")
     public ModelAndView authorize(@ModelAttribute("oauthParams") OAuthParams oauthParams,
                                   HttpServletRequest req) throws OAuthSystemException, IOException {
         logger.debug("authorizing");
 
         try {
-            Utils.validateTokenParams(oauthParams);
+            utils.validateTokenParams(oauthParams);
 
             OAuthClientRequest request = OAuthClientRequest
                 .tokenLocation(oauthParams.getTokenEndpoint())

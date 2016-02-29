@@ -29,14 +29,14 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="<c:url value="/css/bootstrap.min.css"/>" rel="stylesheet" media="screen">
     <title>Apache Oltu - OAuth V2.0 Client Application</title>
   </head>
 
   <body>
     <div class="jumbotron">
       <div class="container">
-        <img alt="Apache Oltu - Sample OAuth V2.0 Client Application" src="/images/logo_oltu.png" />
+        <img alt="Apache Oltu - Sample OAuth V2.0 Client Application" src="<c:url value="/images/logo_oltu.png"/>" />
         <h1>Apache Oltu</h1>
         <p>Sample OAuth V2.0 Client Application</p>
       </div>
@@ -52,7 +52,9 @@
         <div class="alert alert-danger">${oauthParams.errorMessage}</div>
       </c:if>
 
-      <form:form class="form-horizontal" role="form" commandName="oauthParams" action="/get_resource">
+      <c:url var="actionUrl" value="/get_resource"/>
+
+      <form:form class="form-horizontal" role="form" commandName="oauthParams" action="${actionUrl}">
         <div class="form-group">
           <label for="resourceUrl" class="col-lg-3 control-label">Resource URL</label>
           <div class="col-lg-9"><form:input class="form-control" id="resourceUrl" path="resourceUrl" /></div>
@@ -121,7 +123,7 @@
         <input type="submit" class="btn btn-primary pull-right" value="Get Resource" />
       </form:form>
 
-      <form:form commandName="oauthParams" action="/get_resource">
+      <form:form commandName="oauthParams" action="${actionUrl}">
         <h4>OpenId Connect</h4>
 
         <c:if test="${oauthParams.idTokenValid}">
@@ -158,7 +160,7 @@
             <div class="panel-heading">
               <h3 class="panel-title">Claims Set</h3>
             </div>
-            <div class="panel-body">${oauthParams.claimsSet}</div>
+            <pre class="panel-body"><c:out value="${oauthParams.claimsSet}"/></pre>
           </div>
         </c:if>
       </form:form>

@@ -29,14 +29,14 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="<c:url value="/css/bootstrap.min.css"/>" rel="stylesheet" media="screen">
     <title>Apache Oltu - OAuth V2.0 Client Application</title>
   </head>
 
   <body>
     <div class="jumbotron">
       <div class="container">
-        <img alt="Apache Oltu - Sample OAuth V2.0 Client Application" src="/images/logo_oltu.png" />
+        <img alt="Apache Oltu - Sample OAuth V2.0 Client Application" src="<c:url value="/images/logo_oltu.png"/>" />
         <h1>Apache Oltu</h1>
         <p>Sample OAuth V2.0 Client Application</p>
       </div>
@@ -52,7 +52,8 @@
         <div class="alert alert-danger">Error: ${oauthParams.errorMessage}</div>
       </c:if>
 
-      <form:form class="form-horizontal" role="form" commandName="oauthParams" action="/authorize">
+      <c:url var="actionUrl" value="/authorize"/>
+      <form:form class="form-horizontal" role="form" commandName="oauthParams" action="${actionUrl}">
         <div class="form-group">
           <label for="scope" class="col-lg-3 control-label">Requested Access Scope</label>
           <div class="col-lg-9"><form:input class="form-control" id="scope" path="scope" /></div>

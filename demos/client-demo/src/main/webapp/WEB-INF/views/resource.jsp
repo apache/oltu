@@ -29,14 +29,14 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="<c:url value="/css/bootstrap.min.css"/>" rel="stylesheet" media="screen">
     <title>Apache Oltu - OAuth V2.0 Client Application</title>
   </head>
 
   <body>
     <div class="jumbotron">
       <div class="container">
-        <img alt="Apache Oltu - Sample OAuth V2.0 Client Application" src="/images/logo_oltu.png" />
+        <img alt="Apache Oltu - Sample OAuth V2.0 Client Application" src="<c:url value="/images/logo_oltu.png"/>" />
         <h1>Apache Oltu</h1>
         <p>Sample OAuth V2.0 Client Application</p>
       </div>
@@ -53,7 +53,7 @@
       </c:if>
 
       <div class="panel panel-default">
-        <div class="panel-body">${oauthParams.resource}</div>
+        <pre class="panel-body"><c:out value="${oauthParams.resource}"/></pre>
       </div>
     </div>
   </body>

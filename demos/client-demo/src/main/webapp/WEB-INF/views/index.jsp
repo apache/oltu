@@ -29,14 +29,14 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="<c:url value="/css/bootstrap.min.css"/>" rel="stylesheet" media="screen">
     <title>Apache Oltu - OAuth V2.0 Client Application</title>
   </head>
 
   <body>
     <div class="jumbotron">
       <div class="container">
-        <img alt="Apache Oltu - Sample OAuth V2.0 Client Application" src="/images/logo_oltu.png" />
+        <img alt="Apache Oltu - Sample OAuth V2.0 Client Application" src="<c:url value="/images/logo_oltu.png"/>" />
         <h1>Apache Oltu</h1>
         <p>Sample OAuth V2.0 Client Application</p>
       </div>
@@ -48,12 +48,12 @@
       <nav class="navbar navbar-default" role="navigation">
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="/main/generic">Generic OAuth2 Application</a></li>
-            <li><a href="/main/smart_gallery">Smart Gallery</a></li>
-            <li><a href="/main/facebook">Facebook</a></li>
-            <li><a href="/main/google">Google</a></li>
-            <li><a href="/main/github">Github</a></li>
-            <li><a href="/main/linkedin">LinkedIn</a></li>
+            <li><a href="<c:url value="/main/generic"/>">Generic OAuth2 Application</a></li>
+            <li><a href="<c:url value="/main/smart_gallery"/>">Smart Gallery</a></li>
+            <li><a href="<c:url value="/main/facebook"/>">Facebook</a></li>
+            <li><a href="<c:url value="/main/google"/>">Google</a></li>
+            <li><a href="<c:url value="/main/github"/>">Github</a></li>
+            <li><a href="<c:url value="/main/linkedin"/>">LinkedIn</a></li>
           </ul>
         </div>
       </nav>
@@ -64,7 +64,8 @@
         <div class="alert alert-danger">${oauthParams.errorMessage}</div>
       </c:if>
 
-      <form:form role="form" commandName="oauthParams" action="/decode">
+      <c:url var="actionUrl" value="/decode"/>
+      <form:form role="form" commandName="oauthParams" action="${actionUrl}">
         <form:textarea path="jwt" id="jwt" rows="15" class="form-control" />
         <form:hidden path="application" />
         <div class="clearfix">&nbsp;<br/></div>

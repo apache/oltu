@@ -21,39 +21,46 @@
 
 package org.apache.oltu.oauth2.client.demo;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.oltu.oauth2.client.demo.exception.ApplicationException;
 import org.apache.oltu.oauth2.client.demo.model.OAuthParams;
 import org.apache.oltu.oauth2.client.demo.model.OAuthRegParams;
 import org.apache.oltu.oauth2.common.OAuthProviderType;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-/**
- *
- *
- *
- */
+import javax.servlet.ServletContext;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+
+@Component
 public final class Utils {
-    private Utils() {
+
+    public Utils() {
     }
 
-    public static final String REDIRECT_URI = "http://localhost:8080/redirect";
+    private String redirectUri;
+
+    @Autowired
+    private void setServletContext(ServletContext ctx) {
+        String contextPath = ctx.getContextPath();
+        redirectUri = "http://localhost:8080" + contextPath + "/redirect";
+    }
+
     public static final String DISCOVERY_URI = "http://localhost:8080";
 
     public static final String REG_TYPE_PULL = "pull";
     public static final String REG_TYPE_PUSH = "push";
-    
-    public static final String REQUEST_TYPE_QUERY= "queryParameter";
-    public static final String REQUEST_TYPE_HEADER= "headerField";
-    public static final String REQUEST_TYPE_BODY= "bodyParameter";
 
-    public static final String GENERIC = "generic"; 
-    
+    public static final String REQUEST_TYPE_QUERY = "queryParameter";
+    public static final String REQUEST_TYPE_HEADER = "headerField";
+    public static final String REQUEST_TYPE_BODY = "bodyParameter";
+
+    public static final String GENERIC = "generic";
+
     public static final String FACEBOOK = OAuthProviderType.FACEBOOK.getProviderName();
     public static final String FACEBOOK_AUTHZ = OAuthProviderType.FACEBOOK.getAuthzEndpoint();
     public static final String FACEBOOK_TOKEN = OAuthProviderType.FACEBOOK.getTokenEndpoint();
-    
+
     public static final String GOOGLE = OAuthProviderType.GOOGLE.getProviderName();
     public static final String GOOGLE_AUTHZ = OAuthProviderType.GOOGLE.getAuthzEndpoint();
     public static final String GOOGLE_TOKEN = OAuthProviderType.GOOGLE.getTokenEndpoint();
@@ -71,7 +78,11 @@ public final class Utils {
     public static final String SMART_GALLERY_TOKEN = "http://localhost:8090/oauth/token";
     public static final String SMART_GALLERY_REGISTER = "http://localhost:8090/oauthreg/register";
 
-    public static void validateRegistrationParams(OAuthRegParams oauthParams) throws ApplicationException {
+    public String getRedirectUri() {
+        return redirectUri;
+    }
+
+    public void validateRegistrationParams(OAuthRegParams oauthParams) throws ApplicationException {
 
         String regType = oauthParams.getRegistrationType();
 
@@ -104,9 +115,7 @@ public final class Utils {
 
     }
 
-    public static void validateAuthorizationParams(OAuthParams oauthParams) throws ApplicationException {
-
-
+    public void validateAuthorizationParams(OAuthParams oauthParams) throws ApplicationException {
         String authzEndpoint = oauthParams.getAuthzEndpoint();
         String tokenEndpoint = oauthParams.getTokenEndpoint();
         String clientId = oauthParams.getClientId();
@@ -131,7 +140,7 @@ public final class Utils {
             sb.append("Client Secret ");
         }
 
-        if (!REDIRECT_URI.equals(redirectUri)) {
+        if (!getRedirectUri().equals(redirectUri)) {
             sb.append("Redirect URI");
         }
 
@@ -143,7 +152,7 @@ public final class Utils {
 
     }
 
-    public static void validateTokenParams(OAuthParams oauthParams) throws ApplicationException {
+    public void validateTokenParams(OAuthParams oauthParams) throws ApplicationException {
 
         String authzEndpoint = oauthParams.getAuthzEndpoint();
         String tokenEndpoint = oauthParams.getTokenEndpoint();
@@ -174,7 +183,7 @@ public final class Utils {
             sb.append("Client Secret ");
         }
 
-        if (!REDIRECT_URI.equals(redirectUri)) {
+        if (!getRedirectUri().equals(redirectUri)) {
             sb.append("Redirect URI");
         }
 

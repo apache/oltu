@@ -30,6 +30,7 @@ import org.apache.oltu.oauth2.jwt.io.JWTHeaderWriter;
 import org.apache.oltu.oauth2.jwt.io.JWTReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,6 +48,9 @@ public class MainController {
     private Logger logger = LoggerFactory.getLogger(MainController.class);
 
     private final JWTReader jwtReader = new JWTReader();
+
+    @Autowired
+    private Utils utils;
 
     @RequestMapping("/index")
     public ModelAndView authorize(@ModelAttribute("oauthParams") OAuthParams oauthParams)
@@ -86,12 +90,12 @@ public class MainController {
             oauthRegParams.setTokenEndpoint(Utils.SMART_GALLERY_TOKEN);
             oauthRegParams.setRegistrationEndpoint(Utils.SMART_GALLERY_REGISTER);
             oauthRegParams.setApplication(app);
-            oauthRegParams.setRedirectUri(Utils.REDIRECT_URI);
+            oauthRegParams.setRedirectUri(utils.getRedirectUri());
             return new ModelAndView("register");
         }
         if (selected) {
             oauthParams.setApplication(app);
-            oauthParams.setRedirectUri(Utils.REDIRECT_URI);
+            oauthParams.setRedirectUri(utils.getRedirectUri());
             return new ModelAndView("get_authz");
         }
 
