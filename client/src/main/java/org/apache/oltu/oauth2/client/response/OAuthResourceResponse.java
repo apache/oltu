@@ -18,17 +18,40 @@ package org.apache.oltu.oauth2.client.response;
 
 import org.apache.oltu.oauth2.client.validator.ResourceValidator;
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
+import org.apache.oltu.oauth2.common.utils.OAuthUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
-public class OAuthResourceResponse extends OAuthClientResponse {
+public class OAuthResourceResponse  extends OAuthClientResponse {
+
+    private static final Logger LOG = LoggerFactory.getLogger(OAuthResourceResponse.class);
+
+    private InputStream inputStream;
+
+    private boolean bodyRetrieved = false;
 
     public OAuthResourceResponse() {
         this.validator = new ResourceValidator();
     }
 
     public String getBody() {
+        if (bodyRetrieved && body == null) {
+            throw new IllegalStateException("Cannot call getBody() after getBodyAsInputStream()");
+        }
+
+        if (body == null) {
+            try {
+                body = OAuthUtils.saveStreamAsString(getBodyAsInputStream());
+                inputStream = null;
+            } catch (IOException e) {
+                LOG.error("Failed to convert InputStream to String", e);
+            }
+        }
         return body;
     }
 
@@ -40,8 +63,9 @@ public class OAuthResourceResponse extends OAuthClientResponse {
         return contentType;
     }
 
-    public Map<String, List<String>> getHeaders() {
-        return headers;
+    @Override
+    protected void setBody(InputStream body) throws OAuthProblemException {
+        this.inputStream = body;
     }
 
     @Override
@@ -49,7 +73,18 @@ public class OAuthResourceResponse extends OAuthClientResponse {
         this.body = body;
     }
 
-    @Override
+    public Map<String, List<String>> getHeaders() {
+        return headers;
+    }
+
+    public InputStream getBodyAsInputStream() {
+        if (bodyRetrieved && inputStream == null) {
+            throw new IllegalStateException("Cannot call getBodyAsInputStream() after getBody()");
+        }
+        bodyRetrieved = true;
+        return inputStream;
+    }
+
     protected void setContentType(String contentType) {
         this.contentType = contentType;
     }
@@ -60,10 +95,10 @@ public class OAuthResourceResponse extends OAuthClientResponse {
     }
 
     @Override
-    protected void init(String body, String contentType, int responseCode) throws OAuthProblemException {
+    protected void init(InputStream body, String contentType, int responseCode, Map<String, List<String>> headers) throws OAuthProblemException {
         this.setBody(body);
         this.setContentType(contentType);
         this.setResponseCode(responseCode);
+        this.setHeaders(headers);
     }
-
 }

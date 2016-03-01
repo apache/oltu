@@ -23,7 +23,10 @@ package org.apache.oltu.oauth2.client.response;
 
 import org.apache.oltu.oauth2.client.validator.OAuthClientValidator;
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
+import org.apache.oltu.oauth2.common.utils.OAuthUtils;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,7 +59,29 @@ public abstract class OAuthClientResponse {
         this.headers = headers;
     }
 
-    protected abstract void setBody(String body) throws OAuthProblemException;
+    /**
+     * Allows setting the response body to a String value.
+     *
+     * @param body A String representing the response body.
+     * @throws OAuthProblemException
+     * @throws UnsupportedOperationException for subclasses that only
+     *         support InputStream as body
+     */
+    protected void setBody(String body) throws OAuthProblemException {
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * Allows setting the response body to an InputStream value.
+     *
+     * @param body An InputStream representing the response body.
+     * @throws OAuthProblemException
+     * @throws UnsupportedOperationException for subclasses that only
+     *         support String as body
+     */
+    protected void setBody(InputStream body) throws OAuthProblemException {
+        throw new UnsupportedOperationException();
+    }
 
     protected abstract void setContentType(String contentType);
 
@@ -74,6 +99,28 @@ public abstract class OAuthClientResponse {
     protected void init(String body, String contentType, int responseCode)
             throws OAuthProblemException {
         init(body, contentType, responseCode, new HashMap<String, List<String>>());
+    }
+
+    /**
+     * Default implementation that converts the body InputStream to a String and delegates
+     * to {@link #init(String, String, int)}.
+     * <br/>
+     * This implementation ensures backwards compatibility, as many subclasses expect String
+     * type bodies. At the same time it can be overridden to also deal with binary InputStreams.
+     *
+     * @param body an InputStream representing the response body
+     * @param contentType the content type of the response.
+     * @param responseCode the HTTP response code of the response.
+     * @param headers The HTTP response headers
+     * @throws OAuthProblemException
+     */
+    protected void init(InputStream body, String contentType, int responseCode, Map<String, List<String>> headers)
+            throws OAuthProblemException {
+        try {
+            init(OAuthUtils.saveStreamAsString(body), contentType, responseCode);
+        } catch (final IOException e) {
+            throw OAuthProblemException.error(e.getMessage());
+        }
     }
 
     protected void validate() throws OAuthProblemException {

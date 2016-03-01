@@ -57,7 +57,7 @@ public class URLConnectionClient implements HttpClient {
                                                      String requestMethod, Class<T> responseClass)
             throws OAuthSystemException, OAuthProblemException {
 
-        String responseBody = null;
+        InputStream responseBody = null;
         URLConnection c = null;
         Map<String, List<String>> responseHeaders = new HashMap<String, List<String>>();
         int responseCode = 0;
@@ -106,7 +106,7 @@ public class URLConnectionClient implements HttpClient {
                 }
 
                 responseHeaders = httpURLConnection.getHeaderFields();
-                responseBody = OAuthUtils.saveStreamAsString(inputStream);
+                responseBody = inputStream;
             }
         } catch (IOException e) {
             throw new OAuthSystemException(e);
