@@ -21,17 +21,6 @@
 
 package org.apache.oltu.oauth2.common.utils;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
 import org.apache.commons.codec.binary.Base64;
 import org.apache.oltu.oauth2.common.OAuth;
 import org.apache.oltu.oauth2.common.error.OAuthError;
@@ -39,6 +28,13 @@ import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.*;
+
+import static org.easymock.EasyMock.*;
+import static org.junit.Assert.*;
 /**
  *
  *
@@ -56,18 +52,6 @@ public class OAuthUtilsTest {
         params.put(OAuthError.OAUTH_ERROR, OAuthError.TokenResponse.INVALID_REQUEST);
 
         String json = JSONUtils.buildJSON(params);
-
-        /* JSONObject obj = new JSONObject(json);
-
-        AbstractXMLStreamReader reader = new MappedXMLStreamReader(obj);
-
-        assertEquals(XMLStreamReader.START_ELEMENT, reader.next());
-        assertEquals(OAuthError.OAUTH_ERROR, reader.getName().getLocalPart());
-
-        assertEquals(OAuthError.TokenResponse.INVALID_REQUEST, reader.getText());
-        assertEquals(XMLStreamReader.CHARACTERS, reader.next());
-        assertEquals(XMLStreamReader.END_ELEMENT, reader.next());
-        assertEquals(XMLStreamReader.END_DOCUMENT, reader.next()); */
     }
 
     @Test
@@ -108,47 +92,84 @@ public class OAuthUtilsTest {
 
     @Test
     public void testHandleNotAllowedParametersOAuthException() throws Exception {
+        List<String> notAllowedParametersList = new LinkedList<String>();
+        notAllowedParametersList.add("Parameter1");
+        notAllowedParametersList.add("Parameter2");
 
+        OAuthProblemException exception = OAuthUtils.handleNotAllowedParametersOAuthException(notAllowedParametersList);
+        assertEquals("Not allowed parameters: Parameter1 Parameter2", exception.getDescription());
     }
 
     @Test
     public void testDecodeForm() throws Exception {
+        String formUrlEncoded = "MyVariableOne=ValueOne&MyVariableTwo=ValueTwo";
+        Map<String, Object> formDecoded = OAuthUtils.decodeForm(formUrlEncoded);
 
+        assertEquals(2, formDecoded.size());
+        assertEquals("ValueOne", formDecoded.get("MyVariableOne"));
+        assertEquals("ValueTwo", formDecoded.get("MyVariableTwo"));
     }
 
     @Test
     public void testIsFormEncoded() throws Exception {
+        String anotherContentType = "text/html; charset=ISO-8859-4";
+        String urlEncodedType = "application/x-www-form-urlencoded; charset=UTF-8";
 
+        Boolean falseExpected = OAuthUtils.isFormEncoded(anotherContentType);
+        Boolean trueExpected = OAuthUtils.isFormEncoded(urlEncodedType);
+
+        assertEquals(false, falseExpected);
+        assertEquals(true, trueExpected);
     }
 
     @Test
     public void testDecodePercent() throws Exception {
+        String encoded = "It%20is%20sunny%20today%2C%20spring%20is%20coming!%3A)";
+        String decoded = OAuthUtils.decodePercent(encoded);
 
+        assertEquals("It is sunny today, spring is coming!:)", decoded);
     }
 
     @Test
     public void testPercentEncode() throws Exception {
 
+        String decoded = "some!@#%weird\"value1";
+
+        String encoded = OAuthUtils.percentEncode(decoded);
+
+        assertEquals("some%21%40%23%25weird%22value1", encoded);
     }
 
     @Test
     public void testInstantiateClass() throws Exception {
+        StringBuilder builder = OAuthUtils.instantiateClass(StringBuilder.class);
 
+        assertNotNull(builder);
     }
 
     @Test
     public void testInstantiateClassWithParameters() throws Exception {
+        StringBuilder builder = OAuthUtils.instantiateClassWithParameters(StringBuilder.class, new Class[]{String.class}, new Object[]{"something"});
 
+        assertNotNull(builder);
+        assertEquals("something", builder.toString());
     }
 
     @Test
     public void testGetAuthHeaderField() throws Exception {
+        String token = OAuthUtils.getAuthHeaderField("Bearer 312ewqdsad");
 
+        assertEquals("312ewqdsad", token);
     }
 
     @Test
     public void testDecodeOAuthHeader() throws Exception {
+        Map<String, String> parameters = OAuthUtils.decodeOAuthHeader("Bearer realm=\"example\"");
 
+        Map<String, String> expected = new HashMap<String, String>();
+        expected.put("realm", "example");
+
+        assertEquals(expected, parameters);
     }
 
     @Test
@@ -187,15 +208,38 @@ public class OAuthUtilsTest {
     @Test
     public void testIsEmpty() throws Exception {
 
+        Boolean trueExpected = OAuthUtils.isEmpty("");
+        Boolean trueExpected2 = OAuthUtils.isEmpty(null);
+
+        Boolean falseExpected = OAuthUtils.isEmpty(".");
+
+        assertEquals(true, trueExpected);
+        assertEquals(true, trueExpected2);
+        assertEquals(false, falseExpected);
     }
 
     @Test
     public void testHasEmptyValues() throws Exception {
 
+        Boolean trueExpected = OAuthUtils.hasEmptyValues(new String[]{"", "dsadas"});
+        Boolean trueExpected2 = OAuthUtils.hasEmptyValues(new String[]{null, "dsadas"});
+        Boolean trueExpected3 = OAuthUtils.hasEmptyValues(new String[]{});
+
+        Boolean falseExpected = OAuthUtils.hasEmptyValues(new String[]{"qwerty", "dsadas"});
+
+        assertEquals(true, trueExpected);
+        assertEquals(true, trueExpected2);
+        assertEquals(true, trueExpected3);
+        assertEquals(false, falseExpected);
+
     }
 
     @Test
     public void testGetAuthzMethod() throws Exception {
+
+        String authzMethod = OAuthUtils.getAuthzMethod("Basic dXNlcjpwYXNzd29yZA==");
+
+        assertEquals("Basic", authzMethod);
 
     }
 
@@ -207,10 +251,25 @@ public class OAuthUtilsTest {
     @Test
     public void testDecodeScopes() throws Exception {
 
+        Set<String> expected = new HashSet<String>();
+        expected.add("email");
+        expected.add("full_profile");
+
+        Set<String> scopes = OAuthUtils.decodeScopes("email full_profile");
+
+        assertEquals(expected, scopes);
+
     }
 
     @Test
     public void testEncodeScopes() throws Exception {
+        Set<String> actual = new HashSet<String>();
+        actual.add("photo");
+        actual.add("birth_date");
+
+        String actualString = OAuthUtils.encodeScopes(actual);
+
+        assertEquals("birth_date photo", actualString);
 
     }
 
@@ -227,12 +286,47 @@ public class OAuthUtilsTest {
     @Test
     public void testIsMultipart() throws Exception {
 
+        HttpServletRequest request = createMock(HttpServletRequest.class);
+        expect(request.getContentType()).andStubReturn("multipart/form-data");
+        expect(request.getMethod()).andStubReturn("POST");
+        replay(request);
+
+        Boolean actual = OAuthUtils.isMultipart(request);
+
+        assertEquals(true, actual);
+
+        verify(request);
+
+        request = createMock(HttpServletRequest.class);
+        expect(request.getContentType()).andStubReturn("multipart/form-data");
+        expect(request.getMethod()).andStubReturn("GET");
+        replay(request);
+
+        actual = OAuthUtils.isMultipart(request);
+
+        assertEquals(false, actual);
+
+        request = createMock(HttpServletRequest.class);
+        expect(request.getContentType()).andStubReturn("application/json");
+        expect(request.getMethod()).andStubReturn("POST");
+        replay(request);
+
+        actual = OAuthUtils.isMultipart(request);
+
+        assertEquals(false, actual);
     }
 
     @Test
     public void testHasContentType() throws Exception {
 
+        Boolean falseExpected = OAuthUtils.hasContentType("application/x-www-form-urlencoded; charset=UTF-8", "application/json");
+        Boolean trueExpected = OAuthUtils.hasContentType("application/json; charset=UTF-8", "application/json");
+
+        assertEquals(false, falseExpected);
+        assertEquals(true, trueExpected);
+
     }
+
 
     @Test
     public void testDecodeValidClientAuthnHeader() throws Exception {
