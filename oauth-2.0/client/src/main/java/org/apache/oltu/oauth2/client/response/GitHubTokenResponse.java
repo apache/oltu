@@ -26,7 +26,6 @@ import org.apache.oltu.oauth2.common.token.BasicOAuthToken;
 import org.apache.oltu.oauth2.common.token.OAuthToken;
 import org.apache.oltu.oauth2.common.utils.OAuthUtils;
 
-
 /**
  *
  *
@@ -34,9 +33,13 @@ import org.apache.oltu.oauth2.common.utils.OAuthUtils;
  */
 public class GitHubTokenResponse extends OAuthAccessTokenResponse {
 
-
     public String getAccessToken() {
         return getParam(OAuth.OAUTH_ACCESS_TOKEN);
+    }
+
+    @Override
+    public String getTokenType() {
+    	return getParam(OAuth.OAUTH_TOKEN_TYPE);
     }
 
     public Long getExpiresIn() {
@@ -53,7 +56,7 @@ public class GitHubTokenResponse extends OAuthAccessTokenResponse {
     }
 
     public OAuthToken getOAuthToken() {
-        return new BasicOAuthToken(getAccessToken(), getExpiresIn(), getRefreshToken(), getScope());
+        return new BasicOAuthToken(getAccessToken(), getTokenType(), getExpiresIn(), getRefreshToken(), getScope());
     }
 
     protected void setBody(String body) {
@@ -68,6 +71,4 @@ public class GitHubTokenResponse extends OAuthAccessTokenResponse {
     protected void setResponseCode(int code) {
         this.responseCode = code;
     }
-
-
 }
