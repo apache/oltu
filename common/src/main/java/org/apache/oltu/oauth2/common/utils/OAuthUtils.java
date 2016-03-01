@@ -248,23 +248,6 @@ public final class OAuthUtils {
         }
     }
 
-    /**
-     * Construct a &-separated list of the given values, percentEncoded.
-     */
-    public static String percentEncode(Iterable values) {
-        StringBuilder p = new StringBuilder();
-        for (Object v : values) {
-            String stringValue = toString(v);
-            if (!isEmpty(stringValue)) {
-                if (p.length() > 0) {
-                    p.append("&");
-                }
-                p.append(OAuthUtils.percentEncode(toString(v)));
-            }
-        }
-        return p.toString();
-    }
-
     public static String percentEncode(String s) {
         if (s == null) {
             return "";
@@ -278,10 +261,6 @@ public final class OAuthUtils {
         } catch (UnsupportedEncodingException wow) {
             throw new RuntimeException(wow.getMessage(), wow);
         }
-    }
-
-    private static final String toString(Object from) {
-        return (from == null) ? null : from.toString();
     }
 
     private static boolean isEmpty(Set<String> missingParams) {
