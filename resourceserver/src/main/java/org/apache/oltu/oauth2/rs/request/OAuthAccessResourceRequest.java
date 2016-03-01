@@ -65,13 +65,13 @@ public class OAuthAccessResourceRequest {
     }
 
     public OAuthAccessResourceRequest(HttpServletRequest request, ParameterStyle... parameterStyles)
-    throws OAuthSystemException, OAuthProblemException {
-    	this(request,new TokenType []{OAuth.DEFAULT_TOKEN_TYPE}, parameterStyles);
+            throws OAuthSystemException, OAuthProblemException {
+        this(request, new TokenType[]{OAuth.DEFAULT_TOKEN_TYPE}, parameterStyles);
     }
-    
+
     public OAuthAccessResourceRequest(HttpServletRequest request, TokenType... tokenTypes)
-    throws OAuthSystemException, OAuthProblemException {
-    	this(request,tokenTypes,  new ParameterStyle[] {OAuth.DEFAULT_PARAMETER_STYLE});
+            throws OAuthSystemException, OAuthProblemException {
+        this(request, tokenTypes, new ParameterStyle[]{OAuth.DEFAULT_PARAMETER_STYLE});
     }
     
     public OAuthAccessResourceRequest(HttpServletRequest request, TokenType[] tokenTypes ,ParameterStyle[] parameterStyles)
@@ -93,33 +93,33 @@ public class OAuthAccessResourceRequest {
         OAuthProblemException ex = null;
         String lackAuthReason = "OAuth parameters were not found";
         for (TokenType tokenType : tokenTypes) {
-        	ResourceServer resourceServer=instantiateResourceServer(tokenType);
-        	for (ParameterStyle style : parameterStyles) {
-        		try {
-        			 
-        			OAuthValidator validator = resourceServer.instantiateValidator(style);
-        			validator.validateContentType(request);
-        			validator.validateMethod(request);
-        			validator.validateRequiredParameters(request);
+            ResourceServer resourceServer = instantiateResourceServer(tokenType);
+            for (ParameterStyle style : parameterStyles) {
+                try {
 
-        			usedParameterStyle = style;
-        			usedResourceServer = resourceServer;
-        			foundValidStyles++;
-        		} catch (OAuthProblemException e) {
-        			//request lacks any authentication information?
-        			if (OAuthUtils.isEmpty(e.getError())) {
-        				lackAuthInfo = true;
-        				lackAuthReason = e.getDescription();
-        			} else {        				 
-        				ex = OAuthProblemException.error(e.getError(), e.getDescription());
-        			}
-        		}
-        	}
+                    OAuthValidator validator = resourceServer.instantiateValidator(style);
+                    validator.validateContentType(request);
+                    validator.validateMethod(request);
+                    validator.validateRequiredParameters(request);
+
+                    usedParameterStyle = style;
+                    usedResourceServer = resourceServer;
+                    foundValidStyles++;
+                } catch (OAuthProblemException e) {
+                    //request lacks any authentication information?
+                    if (OAuthUtils.isEmpty(e.getError())) {
+                        lackAuthInfo = true;
+                        lackAuthReason = e.getDescription();
+                    } else {
+                        ex = OAuthProblemException.error(e.getError(), e.getDescription());
+                    }
+                }
+            }
         }
 
         if (foundValidStyles > 1) {
             throw OAuthProblemException.error(OAuthError.TokenResponse.INVALID_REQUEST,
-                "Found more than one mechanism for authenticating client");
+                    "Found more than one mechanism for authenticating client");
         }
 
         if (ex != null) {
@@ -132,10 +132,10 @@ public class OAuthAccessResourceRequest {
 
         if (foundValidStyles == 0) {
             throw OAuthProblemException.error(OAuthError.TokenResponse.INVALID_REQUEST,
-                "OAuth parameters were not found");
+                    "OAuth parameters were not found");
         }
 
-        extractor= usedResourceServer.instantiateExtractor(usedParameterStyle);
+        extractor = usedResourceServer.instantiateExtractor(usedParameterStyle);
     }
 
     public static ResourceServer instantiateResourceServer(TokenType tokenType) throws OAuthSystemException {
