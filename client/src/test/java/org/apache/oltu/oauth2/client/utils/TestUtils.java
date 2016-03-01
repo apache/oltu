@@ -39,21 +39,17 @@ public final class TestUtils {
 
     public static final String VALID_JSON_RESPONSE
         = "{\"expires_in\":3600,\"access_token\":\"b52d434791fd52316232b6cf2d3\",\"scope\":\"read\","
-        + "\"refresh_token\":\"test_refresh_token\"}";
+        + "\"token_type\":\"bearer\",\"refresh_token\":\"test_refresh_token\"}";
 
     public static final Long EXPIRES_IN = 3600l;
     public static final String ACCESS_TOKEN = "b52d434791fd52316232b6cf2d3";
+    public static final String TOKEN_TYPE = "bearer";
     public static final String SCOPE = "read";
     public static final String REFRESH_TOKEN = "test_refresh_token";
 
     public static final String ERROR_JSON_BODY
         = "{\"error_uri\":\"null\",\"error\":\"invalid_request\",\"state\":\"null\",\"error_description\":"
         + "\"Invalid grant_type parameter value\"}";
-
-    public static final String INVALID_JSON
-        = "\"expires_in\":3600,\"access_token\":\"b52d434791fd52316232b6cf2d3\"}";
-
-//    public static final String
 
     public static void expectNoErrorParameters(HttpServletRequest request) {
         expect(request.getParameter(OAuthError.OAUTH_ERROR))

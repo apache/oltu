@@ -72,6 +72,11 @@ public class OAuthASResponse extends OAuthResponse {
             return this;
         }
 
+        public OAuthAuthorizationResponseBuilder setTokenType(String tokenType) {
+            this.parameters.put(OAuth.OAUTH_TOKEN_TYPE, tokenType);
+            return this;
+        }
+
         public OAuthAuthorizationResponseBuilder setExpiresIn(String expiresIn) {
             this.parameters.put(OAuth.OAUTH_EXPIRES_IN, expiresIn == null ? null : Long.valueOf(expiresIn));
             return this;

@@ -73,6 +73,7 @@ public class AuthzEndpoint {
             }
             if (responseType.equals(ResponseType.TOKEN.toString())) {
                 builder.setAccessToken(oauthIssuerImpl.accessToken());
+                builder.setTokenType(OAuth.DEFAULT_TOKEN_TYPE.toString());
                 builder.setExpiresIn(3600l);
             }
 

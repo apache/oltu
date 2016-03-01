@@ -120,6 +120,7 @@ public class TokenEndpoint {
             OAuthResponse response = OAuthASResponse
                 .tokenResponse(HttpServletResponse.SC_OK)
                 .setAccessToken(oauthIssuerImpl.accessToken())
+                .setTokenType(OAuth.DEFAULT_TOKEN_TYPE.toString())
                 .setExpiresIn("3600")
                 .buildJSONMessage();
             return Response.status(response.getResponseStatus()).entity(response.getBody()).build();
