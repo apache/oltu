@@ -21,6 +21,8 @@
 
 package org.apache.oltu.oauth2.httpclient4;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
@@ -84,7 +86,7 @@ public class HttpClient4 implements HttpClient {
         try {
             URI location = new URI(request.getLocationUri());
             HttpRequestBase req = null;
-            String responseBody = "";
+            InputStream responseBody = new ByteArrayInputStream(new byte[0]);
 
             if (!OAuthUtils.isEmpty(requestMethod) && OAuth.HttpMethod.POST.equals(requestMethod)) {
                 req = new HttpPost(location);
@@ -108,7 +110,7 @@ public class HttpClient4 implements HttpClient {
 
             HttpEntity entity = response.getEntity();
             if (entity != null) {
-                responseBody = EntityUtils.toString(entity);
+                responseBody = entity.getContent();
                 contentTypeHeader = entity.getContentType();
             }
             String contentType = null;
