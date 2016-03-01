@@ -59,6 +59,10 @@
    </notifiers>
   </ciManagement>
 
+  <properties>
+    <osgi.export>org.apache.oltu.openidconnect.*;version=${project.version}</osgi.export>
+  </properties>
+
   <modules>
     <module>common</module>
     <module>client</module>
