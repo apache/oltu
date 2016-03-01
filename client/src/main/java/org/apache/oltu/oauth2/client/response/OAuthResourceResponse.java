@@ -16,12 +16,17 @@
  */
 package org.apache.oltu.oauth2.client.response;
 
+import org.apache.oltu.oauth2.client.validator.ResourceValidator;
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 
 import java.util.List;
 import java.util.Map;
 
 public class OAuthResourceResponse extends OAuthClientResponse {
+
+    public OAuthResourceResponse() {
+        this.validator = new ResourceValidator();
+    }
 
     public String getBody() {
         return body;
