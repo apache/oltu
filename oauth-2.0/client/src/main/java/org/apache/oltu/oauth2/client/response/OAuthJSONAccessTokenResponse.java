@@ -36,6 +36,7 @@ import org.apache.oltu.oauth2.common.utils.JSONUtils;
 public class OAuthJSONAccessTokenResponse extends OAuthAccessTokenResponse {
 
     public OAuthJSONAccessTokenResponse() {
+        super();
     }
 
     @Override
