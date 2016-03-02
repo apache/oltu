@@ -143,6 +143,13 @@
       <type>jar</type>
       <scope>runtime</scope>
     </dependency>
+
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.2</version>
+      <scope>runtime</scope>
+    </dependency>
   </dependencies>
 
   <build>
