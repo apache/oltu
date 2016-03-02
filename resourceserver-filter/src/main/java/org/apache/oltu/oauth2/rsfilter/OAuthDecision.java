@@ -23,14 +23,7 @@ package org.apache.oltu.oauth2.rsfilter;
 
 import java.security.Principal;
 
-/**
- *
- *
- *
- */
 public interface OAuthDecision {
-
-    boolean isAuthorized();
 
     Principal getPrincipal();
 
