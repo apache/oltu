@@ -21,47 +21,35 @@
 
 package org.apache.oltu.oauth2.rs.extractor;
 
-import static org.easymock.EasyMock.createStrictMock;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.verify;
+import org.apache.oltu.oauth2.common.OAuth;
+import org.junit.Test;
 
 import javax.servlet.http.HttpServletRequest;
 
-import junit.framework.Assert;
+import static org.easymock.EasyMock.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
-import org.apache.oltu.oauth2.common.OAuth;
-import org.apache.oltu.oauth2.rs.extractor.BearerBodyTokenExtractor;
-import org.junit.Test;
-
-
-/**
- *
- *
- *
- */
 public class BodyTokenExtractorTest {
 
     @Test
     public void testGetAccessToken() throws Exception {
-
         HttpServletRequest request = createStrictMock(HttpServletRequest.class);
         expect(request.getParameter(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn("sometoken");
         replay(request);
         BearerBodyTokenExtractor bte = new BearerBodyTokenExtractor();
-        Assert.assertEquals("sometoken", bte.getAccessToken(request));
+        assertEquals("sometoken", bte.getAccessToken(request));
         verify(request);
     }
 
     @Test
     public void testGetAccessTokenNull() throws Exception {
-
         HttpServletRequest request = createStrictMock(HttpServletRequest.class);
         expect(request.getParameter(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(null);
         expect(request.getParameter(OAuth.OAUTH_TOKEN)).andStubReturn(null);
         replay(request);
         BearerBodyTokenExtractor bte = new BearerBodyTokenExtractor();
-        Assert.assertNull(bte.getAccessToken(request));
+        assertNull(bte.getAccessToken(request));
         verify(request);
     }
 }

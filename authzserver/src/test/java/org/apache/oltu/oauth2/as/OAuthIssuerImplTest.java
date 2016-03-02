@@ -21,33 +21,28 @@
 
 package org.apache.oltu.oauth2.as;
 
-import junit.framework.Assert;
-
-import org.junit.Test;
 import org.apache.oltu.oauth2.as.issuer.MD5Generator;
 import org.apache.oltu.oauth2.as.issuer.OAuthIssuer;
 import org.apache.oltu.oauth2.as.issuer.OAuthIssuerImpl;
+import org.junit.Test;
 
-/**
- *
- *
- *
- */
+import static org.junit.Assert.assertNotNull;
+
 public class OAuthIssuerImplTest {
     private OAuthIssuer issuer = new OAuthIssuerImpl(new MD5Generator());
 
     @Test
     public void testAccessToken() throws Exception {
-        Assert.assertNotNull(issuer.accessToken());
+        assertNotNull(issuer.accessToken());
     }
 
     @Test
     public void testRefreshToken() throws Exception {
-        Assert.assertNotNull(issuer.refreshToken());
+        assertNotNull(issuer.refreshToken());
     }
 
     @Test
     public void testAuthorizationCode() throws Exception {
-        Assert.assertNotNull(issuer.authorizationCode());
+        assertNotNull(issuer.authorizationCode());
     }
 }

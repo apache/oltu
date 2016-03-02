@@ -21,32 +21,29 @@
 
 package org.apache.oltu.oauth2.as;
 
-import junit.framework.Assert;
-
 import org.apache.oltu.oauth2.as.issuer.MD5Generator;
 import org.apache.oltu.oauth2.as.issuer.ValueGenerator;
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 import org.junit.Test;
 
+import static org.junit.Assert.assertNotNull;
 
-/**
- *
- *
- *
- */
-public class MD5GeneratorTest extends Assert {
+public class MD5GeneratorTest {
+
+    private final ValueGenerator g = new MD5Generator();
+
     @Test
     public void testGenerateValue() throws Exception {
-        ValueGenerator g = new MD5Generator();
-        Assert.assertNotNull(g.generateValue());
+        assertNotNull(g.generateValue());
+    }
 
-        Assert.assertNotNull(g.generateValue("test"));
+    @Test
+    public void testGenerateValueWithParameter() throws Exception {
+        assertNotNull(g.generateValue("test"));
+    }
 
-        try {
-            g.generateValue(null);
-            fail("Exception not thrown");
-        } catch (OAuthSystemException e) {
-            //ok
-        }
+    @Test(expected = OAuthSystemException.class)
+    public void testGenerateValueFailsWithParameterNull() throws Exception {
+        g.generateValue(null);
     }
 }

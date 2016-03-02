@@ -21,89 +21,72 @@
 
 package org.apache.oltu.oauth2.rs.validator;
 
-import javax.servlet.http.HttpServletRequest;
-
-import junit.framework.Assert;
-
-import org.junit.Test;
 import org.apache.oltu.oauth2.common.OAuth;
 import org.apache.oltu.oauth2.common.error.OAuthError;
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.apache.oltu.oauth2.common.utils.OAuthUtils;
-import org.apache.oltu.oauth2.rs.validator.BearerHeaderOAuthValidator;
+import org.junit.Test;
 
-import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.verify;
+import javax.servlet.http.HttpServletRequest;
 
-/**
- *
- *
- *
- */
+import static org.easymock.EasyMock.*;
+import static org.junit.Assert.*;
+
 public class HeaderOAuthValidatorTest {
 
 
     @Test
     public void testValidateNoHeader() throws Exception {
-
         HttpServletRequest request = createMock(HttpServletRequest.class);
         expect(request.getHeader(OAuth.HeaderType.AUTHORIZATION)).andStubReturn(null);
         replay(request);
         try {
             BearerHeaderOAuthValidator bov = new BearerHeaderOAuthValidator();
             bov.performAllValidations(request);
-            Assert.fail("Exception not thrown.");
+            fail("Exception not thrown.");
         } catch (OAuthProblemException e) {
-            org.junit.Assert.assertTrue(OAuthUtils.isEmpty(e.getError()));
-            Assert.assertEquals("Missing authorization header.", e.getDescription());
+            assertTrue(OAuthUtils.isEmpty(e.getError()));
+            assertEquals("Missing authorization header.", e.getDescription());
         }
         verify(request);
-
     }
 
     @Test
     public void testValidateInvalidHeader() throws Exception {
-
         HttpServletRequest request = createMock(HttpServletRequest.class);
         expect(request.getHeader(OAuth.HeaderType.AUTHORIZATION)).andStubReturn("Basic arawersadf");
         replay(request);
         try {
             BearerHeaderOAuthValidator bov = new BearerHeaderOAuthValidator();
             bov.performAllValidations(request);
-            Assert.fail("Exception not thrown.");
+            fail("Exception not thrown.");
         } catch (OAuthProblemException e) {
-            org.junit.Assert.assertTrue(OAuthUtils.isEmpty(e.getError()));
-            Assert.assertEquals("Incorrect authorization method.", e.getDescription());
+            assertTrue(OAuthUtils.isEmpty(e.getError()));
+            assertEquals("Incorrect authorization method.", e.getDescription());
         }
         verify(request);
-
     }
 
 
     @Test
     public void testValidateValidHeaderMissingField() throws Exception {
-
         HttpServletRequest request = createMock(HttpServletRequest.class);
         expect(request.getHeader(OAuth.HeaderType.AUTHORIZATION)).andStubReturn("Bearer  ");
         replay(request);
         try {
             BearerHeaderOAuthValidator bov = new BearerHeaderOAuthValidator();
             bov.performAllValidations(request);
-            Assert.fail("Exception not thrown.");
+            fail("Exception not thrown.");
         } catch (OAuthProblemException e) {
-            Assert.assertEquals(OAuthError.TokenResponse.INVALID_REQUEST, e.getError());
-            Assert.assertEquals("Missing required parameter.", e.getDescription());
+            assertEquals(OAuthError.TokenResponse.INVALID_REQUEST, e.getError());
+            assertEquals("Missing required parameter.", e.getDescription());
         }
         verify(request);
-
     }
 
 
     @Test
     public void testValidateValidHeaderWrongVersion() throws Exception {
-
         HttpServletRequest request = createMock(HttpServletRequest.class);
         expect(request.getHeader(OAuth.HeaderType.AUTHORIZATION))
             .andStubReturn("Bearer sdfsadfsadf,oauth_signature_method=\"HMAC-SHA1\"");
@@ -111,17 +94,16 @@ public class HeaderOAuthValidatorTest {
         try {
             BearerHeaderOAuthValidator bov = new BearerHeaderOAuthValidator();
             bov.performAllValidations(request);
-            Assert.fail("Exception not thrown.");
+            fail("Exception not thrown.");
         } catch (OAuthProblemException e) {
-            Assert.assertEquals(OAuthError.TokenResponse.INVALID_REQUEST, e.getError());
-            Assert.assertEquals("Incorrect OAuth version. Found OAuth V1.0.", e.getDescription());
+            assertEquals(OAuthError.TokenResponse.INVALID_REQUEST, e.getError());
+            assertEquals("Incorrect OAuth version. Found OAuth V1.0.", e.getDescription());
         }
         verify(request);
     }
 
     @Test
     public void testValidateValidHeader() throws Exception {
-
         HttpServletRequest request = createMock(HttpServletRequest.class);
         expect(request.getHeader(OAuth.HeaderType.AUTHORIZATION)).andStubReturn("Bearer sdfsadfsadf");
         replay(request);
