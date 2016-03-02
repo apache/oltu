@@ -34,13 +34,7 @@
   </head>
 
   <body>
-    <div class="jumbotron">
-      <div class="container">
-        <img alt="Apache Oltu - Sample OAuth V2.0 Client Application" src="<c:url value="/images/logo_oltu.png"/>" />
-        <h1>Apache Oltu</h1>
-        <p>Sample OAuth V2.0 Client Application</p>
-      </div>
-    </div>
+    <jsp:include page="components/_header.jsp"/>
 
     <div class="container">
       <div class="page-header">
@@ -54,7 +48,8 @@
 
       <c:url var="actionUrl" value="/get_resource"/>
 
-      <form:form class="form-horizontal" role="form" commandName="oauthParams" action="${actionUrl}">
+      <div class="container">
+      <form:form class="form-horizontal clearfix" role="form" commandName="oauthParams" action="${actionUrl}">
         <div class="form-group">
           <label for="resourceUrl" class="col-lg-3 control-label">Resource URL</label>
           <div class="col-lg-9"><form:input class="form-control" id="resourceUrl" path="resourceUrl" /></div>
@@ -122,9 +117,18 @@
         <form:hidden path="application" />
         <input type="submit" class="btn btn-primary pull-right" value="Get Resource" />
       </form:form>
+      </div>
 
-      <form:form commandName="oauthParams" action="${actionUrl}">
-        <h4>OpenId Connect</h4>
+      <div class="container">
+
+        <c:if test="${!oauthParams.idTokenValid}">
+          <div class="panel panel-danger">
+            <div class="panel-heading">
+              <h3 class="panel-title">OpenId Connect</h3>
+            </div>
+            <div class="panel-body">ID Token is NOT valid</div>
+          </div>
+        </c:if>
 
         <c:if test="${oauthParams.idTokenValid}">
           <div class="panel panel-success">
@@ -135,23 +139,12 @@
           </div>
         </c:if>
 
-        <c:if test="${!oauthParams.idTokenValid}">
-          <div class="panel panel-success">
-            <div class="panel-heading">
-              <h3 class="panel-title">OpenId Connect</h3>
-            </div>
-            <div class="panel-body">ID Token is NOT valid</div>
-          </div>
-        </c:if>
-
         <c:if test="${!empty oauthParams.header}">
-          <div class="clearfix">&nbsp;<br/>&nbsp;</div>
-
           <div class="panel panel-default">
             <div class="panel-heading">
               <h3 class="panel-title">Header</h3>
             </div>
-            <div class="panel-body">${oauthParams.header}</div>
+            <div class="panel-body"><pre><c:out value="${oauthParams.header}"/></pre></div>
           </div>
         </c:if>
 
@@ -160,10 +153,10 @@
             <div class="panel-heading">
               <h3 class="panel-title">Claims Set</h3>
             </div>
-            <pre class="panel-body"><c:out value="${oauthParams.claimsSet}"/></pre>
+            <div class="panel-body"><pre><c:out value="${oauthParams.claimsSet}"/></pre></div>
           </div>
         </c:if>
-      </form:form>
+      </div>
 
     </div>
   </body>

@@ -80,10 +80,15 @@ public class TokenController {
 
             if (Utils.FACEBOOK.equalsIgnoreCase(app)) {
                 cl = GitHubTokenResponse.class;
+                oauthParams.setResourceUrl(Utils.FACEBOOK_RESOURCE_URL);
             } else if (Utils.GITHUB.equalsIgnoreCase(app)) {
                 cl = GitHubTokenResponse.class;
-            } else if (Utils.GOOGLE.equalsIgnoreCase(app)){
+                oauthParams.setResourceUrl(Utils.GITHUB_RESOURCE_URL);
+            } else if (Utils.GOOGLE.equalsIgnoreCase(app)) {
                 cl = OpenIdConnectResponse.class;
+                oauthParams.setResourceUrl(Utils.GOOGLE_RESOURCE_URL);
+            } else if (Utils.LINKEDIN.equalsIgnoreCase(app)) {
+                oauthParams.setResourceUrl(Utils.LINKEDIN_RESOURCE_URL);
             }
 
             OAuthAccessTokenResponse oauthResponse = client.accessToken(request, cl);
@@ -92,8 +97,8 @@ public class TokenController {
             oauthParams.setExpiresIn(oauthResponse.getExpiresIn());
             oauthParams.setRefreshToken(Utils.isIssued(oauthResponse.getRefreshToken()));
 
-            if (Utils.GOOGLE.equalsIgnoreCase(app)){
-                OpenIdConnectResponse openIdConnectResponse = ((OpenIdConnectResponse)oauthResponse);
+            if (Utils.GOOGLE.equalsIgnoreCase(app)) {
+                OpenIdConnectResponse openIdConnectResponse = ((OpenIdConnectResponse) oauthResponse);
                 JWT idToken = openIdConnectResponse.getIdToken();
                 oauthParams.setIdToken(idToken.getRawString());
 

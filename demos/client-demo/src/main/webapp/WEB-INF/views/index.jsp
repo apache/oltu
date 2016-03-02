@@ -34,13 +34,7 @@
   </head>
 
   <body>
-    <div class="jumbotron">
-      <div class="container">
-        <img alt="Apache Oltu - Sample OAuth V2.0 Client Application" src="<c:url value="/images/logo_oltu.png"/>" />
-        <h1>Apache Oltu</h1>
-        <p>Sample OAuth V2.0 Client Application</p>
-      </div>
-    </div>
+    <jsp:include page="components/_header.jsp"/>
 
     <div class="container">
       <div class="page-header"><h2>Web Server Flow <small>Choose Application</small></h2></div>
@@ -65,7 +59,7 @@
       </c:if>
 
       <c:url var="actionUrl" value="/decode"/>
-      <form:form role="form" commandName="oauthParams" action="${actionUrl}">
+      <form:form role="form" commandName="oauthParams" cssClass="form-horizontal clearfix" action="${actionUrl}">
         <form:textarea path="jwt" id="jwt" rows="15" class="form-control" />
         <form:hidden path="application" />
         <div class="clearfix">&nbsp;<br/></div>

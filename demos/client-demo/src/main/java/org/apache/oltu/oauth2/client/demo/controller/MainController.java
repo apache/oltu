@@ -37,7 +37,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
@@ -54,45 +53,38 @@ public class MainController {
 
     @RequestMapping("/index")
     public ModelAndView authorize(@ModelAttribute("oauthParams") OAuthParams oauthParams)
-        throws OAuthSystemException, IOException {
+            throws OAuthSystemException, IOException {
         return new ModelAndView("index");
     }
 
     @RequestMapping("/main/{app}")
     public ModelAndView authorize(@ModelAttribute("oauthParams") OAuthParams oauthParams,
                                   @ModelAttribute("oauthRegParams") OAuthRegParams oauthRegParams,
-                                  @PathVariable("app") String app,
-                                  HttpServletResponse res)
-        throws OAuthSystemException, IOException {
+                                  @PathVariable("app") String app)
+            throws OAuthSystemException, IOException {
+
+        if (Utils.SMART_GALLERY.equalsIgnoreCase(app)) {
+            addRegParamsForSmartGallery(oauthRegParams);
+            return new ModelAndView("register");
+        }
 
         boolean selected = false;
         if (Utils.GENERIC.equalsIgnoreCase(app)) {
             selected = true;
         } else if (Utils.GITHUB.equalsIgnoreCase(app)) {
             selected = true;
-            oauthParams.setAuthzEndpoint(Utils.GITHUB_AUTHZ);
-            oauthParams.setTokenEndpoint(Utils.GITHUB_TOKEN);
+            addGithubParams(oauthParams);
         } else if (Utils.FACEBOOK.equalsIgnoreCase(app)) {
             selected = true;
-            oauthParams.setAuthzEndpoint(Utils.FACEBOOK_AUTHZ);
-            oauthParams.setTokenEndpoint(Utils.FACEBOOK_TOKEN);
+            addFacebookParams(oauthParams);
         } else if (Utils.GOOGLE.equalsIgnoreCase(app)) {
             selected = true;
-            oauthParams.setAuthzEndpoint(Utils.GOOGLE_AUTHZ);
-            oauthParams.setTokenEndpoint(Utils.GOOGLE_TOKEN);
+            addGoogleParams(oauthParams);
         } else if (Utils.LINKEDIN.equalsIgnoreCase(app)) {
             selected = true;
-            oauthParams.setAuthzEndpoint(Utils.LINKEDIN_AUTHZ);
-            oauthParams.setTokenEndpoint(Utils.LINKEDIN_TOKEN);
-        } else if (Utils.SMART_GALLERY.equalsIgnoreCase(app)) {
-            selected = true;
-            oauthRegParams.setAuthzEndpoint(Utils.SMART_GALLERY_AUTHZ);
-            oauthRegParams.setTokenEndpoint(Utils.SMART_GALLERY_TOKEN);
-            oauthRegParams.setRegistrationEndpoint(Utils.SMART_GALLERY_REGISTER);
-            oauthRegParams.setApplication(app);
-            oauthRegParams.setRedirectUri(utils.getRedirectUri());
-            return new ModelAndView("register");
+            addLinkedInParams(oauthParams);
         }
+
         if (selected) {
             oauthParams.setApplication(app);
             oauthParams.setRedirectUri(utils.getRedirectUri());
@@ -102,14 +94,46 @@ public class MainController {
         return new ModelAndView("index");
     }
 
+    private void addRegParamsForSmartGallery(OAuthRegParams oauthRegParams) {
+        oauthRegParams.setAuthzEndpoint(Utils.SMART_GALLERY_AUTHZ);
+        oauthRegParams.setTokenEndpoint(Utils.SMART_GALLERY_TOKEN);
+        oauthRegParams.setRegistrationEndpoint(Utils.SMART_GALLERY_REGISTER);
+        oauthRegParams.setApplication(Utils.SMART_GALLERY);
+        oauthRegParams.setRedirectUri(utils.getRedirectUri());
+    }
+
+    private void addLinkedInParams(OAuthParams oauthParams) {
+        oauthParams.setAuthzEndpoint(Utils.LINKEDIN_AUTHZ);
+        oauthParams.setTokenEndpoint(Utils.LINKEDIN_TOKEN);
+        oauthParams.setScope(Utils.LINKEDIN_SCOPE);
+    }
+
+    private void addGoogleParams(OAuthParams oauthParams) {
+        oauthParams.setAuthzEndpoint(Utils.GOOGLE_AUTHZ);
+        oauthParams.setTokenEndpoint(Utils.GOOGLE_TOKEN);
+        oauthParams.setScope(Utils.GOOGLE_SCOPE);
+    }
+
+    private void addFacebookParams(OAuthParams oauthParams) {
+        oauthParams.setAuthzEndpoint(Utils.FACEBOOK_AUTHZ);
+        oauthParams.setTokenEndpoint(Utils.FACEBOOK_TOKEN);
+        oauthParams.setScope(Utils.FACEBOOK_SCOPE);
+    }
+
+    private void addGithubParams(OAuthParams oauthParams) {
+        oauthParams.setAuthzEndpoint(Utils.GITHUB_AUTHZ);
+        oauthParams.setTokenEndpoint(Utils.GITHUB_TOKEN);
+        oauthParams.setScope(Utils.GITHUB_SCOPE);
+    }
+
     @RequestMapping("/decode")
-    public ModelAndView decode(@ModelAttribute("oauthParams") OAuthParams oauthParams){
+    public ModelAndView decode(@ModelAttribute("oauthParams") OAuthParams oauthParams) {
         try {
             JWT jwt = jwtReader.read(oauthParams.getJwt());
 
             oauthParams.setHeader(new JWTHeaderWriter().write(jwt.getHeader()));
             oauthParams.setClaimsSet(new JWTClaimsSetWriter().write(jwt.getClaimsSet()));
-        } catch (Exception e){
+        } catch (Exception e) {
             logger.error("Error while decoding the token", e);
             oauthParams.setErrorMessage("Error while decoding the token: " + e);
         }

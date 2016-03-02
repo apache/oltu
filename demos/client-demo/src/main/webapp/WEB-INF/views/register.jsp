@@ -34,13 +34,7 @@
   </head>
 
   <body>
-    <div class="jumbotron">
-      <div class="container">
-        <img alt="Apache Oltu - Sample OAuth V2.0 Client Application" src="<c:url value="/images/logo_oltu.png"/>" />
-        <h1>Apache Oltu</h1>
-        <p>Sample OAuth V2.0 Client Application</p>
-      </div>
-    </div>
+  <jsp:include page="components/_header.jsp"/>
 
     <div class="container">
       <div class="page-header">

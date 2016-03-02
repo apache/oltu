@@ -60,18 +60,26 @@ public final class Utils {
     public static final String FACEBOOK = OAuthProviderType.FACEBOOK.getProviderName();
     public static final String FACEBOOK_AUTHZ = OAuthProviderType.FACEBOOK.getAuthzEndpoint();
     public static final String FACEBOOK_TOKEN = OAuthProviderType.FACEBOOK.getTokenEndpoint();
+    public static final String FACEBOOK_SCOPE = "public_profile";
+    public static final String FACEBOOK_RESOURCE_URL = "https://graph.facebook.com/me";
 
     public static final String GOOGLE = OAuthProviderType.GOOGLE.getProviderName();
     public static final String GOOGLE_AUTHZ = OAuthProviderType.GOOGLE.getAuthzEndpoint();
     public static final String GOOGLE_TOKEN = OAuthProviderType.GOOGLE.getTokenEndpoint();
+    public static final String GOOGLE_SCOPE = "openid profile";
+    public static final String GOOGLE_RESOURCE_URL = "https://www.googleapis.com/oauth2/v3/userinfo";
 
     public static final String LINKEDIN = OAuthProviderType.LINKEDIN.getProviderName();
     public static final String LINKEDIN_AUTHZ = OAuthProviderType.LINKEDIN.getAuthzEndpoint();
     public static final String LINKEDIN_TOKEN = OAuthProviderType.LINKEDIN.getTokenEndpoint();
+    public static final String LINKEDIN_SCOPE = "r_basicprofile";
+    public static final String LINKEDIN_RESOURCE_URL = "https://www.linkedin.com/v1/people/~";
 
     public static final String GITHUB = OAuthProviderType.GITHUB.getProviderName();
     public static final String GITHUB_AUTHZ = OAuthProviderType.GITHUB.getAuthzEndpoint();
     public static final String GITHUB_TOKEN = OAuthProviderType.GITHUB.getTokenEndpoint();
+    public static final String GITHUB_SCOPE = "";
+    public static final String GITHUB_RESOURCE_URL = "https://api.github.com/user";
 
     public static final String SMART_GALLERY = "smart_gallery";
     public static final String SMART_GALLERY_AUTHZ = "http://localhost:8090/oauth/authorize";
