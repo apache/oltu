@@ -129,6 +129,8 @@
       <timezone>+1</timezone>
     </developer>
 
+    <!-- EMERITUS members -->
+
     <developer>
       <id>tommaso</id>
       <name>Tommaso Teofili</name>
@@ -137,11 +139,10 @@
       <roles>
         <role>PMC Member</role>
         <role>Committer</role>
+        <role>Emeritus</role>
       </roles>
       <timezone>+1</timezone>
     </developer>
-
-    <!-- EMERITUS members -->
 
     <developer>
       <id>brianm</id>
