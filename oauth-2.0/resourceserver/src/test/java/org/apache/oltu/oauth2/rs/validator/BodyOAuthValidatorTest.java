@@ -21,31 +21,21 @@
 
 package org.apache.oltu.oauth2.rs.validator;
 
-import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.verify;
-
-import javax.servlet.http.HttpServletRequest;
-
-import junit.framework.Assert;
-
 import org.apache.oltu.oauth2.common.OAuth;
 import org.apache.oltu.oauth2.common.error.OAuthError;
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
-import org.apache.oltu.oauth2.rs.validator.BearerBodyOAuthValidator;
 import org.junit.Test;
 
-/**
- *
- *
- *
- */
+import javax.servlet.http.HttpServletRequest;
+
+import static org.easymock.EasyMock.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 public class BodyOAuthValidatorTest {
 
     @Test
     public void testValidateInvalidMethod() throws Exception {
-
         HttpServletRequest request = createMock(HttpServletRequest.class);
         expect(request.getMethod()).andStubReturn("GET");
         expect(request.getContentType()).andStubReturn(OAuth.ContentType.URL_ENCODED);
@@ -53,10 +43,10 @@ public class BodyOAuthValidatorTest {
         try {
             BearerBodyOAuthValidator bov = new BearerBodyOAuthValidator();
             bov.performAllValidations(request);
-            Assert.fail("Exception not thrown.");
+            fail("Exception not thrown.");
         } catch (OAuthProblemException e) {
-            Assert.assertEquals(OAuthError.TokenResponse.INVALID_REQUEST, e.getError());
-            Assert.assertEquals("Incorrect method. POST, PUT, DELETE are supported.", e.getDescription());
+            assertEquals(OAuthError.TokenResponse.INVALID_REQUEST, e.getError());
+            assertEquals("Incorrect method. POST, PUT, DELETE are supported.", e.getDescription());
         }
         verify(request);
     }
@@ -70,10 +60,10 @@ public class BodyOAuthValidatorTest {
         try {
             BearerBodyOAuthValidator bov = new BearerBodyOAuthValidator();
             bov.performAllValidations(request);
-            Assert.fail("Exception not thrown.");
+            fail("Exception not thrown.");
         } catch (OAuthProblemException e) {
-            Assert.assertEquals(OAuthError.CodeResponse.INVALID_REQUEST, e.getError());
-            Assert.assertEquals("Request is not single part.", e.getDescription());
+            assertEquals(OAuthError.CodeResponse.INVALID_REQUEST, e.getError());
+            assertEquals("Request is not single part.", e.getDescription());
         }
         verify(request);
     }
@@ -87,10 +77,10 @@ public class BodyOAuthValidatorTest {
         try {
             BearerBodyOAuthValidator bov = new BearerBodyOAuthValidator();
             bov.performAllValidations(request);
-            Assert.fail("Exception not thrown.");
+            fail("Exception not thrown.");
         } catch (OAuthProblemException e) {
-            Assert.assertEquals(OAuthError.TokenResponse.INVALID_REQUEST, e.getError());
-            Assert.assertEquals("Bad request content type. Expecting: application/x-www-form-urlencoded", e.getDescription());
+            assertEquals(OAuthError.TokenResponse.INVALID_REQUEST, e.getError());
+            assertEquals("Bad request content type. Expecting: application/x-www-form-urlencoded", e.getDescription());
         }
         verify(request);
     }
@@ -106,10 +96,10 @@ public class BodyOAuthValidatorTest {
         try {
             BearerBodyOAuthValidator bov = new BearerBodyOAuthValidator();
             bov.performAllValidations(request);
-            Assert.fail("Exception not thrown.");
+            fail("Exception not thrown.");
         } catch (OAuthProblemException e) {
-            Assert.assertEquals(OAuthError.TokenResponse.INVALID_REQUEST, e.getError());
-            Assert.assertEquals("Incorrect OAuth version. Found OAuth V1.0.", e.getDescription());
+            assertEquals(OAuthError.TokenResponse.INVALID_REQUEST, e.getError());
+            assertEquals("Incorrect OAuth version. Found OAuth V1.0.", e.getDescription());
         }
         verify(request);
     }
@@ -126,10 +116,10 @@ public class BodyOAuthValidatorTest {
         try {
             BearerBodyOAuthValidator bov = new BearerBodyOAuthValidator();
             bov.performAllValidations(request);
-            Assert.fail("Exception not thrown.");
+            fail("Exception not thrown.");
         } catch (OAuthProblemException e) {
-            Assert.assertEquals(null, e.getError());
-            Assert.assertEquals("Missing OAuth token.", e.getDescription());
+            assertEquals(null, e.getError());
+            assertEquals("Missing OAuth token.", e.getDescription());
         }
         verify(request);
     }
@@ -146,10 +136,10 @@ public class BodyOAuthValidatorTest {
         try {
             BearerBodyOAuthValidator bov = new BearerBodyOAuthValidator();
             bov.performAllValidations(request);
-            Assert.fail("Exception not thrown.");
+            fail("Exception not thrown.");
         } catch (OAuthProblemException e) {
-            Assert.assertEquals(OAuthError.TokenResponse.INVALID_REQUEST, e.getError());
-            Assert.assertEquals("Multiple tokens attached.", e.getDescription());
+            assertEquals(OAuthError.TokenResponse.INVALID_REQUEST, e.getError());
+            assertEquals("Multiple tokens attached.", e.getDescription());
         }
         verify(request);
     }

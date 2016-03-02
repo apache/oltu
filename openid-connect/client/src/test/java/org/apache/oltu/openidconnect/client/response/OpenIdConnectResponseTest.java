@@ -16,13 +16,14 @@
  */
 package org.apache.oltu.openidconnect.client.response;
 
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertTrue;
 import junitx.util.PrivateAccessor;
 
 import org.apache.oltu.oauth2.jwt.JWT;
 import org.apache.oltu.oauth2.jwt.io.JWTReader;
 import org.junit.Test;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class OpenIdConnectResponseTest {
 

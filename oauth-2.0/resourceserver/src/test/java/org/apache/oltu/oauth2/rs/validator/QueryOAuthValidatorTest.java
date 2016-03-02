@@ -21,107 +21,80 @@
 
 package org.apache.oltu.oauth2.rs.validator;
 
-import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.verify;
-
-import javax.servlet.http.HttpServletRequest;
-
-import junit.framework.Assert;
-
 import org.apache.oltu.oauth2.common.OAuth;
 import org.apache.oltu.oauth2.common.error.OAuthError;
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.apache.oltu.oauth2.common.utils.OAuthUtils;
-import org.apache.oltu.oauth2.rs.validator.BearerQueryOAuthValidator;
 import org.junit.Test;
 
-/**
- *
- *
- *
- */
+import javax.servlet.http.HttpServletRequest;
+
+import static org.easymock.EasyMock.*;
+import static org.junit.Assert.*;
+
 public class QueryOAuthValidatorTest {
 
     @Test
     public void testValidateWrongVersion() throws Exception {
-
         HttpServletRequest request = createMock(HttpServletRequest.class);
         expect(request.getQueryString()).andStubReturn(OAuth.OAUTH_VERSION_DIFFER + "=HMAC-SHA1&"
-            + OAuth.OAUTH_BEARER_TOKEN
-            + "=access_token");
-        //        expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn("HMAC-SHA1");
-        //        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(new String[] {"access_token"});
+                + OAuth.OAUTH_BEARER_TOKEN
+                + "=access_token");
         replay(request);
         try {
             BearerQueryOAuthValidator qov = new BearerQueryOAuthValidator();
             qov.performAllValidations(request);
-            Assert.fail("Exception not thrown.");
+            fail("Exception not thrown.");
         } catch (OAuthProblemException e) {
-            Assert.assertEquals(OAuthError.TokenResponse.INVALID_REQUEST, e.getError());
-            Assert.assertEquals("Incorrect OAuth version. Found OAuth V1.0.", e.getDescription());
+            assertEquals(OAuthError.TokenResponse.INVALID_REQUEST, e.getError());
+            assertEquals("Incorrect OAuth version. Found OAuth V1.0.", e.getDescription());
         }
         verify(request);
-
     }
 
     @Test
     public void testValidateNoQuery() throws Exception {
-
         HttpServletRequest request = createMock(HttpServletRequest.class);
         expect(request.getQueryString()).andStubReturn(null);
-        //        expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn(null);
-        //        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(null);
-        //        expect(request.getParameterValues(OAuth.OAUTH_TOKEN)).andStubReturn(null);
         replay(request);
         try {
             BearerQueryOAuthValidator qov = new BearerQueryOAuthValidator();
             qov.performAllValidations(request);
-            Assert.fail("Exception not thrown.");
+            fail("Exception not thrown.");
         } catch (OAuthProblemException e) {
-            org.junit.Assert.assertTrue(OAuthUtils.isEmpty(e.getError()));
-            Assert.assertEquals("Missing OAuth token.", e.getDescription());
+            assertTrue(OAuthUtils.isEmpty(e.getError()));
+            assertEquals("Missing OAuth token.", e.getDescription());
         }
         verify(request);
-
     }
 
     @Test
     public void testValidateMultipleTokens() throws Exception {
-
         HttpServletRequest request = createMock(HttpServletRequest.class);
         expect(request.getQueryString()).andStubReturn(OAuth.OAUTH_BEARER_TOKEN + "=access_token1&"
-            + OAuth.OAUTH_BEARER_TOKEN
-            + "=access_token2");
-        //        expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn(null);
-        //        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(new String[] {"access_token1",
-        //                                                                                                 "access_token2"});
+                + OAuth.OAUTH_BEARER_TOKEN
+                + "=access_token2");
+
         replay(request);
         try {
             BearerQueryOAuthValidator qov = new BearerQueryOAuthValidator();
             qov.performAllValidations(request);
-            Assert.fail("Exception not thrown.");
+            fail("Exception not thrown.");
         } catch (OAuthProblemException e) {
-            Assert.assertEquals(OAuthError.TokenResponse.INVALID_REQUEST, e.getError());
-            Assert.assertEquals("Multiple tokens attached.", e.getDescription());
+            assertEquals(OAuthError.TokenResponse.INVALID_REQUEST, e.getError());
+            assertEquals("Multiple tokens attached.", e.getDescription());
         }
         verify(request);
-
     }
 
     @Test
     public void testValidateToken() throws Exception {
-
         HttpServletRequest request = createMock(HttpServletRequest.class);
         expect(request.getQueryString()).andStubReturn(OAuth.OAUTH_BEARER_TOKEN + "=access_token1");
-        //        expect(request.getParameter(OAuth.OAUTH_VERSION_DIFFER)).andStubReturn(null);
-        //        expect(request.getParameterValues(OAuth.OAUTH_BEARER_TOKEN)).andStubReturn(new String[] {"access_token1"});
+
         replay(request);
         BearerQueryOAuthValidator qov = new BearerQueryOAuthValidator();
         qov.performAllValidations(request);
         verify(request);
-
     }
-
 }
