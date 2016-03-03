@@ -16,23 +16,39 @@
  */
 package org.apache.oltu.jose.jwe.io;
 
-import org.apache.oltu.commons.encodedtoken.TokenWriter;
+import org.apache.oltu.commons.encodedtoken.TokenDecoder;
 import org.apache.oltu.jose.jwe.JWE;
 
-public final class JWEWriter extends TokenWriter<JWE> {
+public final class JWEWriter extends TokenDecoder {
 
-    @Override
+    public final String write(JWE token) {
+        if (token == null) {
+            throw new IllegalArgumentException("Impossible to build a Token from a null JWS representation.");
+        }
+
+        String header = writeHeader(token);
+        String encodedHeader = base64Encode(header);
+        String encodedBody =  writeEncryptedKey(token);
+        String signature = writeContentEncryption(token);
+
+        return new StringBuilder()
+        .append(encodedHeader)
+        .append('.')
+        .append(encodedBody)
+        .append('.')
+        .append(signature)
+        .toString();
+    }
+
     protected String writeHeader(JWE token) {
         return new JWEHeaderWriter().write(token.getHeader());
     }
 
-    @Override
-    protected String writeBody(JWE token) {
+    protected String writeEncryptedKey(JWE token) {
         return token.getEncryptedKey();
     }
 
-    @Override
-    protected String writeSignature(JWE token) {
+    protected String writeContentEncryption(JWE token) {
         return token.getContentEncryption();
     }
 }
