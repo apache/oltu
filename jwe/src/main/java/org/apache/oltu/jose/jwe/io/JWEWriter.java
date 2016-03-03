@@ -28,15 +28,15 @@ public final class JWEWriter extends TokenDecoder {
 
         String header = writeHeader(token);
         String encodedHeader = base64Encode(header);
-        String encodedBody =  writeEncryptedKey(token);
-        String signature = writeContentEncryption(token);
+        String encryptedKey =  writeEncryptedKey(token);
+        String contentEncryption = writeContentEncryption(token);
 
         return new StringBuilder()
         .append(encodedHeader)
         .append('.')
-        .append(encodedBody)
+        .append(encryptedKey)
         .append('.')
-        .append(signature)
+        .append(contentEncryption)
         .toString();
     }
 
