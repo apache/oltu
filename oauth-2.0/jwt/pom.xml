@@ -21,7 +21,7 @@
   <parent>
     <groupId>org.apache.oltu.oauth2</groupId>
     <artifactId>org.apache.oltu.oauth2.parent</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.2</version>
   </parent>
 
   <artifactId>org.apache.oltu.oauth2.jwt</artifactId>
@@ -52,7 +52,7 @@
   	<dependency>
       <groupId>org.apache.oltu.oauth2</groupId>
       <artifactId>org.apache.oltu.oauth2.common</artifactId>
-      <version>1.0.2-SNAPSHOT</version>
+      <version>1.0.2</version>
     </dependency>
   </dependencies>
 
