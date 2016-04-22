@@ -27,7 +27,7 @@
 
   <groupId>org.apache.oltu</groupId>
   <artifactId>org.apache.oltu.parent</artifactId>
-  <version>4</version>
+  <version>5-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Apache Oltu - Parent</name>
@@ -324,9 +324,9 @@
   </mailingLists>
 
   <scm>
-    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/oltu/tags/org.apache.oltu.parent-4</developerConnection>
-    <connection>scm:svn:https://svn.apache.org/repos/asf/oltu/tags/org.apache.oltu.parent-4</connection>
-    <url>https://svn.apache.org/repos/asf/oltu/tags/org.apache.oltu.parent-4</url>
+    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/oltu/trunk/parent</developerConnection>
+    <connection>scm:svn:https://svn.apache.org/repos/asf/oltu/trunk/parent</connection>
+    <url>https://svn.apache.org/repos/asf/oltu/trunk/parent</url>
   </scm>
   <issueManagement>
     <system>JIRA</system>
