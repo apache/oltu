@@ -57,6 +57,7 @@
       <organization>Onegini</organization>
       <organizationUrl>https://www.onegini.com</organizationUrl>
       <roles>
+       	<role>PMC Member</role>
         <role>Committer</role>
       </roles>
       <timezone>+1</timezone>
@@ -124,6 +125,7 @@
       <organization>Onegini</organization>
       <organizationUrl>https://www.onegini.com</organizationUrl>
       <roles>
+       	<role>PMC Member</role>
         <role>Committer</role>
       </roles>
       <timezone>+1</timezone>
@@ -137,8 +139,6 @@
       <email>tommaso@apache.org</email>
       <organization>Adobe</organization>
       <roles>
-        <role>PMC Member</role>
-        <role>Committer</role>
         <role>Emeritus</role>
       </roles>
       <timezone>+1</timezone>
