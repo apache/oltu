@@ -34,9 +34,17 @@ final class JWTClaimsSetParser extends CustomizableEntityReader<JWT, JWT.Builder
         if (AUDIENCE.equals(key)) {
             handleAudience(value);
         } else if (EXPIRATION_TIME.equals(key)) {
-            getBuilder().setClaimsSetExpirationTime(((Integer) value).longValue());
+            if (value instanceof Long) {
+                getBuilder().setClaimsSetExpirationTime((Long) value);
+            } else {
+                getBuilder().setClaimsSetExpirationTime(((Integer) value).longValue());
+            }
         } else if (ISSUED_AT.equals(key)) {
-            getBuilder().setClaimsSetIssuedAt(((Integer) value).longValue());
+            if (value instanceof Long) {
+                getBuilder().setClaimsSetIssuedAt((Long) value);
+            } else {
+                getBuilder().setClaimsSetIssuedAt(((Integer) value).longValue());
+            }
         } else if (ISSUER.equals(key)) {
             getBuilder().setClaimsSetIssuer(String.valueOf(value));
         } else if (JWT_ID.equals(key)) {
