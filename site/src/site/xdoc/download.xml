@@ -51,6 +51,7 @@
           <thead>
             <tr>
               <th scope="col">Artifact</th>
+              <th scope="col">Version</th>
               <th scope="col">Link</th>
               <th scope="col">Checksum</th>
               <th scope="col">Signature</th>
@@ -59,6 +60,7 @@
           <tbody>
             <tr>
               <td scope="row">Apache Oltu Commons</td>
+              <td>1</td>
               <td>
                 <a href="https://www.apache.org/dyn/closer.cgi/oltu/org.apache.oltu.commons/org.apache.oltu.commons.parent-1-source-release.zip">
                   org.apache.oltu.commons.parent-1-source-release.zip
@@ -89,6 +91,7 @@
             </tr>
             <tr>
               <td scope="row">Apache Oltu JOSE</td>
+              <td>1</td>
               <td>
                 <a href="https://www.apache.org/dyn/closer.cgi/oltu/org.apache.oltu.jose/org.apache.oltu.jose.parent-1-source-release.zip">
                   org.apache.oltu.jose.parent-1-source-release.zip
@@ -119,60 +122,62 @@
             </tr>
             <tr>
               <td scope="row">Apache Oltu OAuth2</td>
+              <td>1.0.2</td>
               <td>
-                <a href="https://www.apache.org/dyn/closer.cgi/oltu/org.apache.oltu.oauth2/org.apache.oltu.oauth2.parent-1.0.1-source-release.zip">
-                  org.apache.oltu.oauth2.parent-1.0.1-source-release.zip
+                <a href="https://www.apache.org/dyn/closer.cgi/oltu/org.apache.oltu.oauth2/org.apache.oltu.oauth2.parent-1.0.2-source-release.zip">
+                  org.apache.oltu.oauth2.parent-1.0.2-source-release.zip
                 </a>
               </td>
               <td>
                 <ul>
                   <li>
-                    <a href="https://www.apache.org/dist/oltu/org.apache.oltu.oauth2/org.apache.oltu.oauth2.parent-1.0.1-source-release.zip.md5"
-                       title="org.apache.oltu.oauth2.parent-1.0.1-source-release.zip.md5">
+                    <a href="https://www.apache.org/dist/oltu/org.apache.oltu.oauth2/org.apache.oltu.oauth2.parent-1.0.2-source-release.zip.md5"
+                       title="org.apache.oltu.oauth2.parent-1.0.2-source-release.zip.md5">
                       MD5
                     </a>
                   </li>
                   <li>
-                    <a href="https://www.apache.org/dist/oltu/org.apache.oltu.oauth2/org.apache.oltu.oauth2.parent-1.0.1-source-release.zip.sha1"
-                       title="org.apache.oltu.oauth2.parent-1.0.1-source-release.zip.sha1">
+                    <a href="https://www.apache.org/dist/oltu/org.apache.oltu.oauth2/org.apache.oltu.oauth2.parent-1.0.2-source-release.zip.sha1"
+                       title="org.apache.oltu.oauth2.parent-1.0.2-source-release.zip.sha1">
                       SHA1
                     </a>
                   </li>
                 </ul>
               </td>
               <td>
-                <a href="https://www.apache.org/dist/oltu/org.apache.oltu.oauth2/org.apache.oltu.oauth2.parent-1.0.1-source-release.zip.asc"
-                   title="org.apache.oltu.oauth2.parent-1.0.1-source-release.zip.asc  ">
+                <a href="https://www.apache.org/dist/oltu/org.apache.oltu.oauth2/org.apache.oltu.oauth2.parent-1.0.2-source-release.zip.asc"
+                   title="org.apache.oltu.oauth2.parent-1.0.2-source-release.zip.asc">
                   PGP
                 </a>
               </td>
             </tr>
             <tr>
               <td scope="row">Apache Oltu Parent</td>
+              <td>4</td>
               <td>
-                <a href="https://www.apache.org/dyn/closer.cgi/oltu/org.apache.oltu.parent/org.apache.oltu.parent-3-source-release.zip">
-                  org.apache.oltu.parent-3-source-release.zip
+                <a href="https://www.apache.org/dyn/closer.cgi/oltu/org.apache.oltu.parent/org.apache.oltu.parent-4-source-release.zip">
+                  org.apache.oltu.parent-4-source-release.zip
                 </a>
               </td>
               <td>
                 <ul>
                   <li>
-                    <a href="https://www.apache.org/dist/oltu/org.apache.oltu.parent/org.apache.oltu.parent-3-source-release.zip.md5"
-                       title="org.apache.oltu.parent-3-source-release.zip.md5">
+                    <a href="https://www.apache.org/dist/oltu/org.apache.oltu.parent/org.apache.oltu.parent-4-source-release.zip.md5.txt"
+                       title="org.apache.oltu.parent-4-source-release.zip.md5.txt">
                       MD5
                     </a>
                   </li>
                   <li>
-                    <a href="https://www.apache.org/dist/oltu/org.apache.oltu.parent/org.apache.oltu.parent-3-source-release.zip.sha1"
-                       title="org.apache.oltu.parent-3-source-release.zip.sha1">
+                    <a href="https://www.apache.org/dist/oltu/org.apache.oltu.parent/org.apache.oltu.parent-4-source-release.zip.sha1.txt"
+                       title="org.apache.oltu.parent-4-source-release.zip.sha1.txt">
                       SHA1
                     </a>
                   </li>
                 </ul>
               </td>
               <td>
-                <a href="https://www.apache.org/dist/oltu/org.apache.oltu.parent/org.apache.oltu.parent-3-source-release.zip.asc"
-                   title="org.apache.oltu.parent-3-source-release.zip.asc">PGP</a>
+                <a href="https://www.apache.org/dist/oltu/org.apache.oltu.parent/org.apache.oltu.parent-4-source-release.zip.asc"
+                   title="org.apache.oltu.parent-4-source-release.zip.asc">PGP</a>
               </td>
             </tr>
           </tbody>
