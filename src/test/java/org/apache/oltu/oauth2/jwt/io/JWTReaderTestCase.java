@@ -16,15 +16,16 @@
  */
 package org.apache.oltu.oauth2.jwt.io;
 
-import static org.junit.Assert.assertEquals;
-
-import java.util.Arrays;
 import org.apache.oltu.oauth2.jwt.ClaimsSet;
 import org.apache.oltu.oauth2.jwt.Header;
 import org.apache.oltu.oauth2.jwt.JWT;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Arrays;
+
+import static org.junit.Assert.assertEquals;
 
 public final class JWTReaderTestCase implements IOTestCaseConstants {
 
@@ -66,8 +67,8 @@ public final class JWTReaderTestCase implements IOTestCaseConstants {
         assertEquals("788732372078.apps.googleusercontent.com", claimsSet.getAudience());
         assertEquals("accounts.google.com", claimsSet.getIssuer());
         assertEquals("106422453082479998429", claimsSet.getSubject());
-        assertEquals(1366730217, claimsSet.getExpirationTime());
-        assertEquals(1366726317, claimsSet.getIssuedAt());
+        assertEquals(1366730217L, claimsSet.getExpirationTime());
+        assertEquals(1366726317L, claimsSet.getIssuedAt());
     }
 
     @Test
@@ -78,8 +79,8 @@ public final class JWTReaderTestCase implements IOTestCaseConstants {
         assertEquals("788732372078.apps.googleusercontent.com", claimsSet.getAudience());
         assertEquals("accounts.google.com", claimsSet.getIssuer());
         assertEquals("106422453082479998429", claimsSet.getSubject());
-        assertEquals(1366730217, claimsSet.getExpirationTime());
-        assertEquals(1366726317, claimsSet.getIssuedAt());
+        assertEquals(1366730217L, claimsSet.getExpirationTime());
+        assertEquals(1366726317L, claimsSet.getIssuedAt());
     }
 
 }
