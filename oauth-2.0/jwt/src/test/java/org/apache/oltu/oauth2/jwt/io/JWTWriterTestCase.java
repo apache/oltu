@@ -16,11 +16,12 @@
  */
 package org.apache.oltu.oauth2.jwt.io;
 
-import static org.junit.Assert.assertEquals;
-
-import java.util.Arrays;
 import org.apache.oltu.oauth2.jwt.JWT;
 import org.junit.Test;
+
+import java.util.Arrays;
+
+import static org.junit.Assert.assertEquals;
 
 public final class JWTWriterTestCase implements IOTestCaseConstants {
 
@@ -34,8 +35,8 @@ public final class JWTWriterTestCase implements IOTestCaseConstants {
                           .setClaimsSetAudience("788732372078.apps.googleusercontent.com")
                           .setClaimsSetIssuer("accounts.google.com")
                           .setClaimsSetSubject("106422453082479998429")
-                          .setClaimsSetExpirationTime(1366730217)
-                          .setClaimsSetIssuedAt(1366726317)
+                          .setClaimsSetExpirationTime(1366730217L)
+                          .setClaimsSetIssuedAt(1366726317L)
                           .setClaimsSetCustomField("id", "106422453082479998429")
                           .setClaimsSetCustomField("verified_email", "true")
                           .setClaimsSetCustomField("email_verified", "true")
@@ -61,8 +62,8 @@ public final class JWTWriterTestCase implements IOTestCaseConstants {
                           .setClaimsSetAudiences(Arrays.asList("788732372078.apps.googleusercontent.com"))
                           .setClaimsSetIssuer("accounts.google.com")
                           .setClaimsSetSubject("106422453082479998429")
-                          .setClaimsSetExpirationTime(1366730217)
-                          .setClaimsSetIssuedAt(1366726317)
+                          .setClaimsSetExpirationTime(1366730217L)
+                          .setClaimsSetIssuedAt(1366726317L)
                           .setClaimsSetCustomField("id", "106422453082479998429")
                           .setClaimsSetCustomField("verified_email", "true")
                           .setClaimsSetCustomField("email_verified", "true")
@@ -88,8 +89,8 @@ public final class JWTWriterTestCase implements IOTestCaseConstants {
                           .setClaimsSetAudiences(Arrays.asList("788732372078.apps.googleusercontent.com", "foo"))
                           .setClaimsSetIssuer("accounts.google.com")
                           .setClaimsSetSubject("106422453082479998429")
-                          .setClaimsSetExpirationTime(1366730217)
-                          .setClaimsSetIssuedAt(1366726317)
+                          .setClaimsSetExpirationTime(1366730217L)
+                          .setClaimsSetIssuedAt(1366726317L)
                           .setClaimsSetCustomField("id", "106422453082479998429")
                           .setClaimsSetCustomField("verified_email", "true")
                           .setClaimsSetCustomField("email_verified", "true")

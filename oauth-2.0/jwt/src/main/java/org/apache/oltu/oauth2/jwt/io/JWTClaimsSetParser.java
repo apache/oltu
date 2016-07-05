@@ -16,12 +16,12 @@
  */
 package org.apache.oltu.oauth2.jwt.io;
 
+import org.apache.oltu.commons.json.CustomizableEntityReader;
+import org.apache.oltu.oauth2.jwt.JWT;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
-import org.apache.oltu.commons.json.CustomizableEntityReader;
-import org.apache.oltu.oauth2.jwt.JWT;
 
 final class JWTClaimsSetParser extends CustomizableEntityReader<JWT, JWT.Builder> implements JWTConstants {
 
@@ -34,9 +34,9 @@ final class JWTClaimsSetParser extends CustomizableEntityReader<JWT, JWT.Builder
         if (AUDIENCE.equals(key)) {
             handleAudience(value);
         } else if (EXPIRATION_TIME.equals(key)) {
-            getBuilder().setClaimsSetExpirationTime(((Long) value));
+            getBuilder().setClaimsSetExpirationTime(((Number) value).longValue());
         } else if (ISSUED_AT.equals(key)) {
-            getBuilder().setClaimsSetIssuedAt(((Long) value));
+            getBuilder().setClaimsSetIssuedAt(((Number) value).longValue());
         } else if (ISSUER.equals(key)) {
             getBuilder().setClaimsSetIssuer(String.valueOf(value));
         } else if (JWT_ID.equals(key)) {
