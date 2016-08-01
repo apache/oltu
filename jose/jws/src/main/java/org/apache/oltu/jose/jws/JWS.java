@@ -24,6 +24,11 @@ import org.apache.oltu.jose.jws.signature.SigningKey;
 import org.apache.oltu.jose.jws.signature.VerifyingKey;
 
 public class JWS {
+    
+    /**
+     * The raw JWS String
+     */
+    private String rawString;
 
     /**
      * The JWS Header.
@@ -41,6 +46,11 @@ public class JWS {
     private final String signature;
 
     JWS(Header header, String payload, String signature) {
+        this(null, header, payload, signature);
+    }
+    
+    JWS(String rawString, Header header, String payload, String signature) {
+        this.rawString = rawString;
         this.header = header;
         this.payload = payload;
         this.signature = signature;
@@ -89,11 +99,27 @@ public class JWS {
         if (signature == null) {
             throw new IllegalStateException("JWS token must have a signature to be verified.");
         }
-
-        return method.verify(signature, TokenDecoder.base64Encode(new JWSHeaderWriter().write(header)), TokenDecoder.base64Encode(payload), verifyingKey);
+        
+        if (rawString == null) {
+            return method.verify(signature, TokenDecoder.base64Encode(new JWSHeaderWriter().write(header)), TokenDecoder.base64Encode(payload), verifyingKey);
+        } else {
+            String jwt[] = rawString.split("\\.");
+            return method.verify(jwt[2], jwt[0], jwt[1], verifyingKey);
+        }
     }
 
     public static final class Builder extends CustomizableBuilder<JWS> {
+        
+        public Builder(){}
+        
+        public Builder(String rawString) {
+            this.rawString = rawString;
+        }
+        
+        /**
+         * The raw JWS String
+         */
+        private String rawString;
 
         /**
          * The {@code alg} JWS Header parameter.
@@ -243,7 +269,7 @@ public class JWS {
         }
 
         public JWS build() {
-            return new JWS(new Header(algorithm,
+            return new JWS(rawString, new Header(algorithm,
                                       jwkSetUrl,
                                       jsonWebKey,
                                       x509url,
