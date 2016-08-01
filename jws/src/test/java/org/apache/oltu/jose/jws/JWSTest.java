@@ -33,7 +33,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class JWSTest {
-
     
     @Test
     public void testValidate() throws InvalidKeySpecException, NoSuchAlgorithmException {
@@ -195,7 +194,7 @@ public class JWSTest {
         Assert.assertFalse(jws.validate(signatureMethod, new PublicKey(rsaPublicKey)));
     }
     
-    //@Test
+    @Test
     public void testValidate3() throws InvalidKeySpecException, NoSuchAlgorithmException {
         
         final byte[] n = TokenDecoder.base64DecodeToByte("n4EPtAOCc9AlkeQHPzHStgAbgs7bTZLwUBZdR8_KuKPEHLd4rHVTeT-O-XV2jRojdNhxJWTDvNd7nqQ0VEiZQHz_AJmSCpMaJMRBSFKrKb2wqVwGU_NsYOYL-QtiWN2lbzcEe6XC0dApr5ydQLrHqkHHig3RBordaZ6Aj-oBHqFEHYpPe7Tpe-OfVfHd1E6cS6M1FZcD1NNLYD5lFHpPI9bTwJlsde3uhGqC0ZCuEHg8lhzwOHrtIQbS0FVbb9k3-tVTU4fg_3L_vniUFAKwuCLqKnS2BYwdq_mzSnbLY7h_qixoR7jig3__kRhuaxwUkRz5iaiQkqgc5gHdrNP5zw");
@@ -228,7 +227,6 @@ public class JWSTest {
         JWS jws = new JWSReader().read(accessToken);
         
         SignatureMethod signatureMethod = new SignatureMethodRSAImpl("RS256");
-        
         
         RSAPublicKey rsaPublicKey = (RSAPublicKey) keyFactory.generatePublic(pubKeySpec);
         

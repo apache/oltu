@@ -28,7 +28,7 @@ public final class JWSReader extends TokenReader<JWS> {
 
     @Override
     protected JWS build(String rawString, String decodedHeader, String decodedBody, String encodedSignature) {
-        final JWS.Builder jwsBuilder = new JWS.Builder();
+        final JWS.Builder jwsBuilder = new JWS.Builder(rawString);
 
         new JWSHeaderParser(jwsBuilder).read(decodedHeader);
 
