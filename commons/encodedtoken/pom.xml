@@ -21,11 +21,11 @@
   <parent>
     <groupId>org.apache.oltu.commons</groupId>
     <artifactId>org.apache.oltu.commons.parent</artifactId>
-    <version>2</version>
+    <version>3-SNAPSHOT</version>
   </parent>
 
   <artifactId>org.apache.oltu.commons.encodedtoken</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2-SNAPSHOT</version>
   <packaging>bundle</packaging>
 
   <name>Apache Oltu - Commons - Encoded Token</name>

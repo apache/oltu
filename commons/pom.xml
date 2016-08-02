@@ -27,16 +27,16 @@
 
   <groupId>org.apache.oltu.commons</groupId>
   <artifactId>org.apache.oltu.commons.parent</artifactId>
-  <version>2</version>
+  <version>3-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Apache Oltu - Commons</name>
   <description>Shared utilities across multiple Apache Oltu modules</description>
 
   <scm>
-    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/oltu/tags/org.apache.oltu.commons.parent-2</developerConnection>
-    <connection>scm:svn:https://svn.apache.org/repos/asf/oltu/tags/org.apache.oltu.commons.parent-2</connection>
-    <url>https://svn.apache.org/repos/asf/oltu/tags/org.apache.oltu.commons.parent-2</url>
+    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/oltu/trunk/commons</developerConnection>
+    <connection>scm:svn:https://svn.apache.org/repos/asf/oltu/trunk/commons</connection>
+    <url>https://svn.apache.org/repos/asf/oltu/trunk/commons</url>
   </scm>
 
   <distributionManagement>
