@@ -27,7 +27,7 @@ public abstract class TokenReader<T> extends TokenDecoder {
     /**
      * The Base64 JSON string default separator.
      */
-    private final Pattern base64urlTokenPattern = Pattern.compile("([a-zA-Z0-9/+=]+)\\.([a-zA-Z0-9/+=]+)\\.(.+)");
+    private final Pattern base64urlTokenPattern = Pattern.compile("([a-zA-Z0-9-​_=]+)\\.([a-zA-Z0-9-_​=]+)\\.([a-zA-Z0-9-_=]+)");
 
     /**
      * Read the base64url token string
