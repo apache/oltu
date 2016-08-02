@@ -27,16 +27,16 @@
 
   <groupId>org.apache.oltu.jose</groupId>
   <artifactId>org.apache.oltu.jose.parent</artifactId>
-  <version>2</version>
+  <version>3-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Apache Oltu - JOSE</name>
   <description>JOSE working group specifications in Apache Oltu</description>
 
   <scm>
-    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/oltu/tags/org.apache.oltu.jose.parent-2</developerConnection>
-    <connection>scm:svn:https://svn.apache.org/repos/asf/oltu/tags/org.apache.oltu.jose.parent-2</connection>
-    <url>https://svn.apache.org/repos/asf/oltu/tags/org.apache.oltu.jose.parent-2</url>
+    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/oltu/trunk/jose</developerConnection>
+    <connection>scm:svn:https://svn.apache.org/repos/asf/oltu/trunk/jose</connection>
+    <url>https://svn.apache.org/repos/asf/oltu/trunk/jose</url>
   </scm>
 
   <distributionManagement>
