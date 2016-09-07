@@ -35,7 +35,6 @@ public class AuthorizationCodeValidator extends AbstractValidator<HttpServletReq
     public AuthorizationCodeValidator() {
         requiredParams.add(OAuth.OAUTH_GRANT_TYPE);
         requiredParams.add(OAuth.OAUTH_CODE);
-        requiredParams.add(OAuth.OAUTH_REDIRECT_URI);
 
         enforceClientAuthentication = true;
     }
