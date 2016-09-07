@@ -48,6 +48,7 @@
             <li><a href="<c:url value="/main/github"/>">Github</a></li>
             <li><a href="<c:url value="/main/linkedin"/>">LinkedIn</a></li>
           	<li><a href="<c:url value="/main/microsoft"/>">Microsoft</a></li>
+          	<li><a href="<c:url value="/main/instagram"/>">Instagram</a></li>
           	<li><a href="<c:url value="/main/smart_gallery"/>">Smart Gallery</a></li>
           </ul>
         </div>
