@@ -43,11 +43,12 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav">
             <li><a href="<c:url value="/main/generic"/>">Generic OAuth2 Application</a></li>
-            <li><a href="<c:url value="/main/smart_gallery"/>">Smart Gallery</a></li>
             <li><a href="<c:url value="/main/facebook"/>">Facebook</a></li>
             <li><a href="<c:url value="/main/google"/>">Google</a></li>
             <li><a href="<c:url value="/main/github"/>">Github</a></li>
             <li><a href="<c:url value="/main/linkedin"/>">LinkedIn</a></li>
+          	<li><a href="<c:url value="/main/microsoft"/>">Microsoft</a></li>
+          	<li><a href="<c:url value="/main/smart_gallery"/>">Smart Gallery</a></li>
           </ul>
         </div>
       </nav>
