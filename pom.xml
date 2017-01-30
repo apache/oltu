@@ -30,6 +30,10 @@
   <name>Apache Oltu - OAuth 2.0 - JWT</name>
   <description>OAuth 2.0 library - JWT</description>
 
+  <properties>
+    <osgi.export>org.apache.oltu.oauth2.jwt*;version=${project.version}</osgi.export>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>org.apache.oltu.commons</groupId>
