@@ -21,11 +21,12 @@
   <parent>
     <groupId>org.apache.oltu.oauth2</groupId>
     <artifactId>org.apache.oltu.oauth2.parent</artifactId>
-    <version>1.0.3-SNAPSHOT</version>
+    <version>1.0.2</version>
   </parent>
 
   <artifactId>org.apache.oltu.oauth2.jwt</artifactId>
   <packaging>bundle</packaging>
+  <version>1.0.3-SNAPSHOT</version>
 
   <name>Apache Oltu - OAuth 2.0 - JWT</name>
   <description>OAuth 2.0 library - JWT</description>
