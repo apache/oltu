@@ -26,7 +26,7 @@
 
   <artifactId>org.apache.oltu.oauth2.jwt</artifactId>
   <packaging>bundle</packaging>
-  <version>1.0.3-SNAPSHOT</version>
+  <version>1.0.3</version>
 
   <name>Apache Oltu - OAuth 2.0 - JWT</name>
   <description>OAuth 2.0 library - JWT</description>
@@ -74,4 +74,10 @@
     </resources>
   </build>
 
+
+  <scm>
+    <connection>scm:svn:https://svn.apache.org/repos/asf/oltu/tags/org.apache.oltu.oauth2.jwt-1.0.3</connection>
+    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/oltu/tags/org.apache.oltu.oauth2.jwt-1.0.3</developerConnection>
+    <url>https://svn.apache.org/repos/asf/oltu/tags/org.apache.oltu.oauth2.jwt-1.0.3</url>
+  </scm>
 </project>
