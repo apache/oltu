@@ -26,7 +26,7 @@
 
   <artifactId>org.apache.oltu.oauth2.jwt</artifactId>
   <packaging>bundle</packaging>
-  <version>1.0.3-SNAPSHOT</version>
+  <version>1.0.3</version>
 
   <name>Apache Oltu - OAuth 2.0 - JWT</name>
   <description>OAuth 2.0 library - JWT</description>
