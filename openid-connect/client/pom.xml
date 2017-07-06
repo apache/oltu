@@ -33,6 +33,7 @@
 
   <properties>
     <oltu.oauth2.version>1.0.3-SNAPSHOT</oltu.oauth2.version>
+    <oltu.oauth2.jwt.version>1.0.4-SNAPSHOT</oltu.oauth2.jwt.version>
   </properties>
 
   <dependencies>
@@ -44,14 +45,14 @@
    	<dependency>
       <groupId>org.apache.oltu.oauth2</groupId>
       <artifactId>org.apache.oltu.oauth2.jwt</artifactId>
-      <version>${oltu.oauth2.version}</version>
-    </dependency>    
+      <version>${oltu.oauth2.jwt.version}</version>
+    </dependency>
     <dependency>
       <groupId>junit-addons</groupId>
       <artifactId>junit-addons</artifactId>
       <version>1.4</version>
       <scope>test</scope>
-   	</dependency>   
+   	</dependency>
   </dependencies>
 
   <build>
