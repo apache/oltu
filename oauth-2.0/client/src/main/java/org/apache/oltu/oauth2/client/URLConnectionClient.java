@@ -21,6 +21,21 @@
 
 package org.apache.oltu.oauth2.client;
 
+import static javax.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
+import static javax.servlet.http.HttpServletResponse.SC_UNAUTHORIZED;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.net.HttpURLConnection;
+import java.net.Proxy;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.oltu.oauth2.client.request.OAuthClientRequest;
 import org.apache.oltu.oauth2.client.response.OAuthClientResponse;
 import org.apache.oltu.oauth2.client.response.OAuthClientResponseFactory;
@@ -28,20 +43,6 @@ import org.apache.oltu.oauth2.common.OAuth;
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 import org.apache.oltu.oauth2.common.utils.OAuthUtils;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import static javax.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
-import static javax.servlet.http.HttpServletResponse.SC_UNAUTHORIZED;
 
 
 /**
@@ -53,11 +54,18 @@ import static javax.servlet.http.HttpServletResponse.SC_UNAUTHORIZED;
  */
 public class URLConnectionClient implements HttpClient {
 
+    private Proxy proxy = Proxy.NO_PROXY;
+
     public URLConnectionClient() {
     }
 
-    public <T extends OAuthClientResponse> T execute(OAuthClientRequest request, Map<String, String> headers,
-                                                     String requestMethod, Class<T> responseClass)
+    public URLConnectionClient(final Proxy proxy) {
+        this.proxy = proxy;
+    }
+
+    @Override
+    public <T extends OAuthClientResponse> T execute(final OAuthClientRequest request, final Map<String, String> headers,
+                                                     final String requestMethod, final Class<T> responseClass)
             throws OAuthSystemException, OAuthProblemException {
 
         InputStream responseBody = null;
@@ -67,7 +75,7 @@ public class URLConnectionClient implements HttpClient {
         try {
             URL url = new URL(request.getLocationUri());
 
-            c = url.openConnection();
+            c = url.openConnection(proxy);
             responseCode = -1;
             if (c instanceof HttpURLConnection) {
                 HttpURLConnection httpURLConnection = (HttpURLConnection) c;
