@@ -34,7 +34,13 @@ public class OpenIdConnectResponse extends OAuthJSONAccessTokenResponse {
     protected void init(String body, String contentType, int responseCode)
             throws OAuthProblemException {
         super.init(body, contentType, responseCode);
-        idToken = new JWTReader().read(getParam(OpenIdConnect.ID_TOKEN));
+        try {
+            idToken = new JWTReader().read(getParam(OpenIdConnect.ID_TOKEN));
+        } catch (IllegalArgumentException ie) {
+            //is not open id connect compliant
+            //nothing to do.
+        }
+        
     }
 
     public final JWT getIdToken() {
