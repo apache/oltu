@@ -21,14 +21,14 @@
 
 package org.apache.oltu.oauth2.common.parameters;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.oltu.oauth2.common.OAuth;
 import org.apache.oltu.oauth2.common.message.OAuthResponse;
-import org.apache.oltu.oauth2.common.parameters.OAuthParametersApplier;
-import org.apache.oltu.oauth2.common.parameters.WWWAuthHeaderParametersApplier;
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -54,14 +54,12 @@ public class WWWAuthHeaderParametersApplierTest {
 
         OAuthParametersApplier applier = new WWWAuthHeaderParametersApplier();
         res = (OAuthResponse)applier.applyOAuthParameters(res, params);
-        Assert.assertNotNull(res);
+        assertNotNull(res);
         String header = res.getHeader(OAuth.HeaderType.WWW_AUTHENTICATE);
-        Assert.assertNotNull(header);
-        Assert.assertEquals(OAuth.OAUTH_HEADER_NAME
-            + " scope=\"s1 s2 s3\",error_uri=\"http://www.example.com/error\",error=\"invalid_token\"",
+        assertNotNull(header);
+        assertEquals(OAuth.OAUTH_HEADER_NAME
+            + " scope=\"s1 s2 s3\",error=\"invalid_token\",error_uri=\"http://www.example.com/error\"",
             header);
-
-
     }
 
 }

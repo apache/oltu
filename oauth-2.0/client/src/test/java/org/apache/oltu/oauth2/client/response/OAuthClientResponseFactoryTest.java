@@ -21,9 +21,10 @@
 
 package org.apache.oltu.oauth2.client.response;
 
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.Assert.assertNotNull;
+
 import org.apache.oltu.oauth2.common.OAuth;
+import org.junit.Test;
 
 
 /**
@@ -37,14 +38,14 @@ public class OAuthClientResponseFactoryTest {
     public void testCreateGitHubTokenResponse() throws Exception {
         OAuthClientResponse gitHubTokenResponse = OAuthClientResponseFactory
             .createGitHubTokenResponse("access_token=123", OAuth.ContentType.URL_ENCODED, 200);
-        Assert.assertNotNull(gitHubTokenResponse);
+        assertNotNull(gitHubTokenResponse);
     }
 
     @Test
     public void testCreateJSONTokenResponse() throws Exception {
         OAuthClientResponse jsonTokenResponse = OAuthClientResponseFactory
-            .createJSONTokenResponse("{'access_token':'123'}", OAuth.ContentType.JSON, 200);
-        Assert.assertNotNull(jsonTokenResponse);
+            .createJSONTokenResponse("{\"access_token\":\"123\"}", OAuth.ContentType.JSON, 200);
+        assertNotNull(jsonTokenResponse);
     }
 
     @Test

@@ -22,11 +22,22 @@ package org.apache.oltu.oauth2.ext.dynamicreg.server.request;
 
 import static java.lang.String.format;
 
+import java.io.StringReader;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
+import javax.json.Json;
+import javax.json.JsonArray;
+import javax.json.JsonNumber;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
+import javax.json.JsonString;
+import javax.json.JsonStructure;
+import javax.json.JsonValue;
+import javax.json.JsonValue.ValueType;
 import javax.servlet.ServletInputStream;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
@@ -36,8 +47,6 @@ import org.apache.oltu.oauth2.common.OAuth;
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.apache.oltu.oauth2.common.exception.OAuthRuntimeException;
 import org.apache.oltu.oauth2.common.utils.OAuthUtils;
-import org.json.JSONArray;
-import org.json.JSONTokener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -68,76 +77,82 @@ public class JSONHttpServletRequestWrapper extends HttpServletRequestWrapper {
         if (!bodyRead) {
             String body = readJsonBody();
 
-            final JSONTokener x = new JSONTokener(body);
-            char c;
-            String key;
+            StringReader reader = new StringReader(body);
+            JsonReader jsonReader = Json.createReader(reader);
+            JsonStructure structure = jsonReader.read();
 
-            if (x.nextClean() != '{') {
-                throw new OAuthRuntimeException(format("String '%s' is not a valid JSON object representation, a JSON object text must begin with '{'",
-                                                       body));
+            if (structure == null || structure instanceof JsonArray) {
+                throw new IllegalArgumentException(format("String '%s' is not a valid JSON object representation",
+                                                          body));
             }
-            for (;;) {
-                c = x.nextClean();
-                switch (c) {
-                case 0:
-                    throw new OAuthRuntimeException(format("String '%s' is not a valid JSON object representation, a JSON object text must end with '}'",
-                                                           body));
-                case '}':
-                    return Collections.unmodifiableMap(parameters);
-                default:
-                    x.back();
-                    key = x.nextValue().toString();
-                }
 
-                /*
-                 * The key is followed by ':'. We will also tolerate '=' or '=>'.
-                 */
-                c = x.nextClean();
-                if (c == '=') {
-                    if (x.next() != '>') {
-                        x.back();
-                    }
-                } else if (c != ':') {
-                    throw new OAuthRuntimeException(format("String '%s' is not a valid JSON object representation, expected a ':' after the key '%s'",
-                                                           body, key));
-                }
-                Object value = x.nextValue();
+            JsonObject object = (JsonObject) structure;
+            for (Entry<String, JsonValue> entry : object.entrySet()) {
+                String key = entry.getKey();
+                if (key != null) {
+                    JsonValue jsonValue = entry.getValue();
 
-                // guard from null values
-                if (value != null) {
-                    if (value instanceof JSONArray) { // only plain simple arrays in this version
-                        JSONArray array = (JSONArray) value;
-                        String[] values = new String[array.length()];
-                        for (int i = 0; i < array.length(); i++) {
-                            values[i] = String.valueOf(array.get(i));
+                    // guard from null values
+                    if (jsonValue != null) {
+                        String[] values;
+
+                        if (ValueType.ARRAY == jsonValue.getValueType()) {
+                            JsonArray array = (JsonArray) jsonValue;
+                            values = new String[array.size()];
+                            for (int i = 0; i < array.size(); i++) {
+                                JsonValue current = array.get(i);
+                                values[i] = toJavaObject(current);
+                            }
+                        } else {
+                            values = new String[]{ toJavaObject(jsonValue) };
                         }
-                        parameters.put(key, values);
-                    } else {
-                        parameters.put(key, new String[]{ String.valueOf(value) });
-                    }
-                }
 
-                /*
-                 * Pairs are separated by ','. We will also tolerate ';'.
-                 */
-                switch (x.nextClean()) {
-                case ';':
-                case ',':
-                    if (x.nextClean() == '}') {
-                        return Collections.unmodifiableMap(parameters);
+                        parameters.put(key, values);
                     }
-                    x.back();
-                    break;
-                case '}':
-                    return Collections.unmodifiableMap(parameters);
-                default:
-                    throw new OAuthRuntimeException(format("String '%s' is not a valid JSON object representation, Expected a ',' or '}",
-                                                           body));
                 }
             }
+
+            jsonReader.close();
         }
 
         return Collections.unmodifiableMap(parameters);
+    }
+
+    private static String toJavaObject(JsonValue jsonValue) {
+        String value = null;
+
+        switch (jsonValue.getValueType()) {
+            case FALSE:
+                value = Boolean.FALSE.toString();
+                break;
+
+            case NULL:
+                value = null;
+                break;
+
+            case NUMBER:
+                JsonNumber jsonNumber = (JsonNumber) jsonValue;
+                value = jsonNumber.numberValue().toString();
+                break;
+
+            case OBJECT:
+                // not supported in this version
+                break;
+
+            case STRING:
+                JsonString jsonString = (JsonString) jsonValue;
+                value = jsonString.getString();
+                break;
+
+            case TRUE:
+                value = Boolean.TRUE.toString();
+                break;
+
+            default:
+                break;
+        }
+
+        return value;
     }
 
     public Enumeration<String> getParameterNames() {

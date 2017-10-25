@@ -23,12 +23,26 @@ package org.apache.oltu.oauth2.common.utils;
 
 import static java.lang.String.format;
 
+import java.io.StringReader;
+import java.io.StringWriter;
+import java.lang.reflect.Array;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
-import org.json.JSONArray;
-import org.json.JSONStringer;
-import org.json.JSONTokener;
+import javax.json.Json;
+import javax.json.JsonArray;
+import javax.json.JsonNumber;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
+import javax.json.JsonString;
+import javax.json.JsonStructure;
+import javax.json.JsonValue;
+import javax.json.stream.JsonGenerator;
+import javax.json.stream.JsonGeneratorFactory;
 
 /**
  *
@@ -37,89 +51,157 @@ import org.json.JSONTokener;
  */
 public final class JSONUtils {
 
+    private static final JsonGeneratorFactory GENERATOR_FACTORY = Json.createGeneratorFactory(null);
+
     public static String buildJSON(Map<String, Object> params) {
-        final JSONStringer stringer = new JSONStringer();
-        stringer.object();
+        final StringWriter stringWriter = new StringWriter();
+        final JsonGenerator generator = GENERATOR_FACTORY.createGenerator(stringWriter);
+
+        generator.writeStartObject();
 
         for (Map.Entry<String, Object> param : params.entrySet()) {
-            if (param.getKey() != null && !"".equals(param.getKey()) && param.getValue() != null && !""
-                .equals(param.getValue())) {
-                stringer.key(param.getKey()).value(param.getValue());
+            String key = param.getKey();
+            Object value = param.getValue();
+            if (key != null && value != null) {
+                if (value instanceof Boolean) {
+                    generator.write(key, (Boolean) value);
+                } else if (value instanceof Double) {
+                    generator.write(key, (Double) value);
+                } else if (value instanceof Integer) {
+                    generator.write(key, (Integer) value);
+                } else if (value instanceof BigDecimal) {
+                    generator.write(key, (BigDecimal) value);
+                } else if (value instanceof BigInteger) {
+                    generator.write(key, (BigInteger) value);
+                } else if (value instanceof Long) {
+                    generator.write(key, (Long) value);
+                } else if (value instanceof String) {
+                    String string = (String) value;
+                    if (!string.isEmpty()) {
+                        generator.write(key, string);
+                    }
+                } else if (value.getClass().isArray()) {
+                    generator.writeStartArray(key);
+
+                    for (int i = 0; i < Array.getLength(value); i++) {
+                        witeItem(generator, Array.get(value, i));
+                    }
+
+                    generator.writeEnd();
+                } else if (value instanceof Collection) {
+                    generator.writeStartArray(key);
+
+                    Collection<?> collection = (Collection<?>) value;
+                    for (Object item : collection) {
+                        witeItem(generator, item);
+                    }
+
+                    generator.writeEnd();
+                }
             }
         }
 
-        return stringer.endObject().toString();
+        generator.writeEnd().close();
+
+        return stringWriter.toString();
+    }
+
+    private static <T> void witeItem(JsonGenerator generator, T item) {
+        if (item != null) {
+            if (item instanceof Boolean) {
+                generator.write((Boolean) item);
+            } else if (item instanceof Double) {
+                generator.write((Double) item);
+            } else if (item instanceof Integer) {
+                generator.write((Integer) item);
+            } else if (item instanceof BigDecimal) {
+                generator.write((BigDecimal) item);
+            } else if (item instanceof BigInteger) {
+                generator.write((BigInteger) item);
+            } else if (item instanceof Long) {
+                generator.write((Long) item);
+            } else if (item instanceof String) {
+                generator.write((String) item);
+            }
+        }
     }
 
     public static Map<String, Object> parseJSON(String jsonBody) {
         final Map<String, Object> params = new HashMap<String, Object>();
 
-        final JSONTokener x = new JSONTokener(jsonBody);
-        char c;
-        String key;
+        StringReader reader = new StringReader(jsonBody);
+        JsonReader jsonReader = Json.createReader(reader);
+        JsonStructure structure = jsonReader.read();
 
-        if (x.nextClean() != '{') {
-            throw new IllegalArgumentException(format("String '%s' is not a valid JSON object representation, a JSON object text must begin with '{'",
+        if (structure == null || structure instanceof JsonArray) {
+            throw new IllegalArgumentException(format("String '%s' is not a valid JSON object representation",
                                                       jsonBody));
         }
-        for (;;) {
-            c = x.nextClean();
-            switch (c) {
-            case 0:
-                throw new IllegalArgumentException(format("String '%s' is not a valid JSON object representation, a JSON object text must end with '}'",
-                                                          jsonBody));
-            case '}':
-                return params;
-            default:
-                x.back();
-                key = x.nextValue().toString();
-            }
 
-            /*
-             * The key is followed by ':'. We will also tolerate '=' or '=>'.
-             */
-            c = x.nextClean();
-            if (c == '=') {
-                if (x.next() != '>') {
-                    x.back();
+        JsonObject object = (JsonObject) structure;
+        for (Entry<String, JsonValue> entry : object.entrySet()) {
+            String key = entry.getKey();
+            if (key != null && !key.isEmpty()) {
+                JsonValue jsonValue = entry.getValue();
+
+                // guard from null values
+                if (jsonValue != null) {
+                    Object value = toJavaObject(jsonValue);
+
+                    params.put(key, value);
                 }
-            } else if (c != ':') {
-                throw new IllegalArgumentException(format("String '%s' is not a valid JSON object representation, expected a ':' after the key '%s'",
-                                                          jsonBody, key));
-            }
-            Object value = x.nextValue();
-
-            // guard from null values
-            if (value != null) {
-                if (value instanceof JSONArray) { // only plain simple arrays in this version
-                    JSONArray array = (JSONArray) value;
-                    Object[] values = new Object[array.length()];
-                    for (int i = 0; i < array.length(); i++) {
-                        values[i] = array.get(i);
-                    }
-                    value = values;
-                }
-
-                params.put(key, value);
-            }
-
-            /*
-             * Pairs are separated by ','. We will also tolerate ';'.
-             */
-            switch (x.nextClean()) {
-            case ';':
-            case ',':
-                if (x.nextClean() == '}') {
-                    return params;
-                }
-                x.back();
-                break;
-            case '}':
-                return params;
-            default:
-                throw new IllegalArgumentException("Expected a ',' or '}'");
             }
         }
+
+        jsonReader.close();
+        return params;
+    }
+
+    private static Object toJavaObject(JsonValue jsonValue) {
+        Object value = null;
+
+        switch (jsonValue.getValueType()) {
+            case ARRAY:
+                JsonArray array = (JsonArray) jsonValue;
+                Object[] values = new Object[array.size()];
+                for (int i = 0; i < array.size(); i++) {
+                    JsonValue current = array.get(i);
+                    values[i] = toJavaObject(current);
+                }
+                value = values;
+                break;
+
+            case FALSE:
+                value = false;
+                break;
+
+            case NULL:
+                value = null;
+                break;
+
+            case NUMBER:
+                JsonNumber jsonNumber = (JsonNumber) jsonValue;
+                value = jsonNumber.numberValue();
+                break;
+
+            case OBJECT:
+                // not supported in this version
+                break;
+
+            case STRING:
+                JsonString jsonString = (JsonString) jsonValue;
+                value = jsonString.getString();
+                break;
+
+            case TRUE:
+                value = true;
+                break;
+
+            default:
+                break;
+        }
+
+        return value;
     }
 
 }

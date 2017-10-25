@@ -21,12 +21,12 @@
 
 package org.apache.oltu.oauth2.common.utils;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.oltu.oauth2.common.error.OAuthError;
-import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -37,26 +37,13 @@ import org.junit.Test;
 public class JSONUtilsTest {
 
     @Test
-    @Ignore
-    // TODO what are testing here?
     public void testBuildJSON() throws Exception {
-
         Map<String, Object> params = new HashMap<String, Object>();
         params.put(OAuthError.OAUTH_ERROR, OAuthError.TokenResponse.INVALID_REQUEST);
 
         String json = JSONUtils.buildJSON(params);
 
-        /* JSONObject obj = new JSONObject(json);
-
-        AbstractXMLStreamReader reader = new MappedXMLStreamReader(obj);
-
-        Assert.assertEquals(XMLStreamReader.START_ELEMENT, reader.next());
-        Assert.assertEquals(OAuthError.OAUTH_ERROR, reader.getName().getLocalPart());
-
-        Assert.assertEquals(OAuthError.TokenResponse.INVALID_REQUEST, reader.getText());
-        Assert.assertEquals(XMLStreamReader.CHARACTERS, reader.next());
-        Assert.assertEquals(XMLStreamReader.END_ELEMENT, reader.next());
-        Assert.assertEquals(XMLStreamReader.END_DOCUMENT, reader.next()); */
+        assertEquals("{\"error\":\"invalid_request\"}", json);
     }
 
     @Test
@@ -67,8 +54,8 @@ public class JSONUtilsTest {
 
         String s = JSONUtils.buildJSON(jsonParams);
         Map<String, Object> map = JSONUtils.parseJSON(s);
-        Assert.assertEquals("John B. Smith", map.get("author"));
-        Assert.assertEquals("2000", map.get("year"));
+        assertEquals("John B. Smith", map.get("author"));
+        assertEquals("2000", map.get("year"));
     }
 
 }

@@ -78,7 +78,7 @@ public class PushPullValidator extends AbstractValidator<JSONHttpServletRequestW
         }
 
         if (log.isDebugEnabled()) {
-            log.debug("OAuth dynamic client registration type is: {}", new String[] {requestType});
+            log.debug("OAuth dynamic client registration type is: {}", new Object[] {requestType});
         }
     }
 }

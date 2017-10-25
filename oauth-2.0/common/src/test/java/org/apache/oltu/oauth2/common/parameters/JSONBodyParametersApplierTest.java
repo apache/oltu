@@ -21,16 +21,16 @@
 
 package org.apache.oltu.oauth2.common.parameters;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.oltu.oauth2.common.OAuth;
 import org.apache.oltu.oauth2.common.message.OAuthMessage;
-import org.apache.oltu.oauth2.common.parameters.JSONBodyParametersApplier;
-import org.apache.oltu.oauth2.common.parameters.OAuthParametersApplier;
 import org.apache.oltu.oauth2.common.utils.DummyOAuthMessage;
 import org.apache.oltu.oauth2.common.utils.JSONUtils;
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -61,14 +61,14 @@ public class JSONBodyParametersApplierTest {
 
         String msgBody = message.getBody();
         Map<String, Object> map = JSONUtils.parseJSON(msgBody);
-        Assert.assertEquals(3600, map.get(OAuth.OAUTH_EXPIRES_IN));
-        Assert.assertEquals("token_authz", map.get(OAuth.OAUTH_ACCESS_TOKEN));
-        Assert.assertEquals("code_", map.get(OAuth.OAUTH_CODE));
-        Assert.assertEquals("read", map.get(OAuth.OAUTH_SCOPE));
-        Assert.assertEquals("state", map.get(OAuth.OAUTH_STATE));
-        Assert.assertNull(map.get("empty_param"));
-        Assert.assertNull(map.get("null_param"));
-        Assert.assertNull(map.get(""));
-        Assert.assertNull(map.get(null));
+        assertEquals(3600L, map.get(OAuth.OAUTH_EXPIRES_IN));
+        assertEquals("token_authz", map.get(OAuth.OAUTH_ACCESS_TOKEN));
+        assertEquals("code_", map.get(OAuth.OAUTH_CODE));
+        assertEquals("read", map.get(OAuth.OAUTH_SCOPE));
+        assertEquals("state", map.get(OAuth.OAUTH_STATE));
+        assertNull(map.get("empty_param"));
+        assertNull(map.get("null_param"));
+        assertNull(map.get(""));
+        assertNull(map.get(null));
     }
 }

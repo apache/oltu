@@ -24,6 +24,7 @@ package org.apache.oltu.oauth2.as.response;
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.replay;
+import static org.junit.Assert.assertEquals;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -31,7 +32,6 @@ import org.apache.oltu.oauth2.common.OAuth;
 import org.apache.oltu.oauth2.common.error.OAuthError;
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.apache.oltu.oauth2.common.message.OAuthResponse;
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -53,8 +53,8 @@ public class OAuthASResponseTest {
 
         String url = oAuthResponse.getLocationUri();
 
-        Assert.assertEquals("http://www.example.com?testValue=value2&state=ok&code=code", url);
-        Assert.assertEquals(200, oAuthResponse.getResponseStatus());
+        assertEquals("http://www.example.com?code=code&state=ok&testValue=value2", url);
+        assertEquals(200, oAuthResponse.getResponseStatus());
 
     }
 
@@ -71,8 +71,8 @@ public class OAuthASResponseTest {
 
         String url = oAuthResponse.getLocationUri();
 
-        Assert.assertEquals("http://www.example.com?testValue=value2&state=ok&code=code", url);
-        Assert.assertEquals(200, oAuthResponse.getResponseStatus());
+        assertEquals("http://www.example.com?code=code&state=ok&testValue=value2", url);
+        assertEquals(200, oAuthResponse.getResponseStatus());
 
     }
 
@@ -90,8 +90,8 @@ public class OAuthASResponseTest {
                 .buildQueryMessage();
 
         String url = oAuthResponse.getLocationUri();
-        Assert.assertEquals("http://www.example.com#testValue=value2&state=ok&expires_in=400&token_type=bearer&access_token=access_111", url);
-        Assert.assertEquals(200, oAuthResponse.getResponseStatus());
+        assertEquals("http://www.example.com#access_token=access_111&state=ok&token_type=bearer&expires_in=400&testValue=value2", url);
+        assertEquals(200, oAuthResponse.getResponseStatus());
     }
 
     @Test
@@ -102,8 +102,8 @@ public class OAuthASResponseTest {
             .buildBodyMessage();
 
         String body = oAuthResponse.getBody();
-        Assert.assertEquals(
-            "expires_in=200&token_type=bearer&refresh_token=refresh_token2&access_token=access_token",
+        assertEquals(
+            "access_token=access_token&refresh_token=refresh_token2&token_type=bearer&expires_in=200",
             body);
 
     }
@@ -116,8 +116,9 @@ public class OAuthASResponseTest {
             .buildBodyMessage();
 
         String body = oAuthResponse.getBody();
-        Assert.assertEquals(
-            "some_param=new_param&expires_in=200&token_type=bearer&refresh_token=refresh_token2&access_token=access_token",
+
+        assertEquals(
+            "access_token=access_token&refresh_token=refresh_token2&some_param=new_param&token_type=bearer&expires_in=200",
             body);
 
     }
@@ -132,17 +133,15 @@ public class OAuthASResponseTest {
             .uri("http://www.example.com/error");
 
         OAuthResponse oAuthResponse = OAuthResponse.errorResponse(400).error(ex).buildJSONMessage();
-
-        Assert.assertEquals(
-            "{\"error_uri\":\"http://www.example.com/error\",\"error\":\"access_denied\",\"error_description\":\"Access denied\"}",
+        assertEquals(
+            "{\"error_description\":\"Access denied\",\"error\":\"access_denied\",\"error_uri\":\"http://www.example.com/error\"}",
             oAuthResponse.getBody());
 
 
         oAuthResponse = OAuthResponse.errorResponse(500)
             .location("http://www.example.com/redirect?param2=true").error(ex).buildQueryMessage();
-        Assert.assertEquals(
-            "http://www.example.com/redirect?param2=true&error_uri=http%3A%2F%2Fwww.example.com%2Ferror"
-                + "&error=access_denied&error_description=Access+denied",
+        assertEquals(
+            "http://www.example.com/redirect?param2=true&error_description=Access+denied&error=access_denied&error_uri=http%3A%2F%2Fwww.example.com%2Ferror",
             oAuthResponse.getLocationUri());
     }
 
@@ -156,9 +155,9 @@ public class OAuthASResponseTest {
 
         OAuthResponse oAuthResponse = OAuthResponse.errorResponse(500)
             .location("http://www.example.com/redirect?param2=true").error(ex).buildQueryMessage();
-        Assert.assertEquals(
-            "http://www.example.com/redirect?param2=true&error_uri=http%3A%2F%2Fwww.example.com%2Ferror"
-                + "&error=access_denied&error_description=Access+denied",
+
+        assertEquals(
+            "http://www.example.com/redirect?param2=true&error_description=Access+denied&error=access_denied&error_uri=http%3A%2F%2Fwww.example.com%2Ferror",
             oAuthResponse.getLocationUri());
     }
 
@@ -170,10 +169,10 @@ public class OAuthASResponseTest {
             .buildHeaderMessage();
 
         String header = oAuthResponse.getHeader(OAuth.HeaderType.WWW_AUTHENTICATE);
-        Assert.assertEquals("Bearer state=\"state_ok\",code=\"oauth_code\"", header);
+        assertEquals("Bearer code=\"oauth_code\",state=\"state_ok\"", header);
 
         header = oAuthResponse.getHeaders().get(OAuth.HeaderType.WWW_AUTHENTICATE);
-        Assert.assertEquals("Bearer state=\"state_ok\",code=\"oauth_code\"", header);
+        assertEquals("Bearer code=\"oauth_code\",state=\"state_ok\"", header);
     }
 
 }

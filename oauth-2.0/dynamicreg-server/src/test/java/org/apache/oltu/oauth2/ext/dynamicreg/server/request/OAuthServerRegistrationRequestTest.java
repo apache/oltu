@@ -20,12 +20,11 @@
  */
 package org.apache.oltu.oauth2.ext.dynamicreg.server.request;
 
+import static org.junit.Assert.assertEquals;
+
 import org.apache.oltu.oauth2.common.OAuth;
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
-import org.apache.oltu.oauth2.ext.dynamicreg.server.request.JSONHttpServletRequestWrapper;
-import org.apache.oltu.oauth2.ext.dynamicreg.server.request.OAuthServerRegistrationRequest;
 import org.apache.oltu.oauth2.utils.test.FileUtils;
-import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 
@@ -45,14 +44,13 @@ public class OAuthServerRegistrationRequestTest {
         final JSONHttpServletRequestWrapper jsonWrapper = new JSONHttpServletRequestWrapper(request);
         OAuthServerRegistrationRequest registrationRequest = new OAuthServerRegistrationRequest(jsonWrapper);
 
-        Assert.assertEquals("Uploading and also editing capabilities!",
+        assertEquals("Uploading and also editing capabilities!",
             registrationRequest.getClientDescription());
-        Assert.assertEquals("http://onlinephotogallery.com/icon.png", registrationRequest.getClientIcon());
-        Assert.assertEquals("Online Photo Gallery", registrationRequest.getClientName());
-        Assert
-            .assertEquals("https://onlinephotogallery.com/client_reg", registrationRequest.getRedirectURI());
-        Assert.assertEquals("push", registrationRequest.getType());
-        Assert.assertEquals("http://onlinephotogallery.com", registrationRequest.getClientUrl());
+        assertEquals("http://onlinephotogallery.com/icon.png", registrationRequest.getClientIcon());
+        assertEquals("Online Photo Gallery", registrationRequest.getClientName());
+        assertEquals("https://onlinephotogallery.com/client_reg", registrationRequest.getRedirectURI());
+        assertEquals("push", registrationRequest.getType());
+        assertEquals("http://onlinephotogallery.com", registrationRequest.getClientUrl());
     }
 
     @Test(expected = OAuthProblemException.class)

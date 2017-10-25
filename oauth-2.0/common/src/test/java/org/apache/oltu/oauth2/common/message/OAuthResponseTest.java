@@ -45,7 +45,7 @@ public class OAuthResponseTest {
 
         String body = oAuthResponse.getBody();
         assertEquals(
-            "{\"error_uri\":\"http://example-uri\",\"error\":\"error\",\"param\":\"value\",\"realm\":\"album\",\"state\":\"ok\",\"error_description\":\"error_description\"}",
+            "{\"param\":\"value\",\"error_description\":\"error_description\",\"realm\":\"album\",\"state\":\"ok\",\"error\":\"error\",\"error_uri\":\"http://example-uri\"}",
             body);
     }
 
