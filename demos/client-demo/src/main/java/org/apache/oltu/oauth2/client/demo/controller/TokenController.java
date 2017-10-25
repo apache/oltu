@@ -79,7 +79,6 @@ public class TokenController {
             Class<? extends OAuthAccessTokenResponse> cl = OAuthJSONAccessTokenResponse.class;
 
             if (Utils.FACEBOOK.equalsIgnoreCase(app)) {
-                cl = GitHubTokenResponse.class;
                 oauthParams.setResourceUrl(Utils.FACEBOOK_RESOURCE_URL);
             } else if (Utils.GITHUB.equalsIgnoreCase(app)) {
                 cl = GitHubTokenResponse.class;
