@@ -65,9 +65,9 @@ public class OAuthFilter implements Filter {
     public void init(FilterConfig filterConfig) throws ServletException {
 
         provider = OAuthUtils
-            .initiateServletContext(filterConfig.getServletContext(), OAUTH_RS_PROVIDER_CLASS,
+            .initiateServletContext(filterConfig, OAUTH_RS_PROVIDER_CLASS,
                 OAuthRSProvider.class);
-        realm = filterConfig.getServletContext().getInitParameter(RS_REALM);
+        realm = filterConfig.getInitParameter(RS_REALM);
         if (OAuthUtils.isEmpty(realm)) {
             realm = RS_REALM_DEFAULT;
         }

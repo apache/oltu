@@ -21,6 +21,7 @@
 
 package org.apache.oltu.oauth2.rsfilter;
 
+import javax.servlet.FilterConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
@@ -31,34 +32,34 @@ import javax.servlet.ServletException;
  */
 public class OAuthUtils {
 
-    public static <T> T initiateServletContext(ServletContext context, String key, Class<T> expectedClass)
+    public static <T> T initiateServletContext(FilterConfig config, String key, Class<T> expectedClass)
         throws ServletException {
 
-        T provider = (T)context.getAttribute(key);
+        T provider = (T) config.getServletContext().getAttribute(key);
 
         if (provider != null) {
             return provider;
         }
 
-        provider = (T)loadObject(context, key, expectedClass);
+        provider = (T) loadObject(config, key, expectedClass);
 
         // set the provider and validator
-        context.setAttribute(key, provider);
+        config.getServletContext().setAttribute(key, provider);
 
         return provider;
     }
 
-    public static Object loadObject(ServletContext context, String classParamName, Class expectedClass)
+    public static <T> T loadObject(FilterConfig config, String classParamName, Class<T> expectedClass)
         throws ServletException {
 
-        Object ob = null;
+        T ob = null;
 
-        String providerClassName = context.getInitParameter(classParamName);
+        String providerClassName = config.getInitParameter(classParamName);
         if (isEmpty(providerClassName)) {
             throw new ServletException(classParamName + " context param required");
         }
         try {
-            Class<?> clazz = Class.forName(providerClassName);
+            Class<T> clazz = (Class<T>) Class.forName(providerClassName);
             if (!expectedClass.isAssignableFrom(clazz)) {
                 throw new ServletException(classParamName + " class: " + providerClassName
                     + " must be an instance of: " + expectedClass.getName());
@@ -72,12 +73,11 @@ public class OAuthUtils {
         return ob;
     }
 
-    public static Object createObjectFromClassName(Class clazz)
-        throws IllegalAccessException, InstantiationException {
+    public static <T> T createObjectFromClassName(Class<T> clazz) throws IllegalAccessException, InstantiationException {
         return clazz.newInstance();
     }
 
     public static boolean isEmpty(String value) {
-        return value == null || "".equals(value);
+        return value == null || value.isEmpty();
     }
 }
