@@ -39,7 +39,6 @@ public abstract class CustomizableEntityReader<E, B extends CustomizableBuilder<
     }
 
     /**
-     * Method extracted from {@code org.json.JSONObject#JSONObject(JSONTokener)}
      *
      * @param jsonString
      */
