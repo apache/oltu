@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ | Licensed to the Apache Software Foundation (ASF) under one
+ | or more contributor license agreements.  See the NOTICE file
+ | distributed with this work for additional information
+ | regarding copyright ownership.  The ASF licenses this file
+ | to you under the Apache License, Version 2.0 (the
+ | "License"); you may not use this file except in compliance
+ | with the License.  You may obtain a copy of the License at
+ |
+ |   http://www.apache.org/licenses/LICENSE-2.0
+ |
+ | Unless required by applicable law or agreed to in writing,
+ | software distributed under the License is distributed on an
+ | "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ | KIND, either express or implied.  See the License for the
+ | specific language governing permissions and limitations
+ | under the License.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.apache.oltu</groupId>
+    <artifactId>org.apache.oltu.parent</artifactId>
+    <version>5-SNAPSHOT</version>
+    <relativePath>../parent</relativePath>
+  </parent>
+
+  <artifactId>org.apache.oltu.site</artifactId>
+  <version>1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>Apache Oltu</name>
+  <url>https://oltu.apache.org/</url>
+
+  <scm>
+    <url>https://svn.apache.org/viewvc/oltu/trunk/site</url>
+    <connection>scm:svn:https://svn.apache.org/repos/asf/oltu/trunk/site</connection>
+    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/oltu/trunk/site</developerConnection>
+  </scm>
+
+  <properties>
+    <svnUrl>https://svn.apache.org/repos/asf/oltu/site/</svnUrl>
+    <checkoutDirectory>site-publish</checkoutDirectory>
+  </properties>
+
+  <distributionManagement>
+    <site>
+      <id>apache.website.svnpub</id>
+      <url>scm:svn:${svnUrl}</url>
+    </site>
+  </distributionManagement>
+
+  <repositories>
+    <repository>
+      <id>apache.snapshots</id>
+      <name>Apache Snapshot Repository</name>
+      <url>https://repository.apache.org/snapshots</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+    </repository>
+  </repositories>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-doap-plugin</artifactId>
+        <configuration>
+          <artifact>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>${project.parent.artifactId}</artifactId>
+            <version>${project.parent.version}</version>
+          </artifact>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <configuration>
+          <locales>en</locales>
+          <skipDeploy>true</skipDeploy>
+        </configuration>
+        <executions>
+          <execution>
+            <id>attach-descriptor</id>
+            <goals>
+              <goal>attach-descriptor</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>stage-for-scm-publish</id>
+            <phase>post-site</phase>
+            <goals>
+              <goal>stage</goal>
+            </goals>
+            <configuration>
+              <skipDeploy>false</skipDeploy>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-scm-publish-plugin</artifactId>
+        <inherited>false</inherited>
+        <configuration>
+          <checkinComment>Oltu main site deployment</checkinComment>
+          <ignorePathsToDelete>
+            <ignorePathToDelete>apidocs**</ignorePathToDelete>
+            <ignorePathToDelete>amber-sources**</ignorePathToDelete>
+            <ignorePathToDelete>amber-oauth2-parent**</ignorePathToDelete>
+          </ignorePathsToDelete>
+          <checkoutDirectory>${checkoutDirectory}</checkoutDirectory>
+        </configuration>
+        <executions>
+          <execution>
+            <id>scm-publish</id>
+            <phase>site-deploy</phase>
+            <goals>
+              <goal>publish-scm</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <configuration>
+          <checkoutDirectoryName>org.apache.oltu</checkoutDirectoryName>
+          <webAccessUrl>https://svn.apache.org/viewvc/oltu/trunk/</webAccessUrl>
+          <anonymousConnection>scm:svn:https://svn.apache.org/repos/asf/oltu/trunk/</anonymousConnection>
+          <developerConnection>scm:svn:https://svn.apache.org/repos/asf/oltu/trunk/</developerConnection>
+        </configuration>
+      </plugin>
+    </plugins>
+  </reporting>
+
+  <profiles>
+    <profile>
+      <id>setup-checkout</id>
+      <activation>
+        <file>
+          <missing>site-publish</missing>
+        </file>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>prepare-checkout</id>
+                <phase>pre-site</phase>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+                <configuration>
+                  <tasks>
+                    <exec executable="svn">
+                      <arg line="checkout --depth immediates ${svnUrl} ${checkoutDirectory}" />
+                    </exec>
+
+                    <exec executable="svn">
+                      <arg line="update --set-depth exclude ${checkoutDirectory}/apidocs
+                                                            ${checkoutDirectory}/amber-sources
+                                                            ${checkoutDirectory}/amber-oauth2-parent" />
+                    </exec>
+
+                    <pathconvert pathsep=" " property="dirs">
+                      <dirset dir="${checkoutDirectory}" includes="*" />
+                    </pathconvert>
+                    <exec executable="svn">
+                      <arg line="update --set-depth infinity ${dirs}" />
+                    </exec>
+                  </tasks>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+</project>

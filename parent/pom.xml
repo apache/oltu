@@ -1,0 +1,980 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.apache</groupId>
+    <artifactId>apache</artifactId>
+    <version>17</version>
+    <relativePath />
+  </parent>
+
+  <groupId>org.apache.oltu</groupId>
+  <artifactId>org.apache.oltu.parent</artifactId>
+  <version>5-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>Apache Oltu - Parent</name>
+  <description>Apache Oltu is an OAuth protocol implementation in Java.</description>
+  <url>https://oltu.apache.org/</url>
+  <inceptionYear>2010</inceptionYear>
+
+  <developers>
+    <developer>
+      <id>asanso</id>
+      <name>Antonio Sanso</name>
+      <email>asanso@apache.org</email>
+      <organization>Adobe</organization>
+      <organizationUrl>http://www.day.com</organizationUrl>
+      <roles>
+        <role>Chair</role>
+        <role>PMC Member</role>
+        <role>Committer</role>
+      </roles>
+      <timezone>+1</timezone>
+    </developer>
+
+    <developer>
+      <id>jasha</id>
+      <name>Jasha Joachimsthal</name>
+      <email>jasha@apache.org</email>
+      <organization>Onegini</organization>
+      <organizationUrl>https://www.onegini.com</organizationUrl>
+      <roles>
+       	<role>PMC Member</role>
+        <role>Committer</role>
+      </roles>
+      <timezone>+1</timezone>
+    </developer>
+
+    <developer>
+      <id>lmoren</id>
+      <name>Lukasz Moren</name>
+      <email>lmoren@apache.org</email>
+      <roles>
+        <role>PMC Member</role>
+        <role>Committer</role>
+      </roles>
+      <timezone>0</timezone>
+    </developer>
+
+    <developer>
+      <id>mmachulak</id>
+      <name>Maciej Machulak</name>
+      <email>mmachulak@apache.org</email>
+      <roles>
+        <role>PMC Member</role>
+        <role>Committer</role>
+      </roles>
+      <timezone>0</timezone>
+    </developer>
+
+    <developer>
+      <id>pidster</id>
+      <name>Stuart "Pid" Williams</name>
+      <email>pidster@apache.org</email>
+      <roles>
+        <role>PMC Member</role>
+        <role>Committer</role>
+      </roles>
+      <timezone>+1</timezone>
+    </developer>
+
+    <developer>
+      <id>rfeng</id>
+      <name>Raymond Zhaohui Feng</name>
+      <email>rfeng@apache.org</email>
+      <roles>
+        <role>PMC Member</role>
+        <role>Committer</role>
+      </roles>
+    </developer>
+ 
+    <developer>
+      <id>simonetripodi</id>
+      <name>Simone Tripodi</name>
+      <email>simonetripodi@apache.org</email>
+      <organization>Adobe</organization>
+      <roles>
+        <role>PMC Member</role>
+        <role>Committer</role>
+      </roles>
+      <timezone>+1</timezone>
+    </developer>
+
+    <developer>
+      <id>stein</id>
+      <name>Stein Welberg</name>
+      <email>stein@apache.org</email>
+      <organization>Onegini</organization>
+      <organizationUrl>https://www.onegini.com</organizationUrl>
+      <roles>
+       	<role>PMC Member</role>
+        <role>Committer</role>
+      </roles>
+      <timezone>+1</timezone>
+    </developer>
+
+    <!-- EMERITUS members -->
+
+    <developer>
+      <id>tommaso</id>
+      <name>Tommaso Teofili</name>
+      <email>tommaso@apache.org</email>
+      <organization>Adobe</organization>
+      <roles>
+        <role>Emeritus</role>
+      </roles>
+      <timezone>+1</timezone>
+    </developer>
+
+    <developer>
+      <id>brianm</id>
+      <name>Brian McCallister</name>
+      <email>brianm@apache.org</email>
+      <roles>
+        <role>Mentor</role>
+        <role>PMC Member</role>
+        <role>Committer</role>
+        <role>Emeritus</role>
+      </roles>
+    </developer>
+
+    <developer>
+      <id>djencks</id>
+      <name>David Jencks</name>
+      <email>djencks@apache.org</email>
+      <roles>
+        <role>Mentor</role>
+        <role>PMC Member</role>
+        <role>Committer</role>
+        <role>Emeritus</role>
+      </roles>
+    </developer>
+
+    <developer>
+      <id>gianugo</id>
+      <name>Gianugo Rabellino</name>
+      <email>gianugo@apache.org</email>
+      <roles>
+        <role>Mentor</role>
+        <role>PMC Member</role>
+        <role>Committer</role>
+        <role>Emeritus</role>
+      </roles>
+    </developer>
+
+    <developer>
+      <id>henning</id>
+      <name>Henning Schmiedehausen</name>
+      <email>henning@apache.org</email>
+      <roles>
+        <role>Mentor</role>
+        <role>PMC Member</role>
+        <role>Committer</role>
+        <role>Emeritus</role>
+      </roles>
+    </developer>
+
+    <developer>
+      <id>jfclere</id>
+      <name>Jean-Frederic Clere</name>
+      <email>jfclere@apache.org</email>
+      <roles>
+        <role>Mentor</role>
+        <role>PMC Member</role>
+        <role>Committer</role> 
+       	<role>Emeritus</role>
+      </roles>
+    </developer>
+
+    <developer>
+      <id>lindner</id>
+      <name>Paul Lindner</name>
+      <email>lindner@apache.org</email>
+      <roles>
+        <role>PMC Member</role>
+        <role>Committer</role>
+        <role>Emeritus</role> 
+      </roles>
+      <timezone>+1</timezone>
+    </developer>
+
+    <developer>
+      <id>pablo</id>
+      <name>Pablo Fernandez</name>
+      <email>pablo@apache.org</email>
+      <roles>
+        <role>PMC Member</role>
+        <role>Committer</role>
+        <role>Emeritus</role>
+      </roles>
+      <timezone>+1</timezone>
+    </developer>
+
+    <developer>
+      <id>recordond</id>
+      <name>David Recordon</name>
+      <email>recordond@apache.org</email>
+      <roles>
+        <role>PMC Member</role>
+        <role>Committer</role>
+        <role>Emeritus</role>
+      </roles>
+      <timezone>+1</timezone>
+    </developer>
+
+    <developer>
+      <id>simoneg</id>
+      <name>Simone Gianni</name>
+      <email>simoneg@apache.org</email>
+      <organization>Semeru S.r.l.</organization>
+      <organizationUrl>http://www.semeru.it/</organizationUrl>
+      <roles>
+        <role>PMC Member</role>
+        <role>Committer</role>
+        <role>Emeritus</role> 
+      </roles>
+      <timezone>+1</timezone>
+    </developer>
+  </developers>
+
+  <contributors>
+    <contributor>
+      <name>Markus Sabadello</name>
+      <email />
+      <url />
+      <organization />
+      <organizationUrl />
+      <roles />
+      <timezone />
+      <properties />
+    </contributor>
+
+    <contributor>
+      <name>Ben Noordhuis</name>
+      <email />
+      <url />
+      <organization />
+      <organizationUrl />
+      <roles />
+      <timezone />
+      <properties />
+    </contributor>
+
+    <contributor>
+      <name>Alexis Tessier</name>
+      <url>http://banzoner.com/</url>
+      <roles>
+        <role>Apache Oltu logos designer</role>
+      </roles>
+      <timezone>+1</timezone>
+    </contributor>
+  </contributors>
+
+  <mailingLists>
+    <mailingList>
+      <name>Dev Mailing List</name>
+      <post>dev@oltu.apache.org</post>
+      <subscribe>dev-subscribe@oltu.apache.org</subscribe>
+      <unsubscribe>dev-unsubscribe@oltu.apache.org</unsubscribe>
+      <archive>https://mail-archives.apache.org/mod_mbox/oltu-dev/</archive>
+      <otherArchives>
+        <otherArchive>https://mail-archives.apache.org/mod_mbox/incubator-amber-dev/</otherArchive>
+      </otherArchives>
+    </mailingList>
+
+    <mailingList>
+      <name>User Mailing List</name>
+      <post>user@oltu.apache.org</post>
+      <subscribe>user-subscribe@oltu.apache.org</subscribe>
+      <unsubscribe>user-unsubscribe@oltu.apache.org</unsubscribe>
+      <archive>https://mail-archives.apache.org/mod_mbox/oltu-user/</archive>
+      <otherArchives>
+        <otherArchive>https://mail-archives.apache.org/mod_mbox/incubator-amber-user/</otherArchive>
+      </otherArchives>
+    </mailingList>
+
+    <mailingList>
+      <name>Commits Mailing List</name>
+      <post>commits@oltu.apache.org</post>
+      <subscribe>commits-subscribe@oltu.apache.org</subscribe>
+      <unsubscribe>commits-unsubscribe@oltu.apache.org</unsubscribe>
+      <archive>https://mail-archives.apache.org/mod_mbox/oltu-commits/</archive>
+      <otherArchives>
+        <otherArchive>https://mail-archives.apache.org/mod_mbox/incubator-amber-commits/</otherArchive>
+      </otherArchives>
+    </mailingList>
+  </mailingLists>
+
+  <scm>
+    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/oltu/trunk/parent</developerConnection>
+    <connection>scm:svn:https://svn.apache.org/repos/asf/oltu/trunk/parent</connection>
+    <url>https://svn.apache.org/repos/asf/oltu/trunk/parent</url>
+  </scm>
+  <issueManagement>
+    <system>JIRA</system>
+    <url>https://issues.apache.org/jira/browse/OLTU</url>
+  </issueManagement>
+  <ciManagement>
+    <system>Jenkins</system>
+    <url>https://builds.apache.org/job/Oltu/</url>
+    <notifiers>
+     <notifier>
+       <type>mail</type>
+       <sendOnError>true</sendOnError>
+       <sendOnFailure>true</sendOnFailure>
+       <sendOnSuccess>false</sendOnSuccess>
+       <sendOnWarning>false</sendOnWarning>
+       <configuration><address>dev@oltu.apache.org</address></configuration> 
+     </notifier>
+   </notifiers>
+  </ciManagement>
+  <distributionManagement>
+    <downloadUrl>https://oltu.apache.org/download.html</downloadUrl>
+  </distributionManagement>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <javac.src.version>1.8</javac.src.version>
+    <javac.target.version>1.8</javac.target.version>
+    <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ssZ</maven.build.timestamp.format>
+    <implementation.build>${scmBranch}@r${buildNumber}</implementation.build>
+    <!--
+     | shared build/report plugins version
+    -->
+    <javadoc.version>2.9.1</javadoc.version>
+    <!--
+     | OSGi settings
+    -->
+    <osgi.export>${project.artifactId};version=${project.version}</osgi.export>
+    <osgi.import>*</osgi.import>
+    <osgi.dynamicImport />
+    <osgi.private />
+    <osgi.activator />
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>commons-logging</groupId>
+        <artifactId>commons-logging</artifactId>
+        <version>1.1.3</version>
+        <scope>compile</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>log4j</groupId>
+        <artifactId>log4j</artifactId>
+        <version>1.2.17</version>
+        <exclusions>
+          <exclusion>
+            <groupId>com.sun.jdmk</groupId>
+            <artifactId>jmxtools</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>com.sun.jmx</groupId>
+            <artifactId>jmxri</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>javax.jms</groupId>
+            <artifactId>jms</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>oro</groupId>
+            <artifactId>oro</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-eclipse-plugin</artifactId>
+          <version>2.9</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>2.4</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>2.5</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.8.1</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.5.1</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>2.6</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>cobertura-maven-plugin</artifactId>
+          <version>2.6</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.16</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>2.4</version>
+          <dependencies>
+            <dependency>
+              <groupId>org.codehaus.plexus</groupId>
+              <artifactId>plexus-utils</artifactId>
+              <version>3.0.8</version>
+            </dependency>
+          </dependencies>
+          <configuration>
+            <attach>true</attach>
+            <tarLongFileMode>gnu</tarLongFileMode>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>2.4.2</version>
+          <configuration>
+            <mavenExecutorId>forked-path</mavenExecutorId>
+            <useReleaseProfile>false</useReleaseProfile>
+            <preparationGoals>clean install</preparationGoals>
+            <autoVersionSubmodules>false</autoVersionSubmodules>
+            <arguments>-Prelease,apache</arguments>
+            <tagBase>https://svn.apache.org/repos/asf/oltu/tags</tagBase>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-scm-publish-plugin</artifactId>
+          <version>1.0</version>
+          <configuration>
+            <tryUpdate>true</tryUpdate>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.felix</groupId>
+          <artifactId>maven-bundle-plugin</artifactId>
+          <version>2.3.7</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <version>1.3.1</version>
+        <executions>
+          <execution>
+            <id>enforce-java</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <requireJavaVersion>
+                  <version>[1.8,)</version>
+                  <message>[ERROR] The currently supported version of Java is 1.8 or higher</message>
+                </requireJavaVersion>
+                <requireMavenVersion>
+                  <version>[2.2.0,)</version>
+                  <message>[ERROR] The currently supported version of Maven is 2.2.0 or higher</message>
+                </requireMavenVersion>
+                <requirePluginVersions>
+                  <message>Best Practice is to always define plugin versions!</message>
+                  <banLatest>true</banLatest>
+                  <banRelease>true</banRelease>
+                  <banSnapshots>true</banSnapshots>
+                  <phases>[ERROR] clean,deploy,site</phases>
+                </requirePluginVersions>
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>buildnumber-maven-plugin</artifactId>
+        <version>1.2</version>
+        <executions>
+          <execution>
+            <phase>validate</phase>
+            <goals>
+              <goal>create</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <doCheck>false</doCheck>
+          <doUpdate>false</doUpdate>
+          <!-- Use committed revision so it does not change every time svn update is run -->
+          <useLastCommittedRevision>true</useLastCommittedRevision>
+          <!-- default revision number if unavailable -->
+          <revisionOnScmFailure>??????</revisionOnScmFailure>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.1</version>
+        <configuration>
+          <source>${javac.src.version}</source>
+          <target>${javac.target.version}</target>
+          <optimize>true</optimize>
+          <showDeprecation>true</showDeprecation>
+          <showWarnings>true</showWarnings>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <instructions>
+            <!--
+             | Stop the JAVA_1_n_HOME variables from being treated as headers by Bnd
+            -->
+            <_removeheaders>Include-Resource,JAVA_1_3_HOME,JAVA_1_4_HOME,JAVA_1_5_HOME,JAVA_1_6_HOME,JAVA_1_7_HOME,JAVA_1_8_HOME</_removeheaders>
+            <Bundle-Name>${project.name}</Bundle-Name>
+            <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+            <Bundle-Description>${project.description}</Bundle-Description>
+            <Export-Package>${osgi.export}</Export-Package>
+            <Private-Package>${osgi.private}</Private-Package>
+            <Import-Package>${osgi.import}</Import-Package>
+            <DynamicImport-Package>${osgi.dynamicImport}</DynamicImport-Package>
+            <Bundle-DocURL>${project.url}</Bundle-DocURL>
+            <!-- Bundle-RequiredExecutionEnvironment>J2SE-${javac.target.version}</Bundle-RequiredExecutionEnvironment-->
+            <Bundle-Activator>${osgi.activator}</Bundle-Activator>
+            <Implementation-Build>${implementation.build}</Implementation-Build>
+            <Implementation-Build-Date>${maven.build.timestamp}</Implementation-Build-Date>
+            <X-Compile-Source-JDK>${javac.src.version}</X-Compile-Source-JDK>
+            <X-Compile-Target-JDK>${javac.target.version}</X-Compile-Target-JDK>
+          </instructions>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-doap-plugin</artifactId>
+        <version>1.1</version>
+        <executions>
+          <execution>
+            <id>site</id>
+            <phase>site</phase>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <doapFile>doap.rdf</doapFile>
+          <doapOptions>
+            <created>${project.inceptionYear}-05-09</created>
+          </doapOptions>
+          <asfExtOptions>
+            <charter>${project.description}</charter>
+            <chair>Antonio Sanso</chair>
+          </asfExtOptions>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jxr-plugin</artifactId>
+        <version>2.4</version>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>jdepend-maven-plugin</artifactId>
+        <version>2.0-beta-2</version>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>findbugs-maven-plugin</artifactId>
+        <version>2.5.3</version>
+        <configuration>
+          <xmlOutput>true</xmlOutput>
+          <xmlOutputDirectory>target/findbugs-reports</xmlOutputDirectory>
+          <findbugsXmlOutput>target/findbugs-reports</findbugsXmlOutput>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-report-plugin</artifactId>
+        <version>2.16</version>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-pmd-plugin</artifactId>
+        <version>3.0.1</version>
+        <configuration>
+          <linkXref>true</linkXref>
+          <minimumTokens>100</minimumTokens>
+          <targetJdk>1.8</targetJdk>
+        </configuration>
+      </plugin>
+    </plugins>
+  </reporting>
+
+  <profiles>
+    <profile>
+      <id>release</id>
+
+      <build>
+        <plugins>
+          <!--
+           | Create a source-release artifact that contains the fully buildable
+           | project directory source structure.
+           | This is the artifact which is the official subject of any release vote.
+          -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <dependencies>
+              <dependency>
+                <groupId>org.apache.apache.resources</groupId>
+                <artifactId>apache-source-release-assembly-descriptor</artifactId>
+                <version>1.0.4</version>
+              </dependency>
+            </dependencies>
+            <executions>
+              <execution>
+                <id>source-release-assembly</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>single</goal>
+                </goals>
+                <configuration>
+                  <runOnlyAtExecutionRoot>true</runOnlyAtExecutionRoot>
+                  <descriptorRefs>
+                    <descriptorRef>${sourceReleaseAssemblyDescriptor}</descriptorRef>
+                  </descriptorRefs>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+
+          <plugin>
+            <groupId>org.apache.rat</groupId>
+            <artifactId>apache-rat-plugin</artifactId>
+            <version>0.10</version>
+            <executions>
+              <execution>
+                <id>rat-verify</id>
+                <phase>test</phase>
+                <goals>
+                  <goal>check</goal>
+                </goals>
+                <configuration>
+                  <excludes>
+                    <exclude>CHANGES</exclude>
+                    <exclude>DISCLAIMER</exclude>
+                    <exclude>**/NOTICE*</exclude>
+                    <exclude>.idea/**</exclude>
+                    <exclude>.classpath</exclude>
+                    <exclude>.project</exclude>
+                    <exclude>.settings</exclude>
+                    <exclude>maven-eclipse.xml</exclude>
+                    <exclude>.externalToolBuilders/**</exclude>
+                    <exclude>**/*.json</exclude>
+                  </excludes>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <version>2.2.1</version>
+            <executions>
+              <execution>
+                <id>attach-sources</id>
+                <goals>
+                  <goal>jar-no-fork</goal>
+                </goals>
+                <configuration>
+                  <archive>
+                    <manifest>
+                      <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                      <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                    </manifest>
+                    <manifestEntries>
+                      <Implementation-Build>${implementation.build}</Implementation-Build>
+                      <Implementation-Build-Date>${maven.build.timestamp}</Implementation-Build-Date>
+                      <X-Compile-Source-JDK>${javac.src.version}</X-Compile-Source-JDK>
+                      <X-Compile-Target-JDK>${javac.target.version}</X-Compile-Target-JDK>
+                    </manifestEntries>
+                  </archive>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>${javadoc.version}</version>
+            <executions>
+              <execution>
+                <id>attach-javadocs</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+                <configuration>
+                  <quiet>true</quiet>
+                  <archive>
+                    <manifest>
+                      <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                      <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                    </manifest>
+                    <manifestEntries>
+                      <Implementation-Build>${implementation.build}</Implementation-Build>
+                      <Implementation-Build-Date>${maven.build.timestamp}</Implementation-Build-Date>
+                      <X-Compile-Source-JDK>${javac.src.version}</X-Compile-Source-JDK>
+                      <X-Compile-Target-JDK>${javac.target.version}</X-Compile-Target-JDK>
+                    </manifestEntries>
+                  </archive>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.4</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>site</id>
+
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>${javadoc.version}</version>
+            <configuration>
+              <notimestamp>true</notimestamp>
+              <bootclasspath>${sun.boot.class.path}</bootclasspath>
+              <doclet>com.google.doclava.Doclava</doclet>
+              <useStandardDocletOptions>false</useStandardDocletOptions>
+              <additionalJOption>-J-Xmx1024m</additionalJOption>
+              <docletArtifact>
+                <groupId>com.google.doclava</groupId>
+                <artifactId>doclava</artifactId>
+                <version>1.0.5</version>
+              </docletArtifact>
+              <additionalparam>
+                -quiet
+                -federate JDK http://download.oracle.com/javase/6/docs/api/index.html?
+                -federationxml JDK http://doclava.googlecode.com/svn/static/api/openjdk-6.xml
+                -hdf project.name "${project.name}"
+                -apiversion "${project.version}"
+                -d ${project.reporting.outputDirectory}/apidocs
+              </additionalparam>
+            </configuration>
+            <executions>
+              <execution>
+                <id>aggregate</id>
+                <phase>site</phase>
+                <goals>
+                  <goal>aggregate</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-site-plugin</artifactId>
+            <configuration>
+              <locales>en</locales>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+
+      <reporting>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-project-info-reports-plugin</artifactId>
+            <version>2.7</version>
+            <configuration>
+              <dependencyDetailsEnabled>false</dependencyDetailsEnabled>
+              <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
+            </configuration>
+            <reportSets>
+              <reportSet>
+                <reports>
+                  <report>index</report>
+                  <report>mailing-list</report>
+                  <report>project-team</report>
+                  <report>scm</report>
+                  <report>cim</report>
+                  <report>issue-tracking</report>
+                  <report>license</report>
+                </reports>
+              </reportSet>
+            </reportSets>
+          </plugin>
+
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>${javadoc.version}</version>
+            <reportSets>
+              <reportSet>
+                <id>default</id>
+                <reports>
+                  <report>javadoc</report>
+                </reports>
+              </reportSet>
+              <reportSet>
+                <id>aggregate</id>
+                <reports>
+                  <report>aggregate</report>
+                </reports>
+              </reportSet>
+            </reportSets>
+          </plugin>
+        </plugins>
+      </reporting>
+    </profile>
+    <profile>
+      <!--
+      Originally added to compile with Java 1.6 while using Java 1.8 to run Maven. Now to make sure the correct JDK
+      version is used.
+      -->
+      <id>toolchain</id>
+      <build>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-toolchains-plugin</artifactId>
+              <version>1.1</version>
+              <configuration>
+                <toolchains>
+                  <jdk>
+                    <version>1.8</version>
+                    <vendor>oracle</vendor>
+                  </jdk>
+                </toolchains>
+              </configuration>
+              <executions>
+                <execution>
+                  <goals>
+                    <goal>toolchain</goal>
+                  </goals>
+                </execution>
+              </executions>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-toolchains-plugin</artifactId>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+</project>

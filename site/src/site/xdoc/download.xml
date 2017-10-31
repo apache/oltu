@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+  <properties>
+    <title>Apache Oltu - Download</title>
+    <author email="dev@oltu.apache.org">Apache Oltu Team</author>
+  </properties>
+
+  <body>
+    <section name="Download Apache Oltu">
+      <p>Apache Oltu is distributed in several formats for your convenience. Use a
+        <a href="#latest_source_releases">source archive</a>
+        if you intend to build
+   Apache Oltu yourself. Otherwise, simply pick a ready-made binary distribution and follow the installation
+   instructions given inside the archives.</p>
+
+      <source><a href="https://www.apache.org/dyn/closer.cgi/oltu/">https://www.apache.org/dyn/closer.cgi/oltu/</a></source>
+
+      <p>You will be prompted for a mirror - if the file is not found on yours, please be patient, as it may take 24
+   hours to reach all mirrors.</p>
+
+      <p>In order to guard against corrupted downloads/installations, it is highly recommended to
+   <a href="https://www.apache.org/dev/release-signing#verifying-signature">verify the signature</a>
+   of the release bundles against the public <a href="https://www.apache.org/dist/oltu/KEYS">KEYS</a> used by the Apache Oltu
+   developers.</p>
+
+      <p>As there are many artifacts for Oltu, <b>users are encouraged to include Oltu as a Maven dependency</b>.
+   A <a href="https://search.maven.org/#search|ga|1|org.apache.oltu">list of Oltu Maven artifacts</a> can be found in The Central Repository.</p>
+
+      <p>Apache Oltu is distributed under the <a href="https://oltu.apache.org/license.html">Apache License, version 2.0</a>.</p>
+
+      <subsection name="Latest source releases" id="latest_source_releases">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Artifact</th>
+              <th scope="col">Version</th>
+              <th scope="col">Link</th>
+              <th scope="col">Checksum</th>
+              <th scope="col">Signature</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td scope="row">Apache Oltu Commons</td>
+              <td>1</td>
+              <td>
+                <a href="https://www.apache.org/dyn/closer.cgi/oltu/org.apache.oltu.commons/org.apache.oltu.commons.parent-1-source-release.zip">
+                  org.apache.oltu.commons.parent-1-source-release.zip
+                </a>
+              </td>
+              <td>
+                <ul>
+                  <li>
+                    <a href="https://www.apache.org/dist/oltu/org.apache.oltu.commons/org.apache.oltu.commons.parent-1-source-release.zip.md5"
+                       title="org.apache.oltu.commons.parent-1-source-release.zip.md5">
+                      MD5
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://www.apache.org/dist/oltu/org.apache.oltu.commons/org.apache.oltu.commons.parent-1-source-release.zip.sha1"
+                       title="org.apache.oltu.commons.parent-1-source-release.zip.sha1">
+                      SHA1
+                    </a>
+                  </li>
+                </ul>
+              </td>
+              <td>
+                <a href="https://www.apache.org/dist/oltu/org.apache.oltu.commons/org.apache.oltu.commons.parent-1-source-release.zip.asc"
+                   title="org.apache.oltu.commons.parent-1-source-release.zip.asc">
+                  PGP
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td scope="row">Apache Oltu JOSE</td>
+              <td>1</td>
+              <td>
+                <a href="https://www.apache.org/dyn/closer.cgi/oltu/org.apache.oltu.jose/org.apache.oltu.jose.parent-1-source-release.zip">
+                  org.apache.oltu.jose.parent-1-source-release.zip
+                </a>
+              </td>
+              <td>
+                <ul>
+                  <li>
+                    <a href="https://www.apache.org/dist/oltu/org.apache.oltu.jose/org.apache.oltu.jose.parent-1-source-release.zip.md5"
+                       title="org.apache.oltu.jose.parent-1-source-release.zip.md5">
+                      MD5
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://www.apache.org/dist/oltu/org.apache.oltu.jose/org.apache.oltu.jose.parent-1-source-release.zip.sha1"
+                       title="org.apache.oltu.jose.parent-1-source-release.zip.sha1">
+                      SHA1
+                    </a>
+                  </li>
+                </ul>
+              </td>
+              <td>
+                <a href="https://www.apache.org/dist/oltu/org.apache.oltu.jose/org.apache.oltu.jose.parent-1-source-release.zip.asc"
+                   title="org.apache.oltu.jose.parent-1-source-release.zip.asc">
+                  PGP
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td scope="row">Apache Oltu OAuth2</td>
+              <td>1.0.2</td>
+              <td>
+                <a href="https://www.apache.org/dyn/closer.cgi/oltu/org.apache.oltu.oauth2/org.apache.oltu.oauth2.parent-1.0.2-source-release.zip">
+                  org.apache.oltu.oauth2.parent-1.0.2-source-release.zip
+                </a>
+              </td>
+              <td>
+                <ul>
+                  <li>
+                    <a href="https://www.apache.org/dist/oltu/org.apache.oltu.oauth2/org.apache.oltu.oauth2.parent-1.0.2-source-release.zip.md5"
+                       title="org.apache.oltu.oauth2.parent-1.0.2-source-release.zip.md5">
+                      MD5
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://www.apache.org/dist/oltu/org.apache.oltu.oauth2/org.apache.oltu.oauth2.parent-1.0.2-source-release.zip.sha1"
+                       title="org.apache.oltu.oauth2.parent-1.0.2-source-release.zip.sha1">
+                      SHA1
+                    </a>
+                  </li>
+                </ul>
+              </td>
+              <td>
+                <a href="https://www.apache.org/dist/oltu/org.apache.oltu.oauth2/org.apache.oltu.oauth2.parent-1.0.2-source-release.zip.asc"
+                   title="org.apache.oltu.oauth2.parent-1.0.2-source-release.zip.asc">
+                  PGP
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td scope="row">Apache Oltu Parent</td>
+              <td>4</td>
+              <td>
+                <a href="https://www.apache.org/dyn/closer.cgi/oltu/org.apache.oltu.parent/org.apache.oltu.parent-4-source-release.zip">
+                  org.apache.oltu.parent-4-source-release.zip
+                </a>
+              </td>
+              <td>
+                <ul>
+                  <li>
+                    <a href="https://www.apache.org/dist/oltu/org.apache.oltu.parent/org.apache.oltu.parent-4-source-release.zip.md5.txt"
+                       title="org.apache.oltu.parent-4-source-release.zip.md5.txt">
+                      MD5
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://www.apache.org/dist/oltu/org.apache.oltu.parent/org.apache.oltu.parent-4-source-release.zip.sha1.txt"
+                       title="org.apache.oltu.parent-4-source-release.zip.sha1.txt">
+                      SHA1
+                    </a>
+                  </li>
+                </ul>
+              </td>
+              <td>
+                <a href="https://www.apache.org/dist/oltu/org.apache.oltu.parent/org.apache.oltu.parent-4-source-release.zip.asc"
+                   title="org.apache.oltu.parent-4-source-release.zip.asc">PGP</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </subsection>
+
+      <subsection name="Archive">
+        <p>It is strongly recommended to use the latest release version of Apache Oltu to take advantage of newest
+          features and bug fixes.
+        </p>
+        <p>If you still want to use an old version you can download files from the
+          <a href="https://archive.apache.org/dist/oltu/">archives</a>.
+        </p>
+      </subsection>
+
+    </section>
+  </body>
+</document>
