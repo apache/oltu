@@ -354,8 +354,8 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <javac.src.version>1.6</javac.src.version>
-    <javac.target.version>1.6</javac.target.version>
+    <javac.src.version>1.8</javac.src.version>
+    <javac.target.version>1.8</javac.target.version>
     <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ssZ</maven.build.timestamp.format>
     <implementation.build>${scmBranch}@r${buildNumber}</implementation.build>
     <!--
@@ -538,8 +538,8 @@
             <configuration>
               <rules>
                 <requireJavaVersion>
-                  <version>[1.6,)</version>
-                  <message>[ERROR] The currently supported version of Java is 1.6 or higher</message>
+                  <version>[1.8,)</version>
+                  <message>[ERROR] The currently supported version of Java is 1.8 or higher</message>
                 </requireJavaVersion>
                 <requireMavenVersion>
                   <version>[2.2.0,)</version>
@@ -691,7 +691,7 @@
         <configuration>
           <linkXref>true</linkXref>
           <minimumTokens>100</minimumTokens>
-          <targetJdk>1.6</targetJdk>
+          <targetJdk>1.8</targetJdk>
         </configuration>
       </plugin>
     </plugins>
@@ -937,8 +937,9 @@
       </reporting>
     </profile>
     <profile>
-      <!-- repository.apache.org doesn't accept connections from jdk 1.6 (https://issues.apache.org/jira/browse/BUILDS-85)
-      so use toolchains to require jdk 1.6 for compiling but deploy using a newer jdk
+      <!--
+      Originally added to compile with Java 1.6 while using Java 1.8 to run Maven. Now to make sure the correct JDK
+      version is used.
       -->
       <id>toolchain</id>
       <build>
@@ -951,7 +952,7 @@
               <configuration>
                 <toolchains>
                   <jdk>
-                    <version>1.6</version>
+                    <version>1.8</version>
                     <vendor>oracle</vendor>
                   </jdk>
                 </toolchains>
