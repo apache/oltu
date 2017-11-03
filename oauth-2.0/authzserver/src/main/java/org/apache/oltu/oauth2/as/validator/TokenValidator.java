@@ -38,7 +38,6 @@ public class TokenValidator extends AbstractValidator<HttpServletRequest> {
     public TokenValidator() {
         requiredParams.add(OAuth.OAUTH_RESPONSE_TYPE);
         requiredParams.add(OAuth.OAUTH_CLIENT_ID);
-        requiredParams.add(OAuth.OAUTH_REDIRECT_URI);
     }
 
     @Override
