@@ -143,16 +143,14 @@ public final class OAuthUtils {
         if (charset == null) {
             charset = DEFAULT_CONTENT_CHARSET;
         }
-        Reader reader = new InputStreamReader(is, charset);
+
         StringBuilder sb = new StringBuilder();
         int l;
-        try {
+        try (Reader reader = new InputStreamReader(is, charset)) {
             char[] tmp = new char[4096];
             while ((l = reader.read(tmp)) != -1) {
                 sb.append(tmp, 0, l);
             }
-        } finally {
-            reader.close();
         }
         return sb.toString();
     }

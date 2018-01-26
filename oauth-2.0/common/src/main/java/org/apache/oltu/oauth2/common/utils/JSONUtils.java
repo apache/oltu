@@ -55,53 +55,52 @@ public final class JSONUtils {
 
     public static String buildJSON(Map<String, Object> params) {
         final StringWriter stringWriter = new StringWriter();
-        final JsonGenerator generator = GENERATOR_FACTORY.createGenerator(stringWriter);
+        try (final JsonGenerator generator = GENERATOR_FACTORY.createGenerator(stringWriter)) {
+            generator.writeStartObject();
 
-        generator.writeStartObject();
+            for (Map.Entry<String, Object> param : params.entrySet()) {
+                String key = param.getKey();
+                Object value = param.getValue();
+                if (key != null && value != null) {
+                    if (value instanceof Boolean) {
+                        generator.write(key, (Boolean) value);
+                    } else if (value instanceof Double) {
+                        generator.write(key, (Double) value);
+                    } else if (value instanceof Integer) {
+                        generator.write(key, (Integer) value);
+                    } else if (value instanceof BigDecimal) {
+                        generator.write(key, (BigDecimal) value);
+                    } else if (value instanceof BigInteger) {
+                        generator.write(key, (BigInteger) value);
+                    } else if (value instanceof Long) {
+                        generator.write(key, (Long) value);
+                    } else if (value instanceof String) {
+                        String string = (String) value;
+                        if (!string.isEmpty()) {
+                            generator.write(key, string);
+                        }
+                    } else if (value.getClass().isArray()) {
+                        generator.writeStartArray(key);
 
-        for (Map.Entry<String, Object> param : params.entrySet()) {
-            String key = param.getKey();
-            Object value = param.getValue();
-            if (key != null && value != null) {
-                if (value instanceof Boolean) {
-                    generator.write(key, (Boolean) value);
-                } else if (value instanceof Double) {
-                    generator.write(key, (Double) value);
-                } else if (value instanceof Integer) {
-                    generator.write(key, (Integer) value);
-                } else if (value instanceof BigDecimal) {
-                    generator.write(key, (BigDecimal) value);
-                } else if (value instanceof BigInteger) {
-                    generator.write(key, (BigInteger) value);
-                } else if (value instanceof Long) {
-                    generator.write(key, (Long) value);
-                } else if (value instanceof String) {
-                    String string = (String) value;
-                    if (!string.isEmpty()) {
-                        generator.write(key, string);
+                        for (int i = 0; i < Array.getLength(value); i++) {
+                            witeItem(generator, Array.get(value, i));
+                        }
+
+                        generator.writeEnd();
+                    } else if (value instanceof Collection) {
+                        generator.writeStartArray(key);
+
+                        Collection<?> collection = (Collection<?>) value;
+                        for (Object item : collection) {
+                            witeItem(generator, item);
+                        }
+
+                        generator.writeEnd();
                     }
-                } else if (value.getClass().isArray()) {
-                    generator.writeStartArray(key);
-
-                    for (int i = 0; i < Array.getLength(value); i++) {
-                        witeItem(generator, Array.get(value, i));
-                    }
-
-                    generator.writeEnd();
-                } else if (value instanceof Collection) {
-                    generator.writeStartArray(key);
-
-                    Collection<?> collection = (Collection<?>) value;
-                    for (Object item : collection) {
-                        witeItem(generator, item);
-                    }
-
-                    generator.writeEnd();
                 }
             }
+            generator.writeEnd();
         }
-
-        generator.writeEnd().close();
 
         return stringWriter.toString();
     }
@@ -127,33 +126,32 @@ public final class JSONUtils {
     }
 
     public static Map<String, Object> parseJSON(String jsonBody) {
-        final Map<String, Object> params = new HashMap<String, Object>();
+        final Map<String, Object> params = new HashMap<>();
 
         StringReader reader = new StringReader(jsonBody);
-        JsonReader jsonReader = Json.createReader(reader);
-        JsonStructure structure = jsonReader.read();
+        try (JsonReader jsonReader = Json.createReader(reader)) {
+            JsonStructure structure = jsonReader.read();
 
-        if (structure == null || structure instanceof JsonArray) {
-            throw new IllegalArgumentException(format("String '%s' is not a valid JSON object representation",
-                                                      jsonBody));
-        }
+            if (structure == null || structure instanceof JsonArray) {
+                throw new IllegalArgumentException(format("String '%s' is not a valid JSON object representation",
+                        jsonBody));
+            }
 
-        JsonObject object = (JsonObject) structure;
-        for (Entry<String, JsonValue> entry : object.entrySet()) {
-            String key = entry.getKey();
-            if (key != null && !key.isEmpty()) {
-                JsonValue jsonValue = entry.getValue();
+            JsonObject object = (JsonObject) structure;
+            for (Entry<String, JsonValue> entry : object.entrySet()) {
+                String key = entry.getKey();
+                if (key != null && !key.isEmpty()) {
+                    JsonValue jsonValue = entry.getValue();
 
-                // guard from null values
-                if (jsonValue != null) {
-                    Object value = toJavaObject(jsonValue);
+                    // guard from null values
+                    if (jsonValue != null) {
+                        Object value = toJavaObject(jsonValue);
 
-                    params.put(key, value);
+                        params.put(key, value);
+                    }
                 }
             }
         }
-
-        jsonReader.close();
         return params;
     }
 

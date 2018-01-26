@@ -78,41 +78,40 @@ public class JSONHttpServletRequestWrapper extends HttpServletRequestWrapper {
             String body = readJsonBody();
 
             StringReader reader = new StringReader(body);
-            JsonReader jsonReader = Json.createReader(reader);
-            JsonStructure structure = jsonReader.read();
+            try (JsonReader jsonReader = Json.createReader(reader)) {
+                JsonStructure structure = jsonReader.read();
 
-            if (structure == null || structure instanceof JsonArray) {
-                throw new IllegalArgumentException(format("String '%s' is not a valid JSON object representation",
-                                                          body));
-            }
+                if (structure == null || structure instanceof JsonArray) {
+                    throw new IllegalArgumentException(format("String '%s' is not a valid JSON object representation",
+                            body));
+                }
 
-            JsonObject object = (JsonObject) structure;
-            for (Entry<String, JsonValue> entry : object.entrySet()) {
-                String key = entry.getKey();
-                if (key != null) {
-                    JsonValue jsonValue = entry.getValue();
+                JsonObject object = (JsonObject) structure;
+                for (Entry<String, JsonValue> entry : object.entrySet()) {
+                    String key = entry.getKey();
+                    if (key != null) {
+                        JsonValue jsonValue = entry.getValue();
 
-                    // guard from null values
-                    if (jsonValue != null) {
-                        String[] values;
+                        // guard from null values
+                        if (jsonValue != null) {
+                            String[] values;
 
-                        if (ValueType.ARRAY == jsonValue.getValueType()) {
-                            JsonArray array = (JsonArray) jsonValue;
-                            values = new String[array.size()];
-                            for (int i = 0; i < array.size(); i++) {
-                                JsonValue current = array.get(i);
-                                values[i] = toJavaObject(current);
+                            if (ValueType.ARRAY == jsonValue.getValueType()) {
+                                JsonArray array = (JsonArray) jsonValue;
+                                values = new String[array.size()];
+                                for (int i = 0; i < array.size(); i++) {
+                                    JsonValue current = array.get(i);
+                                    values[i] = toJavaObject(current);
+                                }
+                            } else {
+                                values = new String[]{toJavaObject(jsonValue)};
                             }
-                        } else {
-                            values = new String[]{ toJavaObject(jsonValue) };
-                        }
 
-                        parameters.put(key, values);
+                            parameters.put(key, values);
+                        }
                     }
                 }
             }
-
-            jsonReader.close();
         }
 
         return Collections.unmodifiableMap(parameters);

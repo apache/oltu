@@ -43,20 +43,13 @@ public class JWEReader extends TokenDecoder {
 
         // TODO improve multi-line tokens
         StringBuilder buffer = new StringBuilder();
-        BufferedReader reader = new BufferedReader(new StringReader(base64String));
         String line = null;
-        try {
+        try (BufferedReader reader = new BufferedReader(new StringReader(base64String))) {
             while ((line = reader.readLine()) != null) {
                 buffer.append(line.trim());
             }
         } catch (IOException e) {
-            // it cannot happen
-        } finally {
-            try {
-                reader.close();
-            } catch (IOException e) {
-                // swallow it
-            }
+            // swallow it
         }
 
         Matcher matcher = base64urlTokenPattern.matcher(buffer.toString());

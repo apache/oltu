@@ -34,13 +34,13 @@ public class FileUtils {
 
     public static String readTextFileAsString(String fileName) throws IOException {
         URL inputStream = ClassLoader.getSystemResource(fileName);
-        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream.openStream()));
-
-        String line;
-        StringBuffer buffer = new StringBuffer();
-        while ((line = br.readLine()) != null) {
-            buffer.append(line);
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream.openStream()))) {
+            String line;
+            StringBuffer buffer = new StringBuffer();
+            while ((line = br.readLine()) != null) {
+                buffer.append(line);
+            }
+            return buffer.toString();
         }
-        return buffer.toString();
     }
 }
