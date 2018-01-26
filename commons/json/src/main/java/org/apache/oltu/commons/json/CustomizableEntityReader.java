@@ -48,31 +48,30 @@ public abstract class CustomizableEntityReader<E, B extends CustomizableBuilder<
         }
 
         StringReader reader = new StringReader(jsonString);
-        JsonReader jsonReader = Json.createReader(reader);
-        JsonStructure structure = jsonReader.read();
+        try (JsonReader jsonReader = Json.createReader(reader)) {
+            JsonStructure structure = jsonReader.read();
 
-        if (structure == null || structure instanceof JsonArray) {
-            throw new IllegalArgumentException(format("String '%s' is not a valid JSON object representation",
-                                                      jsonString));
-        }
+            if (structure == null || structure instanceof JsonArray) {
+                throw new IllegalArgumentException(format("String '%s' is not a valid JSON object representation",
+                                                          jsonString));
+            }
 
-        JsonObject object = (JsonObject) structure;
-        for (Entry<String, JsonValue> entry : object.entrySet()) {
-            String key = entry.getKey();
-            JsonValue jsonValue = entry.getValue();
+            JsonObject object = (JsonObject) structure;
+            for (Entry<String, JsonValue> entry : object.entrySet()) {
+                String key = entry.getKey();
+                JsonValue jsonValue = entry.getValue();
 
-            // guard from null values
-            if (jsonValue != null) {
-                Object value = toJavaObject(jsonValue);
+                // guard from null values
+                if (jsonValue != null) {
+                    Object value = toJavaObject(jsonValue);
 
-                // if the concrete implementation is not able to handle the property, set the custom field
-                if (!handleProperty(key, value)) {
-                    builder.setCustomField(key, value);
+                    // if the concrete implementation is not able to handle the property, set the custom field
+                    if (!handleProperty(key, value)) {
+                        builder.setCustomField(key, value);
+                    }
                 }
             }
         }
-
-        jsonReader.close();
     }
 
     private static Object toJavaObject(JsonValue jsonValue) {
