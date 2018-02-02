@@ -106,4 +106,19 @@ public final class JWTWriterTestCase implements IOTestCaseConstants {
         assertEquals(JWT_MULTIPLE_AUDIENCES, encodedJWT);
     }
 
+    @Test
+    public void writeWithAlgNone() {
+        JWT jwt = new JWT.Builder()
+                          // header
+                          .setHeaderAlgorithm("none")
+                          // claimset
+                          .setClaimsSetExpirationTime(1366730217L)
+                          .setClaimsSetIssuedAt(1366726317L)
+                          .setClaimsSetCustomField("id", "106422453082479998429")
+                          // no signature
+                          .build();
+        String encodedJWT = new JWTWriter().write(jwt);
+        assertEquals(JWT_ALG_NONE, encodedJWT);
+    }
+
 }

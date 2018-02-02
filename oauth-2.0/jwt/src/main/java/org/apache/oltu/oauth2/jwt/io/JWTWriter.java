@@ -36,7 +36,7 @@ public final class JWTWriter extends TokenWriter<JWT> {
 
     @Override
     protected String writeSignature(JWT token) {
-        return token.getSignature();
+        return token.getSignature() == null ? "" : token.getSignature();
     }
 
 }
