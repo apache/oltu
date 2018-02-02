@@ -50,4 +50,9 @@ interface IOTestCaseConstants {
                             + "7MxUgVEgh8G-Nnbk_baJ6k_3w5c1SKFamFiHHDoKLFhrt1Y8JKSuGwE02V-px4Cn0dRAQAc1IN5C"
                             + "U6wqCrYK0p-fv_fvy28";
 
+    public final String JWT_ALG_NONE = "eyJhbGciOiJub25lIn0"
+                            + "."
+                            + "eyJleHAiOjEzNjY3MzAyMTcsImlhdCI6MTM2NjcyNjMxNywiaWQiOiIxMDY0MjI0NTMwODI0Nzk5OTg0MjkifQ"
+                            + ".";
+
 }
