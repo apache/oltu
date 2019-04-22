@@ -34,6 +34,7 @@
 
   <modules>
     <module>client-demo</module>
+    <module>provider-demo</module>
   </modules>
 
 </project>

@@ -1,0 +1,163 @@
+<div id="editClient">
+  <div class="page-header">
+    <h1>{{formTitle}}</h1>
+  </div>
+  <form class="form-horizontal" id="editClientForm">
+    <input type="hidden" name="id" value="{{id}}" />
+    <fieldset>
+      <div class="control-group">
+        <label class="control-label">Client name</label>
+        <div class="controls">
+          <input type="text" required="required" name="name" value="{{name}}" placeholder="client name">
+          <i class="icon-question-sign icon-blue" rel="popover" name="client-name"></i>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">Resource Server</label>
+        <div class="controls">
+          {{#if availableResourceServers}}
+          <select required="required" name="resourceServerId" id="clientResourceServer">
+            {{#each availableResourceServers}}
+            <option value="{{id}}">{{name}}</option>
+            {{/each}}
+          </select>
+          <i class="icon-question-sign icon-blue" rel="popover" name="client-resource-server"></i>
+          {{else}}
+            <input type="hidden" name="resourceServerId" value="{{resourceServer.id}}">
+            <label class="control-label">{{resourceServer.name}}</label>
+	        <i class="icon-question-sign icon-blue" rel="popover" name="client-resource-server"></i>
+          {{/if}}
+        </div>
+      </div>
+      <div class="control-group">
+        <label for="clientDescription" class="control-label">Description</label>
+        <div class="controls">
+          <textarea rows="3" id="clientDescription" name="description" class="input">{{description}}</textarea>
+          <i class="icon-question-sign icon-blue" rel="popover" name="client-description"></i>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label">Scopes</label>
+        <i class="icon-question-sign icon-blue" rel="popover" name="client-scope"></i>
+        <div class="controls" id="clientScopesHolder">
+          {{#each availableScopes}}
+          <label class="checkbox">
+            <input type="checkbox" value="{{scopeName}}" name="scopes"
+            {{#if currentlySelected}}checked="checked"{{/if}}>
+            {{scopeName}}
+          </label>
+          {{/each}}
+        </div>
+        
+      </div>
+
+      <div class="control-group">
+        <label class="control-label">Thumbnail URL</label>
+        <div class="controls">
+          <input type="url" name="thumbNailUrl" value="{{thumbNailUrl}}" placeholder="http://your-thumbnail-url">
+          <i class="icon-question-sign icon-blue" rel="popover" name="client-thumbNailUrl"></i>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">Contact name</label>
+        <div class="controls">
+          <input type="text" name="contactName" required="required" value="{{contactName}}" placeholder="your name">
+          <i class="icon-question-sign icon-blue" rel="popover" name="client-contactName"></i>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">Contact email address</label>
+        <div class="controls">
+          <input type="email" name="contactEmail" required="required" value="{{contactEmail}}" placeholder="john@doe.com">
+          <i class="icon-question-sign icon-blue" rel="popover" name="client-contactEmail"></i>
+        </div>
+      </div>
+
+
+      <div class="control-group">
+        <label class="control-label">Redirect URIs</label>
+        <div class="controls" id="redirectUrisHolder">
+          {{#each redirectUris}}
+          <div class="input multiple-fields">
+            <input type="url" name="redirectUris" size="16" class="input-append" value="{{this}}">
+            <button type="button" class="btn removeRedirectUri"><i class="icon-trash"></i></button>
+          </div>
+          {{/each}}
+          <div class="input multiple-fields" id="newRedirectUri">
+            <input type="url" id="newRedirectUriField" name="redirectUris"
+                   placeholder="http://your-apps-uri/" size="16" class="input-append">
+            <button type="button" class="btn btn-success addRedirectUri"><i class="icon-plus icon-white"></i></button>
+            <i class="icon-question-sign icon-blue" rel="popover" name="client-redirectUri"></i>
+          </div>
+        </div>
+      </div>
+
+        <div class="alert hide" id="implicit_grant_warning">
+            <button class="close" data-dismiss="alert">×</button>
+            <span>An implicit grant client is not issued a secret. Therefore this client can not use the authorization code flow.</span>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label">Allow implicit grant</label>
+          <div class="controls">
+              <input type="checkbox" name="allowedImplicitGrant" value="true" {{#if allowedImplicitGrant}}checked="checked"{{/if}}>
+              <i class="icon-question-sign icon-blue" rel="popover" name="client-allowedImplicitGrant"></i>
+          </div>
+      </div>
+
+        <div class="alert hide" id="client_credentials_warning">
+            <button class="close" data-dismiss="alert">×</button>
+            <span>A client credentials grant is usually for resource servers that acts as clients to other resource servers. It MUST only be used by very confidential clients.</span>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label">Allow client credentials grant</label>
+            <div class="controls">
+                <input type="checkbox" name="allowedClientCredentials" value="true" {{#if allowedClientCredentials}}checked="checked"{{/if}}>
+                <i class="icon-question-sign icon-blue" rel="popover" name="client-allowedClientCredentials"></i>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label">Use refresh tokens</label>
+            <div class="controls">
+                <input type="checkbox" name="useRefreshTokens" value="true" {{#if useRefreshTokens}}checked="checked"{{/if}}>
+                <i class="icon-question-sign icon-blue" rel="popover" name="client-useRefreshTokens"></i>
+            </div>
+        </div>
+
+      <div class="control-group">
+        <label class="control-label">Token expiration time</label>
+        <div class="controls">
+          <input type="number" name="expireDuration" value="{{expireDuration}}" placeholder="0">
+          <i class="icon-question-sign icon-blue" rel="popover" name="client-expireDuration"></i>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label">Additional attributes</label>
+        <div class="controls" id="attributesHolder">
+          {{#each attributes}}
+          <div class="input multiple-fields">
+            <input class="span2" type="text" name="attributeName" value="{{attributeName}}">
+            <input class="span2" type="text" name="attributeValue" value="{{attributeValue}}">
+            <button class="btn removeAttribute" type="button"><i class="icon-trash"></i></button>
+          </div>
+          {{/each}}
+          <div id="newAttribute" class="input multiple-fields">
+            <input class="span2" type="text" name="attributeName" id="newAttributeName" placeholder="key">
+            <input class="span2" type="text" name="attributeValue" id="newAttributeValue" placeholder="value">
+            <button type="button" class="btn btn-success addAttribute"><i class="icon-plus icon-white"></i></button>
+            <i class="icon-question-sign icon-blue" rel="popover" name="client-attributes"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Save changes</button>
+        <button type="button" class="cancel btn">Cancel</button>
+      </div>
+    </fieldset>
+  </form>
+</div>
