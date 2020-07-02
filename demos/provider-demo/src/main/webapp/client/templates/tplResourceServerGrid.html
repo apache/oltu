@@ -1,0 +1,42 @@
+ <div id="resourceServerGrid">
+
+ <a class="btn btn-small btn-primary pull-right" id="addServerButton" href="#">Add another server</a>
+ <h1>Resource servers</h1>
+ {{#if resourceServers}}
+   <table class="table table-bordered grid-overview">
+       <thead>
+       <tr>
+           <th class="col-icon">Icon</th>
+           <th class="col-about">Resource server</th>
+           <th class="resource-id">Client apps</th>
+           <th class="scopes">Scopes</th>
+           <th class="col-meta">About</th>
+           <th class="actions">Actions</th>
+       </tr>
+       </thead>
+       <tbody>
+       {{#each resourceServers}}
+       <tr data-resourceServerId="{{id}}">
+         <td><a href="#" class="editResourceServer"><img src="{{thumbNailUrl}}"></a></td>
+         <td><a class="editResourceServer" href="#">{{name}}</a><br>
+               {{description}}
+         </td>
+         <td id="resource_server_clients_{{id}}"></td>
+         <td>{{scopes}}</td>
+         <td>
+             <strong class="key-secret">Contact:</strong> <a href="mailto:{{contactEmail}}">{{contactName}}</a><br>
+             <strong class="key-secret">Key <i rel="popover" class="icon-question-sign" name="resource-server-key"></i>:</strong> 
+             <input class="copy-clipboard" readonly="readonly" value="{{key}}" /><br>
+             <strong class="key-secret">Secret <i rel="popover" class="icon-question-sign" name="resource-server-secret"></i>:</strong>
+           <input class="copy-clipboard" readonly="readonly" value="{{secret}}" />
+         </td>
+         <td><a class="deleteServerButton btn btn-small" href="#">Delete</a></td>
+       </tr>
+       {{/each}}
+       </tbody>
+   </table>
+ {{else}}
+   <p>No resource servers yet. <a id="noServersAddOne" href="#">Add one</a>.</p>
+<p>After you have added a resource server, you can start adding client applications that actually do something with the protected resources of your resource server.
+ {{/if}}
+ </div>

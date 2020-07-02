@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+   
+  <display-name>Apache Oltu - Demos - Provider</display-name>
+  
+  <servlet>
+    <servlet-name>authzEndpoint</servlet-name>
+    <servlet-class>org.apache.oltu.oauth2.provider.demo.endpoints.AuthzEndpoint</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>authzEndpoint</servlet-name>
+    <url-pattern>/auth/oauth2/authz</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>Login</servlet-name>
+    <servlet-class>org.apache.oltu.oauth2.provider.demo.Login</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Login</servlet-name>
+    <url-pattern>/Login</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>tokenEndpoint</servlet-name>
+    <servlet-class>org.apache.oltu.oauth2.provider.demo.endpoints.TokenEndpoint</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>tokenEndpoint</servlet-name>
+    <url-pattern>/auth/oauth2/token</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>resourceBodyEndpoint</servlet-name>
+    <servlet-class>org.apache.oltu.oauth2.provider.demo.endpoints.ResourceBodyEndpoint</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>resourceBodyEndpoint</servlet-name>
+    <url-pattern>/auth/oauth2/resource_server/resource_body</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>resourceHeaderEndpoint</servlet-name>
+    <servlet-class>org.apache.oltu.oauth2.provider.demo.endpoints.ResourceHeaderEndpoint</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>resourceHeaderEndpoint</servlet-name>
+    <url-pattern>/auth/oauth2/resource_server/resource_header</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>resourceQueryEndpoint</servlet-name>
+    <servlet-class>org.apache.oltu.oauth2.provider.demo.endpoints.ResourceQueryEndpoint</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>resourceQueryEndpoint</servlet-name>
+    <url-pattern>/auth/oauth2/resource_server/resource_query</url-pattern>
+  </servlet-mapping>
+  
+</web-app>
