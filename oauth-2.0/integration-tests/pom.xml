@@ -27,6 +27,10 @@
   <name>Apache Oltu - OAuth 2.0 - Integration Tests</name>
 
   <artifactId>org.apache.oltu.oauth2.integration-tests</artifactId>
+  
+  <properties>
+    <maven.test.skip>false</maven.test.skip>
+  </properties>
 
   <dependencies>
     <dependency>

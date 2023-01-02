@@ -21,6 +21,16 @@
 
 package org.apache.oltu.oauth2.as;
 
+import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.verify;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
+import jakarta.servlet.http.HttpServletRequest;
+
+import java.util.Set;
+
 import org.apache.commons.codec.binary.Base64;
 import org.apache.oltu.oauth2.as.request.OAuthAuthzRequest;
 import org.apache.oltu.oauth2.as.request.OAuthRequest;
@@ -33,13 +43,6 @@ import org.apache.oltu.oauth2.common.message.types.GrantType;
 import org.apache.oltu.oauth2.common.message.types.ResponseType;
 import org.apache.oltu.oauth2.common.utils.OAuthUtils;
 import org.junit.Test;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.Set;
-
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.*;
 
 
 public class OAuthRequestTest {

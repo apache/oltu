@@ -21,12 +21,12 @@
 
 package org.apache.oltu.oauth2.as;
 
+import static org.junit.Assert.assertNotNull;
+
 import org.apache.oltu.oauth2.as.issuer.MD5Generator;
 import org.apache.oltu.oauth2.as.issuer.ValueGenerator;
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 import org.junit.Test;
-
-import static org.junit.Assert.assertNotNull;
 
 public class MD5GeneratorTest {
 

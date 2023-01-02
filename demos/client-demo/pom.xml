@@ -34,7 +34,7 @@
     <oltu.oauth2.jwt.version>1.0.4-SNAPSHOT</oltu.oauth2.jwt.version>
     <oltu.oidc.version>0.0.1-SNAPSHOT</oltu.oidc.version>
     <org.springframework.version>3.2.18.RELEASE</org.springframework.version>
-    <servlet-api.version>2.5</servlet-api.version>
+    <servlet-api.version>6.0.0</servlet-api.version>
     <slf4j.version>1.7.25</slf4j.version>
   </properties>
 
@@ -125,7 +125,6 @@
     </dependency>
 
     <!-- URL Rewrite -->
-    <!--  URL Rewrite -->
     <dependency>
       <groupId>org.tuckey</groupId>
       <artifactId>urlrewritefilter</artifactId>
@@ -133,11 +132,12 @@
       <scope>runtime</scope>
     </dependency>
 
+    <!-- Jakarta Servlet 6.0  -->
     <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
-      <version>${servlet-api.version}</version>
-      <scope>provided</scope>
+        <groupId>jakarta.servlet</groupId>
+        <artifactId>jakarta.servlet-api</artifactId>
+         <version>${servlet-api.version}</version>
+        <scope>provided</scope>
     </dependency>
 
     <!--

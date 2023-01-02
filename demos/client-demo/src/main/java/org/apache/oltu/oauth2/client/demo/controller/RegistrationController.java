@@ -21,6 +21,10 @@
 
 package org.apache.oltu.oauth2.client.demo.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
+
+import java.io.IOException;
+
 import org.apache.oltu.oauth2.client.URLConnectionClient;
 import org.apache.oltu.oauth2.client.demo.Utils;
 import org.apache.oltu.oauth2.client.demo.exception.ApplicationException;
@@ -40,9 +44,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 
 @Controller
 public class RegistrationController {

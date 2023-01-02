@@ -21,16 +21,16 @@
 
 package org.apache.oltu.oauth2.client.demo;
 
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+
 import org.apache.oltu.oauth2.client.demo.exception.ApplicationException;
 import org.apache.oltu.oauth2.client.demo.model.OAuthParams;
 import org.apache.oltu.oauth2.client.demo.model.OAuthRegParams;
 import org.apache.oltu.oauth2.common.OAuthProviderType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import javax.servlet.ServletContext;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 
 @Component
 public final class Utils {

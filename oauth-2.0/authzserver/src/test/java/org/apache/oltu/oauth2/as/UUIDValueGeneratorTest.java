@@ -21,10 +21,9 @@
 
 package org.apache.oltu.oauth2.as;
 
+import org.apache.oltu.oauth2.as.issuer.UUIDValueGenerator;
 import org.junit.Assert;
 import org.junit.Test;
-
-import org.apache.oltu.oauth2.as.issuer.UUIDValueGenerator;
 
 /**
  *

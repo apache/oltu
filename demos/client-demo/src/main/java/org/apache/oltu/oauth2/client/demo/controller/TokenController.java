@@ -21,6 +21,11 @@
 
 package org.apache.oltu.oauth2.client.demo.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
+
+import java.io.IOException;
+import java.net.URI;
+
 import org.apache.oltu.oauth2.client.OAuthClient;
 import org.apache.oltu.oauth2.client.URLConnectionClient;
 import org.apache.oltu.oauth2.client.demo.Utils;
@@ -44,10 +49,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.net.URI;
 
 @Controller
 public class TokenController {

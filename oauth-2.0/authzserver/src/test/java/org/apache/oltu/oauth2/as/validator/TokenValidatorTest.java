@@ -21,19 +21,18 @@
 
 package org.apache.oltu.oauth2.as.validator;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.oltu.oauth2.as.validator.TokenValidator;
-import org.apache.oltu.oauth2.common.OAuth;
-import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
-import org.junit.Assert;
-import org.junit.Test;
-
 import static org.easymock.EasyMock.createStrictMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.reset;
 import static org.easymock.EasyMock.verify;
+
+import jakarta.servlet.http.HttpServletRequest;
+
+import org.apache.oltu.oauth2.common.OAuth;
+import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
+import org.junit.Assert;
+import org.junit.Test;
 
 
 /**

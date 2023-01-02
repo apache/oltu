@@ -17,12 +17,12 @@
 
 package org.apache.oltu.oauth2.as;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.oltu.oauth2.common.OAuth;
-
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+
+import jakarta.servlet.http.HttpServletRequest;
+
+import org.apache.oltu.oauth2.common.OAuth;
 
 public class OauthMockRequestBuilder {
 

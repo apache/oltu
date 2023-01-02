@@ -17,10 +17,10 @@
 
 package org.apache.oltu.oauth2.as.validator;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 import org.apache.oltu.oauth2.common.OAuth;
 import org.apache.oltu.oauth2.common.validators.AbstractValidator;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * Validator that checks for the required fields for an OAuth Token request with the Authorization Code grant type.

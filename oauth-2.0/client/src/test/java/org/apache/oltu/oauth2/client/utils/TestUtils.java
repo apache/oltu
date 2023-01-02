@@ -23,7 +23,7 @@ package org.apache.oltu.oauth2.client.utils;
 
 import static org.easymock.EasyMock.expect;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.apache.oltu.oauth2.common.error.OAuthError;
 

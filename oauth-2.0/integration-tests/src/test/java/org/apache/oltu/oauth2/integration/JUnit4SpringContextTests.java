@@ -36,6 +36,8 @@ public class JUnit4SpringContextTests extends Assert {
 
     @BeforeClass
     public static void initialize() {
+      if (null==ctx) {
         ctx = new ClassPathXmlApplicationContext(new String[] {"classpath:oauth-beans.xml"});
+      }
     }
 }

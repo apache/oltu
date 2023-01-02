@@ -76,12 +76,12 @@
 
   <properties>
     <osgi.export>org.apache.oltu.oauth2*;version=${project.version}</osgi.export>
-    <cxf.version>2.2.10</cxf.version>
-    <org.springframework.version>3.0.3.RELEASE</org.springframework.version>
-    <spring-mock.version>2.0.8</spring-mock.version>
-    <easy-mock.version>3.0</easy-mock.version>
-    <servlet-api.version>2.5</servlet-api.version>
-    <jetty.version>7.1.5.v20100705</jetty.version>
+    <cxf.version>4.0.0</cxf.version>
+    <org.springframework.version>6.0.3</org.springframework.version>
+    <spring-mock.version>6.0.3</spring-mock.version>
+    <easy-mock.version>5.1.0</easy-mock.version>
+    <servlet-api.version>6.0.0</servlet-api.version>
+    <jetty.version>11.0.13</jetty.version>
     <pmd.version>2.5</pmd.version>
   </properties>
 
@@ -124,10 +124,11 @@
 
     <dependency>
       <groupId>org.springframework</groupId>
-      <artifactId>spring-mock</artifactId>
+      <artifactId>spring-test</artifactId>
       <version>${spring-mock.version}</version>
       <scope>test</scope>
     </dependency>
+    
 
     <dependency>
       <groupId>org.easymock</groupId>
@@ -135,13 +136,15 @@
       <version>${easy-mock.version}</version>
       <scope>test</scope>
     </dependency>
-
+    
+    <!-- Jakarta Servlet 6.0  -->
     <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
-      <version>${servlet-api.version}</version>
-      <scope>provided</scope>
+        <groupId>jakarta.servlet</groupId>
+        <artifactId>jakarta.servlet-api</artifactId>
+         <version>${servlet-api.version}</version>
+        <scope>provided</scope>
     </dependency>
+    
   </dependencies>
 
   <profiles>

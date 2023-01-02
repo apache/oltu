@@ -21,9 +21,8 @@
 
 package org.apache.oltu.oauth2.rsfilter;
 
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
+import jakarta.servlet.FilterConfig;
+import jakarta.servlet.ServletException;
 
 /**
  *

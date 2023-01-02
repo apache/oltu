@@ -40,6 +40,7 @@ public class OAuthServerRegistrationRequestTest {
         MockHttpServletRequest request = new MockHttpServletRequest("POST", "/oauth/register");
         request.setContentType(OAuth.ContentType.JSON);
         request.setContent(validJson.getBytes("UTF-8"));
+       
 
         final JSONHttpServletRequestWrapper jsonWrapper = new JSONHttpServletRequestWrapper(request);
         OAuthServerRegistrationRequest registrationRequest = new OAuthServerRegistrationRequest(jsonWrapper);

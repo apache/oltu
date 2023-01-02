@@ -21,12 +21,12 @@
 
 package org.apache.oltu.oauth2.client.response;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.oltu.oauth2.client.validator.TokenValidator;
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.apache.oltu.oauth2.common.token.OAuthToken;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  *
