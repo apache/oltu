@@ -21,8 +21,7 @@
 
 package org.apache.oltu.oauth2.client;
 
-import static javax.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
-import static javax.servlet.http.HttpServletResponse.SC_UNAUTHORIZED;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -103,7 +102,7 @@ public class URLConnectionClient implements HttpClient {
 
                 InputStream inputStream;
                 responseCode = httpURLConnection.getResponseCode();
-                if (responseCode == SC_BAD_REQUEST || responseCode == SC_UNAUTHORIZED) {
+                if (responseCode == HttpServletResponse.SC_BAD_REQUEST || responseCode == HttpServletResponse.SC_UNAUTHORIZED) {
                     inputStream = httpURLConnection.getErrorStream();
                 } else {
                     inputStream = httpURLConnection.getInputStream();

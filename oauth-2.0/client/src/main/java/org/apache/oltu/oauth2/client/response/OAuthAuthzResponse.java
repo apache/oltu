@@ -21,9 +21,9 @@
 
 package org.apache.oltu.oauth2.client.response;
 
-import java.util.Map;
+import jakarta.servlet.http.HttpServletRequest;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 import org.apache.oltu.oauth2.client.validator.CodeTokenValidator;
 import org.apache.oltu.oauth2.client.validator.CodeValidator;

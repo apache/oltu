@@ -16,16 +16,16 @@
  */
 package org.apache.oltu.oauth2.client.response;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.oltu.oauth2.client.validator.ResourceValidator;
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.apache.oltu.oauth2.common.utils.OAuthUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
-import java.util.Map;
 
 public class OAuthResourceResponse  extends OAuthClientResponse {
 

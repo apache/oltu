@@ -23,7 +23,7 @@ package org.apache.oltu.oauth2.rs.extractor;
 
 import static org.apache.oltu.oauth2.rs.ResourceServer.getQueryParameterValue;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.apache.oltu.oauth2.common.OAuth;
 

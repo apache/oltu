@@ -23,7 +23,6 @@ package org.apache.oltu.oauth2.integration;
 
 import org.apache.cxf.endpoint.Server;
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
-
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 
