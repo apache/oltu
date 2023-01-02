@@ -29,7 +29,7 @@
   <artifactId>org.apache.oltu.oauth2.integration-tests</artifactId>
   
   <properties>
-    <maven.test.skip>true</maven.test.skip>
+    <maven.test.skip>false</maven.test.skip>
   </properties>
 
   <dependencies>

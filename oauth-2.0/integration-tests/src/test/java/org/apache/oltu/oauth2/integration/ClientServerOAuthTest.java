@@ -38,23 +38,23 @@ public abstract class ClientServerOAuthTest extends JUnit4SpringContextTests {
     @BeforeClass
     public static void initService() throws Exception {
 
-        JAXRSServerFactoryBean sf = (JAXRSServerFactoryBean)ctx.getBean("oauthServer");
-        s = sf.create();
-
-        JAXRSServerFactoryBean sf2 = (JAXRSServerFactoryBean)ctx.getBean("oauthClient");
-        s2 = sf2.create();
+//        JAXRSServerFactoryBean sf = (JAXRSServerFactoryBean)ctx.getBean("oauthServer");
+//        s = sf.create();
+//
+//        JAXRSServerFactoryBean sf2 = (JAXRSServerFactoryBean)ctx.getBean("oauthClient");
+//        s2 = sf2.create();
 
 
     }
 
     @AfterClass
     public static void stopService() throws Exception {
-        if (s != null) {
-            s.stop();
-        }
-        if (s2 != null) {
-            s2.stop();
-        }
+//        if (s != null) {
+//            s.stop();
+//        }
+//        if (s2 != null) {
+//            s2.stop();
+//        }
     }
 
 
